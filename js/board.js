@@ -4,6 +4,11 @@
 
 'use strict';
 
+// IIFE so our `const COMPANIES` destructuring doesn't collide with the
+// same-named top-level const already declared by data.js in the shared
+// classic-script scope (which throws SyntaxError and blanks the page).
+(function () {
+
 const { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT } = window.DATA;
 
 /* --------------------------------------------------------------------
@@ -699,3 +704,5 @@ window.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root');
   if (root) renderCompanies(root);
 });
+
+})();
