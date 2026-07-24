@@ -1,0 +1,2987 @@
+/* =========================================================================
+ * styles.css — Apple Liquid Glass design system (LIGHT MODE)
+ *
+ * Liquid Glass signatures (light variant):
+ *   - backdrop-filter: blur(N) saturate(180%)
+ *   - Translucent surfaces in the 0.55–0.85 alpha range over a tinted canvas
+ *   - Inset top-edge highlight: inset 0 1px 0 rgba(255,255,255,0.95)
+ *   - Subtle hairline shadows below: 0 1px 2px rgba(0,0,0,0.04)
+ *   - Continuous-curvature radii (10–28px)
+ *   - Spring-physics transitions
+ *   - Ambient color wells (low saturation on light)
+ *
+ * Color discipline (semantic, accessible contrast on white):
+ *   mint = progress · amber = focus · rose = urgency
+ *   sky  = SDE/info · violet = cross-track
+ * ========================================================================= */
+
+:root {
+  color-scheme: light;
+
+  /* Surfaces — warm-cool near-white */
+  --bg:           #F8F9FC;
+  --bg-2:         #F1F3F8;
+  --canvas-tint:  #FBFCFE;
+
+  /* Glass materials (translucent over the tinted canvas).
+   * Lower alphas = more visible refraction of the canvas + tinted shadows
+   * behind. Calibrated so backdrop-filter does the heavy lifting. */
+  --thin:    rgba(255, 255, 255, 0.42);
+  --regular: rgba(255, 255, 255, 0.58);
+  --thick:   rgba(255, 255, 255, 0.78);
+  --chrome:  rgba(252, 253, 255, 0.68);
+
+  /* Edge highlights & shadows (light-mode appropriate) */
+  --hl-strong: rgba(255, 255, 255, 0.95);
+  --hl-soft:   rgba(255, 255, 255, 0.65);
+  --hl-faint:  rgba(0, 0, 0, 0.025);
+  --hairline:  rgba(15, 23, 42, 0.08);
+  --hairline-2:rgba(15, 23, 42, 0.12);
+  --depth:     rgba(15, 23, 42, 0.08);
+
+  /* Text — dark on light */
+  --text:  #0F172A;
+  --muted: #5A6373;
+  --dim:   #97A0B0;
+
+  /* Intentional color — darker variants for WCAG-AA on white */
+  --accent:     #0EA371;   /* mint — progress / success */
+  --accent-dim: #0B8A60;
+  --warn:       #C7780E;   /* amber — focus / attention */
+  --bad:        #D7384C;   /* rose — urgency / errors */
+  --sde:        #2E6FE0;   /* sky — SDE / info */
+  --both:       #7849E0;   /* violet — cross-track */
+
+  /* Soft accent fills (used in pills, hover states) */
+  --accent-fill: rgba(14, 163, 113, 0.10);
+  --warn-fill:   rgba(199, 120, 14, 0.10);
+  --bad-fill:    rgba(215, 56, 76, 0.08);
+  --sde-fill:    rgba(46, 111, 224, 0.08);
+  --both-fill:   rgba(120, 73, 224, 0.08);
+
+  /* Shadows — diffuse, light-mode appropriate */
+  --sh-card: 0 1px 2px rgba(15,23,42,0.04),
+             0 4px 14px -6px rgba(15,23,42,0.10),
+             0 1px 1px rgba(15,23,42,0.03);
+  --sh-lift: 0 1px 2px rgba(15,23,42,0.06),
+             0 14px 36px -14px rgba(15,23,42,0.18),
+             0 4px 12px -6px rgba(15,23,42,0.08);
+  --sh-glow-accent: 0 8px 24px -10px rgba(14,163,113,0.35),
+                    0 0 0 1px rgba(14,163,113,0.18);
+
+  /* Continuous-curvature radii */
+  --r-xs: 10px;
+  --r-sm: 14px;
+  --r:    20px;
+  --r-lg: 28px;
+  --r-xl: 36px;
+
+  /* Concentric corner system (Apple HIG: inner = outer − padding). Cards
+   * publish --r-outer and --card-padding; nested glass picks up --r-inner
+   * automatically so corners stay parallel. Floored at 6px so deeply nested
+   * elements never collapse to right angles. */
+  --r-outer:       var(--r);
+  --card-padding:  1.15rem;
+  --r-inner:       max(6px, calc(var(--r-outer) - var(--card-padding)));
+
+  /* Variable blur — let it animate per surface state (e.g., frosted ramp-up
+   * when a modal opens over the dashboard). Surfaces reference this token
+   * in their backdrop-filter instead of hardcoding 60px. */
+  --glass-blur:        60px;
+  --glass-saturate:    200%;
+  --glass-brightness:  1.08;
+  --glass-contrast:    1.02;
+
+  /* Adaptive substrate — JS samples each card's background and writes
+   * --card-tint with the dominant color. Defaults to transparent so the
+   * cascade is a no-op until JS lights it up. The .card rule uses
+   * color-mix(...) to blend a slight pull toward the substrate. */
+  --card-tint:         transparent;
+  --card-tint-mix:     7%;     /* lowered from 14% — kept subtle so the
+                                  ambient-well color doesn't visibly tint
+                                  cards green/rose/blue depending on
+                                  scroll position. */
+
+  /* Spring transition (Apple-style overshoot) */
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease:   cubic-bezier(0.32, 0.72, 0, 1);
+  /* Liquid Glass motion tokens.
+   * --spring-overshoot: entrance — overshoots target with 2 oscillations.
+   * --spring-settle:    exit — gentle deceleration into rest.
+   * --spring-snap:      quick taps, no overshoot.
+   * Use Web Animations API with these as easing on the FLIP transforms. */
+  --spring-overshoot: linear(
+    0, 0.012 1.5%, 0.06 3.3%, 0.16 5.9%, 0.337 9.6%, 0.526 13.5%,
+    0.706 17.6%, 0.853 21.8%, 0.962 26.1%, 1.024 30.4%, 1.046 34.9%,
+    1.04 39.6%, 1.022 44.4%, 1.003 49.5%, 0.987 55%, 0.984 61%,
+    0.991 67.5%, 1 100%
+  );
+  --spring-settle: cubic-bezier(0.16, 1, 0.3, 1);
+  --spring-snap:   cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { box-sizing: border-box; }
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  /* Disable iOS Safari's double-tap-to-zoom (and the 300 ms click
+     delay that comes with it). `manipulation` still allows pinch
+     zoom for accessibility — only the gesture-zoom on double-tap
+     is suppressed. */
+  touch-action: manipulation;
+}
+
+/* Hide the browser scrollbar app-wide. Scrolling still works (wheel,
+ * trackpad, keys, touch); only the rendered scrollbar UI is removed. */
+html { scrollbar-width: none; -ms-overflow-style: none; }
+html::-webkit-scrollbar, body::-webkit-scrollbar { width: 0; height: 0; display: none; }
+*::-webkit-scrollbar { width: 0; height: 0; }
+* { scrollbar-width: none; }
+body {
+  font: 14.5px/1.55 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; background: none; border: none; color: inherit; }
+::selection { background: var(--accent); color: #FFFFFF; }
+
+/* =========================================================================
+ * Ambient color wells — VIBRANT, slow-drifting pastel orbs.
+ * Glass needs strong, colorful substrate to refract visibly on light bg.
+ * Animation gives the glass surfaces subtle visible "life" without movement.
+ * ========================================================================= */
+body::before {
+  content: ''; position: fixed; inset: -15vh -15vw; pointer-events: none; z-index: -2;
+  background:
+    radial-gradient(50vw 40vw at 8% -5%,   rgba(14,163,113,0.35),  transparent 55%),
+    radial-gradient(42vw 35vw at 95% 8%,   rgba(46,111,224,0.28),  transparent 55%),
+    radial-gradient(55vw 45vw at 50% 108%, rgba(120,73,224,0.26),  transparent 55%),
+    radial-gradient(36vw 30vw at 100% 65%, rgba(199,120,14,0.22),  transparent 55%),
+    radial-gradient(32vw 26vw at -3% 70%,  rgba(215,56,76,0.20),   transparent 55%),
+    radial-gradient(28vw 22vw at 30% 50%,  rgba(14,163,113,0.12),  transparent 60%);
+  animation: ambient-drift 32s ease-in-out infinite alternate;
+  /* Force into its own GPU compositor layer. The drift animation just
+   * translates this layer -- if it stays on the main layer, every
+   * frame re-rasters the giant gradient. translateZ(0) + will-change
+   * promotes it once on page load; transform updates are then pure
+   * compositor work (no CPU paint). */
+  will-change: transform;
+  transform: translateZ(0);
+}
+@keyframes ambient-drift {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(-2vw, 1vh) scale(1.02); }
+  100% { transform: translate(1vw, -1vh) scale(0.99); }
+}
+/* Film grain — gives glass a "material" feel rather than plastic */
+body::after {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: -1;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0   0 0 0 0 0   0 0 0 0 0   0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  mix-blend-mode: multiply;
+  opacity: 0.7;
+  /* Promote the grain layer to its own GPU plane so the SVG turbulence
+   * + mix-blend-mode:multiply composite is cached, not re-rastered on
+   * every frame. translateZ(0) is the established way to force a layer
+   * without touching layout. */
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* =========================================================================
+ * Sidebar responsive — MAX liquid glass: heavy blur, vivid saturation,
+ * multi-edge specular ring, slight contrast for crystallized feel
+ * ========================================================================= */
+.sidebar-nav {
+  display: flex;
+  background: var(--chrome);
+  -webkit-backdrop-filter: blur(60px) saturate(200%) brightness(1.08) contrast(1.03);
+  backdrop-filter: blur(60px) saturate(200%) brightness(1.08) contrast(1.03);
+  border-right: 1px solid var(--hairline);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.95),
+    inset -1px 0 0 rgba(255,255,255,0.45),
+    inset 1px 0 0 rgba(255,255,255,0.55),
+    inset 0 -1px 0 var(--hairline),
+    1px 0 0 rgba(15,23,42,0.04);
+  position: relative;
+}
+/* Specular gloss on sidebar — diagonal sweep + top gradient */
+.sidebar-nav::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.45) 0%, transparent 12%),
+    linear-gradient(135deg, rgba(255,255,255,0.20) 0%, transparent 35%);
+  z-index: 0;
+}
+.sidebar-nav > * { position: relative; z-index: 1; }
+#sidebar-backdrop { display: none; }
+@media (max-width: 899px) {
+  .sidebar-nav {
+    position: fixed; top: 0; left: 0; bottom: 0;
+    height: 100vh; height: 100dvh;
+    transform: translateX(-100%);
+    transition: transform 0.45s var(--spring);
+    box-shadow: inset 0 1px 0 var(--hl-strong),
+                28px 0 60px -20px rgba(15,23,42,0.15);
+    max-width: 86vw;
+    border-top-right-radius: var(--r);
+    border-bottom-right-radius: var(--r);
+    overflow-y: auto;             /* long nav can scroll */
+    -webkit-overflow-scrolling: touch;
+  }
+  body.sidebar-open .sidebar-nav { transform: translateX(0); }
+  body.sidebar-open #sidebar-backdrop {
+    display: block;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    background: rgba(15,23,42,0.18);
+  }
+  /* Lock the body scroll while the slide-over is open */
+  body.sidebar-open { overflow: hidden !important; }
+  /* Ensure the hamburger sits above any sticky-positioned content */
+  #mobile-menu { position: relative; z-index: 5; }
+}
+
+/* =========================================================================
+ * Nav items
+ * ========================================================================= */
+.nav-item {
+  display: flex; align-items: center; gap: 0.55rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--r-xs);
+  color: var(--muted);
+  font-size: 13.5px;
+  position: relative;
+  transition: color 0.25s var(--ease), background 0.25s var(--ease), transform 0.35s var(--spring);
+}
+.nav-item:hover {
+  color: var(--text);
+  background: var(--hl-faint);
+  transform: translateX(2px);
+}
+.nav-item.active {
+  color: var(--text);
+  background: linear-gradient(180deg, rgba(14,163,113,0.13), rgba(14,163,113,0.05));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.95), inset 0 -1px 0 var(--hairline);
+}
+.nav-item.active::before {
+  content: ''; position: absolute; left: -16px; top: 8px; bottom: 8px; width: 3px;
+  background: var(--accent);
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(14,163,113,0.45);
+}
+.nav-item .nav-icon { display: none; }
+.nav-item .nav-badge { margin-left: auto; font-size: 10px; color: var(--dim); }
+
+@media (max-width: 480px) {
+  .nav-item { padding: 0.75rem 0.85rem; font-size: 14.5px; }
+}
+
+/* =========================================================================
+ * Header — chrome material (MAX liquid glass)
+ * ========================================================================= */
+header.sticky, main > header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: var(--chrome);
+  -webkit-backdrop-filter: blur(60px) saturate(200%) brightness(1.08) contrast(1.03);
+  backdrop-filter: blur(60px) saturate(200%) brightness(1.08) contrast(1.03);
+  /* Notch-seamless: dropped the inset 1px top highlight that was
+     drawing a hard white line exactly at the notch/header boundary.
+     Kept only the bottom hairline so the header still has a defined
+     edge against scrolling content. */
+  box-shadow: inset 0 -1px 0 var(--hairline);
+  border-bottom: none !important;
+  /* The Liquid Glass material flows up into the iPhone notch safe-area
+     band via padding-top: env(...). The padded area is part of the
+     header's box, so its translucent backdrop-filter + chrome bg fill
+     the notch region instead of leaving a bare body-bg strip. */
+  padding-top: env(safe-area-inset-top, 0px);
+}
+header.sticky::after, main > header::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,255,255,0.50) 0%, transparent 30%);
+}
+header.sticky > *, main > header > * { position: relative; z-index: 1; }
+
+/* =========================================================================
+ * Cards — MAX Liquid Glass:
+ *  - Heavy blur (60px) + 200% saturation + brightness/contrast boost
+ *  - Multi-layer specular: top gradient + radial highlight + diagonal sheen
+ *  - Inner fresnel ring (light pickup on inside of border)
+ *  - Soft compress-on-press
+ * ========================================================================= */
+/* =========================================================================
+ * .card — Liquid-glass material WITHOUT the heavy transform animations.
+ * Stripped: pointer-tracked specular, ambient sweep, 3D-tilt-on-hover,
+ * chromatic rim shift, glass-card-enter keyframe.
+ * Kept: backdrop-filter, top-edge gloss, fresnel rim, simple hover lift,
+ * gentle press scale.
+ * ========================================================================= */
+.card {
+  position: relative;
+  /* Plain fallback first — WebKit < iOS 16.4 doesn't support color-mix(),
+   * which invalidates the whole background declaration. Without this
+   * fallback the .card surface renders fully transparent on older iOS. */
+  background: var(--regular);
+  /* Adaptive substrate — color-mix pulls the glass slightly toward the
+   * background sampled by JS (see js/glass-adaptive.js). When --card-tint
+   * is transparent (default), the mix is a no-op and we get pure --regular. */
+  background: color-mix(in srgb, var(--regular) calc(100% - var(--card-tint-mix)), var(--card-tint) var(--card-tint-mix));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) brightness(var(--glass-brightness)) contrast(var(--glass-contrast));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) brightness(var(--glass-brightness)) contrast(var(--glass-contrast));
+}
+/* Companies grid — 129+ cards at once. Skip the backdrop-filter pass
+   (cheapest possible substrate) so the tap → paint isn't bottlenecked
+   by composting a 60-px blur for every card. Falls back to a slightly
+   more opaque solid material; visually almost indistinguishable when
+   tiled in a grid since the per-card blur barely shows through anyway. */
+.card {
+  border-radius: var(--r-outer);
+  padding: var(--card-padding) 1.3rem;
+  /* CSS containment: tell the browser this card's layout + paint can
+   * be reasoned about in isolation. Combined with isolation:isolate
+   * below, descendants can't affect anything outside the card. Cuts
+   * style-recalc + paint scope during scroll + nav significantly. */
+  contain: layout style paint;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.95),
+    inset 0 -1px 0 rgba(15,23,42,0.06),
+    inset 1px 0 0 rgba(255,255,255,0.55),
+    inset -1px 0 0 rgba(255,255,255,0.30),
+    var(--sh-card);
+  overflow: hidden;
+  isolation: isolate;
+}
+/* Spring physics on interactive transitions — isolated to its own rule
+ * because --spring-overshoot is a linear() easing, which WebKit < iOS 17.2
+ * cannot parse. If the transition shorthand is invalid the parser used to
+ * sometimes corrupt subsequent declarations in the same block — keeping
+ * the layout properties above safe means cards still get padding/radius/
+ * shadow on older iOS even when the transition itself is dropped. */
+.card {
+  transition:
+    transform 0.42s var(--spring-overshoot),
+    box-shadow 0.28s var(--spring-settle),
+    background 0.4s var(--ease),
+    backdrop-filter 0.45s var(--spring-settle),
+    -webkit-backdrop-filter 0.45s var(--spring-settle);
+}
+/* Companies grid — 129+ cards at once. Skip the backdrop-filter pass
+   (cheapest possible substrate) so the tap → paint isn't bottlenecked
+   by compositing a 60-px blur for every card. Falls back to a slightly
+   more opaque solid material; visually nearly identical when tiled. */
+#co-grid > .card {
+  -webkit-backdrop-filter: none;
+  backdrop-filter:        none;
+  background: rgba(255, 255, 255, 0.72);
+  /* Skip layout + paint for off-screen company cards. With 138 cards in
+   * the grid, scroll FPS was scraping the floor because every card kept
+   * paying its paint cost even when scrolled out of view. content-
+   * visibility:auto lets the browser skip both. contain-intrinsic-size
+   * keeps the scrollbar from jumping by reserving the card's typical
+   * height (~210px) up front. No visual change for on-screen cards. */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 210px;
+}
+
+/* Concentric nesting — nested glass surfaces inherit a smaller radius so
+ * corners run parallel to the parent (Apple HIG rule). */
+.card .card,
+.card .btn {
+  --r-outer: var(--r-inner);
+}
+
+/* Frosted-on-modal-open — Apple's Liquid Glass ramps blur on the surfaces
+ * beneath an open sheet, signaling depth-stacking. We detect any modal
+ * mounted as a direct child of <body> via :has() and bump --glass-blur.
+ * The .card transition includes backdrop-filter, so the ramp animates. */
+body:has(> .fixed.inset-0[class*="z-4"]),
+body:has(> .fixed.inset-0[class*="z-5"]) {
+  --glass-blur: 84px;
+  --glass-saturate: 220%;
+  /* Lock body scroll while a modal is open so the page underneath doesn't
+   * scroll behind the sheet on iOS (overscroll bleed). The modal wrapper
+   * carries its own overflow-y:auto -- we only freeze the body.
+   * overscroll-behavior blocks the pull-to-refresh / rubber-band bleed
+   * that iOS Safari would otherwise still allow at the edges. */
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+/* Pause the ambient color-well drift on body::before while a modal is
+ * open. The modal wrapper's backdrop-filter samples those pixels every
+ * frame; if the source is animating, the blur has to re-composite
+ * continuously and tanks scroll FPS inside the modal. Paused = blur
+ * cache is stable, modal scroll stays smooth. The 32s drift cycle
+ * resuming a few seconds later is imperceptible. */
+body:has(> .fixed.inset-0[class*="z-4"])::before,
+body:has(> .fixed.inset-0[class*="z-5"])::before {
+  animation-play-state: paused;
+}
+html:has(body > .fixed.inset-0[class*="z-4"]),
+html:has(body > .fixed.inset-0[class*="z-5"]) {
+  overflow: hidden;
+}
+
+/* Modal layout — applied at ALL widths.
+ *
+ * Why this exists: the modal wrappers are `<div class="fixed inset-0
+ * grid place-items-center p-4">` with the lesson card inside as
+ * `<div class="card ... max-h-[90vh] overflow-y-auto">`. That pattern
+ * caps the card at 90vh and tries to scroll internally, which
+ *   (a) wedges on iOS WebKit (fixed+grid centering + max-h child is
+ *       unreliable), and
+ *   (b) on desktop, hides content behind the closed-shape height even
+ *       when the rest of the viewport has room.
+ *
+ * The fix: turn the WRAPPER into the scroll container and let the card
+ * flow naturally inside it. The card grows with content; the wrapper
+ * scrolls when content exceeds the viewport. Plays well across WebKit
+ * and Blink. */
+.fixed.inset-0.grid.place-items-center {
+  display: block !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior: contain !important;
+  padding: 1.5rem;
+}
+.fixed.inset-0 .card,
+.fixed.inset-0 .card.elevated {
+  max-height: none !important;
+  overflow: visible !important;
+  margin: 1rem auto !important;
+}
+
+/* Scene drop — the underlying <main> recedes when a modal opens. Combined
+ * with the blur ramp above, this is the "sheet pushes the world back"
+ * effect from iOS / macOS Liquid Glass. transform-origin keeps the top of
+ * the page anchored so the header doesn't visually slide.
+ *
+ * IMPORTANT: will-change is intentionally NOT on the base rule. An always-
+ * on will-change:transform on <main> would make its descendant header's
+ * position:sticky operate within main's box instead of the viewport,
+ * which breaks the sticky behavior entirely. We only signal the GPU
+ * compositor when a modal is actually about to scale main. */
+main {
+  transition:
+    transform 0.42s var(--spring-settle),
+    filter 0.42s var(--spring-settle);
+  transform-origin: top center;
+}
+body:has(> .fixed.inset-0[class*="z-4"]) main,
+body:has(> .fixed.inset-0[class*="z-5"]) main {
+  transform: scale(0.965) translateY(6px);
+  filter: brightness(0.94);
+  will-change: transform, filter;
+}
+
+/* (View Transitions API removed — every wiring of it produced a
+ * rectangular flicker on the tab bar / sidebar pill because the API
+ * hides live elements during snapshot, and any in-flight CSS transition
+ * captured at slightly different progress points in OLD vs NEW reads as
+ * a flicker. Route swaps are now a plain DOM replace + ANIM.viewIn
+ * fade-in on the #view content. See app.js: render.) */
+
+/* Top-edge specular gloss — static only, no animation, no pointer tracking */
+.card::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.00) 25%),
+    radial-gradient(ellipse 90% 25% at 50% 0%, rgba(255,255,255,0.55), transparent 75%);
+  z-index: 0;
+  mix-blend-mode: screen;
+}
+/* Diagonal sheen + bottom-depth — static only */
+.card::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 35%, transparent 65%, rgba(15,23,42,0.025) 100%),
+    radial-gradient(ellipse 70% 18% at 50% 100%, rgba(15,23,42,0.05), transparent 70%);
+  z-index: 0;
+}
+.card > * { position: relative; z-index: 1; }
+
+.card:hover {
+  transform: translateY(-2px);
+  background: var(--thick);
+  box-shadow:
+    inset 0 1px 0 var(--hl-strong),
+    inset 0 -1px 0 var(--hairline),
+    var(--sh-lift);
+}
+.card:active { transform: translateY(0) scale(0.997); transition-duration: 0.1s; }
+
+.card-glow:hover {
+  box-shadow:
+    inset 0 1px 0 var(--hl-strong),
+    inset 0 -1px 0 var(--hairline),
+    var(--sh-lift),
+    var(--sh-glow-accent);
+}
+
+.card.elevated { box-shadow: inset 0 1px 0 var(--hl-strong), inset 0 -1px 0 var(--hairline), var(--sh-lift); }
+.card.thick { background: var(--thick); }
+.card.thin  { background: var(--thin); }
+
+/* Modal cards: stay still on hover (focused surface, no lift) */
+.fixed.inset-0 .card,
+.fixed.inset-0 .card:hover,
+.fixed.inset-0 .card:active {
+  transform: none;
+  /* The .fixed.inset-0 wrapper already supplies a blur(24px) backdrop-
+   * filter for the modal substrate. The card-on-modal layer also having
+   * backdrop-filter stacks a second blur pass for almost no visible
+   * difference (the card sits on top of an already-blurred wrapper, so
+   * the card's own blur samples that blurred output -- doubly diminished).
+   * Dropping the card's blur here cut the lesson:open fade from ~10fps
+   * to 30+ under throttle with no perceptible end-state change. */
+  -webkit-backdrop-filter: none;
+  backdrop-filter:        none;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+/* Reduce-motion */
+@media (prefers-reduced-motion: reduce) {
+  .card:hover { transform: none; }
+}
+
+/* =========================================================================
+ * Pet tamagotchi — PS2-era polygonal isometric scene
+ * Everything is one SVG (.pet-iso-scene) with shape-rendering:crispEdges
+ * for that flat-shaded low-poly look. The walking animation translates
+ * the pet group along an isometric axis.
+ * ========================================================================= */
+.pet-card { contain: layout style; }
+
+/* =========================================================================
+ * Liquid Glass mobile nav (iOS 26-style floating tab bar)
+ *
+ * Apple's mobile Liquid Glass nav (iOS 26):
+ *  • Floats above content, inset from screen edges (not edge-anchored)
+ *  • Capsule shape with concentric corner radius
+ *  • Translucent Liquid Glass material (blur + saturation + inner highlights)
+ *  • Active tab marked by a glass pill that morphs between tabs with
+ *    spring physics
+ *  • Minimizes on scroll-down, expands on scroll-up
+ *  • Content-first: floats above content rather than blocking it
+ *
+ * Visible on mobile only (the lg+ sidebar handles desktop nav).
+ * ========================================================================= */
+/* Mobile breakpoint: force-show the tab bar regardless of any Tailwind
+ * lg:hidden specificity quirks. Defensive — should never be needed in
+ * practice but locks the behavior in. */
+@media (max-width: 1023px) {
+  #liquid-tabbar { display: flex !important; }
+}
+@media (min-width: 1024px) {
+  #liquid-tabbar { display: none !important; }
+}
+
+#liquid-tabbar {
+  /* Floating, capsule, inset. Center-anchored. */
+  position: fixed;
+  left: 50%;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 14px);
+  width: calc(100vw - 32px);
+  max-width: 480px;
+  z-index: 35;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 4px;
+  padding: 8px;
+  height: 68px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--regular) 80%, var(--card-tint, transparent) 20%);
+  /* Liquid Glass material — visual unchanged from baseline. */
+  -webkit-backdrop-filter: blur(40px) saturate(220%) brightness(1.08) contrast(1.04);
+  backdrop-filter:        blur(40px) saturate(220%) brightness(1.08) contrast(1.04);
+  /* Force a dedicated compositor layer so the heavy backdrop-filter
+   * doesn't have to be re-composited every time the view below it
+   * repaints (route swap, scroll, etc.). translate(-50%) is in the
+   * existing transform below; we add the Z and will-change here. */
+  will-change: transform, backdrop-filter;
+  contain: layout style;
+  /* Static box-shadow only — the animated sync glow now lives on a
+     ::after pseudo-element with opacity transitions (compositor-only,
+     vs. animating a multi-layer box-shadow which forces a re-paint
+     every frame of the transition). */
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.95),
+    inset 0 -1px 0 rgba(15,23,42,0.06),
+    inset 1px 0 0 rgba(255,255,255,0.55),
+    inset -1px 0 0 rgba(255,255,255,0.30),
+    0 10px 32px -10px rgba(15,23,42,0.22),
+    0 2px 6px rgba(15,23,42,0.08);
+  /* Animate ONLY GPU-cheap properties. Removed backdrop-filter from
+     the list (it doesn't change), and box-shadow (now opacity-driven
+     on the ::after halo). width + gap stay because the minimize
+     animation actually depends on them. */
+  transition:
+    transform 0.42s var(--spring-overshoot),
+    width    0.42s var(--spring-overshoot),
+    gap      0.42s var(--spring-overshoot),
+    opacity  0.30s var(--spring-settle);
+  transform: translateX(-50%);
+  will-change: transform, width;
+  isolation: isolate;
+  /* Repaint isolation: changes inside the bar (icon pop, label fade)
+     can't invalidate the rest of the page. */
+  contain: layout style paint;
+}
+/* Sync-glow halo as a separate pseudo-element. The body[data-sync]
+   selectors below toggle its opacity (compositor-only transition) AND
+   tint via CSS vars. The underlying tabbar never repaints. */
+#liquid-tabbar::after {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: 0 0 var(--sync-glow-blur, 0px) var(--sync-glow-spread, 0px) var(--sync-glow-color, transparent);
+  opacity: var(--sync-glow-op, 0);
+  transition: opacity 0.45s var(--spring-settle);
+}
+
+/* ─── Sync-state glow ────────────────────────────────────────────────
+ * Diffuse halo around the nav pill (#liquid-tabbar on mobile;
+ * #sidebar on desktop) that signals live sync status at a glance.
+ * Toggled by sync.js via body[data-sync="<state>"]. The glow is
+ * implemented as the last box-shadow layer on each element above,
+ * via three CSS variables: --sync-glow-color / -blur / -spread.
+ *
+ * States:
+ *   polling / paired  — gentle gray (loop alive, no change)
+ *   synced  / pulled  — green (data just flowed) — with .sync-pulse
+ *                       flaring brighter for 700ms before settling
+ *   offline           — amber (fetch failed)
+ *   error             — red (HTTP non-OK / quota)
+ *   (no attribute)    — transparent (idle / unpaired)
+ */
+/* Drive the ::after halo via two CSS vars: tint+blur+spread set once
+   per state, opacity transitions on the compositor. */
+body[data-sync="polling"] #liquid-tabbar,
+body[data-sync="paired"]  #liquid-tabbar {
+  --sync-glow-color: rgba(140, 152, 168, 0.18);
+  --sync-glow-blur:  36px;  --sync-glow-spread: 2px;  --sync-glow-op: 1;
+}
+body[data-sync="synced"] #liquid-tabbar,
+body[data-sync="pulled"] #liquid-tabbar {
+  --sync-glow-color: rgba(14, 163, 113, 0.42);
+  --sync-glow-blur:  48px;  --sync-glow-spread: 4px;  --sync-glow-op: 1;
+}
+body.sync-pulse[data-sync="synced"] #liquid-tabbar,
+body.sync-pulse[data-sync="pulled"] #liquid-tabbar {
+  --sync-glow-color: rgba(14, 163, 113, 0.72);
+  --sync-glow-blur:  64px;  --sync-glow-spread: 8px;  --sync-glow-op: 1;
+}
+body[data-sync="offline"] #liquid-tabbar {
+  --sync-glow-color: rgba(245, 158, 11, 0.45);
+  --sync-glow-blur:  44px;  --sync-glow-spread: 4px;  --sync-glow-op: 1;
+}
+body[data-sync="error"] #liquid-tabbar {
+  --sync-glow-color: rgba(239, 68, 68, 0.50);
+  --sync-glow-blur:  48px;  --sync-glow-spread: 4px;  --sync-glow-op: 1;
+}
+
+/* Sidebar (desktop) — apply the same halo. Bigger element, so wider blur. */
+body[data-sync="polling"] #sidebar,
+body[data-sync="paired"]  #sidebar {
+  box-shadow: inset -1px 0 0 rgba(15,23,42,0.06), 0 0 48px 2px rgba(140,152,168,0.16);
+}
+body[data-sync="synced"] #sidebar,
+body[data-sync="pulled"] #sidebar {
+  box-shadow: inset -1px 0 0 rgba(15,23,42,0.06), 0 0 64px 6px rgba(14,163,113,0.38);
+}
+body.sync-pulse[data-sync="synced"] #sidebar,
+body.sync-pulse[data-sync="pulled"] #sidebar {
+  box-shadow: inset -1px 0 0 rgba(15,23,42,0.06), 0 0 84px 10px rgba(14,163,113,0.65);
+}
+body[data-sync="offline"] #sidebar {
+  box-shadow: inset -1px 0 0 rgba(15,23,42,0.06), 0 0 56px 5px rgba(245,158,11,0.45);
+}
+body[data-sync="error"] #sidebar {
+  box-shadow: inset -1px 0 0 rgba(15,23,42,0.06), 0 0 64px 6px rgba(239,68,68,0.50);
+}
+#sidebar { transition: box-shadow 0.55s var(--spring-settle); }
+
+/* Each tab — iOS 26 layout: icon above label, all tabs show labels in
+ * the expanded state. Apple's active-state cue is color-only (no
+ * background pill behind the icon) — inactive tabs use a low-opacity
+ * muted color, the active tab uses the accent color with full opacity
+ * and slightly heavier label. */
+#liquid-tabbar .tab-item {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 100px;
+  height: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: var(--text);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  border-radius: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  opacity: 0.62;
+  overflow: hidden;
+  /* Reliable tap registration on iOS Safari: skip the double-tap-zoom
+     gesture delay and the gray flash that can swallow rapid taps. */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  transition:
+    color 0.28s var(--spring-settle),
+    opacity 0.28s var(--spring-settle),
+    max-width 0.45s var(--spring-overshoot),
+    padding 0.45s var(--spring-overshoot);
+}
+#liquid-tabbar .tab-item .tab-label {
+  font-weight: 500;
+  white-space: nowrap;
+  line-height: 1;
+  transition:
+    max-height 0.32s var(--spring-settle),
+    opacity 0.28s var(--spring-settle),
+    margin 0.32s var(--spring-settle);
+}
+#liquid-tabbar .tab-item.active {
+  color: var(--accent);
+  opacity: 1;
+}
+#liquid-tabbar .tab-item.active .tab-label {
+  font-weight: 600;
+}
+/* Icon pop on activation — driven from JS via Element.animate after the
+ * view-transition completes (see app.js: popActiveIcon). Driving it
+ * imperatively avoids the flicker that a CSS transition produced: the
+ * view-transition pseudo hides the live bar mid-animation and the
+ * snapshot freezes the icon at its in-progress scale, then the live
+ * element returns at a more-advanced animation state — a visible jump.
+ * With JS we wait for the transition to fully end, then run the pop on
+ * the fully-visible live element. Resting state remains scale(1). */
+#liquid-tabbar .tab-item .icon {
+  transform: translateZ(0);          /* GPU layer; no scale transition here */
+  transform-origin: 50% 50%;
+  backface-visibility: hidden;
+}
+/* Press feedback — gentle scale-down on touch. */
+#liquid-tabbar .tab-item:active {
+  transform: scale(0.94);
+  transition: transform 0.18s var(--spring-snap);
+}
+
+/* Minimize-on-scroll — matches Apple iOS 26 `tabBarMinimizeBehavior`.
+ * On scroll-down, the bar contracts in place around the active tab:
+ *   • Width animates from full to 64px (compact circular pill)
+ *   • Non-active tabs collapse to zero footprint (max-width AND flex
+ *     basis both zero, so they contribute no width and no leftover
+ *     space — required to keep the active icon perfectly centered)
+ *   • Bar's gap shrinks to 0 alongside, so residual gaps between
+ *     hidden items don't shift the active item off-axis
+ *   • justify-content switches to center so the active tab is
+ *     guaranteed centered regardless of its position in the bar
+ *   • Active tab's label hides (icon-only)
+ * Scroll-up or reaching the top of the page restores the full bar. */
+body.nav-minimized #liquid-tabbar {
+  width: 64px;
+  gap: 0;
+  justify-content: center;
+  -webkit-backdrop-filter: blur(32px) saturate(200%) brightness(1.06);
+  backdrop-filter:        blur(32px) saturate(200%) brightness(1.06);
+}
+body.nav-minimized #liquid-tabbar .tab-item:not(.active) {
+  max-width: 0;
+  flex: 0 0 0;
+  padding-left: 0;
+  padding-right: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+body.nav-minimized #liquid-tabbar .tab-item.active {
+  flex: 0 0 auto;
+  max-width: none;
+  /* Symmetric horizontal margin keeps the icon perfectly centered
+   * inside the contracted pill, regardless of which tab was active. */
+  margin: 0 auto;
+}
+body.nav-minimized #liquid-tabbar .tab-item.active .tab-label {
+  max-height: 0;
+  opacity: 0;
+  margin: 0;
+}
+
+/* When a modal is open, the tab bar also recedes alongside <main>. */
+body:has(> .fixed.inset-0[class*="z-4"]) #liquid-tabbar,
+body:has(> .fixed.inset-0[class*="z-5"]) #liquid-tabbar {
+  transform: translateX(-50%) scale(0.92) translateY(4px);
+  opacity: 0.6;
+}
+
+/* Mobile-only — reserve room at the bottom of <main> so content can
+ * scroll past the floating tab bar without being permanently obscured. */
+@media (max-width: 1023px) {
+  main {
+    padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Reduce motion — disable spring + minimize transforms */
+@media (prefers-reduced-motion: reduce) {
+  #liquid-tabbar,
+  #liquid-tabbar .tab-pill,
+  #liquid-tabbar .tab-item .tab-label {
+    transition-duration: 0.001s;
+  }
+  body.nav-minimized #liquid-tabbar {
+    transform: none;
+  }
+}
+
+/* ─── More sheet (mobile overflow nav) ─────────────────────────────────
+ * Liquid Glass panel that slides up from the bottom. Hosts the secondary
+ * routes that don't fit in the tab bar. Closes on backdrop tap, Esc, or
+ * selecting a route. */
+#more-sheet { display: block; }
+/* Wrapper deliberately avoids `fixed inset-0 z-50` Tailwind classes —
+   the body's `:has(> .fixed.inset-0[class*="z-5"])` selector would
+   otherwise globally bump --glass-blur to 84px and invalidate every
+   dashboard card's backdrop-filter on the same frame the entrance
+   starts. Positioning here, freeze behaviors below via .more-sheet-open. */
+.more-sheet-wrap {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+}
+.more-sheet-scrim {
+  position: absolute; inset: 0;
+  background: rgba(15, 23, 42, 0.42);
+  opacity: 0;
+  transition: opacity 0.28s var(--spring-settle);
+}
+#more-sheet.open .more-sheet-scrim { opacity: 1; }
+
+.more-sheet-panel {
+  position: absolute;
+  left: 12px; right: 12px;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+  max-height: 72vh;
+  overflow-y: auto;
+  border-radius: 26px;
+  padding: 20px 18px 22px;
+  background: rgba(255, 255, 255, 0.97);
+  /* Single cheap drop-shadow instead of .card's 5-layer inset stack.
+     Inset rims need to recomposite every transform frame; one flat
+     shadow can be cached by the compositor as a static layer. */
+  box-shadow: 0 18px 48px rgba(15, 23, 42, 0.22);
+  /* Isolate paint + layout so the entrance can't dirty anything else. */
+  contain: layout style paint;
+  isolation: isolate;
+  transform: translateY(110%) translateZ(0);
+  /* Exit uses --spring-settle; entrance overrides to --spring-overshoot
+     below. Splitting curves keeps both directions Apple-correct. */
+  transition: transform 0.32s var(--spring-settle);
+  will-change: transform;
+}
+#more-sheet.open .more-sheet-panel {
+  transform: translateY(0) translateZ(0);
+  transition: transform 0.42s var(--spring-overshoot);
+}
+
+/* Freeze behaviors opted into AFTER append, via JS-toggled body class.
+   These replicate what the old `:has()`-based modal rules did but only
+   for what the More sheet actually needs (scroll lock + tabbar recede +
+   pause ambient drift). We deliberately do NOT bump --glass-blur here —
+   the scrim already darkens the page enough that the depth cue from the
+   blur ramp isn't worth its recomposite cost for this sheet. */
+body.more-sheet-open {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+body.more-sheet-open::before {
+  animation-play-state: paused;
+}
+body.more-sheet-open #liquid-tabbar {
+  transform: translateX(-50%) scale(0.92) translateY(4px);
+  opacity: 0.6;
+}
+
+.more-sheet-handle {
+  width: 36px; height: 4px;
+  border-radius: 999px;
+  background: var(--hairline-2);
+  margin: 0 auto 14px;
+}
+.more-sheet-list { display: flex; flex-direction: column; gap: 4px; }
+.more-sheet-version {
+  display: block;
+  width: 100%;
+  margin-top: 14px;
+  padding: 10px 8px;
+  text-align: center;
+  font-size: 10.5px;
+  font-feature-settings: 'tnum';
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  opacity: 0.62;
+  user-select: text;
+  background: transparent;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: opacity 0.2s var(--spring-settle), background 0.2s var(--spring-settle);
+}
+.more-sheet-version:hover { opacity: 0.85; background: rgba(15,23,42,0.04); }
+.more-sheet-version:active { opacity: 1.0; background: rgba(15,23,42,0.08); }
+.more-sheet-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 14px;
+  border-radius: 16px;
+  color: var(--text);
+  font-size: 14.5px; font-weight: 500;
+  text-decoration: none;
+  /* Snappy press-IN (0.06s linear), gentle release (0.22s spring-settle).
+     iOS tap-highlight off so our own :active state isn't masked by the
+     gray flash. */
+  transition:
+    background 0.22s var(--spring-settle),
+    transform 0.22s var(--spring-settle);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+}
+.more-sheet-row:hover { background: rgba(15,23,42,0.05); }
+.more-sheet-row:active {
+  transform: scale(0.97);
+  background: rgba(15,23,42,0.12);
+  transition: background 0.06s linear, transform 0.06s linear;
+}
+.more-sheet-icon { color: var(--muted); display: inline-flex; align-items: center; }
+.more-sheet-label { flex: 1; }
+.more-sheet-chevron { color: var(--dim); display: inline-flex; align-items: center; }
+
+/* ─── Desktop sidebar — Liquid Glass nav, polished ─────────────────────
+ * Apple-style docked sidebar: Liquid Glass material, generous padding,
+ * pill-shape active indicator that morphs between items via the same
+ * --spring-overshoot easing the bottom tab bar uses. Hidden on mobile
+ * (tab bar takes over). */
+@media (max-width: 1023px) {
+  #sidebar { display: none !important; }
+}
+@media (min-width: 1024px) {
+  #sidebar.sidebar-nav {
+    /* Pull the sidebar into a floating-glass pane: small margin from
+     * viewport edges, full Liquid Glass material, concentric corners. */
+    margin: 12px 0 12px 12px;
+    height: calc(100vh - 24px);
+    border: none;
+    border-radius: 22px;
+    background: color-mix(in srgb, var(--regular) 88%, var(--card-tint, transparent) 12%);
+    -webkit-backdrop-filter: blur(50px) saturate(200%) brightness(1.06);
+    backdrop-filter:        blur(50px) saturate(200%) brightness(1.06);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.95),
+      inset 0 -1px 0 rgba(15,23,42,0.06),
+      inset 1px 0 0 rgba(255,255,255,0.55),
+      inset -1px 0 0 rgba(255,255,255,0.30),
+      0 8px 24px -10px rgba(15,23,42,0.14);
+    isolation: isolate;
+  }
+}
+
+/* Per-item polish — nav-item gets pill rounding + smooth active state */
+#sidenav .nav-item {
+  position: relative;
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 12px;
+  border-radius: 12px;
+  color: var(--muted);
+  font-size: 13.5px; font-weight: 500;
+  text-decoration: none;
+  transition:
+    background 0.28s var(--spring-settle),
+    color 0.28s var(--spring-settle),
+    transform 0.2s var(--spring-snap);
+}
+#sidenav .nav-item:hover {
+  background: rgba(15,23,42,0.04);
+  color: var(--text);
+}
+#sidenav .nav-item.active {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  font-weight: 600;
+}
+#sidenav .nav-item.active::before {
+  /* Accent rail on the left edge — concentric mini-pill */
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 50%;
+  width: 3px;
+  height: 60%;
+  border-radius: 999px;
+  background: var(--accent);
+  transform: translateY(-50%);
+}
+
+/* Pseudo-icon classes for lesson body content (where ✅/❌ used to live).
+ * Mass-replaced in data.js so all "pro / con" lines render with classy
+ * Lucide icons instead of green/red emojis. Color via currentColor so
+ * pair with text-color utilities to tint per context.  */
+.icon-check::before,
+.icon-x::before {
+  content: '';
+  display: inline-block;
+  width: 14px; height: 14px;
+  background-color: currentColor;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  vertical-align: -2px;
+  margin-right: 6px;
+  flex-shrink: 0;
+}
+.icon-check { color: var(--accent); }
+.icon-check::before { -webkit-mask-image: url('assets/icons/check.svg'); mask-image: url('assets/icons/check.svg'); }
+.icon-x { color: var(--bad); }
+.icon-x::before { -webkit-mask-image: url('assets/icons/x.svg'); mask-image: url('assets/icons/x.svg'); }
+
+/* Pet card layout — desktop puts Bit on the left and all stats+actions
+ * stacked on the right. Mobile falls back to the original vertical stack
+ * (3D scene full-width on top, panel beneath). The 720px breakpoint
+ * matches Tailwind's `sm` so it behaves predictably with the rest of
+ * the dashboard cards. */
+.pet-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.pet-grid > .pet-room-3d { width: 100%; }
+.pet-grid > .pet-panel-right { width: 100%; }
+
+@media (min-width: 720px) {
+  .pet-grid {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 1.25rem;
+  }
+  .pet-grid > .pet-room-3d {
+    width: auto;
+    flex: 0 0 auto;
+  }
+  .pet-grid > .pet-panel-right {
+    width: auto;
+    flex: 1 1 0;
+    min-width: 180px;
+  }
+}
+
+.pet-room-3d {
+  width: 260px; height: 180px;
+  border-radius: 14px;
+  border: 1px solid var(--hairline);
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+  background: linear-gradient(180deg, #EFE6D6 0%, #D9C5A1 70%, #C49A6A 100%);
+  box-shadow: inset 0 -1px 0 rgba(15,23,42,0.04);
+}
+.pet-room-3d canvas { display: block; width: 100%; height: 100%; }
+
+/* Ambient Liquid Glass activity indicator — soft, diffused, emerges
+ * from the scene rather than sitting on top of it.
+ *  Layers:
+ *    1. Radial halo behind the disc — bleeds into the scene so the
+ *       loader feels integrated with the warm sand background.
+ *    2. Translucent glass disc with subtle inner highlight — provides
+ *       material substance without hard edges.
+ *    3. Conic-gradient ring with a long smooth gradient (multi-stop)
+ *       and a 1.5px blur applied — gives the rotation a soft "smoke"
+ *       quality instead of a sharp comet trail.
+ *    4. Outer glow box-shadow instead of a drop shadow — radiates
+ *       softly outward, no hard rim.
+ *  Animation: 1.4s constant-velocity rotation — slower than the
+ *  default iOS spinner so the motion reads as breathing rather
+ *  than urgency.
+ */
+.pet-loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  z-index: 2;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(255, 255, 255, 0.06) 35%,
+    transparent 65%
+  );
+}
+.lg-spinner {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  -webkit-backdrop-filter: blur(28px) saturate(190%) brightness(1.04);
+          backdrop-filter: blur(28px) saturate(190%) brightness(1.04);
+  box-shadow:
+    inset 0 0.5px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -0.5px 0 rgba(15, 23, 42, 0.04),
+    0 0 28px rgba(255, 255, 255, 0.35),
+    0 0 12px rgba(255, 255, 255, 0.2);
+}
+.lg-spinner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    rgba(255, 255, 255, 0.0)   0deg,
+    rgba(255, 255, 255, 0.02)  45deg,
+    rgba(255, 255, 255, 0.08)  100deg,
+    rgba(255, 255, 255, 0.20)  170deg,
+    rgba(255, 255, 255, 0.40)  240deg,
+    rgba(255, 255, 255, 0.65)  300deg,
+    rgba(255, 255, 255, 0.85)  340deg,
+    rgba(255, 255, 255, 0.95)  360deg
+  );
+  -webkit-mask: radial-gradient(circle at center, transparent 0 14px, #000 16px 21.5px, transparent 23.5px);
+          mask: radial-gradient(circle at center, transparent 0 14px, #000 16px 21.5px, transparent 23.5px);
+  filter: blur(1.5px);
+  animation: lg-spin 1.4s linear infinite;
+}
+@keyframes lg-spin {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lg-spinner::before, .lg-spinner::after { animation: none; opacity: 0.65; }
+}
+
+@media (max-width: 640px) {
+  .pet-room-3d { width: 100%; max-width: 340px; height: 200px; margin: 0 auto; }
+}
+
+.divider { height: 1px; background: var(--hairline); margin: 0.95rem 0; }
+
+/* =========================================================================
+ * Typography — 2026 SOTA tech-platform system
+ *
+ * Researched against Linear (Söhne), Vercel (Geist), Notion (Inter), Stripe (Söhne).
+ * Common pattern: neo-grotesque sans for ALL UI + body. Editorial serif reserved
+ * for hero moments only. Geist Sans is the open-source neo-grotesque equivalent
+ * to Söhne — Vercel + Basement Studio, Apache 2.0.
+ *
+ * Stack:
+ *   - Geist Sans (variable, 100-900) — body, UI, all headings except hero h1
+ *   - Geist Mono (variable) — code blocks
+ *   - Fraunces (variable, opsz + SOFT) — RESERVED: hero-h1 + italic editorial pull only
+ *
+ * Tracking philosophy (Linear/Vercel-derived):
+ *   - Body 0 to -0.005em (neutral, never positive)
+ *   - h3 -0.02em
+ *   - h2 -0.03em
+ *   - h1 -0.04em
+ *   - Eyebrows / uppercase labels: +0.08em (the only positive tracking)
+ *
+ * Leading philosophy:
+ *   - Body 1.55 (readability)
+ *   - h3 1.25, h2 1.1, h1 1.02 (tighter at scale)
+ * ========================================================================= */
+
+body {
+  font-family: 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-feature-settings: 'cv11', 'ss01', 'ss03';  /* Geist stylistic alts: clean a/g, single-story */
+  font-variation-settings: 'wght' 400;
+  letter-spacing: -0.005em;
+}
+
+.font-display {
+  font-family: 'Geist', 'Inter', system-ui, sans-serif;
+  font-variation-settings: 'wght' 600;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+/* Hero-only h1 keeps a Fraunces option for editorial moments (e.g., lesson modal title).
+   Default h1 is Geist for the tech-platform feel. */
+h1 {
+  font-family: 'Geist', 'Inter', system-ui, sans-serif;
+  font-variation-settings: 'wght' 600;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+  color: var(--text);
+}
+/* Opt-in editorial hero h1 — use .h1-editorial class for one-off moments */
+.h1-editorial {
+  font-family: 'Fraunces', Georgia, serif;
+  font-optical-sizing: auto;
+  font-variation-settings: 'opsz' 144, 'SOFT' 50, 'wght' 500;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+}
+
+h2 {
+  font-family: 'Geist', 'Inter', system-ui, sans-serif;
+  font-variation-settings: 'wght' 600;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--text);
+}
+
+h3 {
+  font-family: 'Geist', 'Inter', system-ui, sans-serif;
+  font-variation-settings: 'wght' 600;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--text);
+}
+
+/* Body text */
+p, li, label, button, input, select, textarea, .body-text {
+  font-family: 'Geist', 'Inter', system-ui, sans-serif;
+}
+
+/* Italic emphasis — Fraunces italic is the one editorial moment. Used for pull-quotes,
+   in-line emphasis where typographic texture matters. */
+em, .italic-emphasis, blockquote {
+  font-family: 'Fraunces', Georgia, serif;
+  font-style: italic;
+  font-variation-settings: 'opsz' 32, 'SOFT' 50;
+  letter-spacing: -0.005em;
+}
+
+/* Eyebrow / micro-label: Geist 600 uppercase, the only place positive tracking is used */
+.eyebrow, .text-xs.uppercase {
+  font-family: 'Geist', 'Inter', system-ui, sans-serif;
+  font-variation-settings: 'wght' 600;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 10.5px;
+  color: var(--muted);
+}
+
+.muted { color: var(--muted); }
+.dim   { color: var(--dim); }
+
+/* Numeric — tabular figures, slight monospace feel for stats */
+.numeric {
+  font-variant-numeric: tabular-nums;
+  font-family: 'Geist', 'Inter', system-ui, sans-serif;
+  font-feature-settings: 'tnum', 'cv11';
+  letter-spacing: -0.01em;
+}
+
+/* Mono — Geist Mono for code blocks (replaces JetBrains Mono) */
+code, pre, .font-mono {
+  font-family: 'Geist Mono', 'SF Mono', 'JetBrains Mono', ui-monospace, monospace;
+  font-feature-settings: 'liga' 0;  /* disable ligatures in code */
+}
+
+/* Drop-cap utility for editorial body openings (rare; uses Fraunces) */
+.drop-cap::first-letter {
+  font-family: 'Fraunces', Georgia, serif;
+  font-variation-settings: 'opsz' 144, 'SOFT' 50;
+  font-weight: 500;
+  font-size: 3.6em;
+  line-height: 0.85;
+  float: left;
+  margin: 0.05em 0.08em 0 -0.04em;
+  color: var(--text);
+}
+
+/* =========================================================================
+ * Pills — colored fills on light bg
+ * ========================================================================= */
+.pill {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  padding: 4px 11px;
+  border-radius: 999px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
+  line-height: 1.3;
+  background: var(--hl-faint);
+  border: 1px solid var(--hairline);
+  color: var(--muted);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+@media (max-width: 640px) {
+  .pill { padding: 5px 12px; font-size: 11.5px; gap: 0.4rem; }
+}
+.pill-fde  { color: var(--accent); border-color: rgba(14,163,113,0.30); background: var(--accent-fill); }
+.pill-sde  { color: var(--sde);    border-color: rgba(46,111,224,0.30); background: var(--sde-fill); }
+.pill-both { color: var(--both);   border-color: rgba(120,73,224,0.30); background: var(--both-fill); }
+.pill-ai   { color: var(--warn);   border-color: rgba(199,120,14,0.28); background: var(--warn-fill); }
+.pill-hosp { color: var(--bad);    border-color: rgba(215,56,76,0.26);  background: var(--bad-fill); }
+.pill-mkt  { color: var(--sde);    border-color: rgba(46,111,224,0.28); background: var(--sde-fill); }
+.pill-dev  { color: var(--accent); border-color: rgba(14,163,113,0.28); background: var(--accent-fill); }
+
+.diff-easy   { color: var(--accent); }
+.diff-medium { color: var(--warn); }
+.diff-hard   { color: var(--bad); }
+
+/* =========================================================================
+ * Buttons
+ * ========================================================================= */
+.btn {
+  position: relative;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 13.5px;
+  letter-spacing: -0.005em;
+  background: var(--thick);
+  -webkit-backdrop-filter: blur(40px) saturate(200%) brightness(1.06);
+  backdrop-filter: blur(40px) saturate(200%) brightness(1.06);
+  color: var(--text);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.95),
+    inset 0 -1px 0 rgba(15,23,42,0.06),
+    inset 1px 0 0 rgba(255,255,255,0.45),
+    inset -1px 0 0 rgba(255,255,255,0.25),
+    0 1px 2px rgba(15,23,42,0.06),
+    0 4px 14px -6px rgba(15,23,42,0.10);
+  transition: transform 0.3s var(--spring), background 0.2s var(--ease), box-shadow 0.2s var(--ease);
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255,255,255,0.55) 0%, transparent 50%);
+  z-index: 0;
+}
+.btn > * { position: relative; z-index: 1; }
+.btn:hover {
+  background: rgba(255,255,255,0.92);
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.98),
+    inset 0 -1px 0 rgba(15,23,42,0.08),
+    inset 1px 0 0 rgba(255,255,255,0.55),
+    inset -1px 0 0 rgba(255,255,255,0.35),
+    0 6px 18px -6px rgba(15,23,42,0.18);
+}
+.btn:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow:
+    inset 0 2px 4px rgba(15,23,42,0.10),
+    inset 0 -1px 0 rgba(255,255,255,0.3),
+    0 1px 2px rgba(15,23,42,0.05);
+  transition-duration: 0.08s;
+}
+.btn:active { transform: translateY(0); }
+
+.btn-primary {
+  background: linear-gradient(180deg, #18CB91 0%, var(--accent) 50%, #0C9168 100%);
+  color: #FFFFFF;
+  border: 0;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.45),
+    inset 0 -1px 0 rgba(0,0,0,0.15),
+    inset 1px 0 0 rgba(255,255,255,0.20),
+    inset -1px 0 0 rgba(0,0,0,0.05),
+    0 6px 18px -6px rgba(14,163,113,0.45),
+    0 1px 2px rgba(15,23,42,0.08),
+    0 12px 36px -12px rgba(14,163,113,0.30);
+}
+.btn-primary::before {
+  background: linear-gradient(180deg, rgba(255,255,255,0.30) 0%, transparent 50%);
+}
+.btn-primary:hover {
+  background: linear-gradient(180deg, #22DDA1 0%, #14B884 50%, #0BA070 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.50),
+    inset 0 -1px 0 rgba(0,0,0,0.18),
+    inset 1px 0 0 rgba(255,255,255,0.25),
+    inset -1px 0 0 rgba(0,0,0,0.07),
+    0 10px 28px -8px rgba(14,163,113,0.55),
+    0 1px 2px rgba(15,23,42,0.10),
+    0 16px 44px -14px rgba(14,163,113,0.35);
+}
+.btn-ghost { background: transparent; box-shadow: none; }
+.btn-ghost:hover { background: var(--hl-faint); }
+.btn-danger { color: var(--bad); background: var(--bad-fill); }
+.btn-danger:hover { background: rgba(215,56,76,0.16); }
+
+/* =========================================================================
+ * Bars / Rings
+ * ========================================================================= */
+.bar {
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(15,23,42,0.07);
+  overflow: hidden;
+}
+.bar > i {
+  display: block; height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-dim));
+  box-shadow: 0 0 8px rgba(14,163,113,0.35);
+  transition: width 0.6s var(--ease);
+}
+
+/* =========================================================================
+ * Daily-effort legend pills — Liquid Glass mini-cards. One per metric.
+ * Sit in a 3-col grid below the SVG chart on the dashboard. Each pill
+ * pulls its accent color from --accent-c (set inline per pill) so the
+ * left-edge fade matches the line color in the chart above.
+ *
+ * Mobile gets a tighter padding + smaller font so three pills fit
+ * comfortably on a 375px viewport without breaking to two rows.
+ * ========================================================================= */
+.effort-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px 7px 9px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--accent-c) 8%, var(--regular) 92%);
+  border: 1px solid color-mix(in srgb, var(--accent-c) 22%, transparent);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.55),
+    inset 0 -1px 0 rgba(15,23,42,0.04),
+    0 1px 2px rgba(15,23,42,0.04);
+  /* Subtle ambient glow underneath, matching the chart-line glow recipe */
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+}
+.effort-pill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--accent-c) 8%, transparent) 0%,
+    transparent 55%);
+}
+.effort-pill-dot {
+  width: 8px; height: 8px;
+  border-radius: 999px;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px color-mix(in srgb, var(--accent-c) 60%, transparent);
+}
+.effort-pill-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.15;
+}
+.effort-pill-label {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.effort-pill-val {
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 1px;
+}
+.effort-pill-val.effort-pill-hit { color: var(--accent); }
+.effort-pill-val .dim { font-weight: 400; font-size: 0.82em; opacity: 0.55; }
+@media (max-width: 640px) {
+  .effort-pill { padding: 6px 8px 6px 8px; gap: 6px; border-radius: 9px; }
+  .effort-pill-dot { width: 7px; height: 7px; }
+  .effort-pill-label { font-size: 9.5px; letter-spacing: 0.03em; }
+  .effort-pill-val { font-size: 13px; }
+}
+
+/* CSS-only ring — no SVG bounding box, perfectly circular */
+.ring {
+  position: relative;
+  width: 124px; height: 124px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  background:
+    conic-gradient(
+      var(--accent) calc(var(--pct, 0) * 1%),
+      rgba(15,23,42,0.08) calc(var(--pct, 0) * 1%)
+    );
+  box-shadow:
+    inset 0 0 0 1px rgba(15,23,42,0.04),
+    0 0 18px -2px rgba(14,163,113, calc(var(--pct, 0) * 0.004));
+  transition: background 0.8s var(--ease);
+  flex-shrink: 0;
+}
+.ring::before {
+  content: ''; position: absolute; inset: 9px;
+  border-radius: 50%;
+  background: var(--bg);
+  box-shadow: inset 0 1px 0 var(--hl-strong);
+}
+.ring > .ring-inner {
+  position: relative; z-index: 1;
+  text-align: center;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 2px;
+  padding: 0 6px;
+}
+/* Force the inner percentage + label to fit inside the ring regardless of
+ * any global Tailwind text-size overrides (mobile readability bumps would
+ * otherwise crash through the inner circle). */
+.ring > .ring-inner > .text-2xl { font-size: 26px !important; line-height: 1.05; }
+.ring > .ring-inner > div:last-child {
+  font-size: 10.5px !important;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .ring { width: 112px; height: 112px; }
+  .ring > .ring-inner > .text-2xl { font-size: 24px !important; }
+  .ring > .ring-inner > div:last-child { font-size: 10px !important; }
+}
+@media (max-width: 380px) {
+  .ring { width: 96px; height: 96px; }
+  .ring::before { inset: 7px; }
+  .ring > .ring-inner > .text-2xl { font-size: 21px !important; }
+  .ring > .ring-inner > div:last-child { font-size: 9.5px !important; letter-spacing: 0.06em; }
+}
+
+/* =========================================================================
+ * Lesson rows
+ * ========================================================================= */
+.lesson-row {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: var(--r-xs);
+  cursor: pointer;
+  transition: background 0.2s var(--ease), transform 0.35s var(--spring);
+}
+.lesson-row:hover {
+  background: var(--hl-faint);
+  transform: translateX(2px);
+}
+.lesson-row .check {
+  width: 19px; height: 19px;
+  border-radius: 999px;
+  border: 1.5px solid var(--hairline-2);
+  background: #FFFFFF;
+  display: grid; place-items: center;
+  flex-shrink: 0;
+  transition: all 0.4s var(--spring);
+  box-shadow: inset 0 1px 0 var(--hl-strong);
+}
+.lesson-row.done .check {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(14,163,113,0.15);
+}
+.lesson-row.done .check::after {
+  content: ''; width: 7px; height: 3px;
+  border-left: 2px solid #FFFFFF; border-bottom: 2px solid #FFFFFF;
+  transform: rotate(-45deg); margin-top: -2px;
+}
+.lesson-row.done .title {
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--dim);
+}
+
+/* =========================================================================
+ * Tabs
+ * ========================================================================= */
+/* Apple Liquid Glass — regular material, capsule shape. iOS 26 spec:
+ *   • backdrop-filter blur 40px, saturate 200%, brightness 1.06, contrast 1.03
+ *   • top inner gloss (1px white), bottom inner hairline (shadow)
+ *   • side fresnel rim (subtle white inset on both sides)
+ *   • micro drop-shadow lift so the chrome sits *above* the substrate
+ *   • isolation so descendants paint into the glass's own stacking ctx
+ */
+.tabs {
+  display: inline-flex; gap: 4px;
+  padding: 5px;
+  margin-bottom: 1rem;
+  background: var(--regular);
+  -webkit-backdrop-filter: blur(40px) saturate(200%) brightness(1.06) contrast(1.03);
+  backdrop-filter: blur(40px) saturate(200%) brightness(1.06) contrast(1.03);
+  border-radius: 999px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.95),
+    inset 0 -1px 0 rgba(15,23,42,0.06),
+    inset 1px 0 0 rgba(255,255,255,0.50),
+    inset -1px 0 0 rgba(255,255,255,0.28),
+    0 6px 20px -8px rgba(15,23,42,0.14),
+    0 1px 2px rgba(15,23,42,0.05);
+  isolation: isolate;
+  /* Always scroll horizontally instead of wrapping — wrapping with many
+   * vertical filters caused the labels to overlap visually on the
+   * Companies page. */
+  flex-wrap: nowrap !important;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tabs .tab { white-space: nowrap; flex-shrink: 0; }
+
+/* Compact sort segmented control — the default .tab padding is calibrated
+ * for filter chips (e.g., "Vertical / Stage / Level"). The Sort control
+ * only has two short labels ("Top fit", "Newest") so the default pill
+ * was visibly oversized for the text. Tighten just this one.
+ *
+ * Note: `line-height: 1.15` is the key — without it, the inherited 1.5
+ * line-height makes the text box taller than the active-pill drop-shadow
+ * can accommodate, and the white pill visually escapes the gray track. */
+#co-sort {
+  padding: 3px;
+  gap: 2px;
+  margin-bottom: 0;
+}
+/* Tab uses data-co-sort (not data-sort) so it doesn't collide with the
+ * quiz answer-button rule below at line ~2345 that forces 52px min-height
+ * + 15.5px font + 1.35 line-height on any [data-sort] element. */
+#co-sort .tab {
+  padding: 0.28rem 0.75rem;
+  font-size: 11.5px;
+  line-height: 1.2;
+  font-weight: 500;
+}
+/* Default .tab.active drop-shadow is calibrated for the full-size filter
+ * chips. On a compact pill that shadow visibly overflows the track.
+ * Scale the shadow down to match the smaller pill. */
+#co-sort .tab.active {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,1),
+    inset 0 -1px 0 rgba(15,23,42,0.06),
+    inset 1px 0 0 rgba(255,255,255,0.55),
+    inset -1px 0 0 rgba(255,255,255,0.30),
+    0 1px 2px rgba(15,23,42,0.04);
+}
+
+/* Primary tab strip — chrome material for the top-level segmented
+ * control. Hosts an absolutely-positioned `.tab-thumb` that slides
+ * between segments with spring easing (the JS sets --thumb-x / --thumb-w
+ * on click + resize). Buttons themselves are transparent — the thumb
+ * is the visible selected surface. */
+.tabs.tabs-primary {
+  position: relative;
+  padding: 6px;
+  background: var(--chrome);
+  -webkit-backdrop-filter: blur(60px) saturate(220%) brightness(1.08) contrast(1.04);
+  backdrop-filter: blur(60px) saturate(220%) brightness(1.08) contrast(1.04);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.97),
+    inset 0 -1px 0 rgba(15,23,42,0.06),
+    inset 1px 0 0 rgba(255,255,255,0.55),
+    inset -1px 0 0 rgba(255,255,255,0.30),
+    0 10px 32px -10px rgba(15,23,42,0.20),
+    0 2px 6px rgba(15,23,42,0.06);
+}
+.tabs.tabs-primary .tab {
+  position: relative;
+  z-index: 1;
+  padding: 0.6rem 1.25rem;
+  font-size: 13.5px;
+  background: transparent !important;
+  box-shadow: none !important;
+  /* button-element resets */
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+  color: var(--muted);
+}
+.tabs.tabs-primary .tab.active {
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--text);
+}
+.tabs.tabs-primary .tab-thumb {
+  position: absolute;
+  top: 6px; bottom: 6px;
+  left: var(--thumb-x, 6px);
+  width: var(--thumb-w, 0);
+  z-index: 0;
+  border-radius: 999px;
+  background: var(--thick);
+  -webkit-backdrop-filter: blur(28px) saturate(220%) brightness(1.06);
+  backdrop-filter: blur(28px) saturate(220%) brightness(1.06);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,1),
+    inset 0 -1px 0 rgba(15,23,42,0.08),
+    inset 1px 0 0 rgba(255,255,255,0.55),
+    inset -1px 0 0 rgba(255,255,255,0.30),
+    0 1px 2px rgba(15,23,42,0.06),
+    0 4px 14px -4px rgba(15,23,42,0.14);
+  /* Spring-overshoot slide between segments — matches the Liquid Glass
+   * motion grammar used elsewhere in the app. */
+  transition:
+    left  0.50s var(--spring-overshoot),
+    width 0.50s var(--spring-overshoot);
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tabs.tabs-primary .tab-thumb {
+    transition-duration: 0.001s;
+  }
+}
+
+/* Category nav (vertical + level filters) — uppercase + tracked for
+ * a uniform sectional feel regardless of source casing (so "AI",
+ * "Dev Tools", "SaaS", "Fintech" all read as one visual style). */
+#co-filters .tab {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Aggregated filter bar — search input + merged vertical/level chips in
+ * one row. Filters live inside ONE `.tabs` pill rather than three
+ * separate ones, with a thin vertical divider between the two chip
+ * groups. In Companies mode the level group is hidden so the bar reads
+ * cleanly without empty controls. */
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.filter-bar .search-glass { flex: 1 1 240px; min-width: 220px; }
+.filter-bar .tabs         { flex: 1 1 auto; min-width: 0; margin-bottom: 0; }
+
+/* Vertical-rule separator between the two filter groups in the merged
+ * pill. Sits inline as a flex item; gets its color from the hairline
+ * token so it harmonises with the inset top-gloss of the glass. */
+.filter-divider {
+  display: inline-block;
+  width: 1px;
+  align-self: stretch;
+  margin: 4px 6px;
+  background: linear-gradient(180deg, transparent, var(--hairline-2), transparent);
+  flex-shrink: 0;
+}
+
+/* Hide the level group (chips + divider) when in Companies mode.
+ * Divider marked with [data-level-only], chips with [data-lfilter];
+ * both get display:none on .hide-levels. The role-category row lives
+ * in its own #co-cat-filters container and is hidden via inline style
+ * from views.js (syncLevelVis). */
+#co-filters.hide-levels [data-level-only],
+#co-filters.hide-levels [data-lfilter] {
+  display: none;
+}
+
+/* Role-category row — its own pill sitting just below the vertical +
+ * level filter bar. Adds a small top gap so it reads as a separate
+ * grouping without needing a horizontal rule. */
+#co-cat-filters {
+  margin-top: 6px;
+}
+.tab {
+  padding: 0.45rem 0.95rem;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 999px;
+  transition: color 0.2s var(--ease), background 0.3s var(--spring);
+}
+.tab:hover { color: var(--text); }
+/* Active pill — thick Liquid Glass material rather than flat white, so
+ * the selected segment reads as a *layered* surface on top of the
+ * regular-glass track. Top gloss, bottom hairline, subtle drop-shadow
+ * for lift. Matches Apple's segmented-control selection in iOS 26. */
+.tab.active {
+  color: var(--text);
+  background: var(--thick);
+  -webkit-backdrop-filter: blur(24px) saturate(200%) brightness(1.06);
+  backdrop-filter: blur(24px) saturate(200%) brightness(1.06);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,1),
+    inset 0 -1px 0 rgba(15,23,42,0.08),
+    inset 1px 0 0 rgba(255,255,255,0.55),
+    inset -1px 0 0 rgba(255,255,255,0.30),
+    0 1px 2px rgba(15,23,42,0.06),
+    0 4px 12px -4px rgba(15,23,42,0.12);
+}
+
+/* Apple Liquid Glass search input — regular material capsule with an
+ * embedded magnifier icon and a focus ring that tints toward accent
+ * without changing the glass character of the surface. */
+.search-glass {
+  flex: 1 1 0;
+  min-width: 200px;
+  max-width: 480px;
+  height: 38px;
+  padding: 0 14px 0 38px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text);
+  background-color: var(--regular);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><path d='M21 21l-4.35-4.35'/></svg>");
+  background-repeat: no-repeat;
+  background-position: 12px center;
+  background-size: 14px 14px;
+  -webkit-backdrop-filter: blur(40px) saturate(200%) brightness(1.06) contrast(1.03);
+  backdrop-filter: blur(40px) saturate(200%) brightness(1.06) contrast(1.03);
+  border: none !important;
+  border-radius: 999px !important;
+  outline: none !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.95),
+    inset 0 -1px 0 rgba(15,23,42,0.06),
+    inset 1px 0 0 rgba(255,255,255,0.50),
+    inset -1px 0 0 rgba(255,255,255,0.28),
+    0 6px 20px -8px rgba(15,23,42,0.14),
+    0 1px 2px rgba(15,23,42,0.05) !important;
+  transition: background-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  /* Strip the platform "search" affordances so the chrome stays clean. */
+  -webkit-appearance: none; appearance: none;
+}
+.search-glass::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+.search-glass::placeholder { color: var(--muted); font-weight: 500; }
+.search-glass:focus {
+  background-color: rgba(255,255,255,0.78);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,1),
+    inset 0 -1px 0 rgba(15,23,42,0.06),
+    inset 1px 0 0 rgba(255,255,255,0.60),
+    inset -1px 0 0 rgba(255,255,255,0.32),
+    0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent),
+    0 6px 20px -8px rgba(15,23,42,0.14) !important;
+}
+
+/* =========================================================================
+ * Flashcard
+ * ========================================================================= */
+.flashcard { perspective: 1400px; }
+/* Grid layout: both faces live in the same 1x1 cell so the card grows
+   with whichever face has more content (front Q is usually short, back
+   A is often structured). preserve-3d + backface-visibility keep the
+   flip animation working — only the front-facing face renders. */
+.flashcard-inner {
+  position: relative; width: 100%; min-height: 240px;
+  display: grid;
+  grid-template-areas: "card";
+  transition: transform 0.7s var(--spring);
+  transform-style: preserve-3d;
+  cursor: pointer;
+  /* The flip is a transform animation -- promote to GPU layer so the
+   * spring transition doesn't re-paint the card body each frame. */
+  will-change: transform;
+}
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+.flashcard-face {
+  grid-area: card;
+  position: relative;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  padding: 1.5rem 1.6rem 4.5rem;
+  border-radius: var(--r);
+  background: var(--thick);
+  -webkit-backdrop-filter: blur(40px) saturate(180%) brightness(1.06);
+  backdrop-filter: blur(40px) saturate(180%) brightness(1.06);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.95),
+    inset 0 -1px 0 var(--hairline),
+    inset 1px 0 0 rgba(255,255,255,0.45),
+    var(--sh-lift);
+}
+.flashcard-back { transform: rotateY(180deg); }
+.flashcard-answer { font-size: 15px; line-height: 1.6; }
+.flashcard-answer p { margin: 6px 0; }
+.flashcard-answer ul { margin: 6px 0 6px 20px; padding: 0; }
+.flashcard-answer li { margin: 3px 0; }
+.flashcard-answer code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.92em; }
+@media (max-width: 640px) {
+  .flashcard-answer { font-size: 16.5px; line-height: 1.65; }
+  .flashcard-answer p { margin: 7px 0; }
+  .flashcard-answer ul { margin: 7px 0 7px 22px; }
+  .flashcard-answer li { margin: 4px 0; }
+  .flashcard-face { padding: 1.25rem 1.3rem 4rem; }
+  .flashcard-inner { min-height: 200px; }
+}
+
+/* =========================================================================
+ * Heatmap
+ * ========================================================================= */
+.heat-cell {
+  width: 11px; height: 11px;
+  border-radius: 3px;
+  background: rgba(15,23,42,0.05);
+  transition: transform 0.3s var(--spring);
+}
+.heat-cell:hover { transform: scale(1.5); }
+.heat-1 { background: rgba(14,163,113,0.20); }
+.heat-2 { background: rgba(14,163,113,0.40); }
+.heat-3 { background: rgba(14,163,113,0.65); box-shadow: 0 0 4px rgba(14,163,113,0.25); }
+.heat-4 { background: rgba(14,163,113,0.90); box-shadow: 0 0 6px rgba(14,163,113,0.40); }
+
+/* =========================================================================
+ * Chips
+ * ========================================================================= */
+.chip {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  background: var(--hl-faint);
+  border: 1px solid var(--hairline);
+  color: var(--muted);
+  margin: 2px 2px 2px 0;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+/* Funding-badge chip — accent-tinted to read as a signal, not a tag. */
+.chip-funding {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 24%, var(--hairline));
+  color: color-mix(in srgb, var(--accent) 80%, var(--text));
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+/* Live-job row inside a company detail page. */
+.job-row { background: rgba(255,255,255,0.45); text-decoration: none; }
+.job-row:hover { background: rgba(255,255,255,0.75); transform: translateY(-1px); }
+
+/* ── Job-applications stepper (single visual button with two click halves) ── */
+.app-stepper {
+  display: inline-flex;
+  align-items: stretch;
+  height: 38px;
+  background: var(--accent);
+  border-radius: 999px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.32),
+    inset 0 -1px 0 rgba(15,23,42,0.18),
+    0 1px 2px rgba(15,23,42,0.10),
+    0 4px 12px -4px rgba(15,23,42,0.18);
+  overflow: hidden;
+  isolation: isolate;
+}
+.app-stepper-half {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  padding: 0 16px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s var(--ease);
+  font-family: inherit;
+}
+.app-stepper-half:hover:not(:disabled) {
+  background: rgba(255,255,255,0.18);
+}
+.app-stepper-half:active:not(:disabled) {
+  background: rgba(0,0,0,0.10);
+}
+.app-stepper-half:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+.app-stepper-plus  { font-size: 22px; padding-right: 18px; }
+.app-stepper-minus { font-size: 22px; padding-left: 18px; }
+.app-stepper-divider {
+  width: 1px;
+  align-self: stretch;
+  margin: 6px 0;
+  background: rgba(255,255,255,0.30);
+}
+
+/* Fit badge — probability-of-offer indicator. Color reflects tier. */
+.fit-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  border: 1px solid currentColor;
+  background: color-mix(in srgb, currentColor 8%, transparent);
+  white-space: nowrap;
+}
+.fit-badge .fit-num   { font-family: var(--font-mono, ui-monospace, monospace); font-weight: 600; }
+.fit-badge .fit-tier  { font-weight: 500; opacity: 0.85; }
+.fit-strong { color: #0B8A60; }   /* green   */
+.fit-worth  { color: #0B6FC1; }   /* blue    */
+.fit-long   { color: #C7780E; }   /* amber   */
+.fit-tough  { color: #B22B3D; }   /* red     */
+
+/* The "Ranking for" header strip on the Companies page. */
+.fit-strip {
+  background: linear-gradient(180deg, rgba(11,138,96,0.08), rgba(11,138,96,0.02));
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--hairline));
+}
+
+/* Individual-roles list row (the flat list shown when Roles tab active). */
+.role-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.55);
+  border: 1px solid var(--hairline);
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.18s var(--ease), border-color 0.18s var(--ease), transform 0.18s var(--ease);
+}
+.role-row:hover {
+  background: rgba(255,255,255,0.82);
+  border-color: color-mix(in srgb, var(--accent) 30%, var(--hairline));
+  transform: translateY(-1px);
+}
+.role-row-letter {
+  width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0;
+  background: var(--hl-faint); display: grid; place-items: center;
+  font-size: 12px; font-weight: 600; color: var(--muted);
+}
+.role-row-text  { flex: 1 1 0; min-width: 0; }
+.role-row-title { font-size: 14.5px; font-weight: 500; line-height: 1.35; }
+.role-row-co    { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+@media (max-width: 640px) {
+  .role-row { gap: 12px; padding: 13px 14px; }
+  .role-row-title { font-size: 14px; }
+  .role-row .fit-badge .fit-tier { display: none; } /* tight layout */
+}
+
+/* Role preview pills shown on each company card (up to 3 per card). */
+.role-pill {
+  display: flex;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.5);
+  border: 1px solid var(--hairline);
+  color: var(--text);
+  text-decoration: none;
+  transition: background 0.18s var(--ease), border-color 0.18s var(--ease);
+}
+.role-pill:hover {
+  background: rgba(255,255,255,0.82);
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--hairline));
+}
+.role-pill .role-arrow { font-size: 10px; opacity: 0; transition: opacity 0.18s; }
+.role-pill:hover .role-arrow { opacity: 1; color: var(--accent); }
+.role-dot {
+  width: 6px; height: 6px; border-radius: 999px; flex-shrink: 0;
+}
+
+/* =========================================================================
+ * Toasts — thick glass
+ * ========================================================================= */
+.toast {
+  pointer-events: auto;
+  background: var(--thick);
+  -webkit-backdrop-filter: blur(40px) saturate(180%) brightness(1.05);
+  backdrop-filter: blur(40px) saturate(180%) brightness(1.05);
+  padding: 0.7rem 0.95rem;
+  border-radius: var(--r-sm);
+  min-width: 240px;
+  display: flex; gap: 0.6rem; align-items: flex-start;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.92),
+    inset 0 -1px 0 var(--hairline),
+    inset 1px 0 0 rgba(255,255,255,0.4),
+    var(--sh-lift);
+  transform: translateX(120%);
+  transition: transform 0.55s var(--spring);
+}
+.toast.show { transform: translateX(0); }
+.toast .icon { font-size: 1rem; line-height: 1; }
+.toast .title { font-weight: 500; font-size: 13px; }
+.toast .body  { font-size: 11.5px; color: var(--muted); margin-top: 1px; }
+
+/* =========================================================================
+ * Forms — glass inputs
+ * ========================================================================= */
+input, select, textarea {
+  background: #FFFFFF;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--hairline-2);
+  color: var(--text);
+  border-radius: var(--r-xs);
+  padding: 0.55rem 0.75rem;
+  font: inherit;
+  outline: none;
+  box-shadow: inset 0 1px 1px rgba(15,23,42,0.04);
+  transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease), background 0.25s var(--ease);
+}
+input:focus, select:focus, textarea:focus {
+  border-color: rgba(14,163,113,0.5);
+  box-shadow: inset 0 1px 1px rgba(15,23,42,0.04), 0 0 0 4px rgba(14,163,113,0.14);
+}
+input::placeholder, textarea::placeholder { color: var(--dim); }
+
+/* =========================================================================
+ * Game-specific
+ * ========================================================================= */
+.grid-cell {
+  width: 22px; height: 22px;
+  border-radius: 4px;
+  border: 1px solid var(--hairline);
+  background: #FFFFFF;
+  cursor: pointer;
+  transition: background 0.18s var(--ease), transform 0.3s var(--spring);
+}
+.grid-cell:hover { transform: scale(1.12); }
+.grid-cell.wall     { background: var(--text); border-color: var(--text); }
+.grid-cell.start    {
+  background: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 0 12px rgba(14,163,113,0.5);
+}
+.grid-cell.end      {
+  background: var(--bad);
+  box-shadow: 0 0 0 1px var(--bad), 0 0 12px rgba(215,56,76,0.5);
+}
+.grid-cell.visited  { background: rgba(14,163,113,0.25); }
+.grid-cell.frontier { background: rgba(14,163,113,0.55); box-shadow: 0 0 6px rgba(14,163,113,0.3); }
+.grid-cell.path     { background: var(--warn); box-shadow: 0 0 10px rgba(199,120,14,0.4); }
+
+.cache-slot {
+  border-radius: var(--r-xs);
+  padding: 0.6rem 0.75rem;
+  min-width: 78px;
+  text-align: center;
+  font-family: 'SF Mono', 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12.5px;
+  background: #FFFFFF;
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: inset 0 1px 0 var(--hl-strong), inset 0 -1px 0 var(--hairline), 0 1px 3px rgba(15,23,42,0.06);
+  transition: all 0.45s var(--spring);
+}
+.cache-slot.hit {
+  box-shadow:
+    inset 0 1px 0 var(--hl-strong),
+    inset 0 -1px 0 var(--hairline),
+    0 0 0 1px rgba(14,163,113,0.3),
+    0 0 14px rgba(14,163,113,0.25);
+  color: var(--accent);
+}
+.cache-slot.miss {
+  box-shadow:
+    inset 0 1px 0 var(--hl-strong),
+    inset 0 -1px 0 var(--hairline),
+    0 0 0 1px rgba(215,56,76,0.28);
+  color: var(--bad);
+}
+.cache-slot.evicted { opacity: 0.3; text-decoration: line-through; }
+
+.timer-ring { position: relative; width: 180px; height: 180px; }
+.timer-ring .ring-fg {
+  transition: stroke-dashoffset 1s linear;
+  filter: drop-shadow(0 0 8px rgba(14,163,113,0.35));
+}
+
+/* =========================================================================
+ * Reference image card
+ * ========================================================================= */
+.ref-img {
+  background: #FFFFFF;
+  border-radius: var(--r-sm);
+  padding: 0.55rem;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 1px 6px rgba(15,23,42,0.08);
+  border: 1px solid var(--hairline);
+}
+.ref-img img { display: block; max-width: 100%; height: auto; }
+
+/* Company logo */
+.co-logo {
+  width: 40px; height: 40px;
+  border-radius: 11px;
+  background: #FFFFFF;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  display: grid; place-items: center;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--muted);
+  box-shadow: inset 0 1px 0 var(--hl-strong), inset 0 -1px 0 var(--hairline), 0 1px 2px rgba(15,23,42,0.06);
+  overflow: hidden;
+}
+.co-logo img { width: 100%; height: 100%; object-fit: contain; padding: 5px; }
+
+/* =========================================================================
+ * Motion utilities
+ * ========================================================================= */
+/* Page-entrance fades.
+ *
+ * will-change tells the browser to promote the element to its own GPU
+ * compositor layer *before* the animation starts. Without it, the first
+ * 2-3 frames of the fade re-raster the entire subtree (which contains
+ * many .card elements with expensive backdrop-filter blurs) before the
+ * browser figures out a layer is needed. With it, every frame is a
+ * pure compositor opacity update -- no paint cost.
+ *
+ * animation-fill-mode is implicit via `both` -- the element holds the
+ * `to` state after the animation ends, so we can safely clear
+ * will-change with a tiny @keyframes trick: ending the animation also
+ * resets will-change via the animation-end. Browsers also drop the
+ * promoted layer ~100ms after the animation completes if will-change
+ * still says `opacity`, so we deliberately keep it static -- the cost
+ * of one cached layer is negligible vs. the per-frame paint cost. */
+.fade-in    {
+  animation: fi 0.45s var(--ease) both;
+  will-change: opacity;
+}
+.fade-in-up {
+  animation: fiu 0.55s var(--spring) both;
+  will-change: opacity, transform;
+}
+@keyframes fi  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fiu { from { opacity: 0; transform: translateY(10px) scale(0.99); } to { opacity: 1; transform: none; } }
+
+@keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-3px); } 75% { transform: translateX(3px); } }
+.shake { animation: shake 0.35s var(--ease); }
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(14,163,113,0.40); }
+  50%      { box-shadow: 0 0 0 10px rgba(14,163,113,0); }
+}
+.pulse-glow { animation: pulse-glow 1.9s ease-in-out infinite; }
+
+/* =========================================================================
+ * Scrollbar
+ * ========================================================================= */
+::-webkit-scrollbar { width: 9px; height: 9px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(15,23,42,0.18); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(15,23,42,0.30); }
+
+/* =========================================================================
+ * Mobile pass — comprehensive
+ *
+ * Two breakpoints:
+ *   ≤ 640px (phones)      — most rules
+ *   ≤ 380px (tiny phones) — extra tightening on small iPhones
+ *
+ * Targets:
+ *   - 44px+ touch targets (Apple HIG)
+ *   - Reduced card / modal padding
+ *   - Code blocks: smaller font + horizontal scroll
+ *   - Grid collapses for cramped layouts (self-rate, review tiles)
+ *   - Hero / heatmap / focus-bar sized down
+ * ========================================================================= */
+
+/* ===== Global anti-overflow guardrails — apply at ALL widths but most-load-bearing on mobile =====
+ * NOTE: use `overflow-x: clip` (not `hidden`). `hidden` implicitly forces
+ * `overflow-y: auto` per CSS spec, which makes <html>/<body> a scroll
+ * container and breaks `position: sticky` from pinning to the viewport.
+ * `clip` prevents overflow without establishing a scroll context. */
+html, body { overflow-x: clip; max-width: 100%; }
+* { min-width: 0; }            /* allow flex children to shrink below content width */
+img, svg, video, canvas { max-width: 100%; height: auto; }
+table { display: block; max-width: 100%; overflow-x: auto; }
+.btn { max-width: 100%; }
+/* Long-word safety on text containers */
+.card, .card p, .card li, .card a, .card .leading-relaxed {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+@media (max-width: 640px) {
+  /* Mobile type scale — anchored at 17px body (Apple HIG) using a 1.2
+   * modular ratio (Minor Third):
+   *   tiny 12  ·  small 14  ·  body 17  ·  subhead 20
+   *   h3  24  ·  h2    28  ·  h1   34
+   * Reading content (.lesson-prose) uses 18px so long-form is easier
+   * than UI chrome by one notch. */
+  html, body { font-size: 16.5px; line-height: 1.55; }
+  h1.font-display, .font-display.text-3xl, .font-display.text-2xl { font-size: 1.75rem; line-height: 1.2; }
+  h1 { font-size: 1.7rem; line-height: 1.15; }
+  h2 { font-size: 1.4rem; line-height: 1.25; }
+  h3 { font-size: 1.2rem; line-height: 1.3; }
+  .card .text-3xl { font-size: 1.6rem; }
+  .card .text-2xl { font-size: 1.3rem; }
+  .text-sm, p.text-sm, div.text-sm { font-size: 14.5px; }
+  .text-xs { font-size: 12.5px; }
+  /* iOS Safari auto-zooms any form control whose computed font-size is
+   * less than 16px when the user focuses it. The free-recall textarea
+   * (text-[13px]) and STAR story textareas were triggering this. Pin
+   * every form control to 16px on mobile, regardless of utility class.
+   * Higher specificity than text-[13px] / text-sm via the input/textarea
+   * type selector. */
+  input, textarea, select { font-size: 16px !important; }
+  /* The "ALL CAPS section eyebrows" should never go below 11px */
+  .eyebrow, .uppercase.tracking-wider { font-size: 11px; letter-spacing: 0.08em; }
+
+  /* Cards — tighter on phones but with a touch more breathing room than before */
+  .card { padding: 1rem 1.1rem; }
+  .card.elevated { padding: 1.1rem 1.15rem; }
+
+  /* Mobile-only modal padding tightening. The wrapper-scroll pattern
+   * itself is now applied at all widths (see the .fixed.inset-0 rule
+   * outside this media query). */
+  .fixed.inset-0.grid.place-items-center { padding: 1rem !important; }
+  .fixed.inset-0 .card,
+  .fixed.inset-0 .card.elevated { padding: 1.1rem 1.15rem !important; }
+
+  /* Touch targets — Apple HIG ≥ 44px */
+  .btn { min-height: 42px; padding: 0.6rem 1rem; font-size: 15px; }
+  .btn.btn-primary, button.btn-primary { min-height: 46px; font-size: 15.5px; }
+  /* Quiz / activity option buttons get the biggest target */
+  [data-opt], [data-pick], [data-sort], [data-left], [data-right], [data-tf], [data-rate], [data-cr-rate] {
+    min-height: 52px !important;
+    font-size: 15.5px !important;
+    line-height: 1.35 !important;
+  }
+  /* Smaller "ghost" buttons can shrink but stay tappable */
+  .btn-ghost { min-height: 38px; padding: 0.55rem 0.95rem; }
+
+  /* Rings */
+  .ring { width: 96px; height: 96px; }
+  .ring svg { width: 96px; height: 96px; }
+  .ring::before { inset: 7px; }
+  .timer-ring { width: 140px; height: 140px; }
+  .timer-ring svg { width: 140px; height: 140px; }
+
+  /* Tabs scroll horizontally */
+  .tabs { overflow-x: auto; flex-wrap: nowrap; max-width: 100%; padding: 3px; }
+  .tab { white-space: nowrap; padding: 0.45rem 0.8rem; font-size: 12px; }
+
+  /* Pills */
+  .pill { padding: 2px 7px; font-size: 10px; letter-spacing: 0.03em; }
+
+  /* Chips — slightly bigger for thumbs */
+  .chip { padding: 4px 9px; font-size: 11px; }
+
+  /* Code blocks: smaller font, horizontal scroll instead of wrap */
+  pre {
+    font-size: 11.5px !important;
+    line-height: 1.4 !important;
+    padding: 10px !important;
+    overflow-x: auto !important;
+    max-width: 100%;
+    /* Allow horizontal scroll even when content uses white-space: pre */
+    -webkit-overflow-scrolling: touch;
+  }
+  code { font-size: 92%; }
+  /* Inline code inside paragraphs */
+  p code, li code { padding: 1px 4px; }
+
+  /* Heatmap cells smaller */
+  .heat-cell { width: 9px; height: 9px; border-radius: 2px; }
+
+  /* Focus session timer widget */
+  #focus-bar {
+    bottom: 0.5rem !important;
+    right: 0.5rem !important;
+    left: 0.5rem;
+    max-width: none !important;
+    padding: 0.45rem 0.7rem !important;
+  }
+  #focus-bar > div { font-size: 13px; }
+
+  /* Toasts — full-bleed width with margin */
+  #toasts { right: 0.5rem !important; left: 0.5rem !important; }
+  .toast { min-width: auto; width: 100%; }
+
+  /* Canvas (Chart.js) */
+  canvas { max-width: 100% !important; height: auto !important; }
+
+  /* Forms — bigger touch targets */
+  input, select, textarea {
+    font-size: 16px;  /* prevents iOS Safari auto-zoom on focus */
+    padding: 0.65rem 0.75rem;
+    min-height: 44px;
+  }
+  textarea { min-height: 80px; }
+
+  /* Self-rate 4-cols → 2x2 on phones (text is too long for 4-cols on a 375px screen) */
+  .grid.grid-cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Hero card stats — keep 2 cols, just tighten */
+  .card .grid.grid-cols-2.sm\:grid-cols-4 {
+    gap: 0.5rem;
+  }
+
+  /* Activity panel (🎯 ACTIVITY · ...) */
+  .rounded-md.p-3 { padding: 0.65rem 0.75rem !important; }
+
+  /* Lesson row checks — slightly bigger */
+  .lesson-row { padding: 0.7rem 0.7rem; }
+  .lesson-row .check { width: 22px; height: 22px; }
+
+  /* Eyebrow / micro labels slightly larger for readability */
+  .eyebrow, .text-xs.uppercase { font-size: 10px; letter-spacing: 0.06em; }
+
+  /* Footer */
+  footer .flex { flex-direction: column; align-items: flex-start; gap: 6px; }
+
+  /* Lesson-modal action button row — guarantee it stacks cleanly */
+  .fixed.inset-0 .card .mt-6.flex.items-center.justify-between {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  .fixed.inset-0 .card .mt-6.flex.items-center.justify-between > div {
+    display: flex; width: 100%;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .fixed.inset-0 .card .mt-6.flex.items-center.justify-between > div .btn {
+    flex: 1 1 0;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Tier header (Curriculum view) — keep label + counters readable when both compete for space */
+  .tabs + #tier-stack > div > div:first-child {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* Hero card buttons (Continue · ... ) wrap text instead of pushing wide */
+  .card .btn.btn-primary span,
+  .card .btn span {
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  /* Reference image cards — stay within their card */
+  .ref-img { max-width: 100%; }
+
+  /* Companies search input shrink-friendly */
+  #co-search { min-width: 0 !important; width: 100% !important; max-width: 100% !important; }
+
+  /* Onboarding/help modals: full-bleed-ish on small screens */
+  #onboarding .max-w-md, .fixed.inset-0 .max-w-md { max-width: calc(100vw - 1rem) !important; }
+
+  /* Lesson modal: use dynamic viewport height so iOS Safari URL bar doesn't
+     clip the bottom of the modal */
+  .fixed.inset-0 .card.elevated[class*="max-h"] {
+    max-height: calc(100dvh - 1rem) !important;
+  }
+
+  /* Tier section right-info gracefully wraps below the title on tiny phones */
+  #tier-stack .flex.items-end.justify-between > .text-right {
+    text-align: left;
+  }
+}
+
+/* Tiny phones (≤ 380px iPhone SE etc.) */
+@media (max-width: 380px) {
+  /* Tiny phones (iPhone SE 1st gen, etc.) — proportionally smaller than the
+     ≤640px values but still readable; do NOT drop below 15px on body text. */
+  body { font-size: 15.5px; line-height: 1.6; }
+  h1.font-display, .font-display.text-3xl, .font-display.text-2xl { font-size: 1.5rem; }
+  .card { padding: 0.95rem 1rem; }
+  .card.elevated { padding: 1.05rem 1.1rem; }
+  .card .text-3xl { font-size: 1.4rem; }
+  .btn { font-size: 13.5px; padding: 0.5rem 0.85rem; }
+  /* .ring is now sized in its own media-query block above */
+  /* Hero stats: stack to single column on smallest */
+  .card .grid.grid-cols-2.sm\:grid-cols-4 {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+}
+
+@media (min-width: 420px) {
+  .hidden.xs\:inline { display: inline; }
+}
+
+/* =========================================================================
+ * Utility
+ * ========================================================================= */
+.line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* Reduced-motion respect (Apple HIG) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* =========================================================================
+ * Code / pre blocks inside lesson bodies — light surface + Prism tokens
+ * ========================================================================= */
+pre {
+  background: #F4F5F9 !important;
+  color: var(--text) !important;
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-size: 12.5px;
+  line-height: 1.55;
+  font-family: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  margin: 12px 0;
+}
+pre code, pre code[class*="language-"] {
+  background: transparent !important;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+  text-shadow: none;
+}
+code {
+  background: rgba(15,23,42,0.05);
+  padding: 0 4px;
+  border-radius: 4px;
+  font-size: 90%;
+}
+
+/* Prism token colors for our light theme — Tomorrow-ish but readable on
+ * the warm #F4F5F9 surface. Aim: high-contrast structural tokens (keywords,
+ * functions), softer auxiliary tokens (comments, punctuation). */
+.token.comment, .token.prolog, .token.doctype, .token.cdata { color: #6B7686; font-style: italic; }
+.token.punctuation { color: #475467; }
+.token.property, .token.tag, .token.boolean, .token.number, .token.constant,
+.token.symbol, .token.deleted { color: #B22B3D; }
+.token.selector, .token.attr-name, .token.string, .token.char, .token.builtin,
+.token.inserted { color: #0B8A60; }
+.token.operator, .token.entity, .token.url, .language-css .token.string,
+.style .token.string { color: #2E6FE0; }
+.token.atrule, .token.attr-value, .token.keyword { color: #6336C7; font-weight: 600; }
+.token.function, .token.class-name { color: #A86409; font-weight: 600; }
+.token.regex, .token.important, .token.variable { color: #C7780E; }
+
+/* =========================================================================
+ * Lesson-body shared components — replaces the 100+ inline style="..." UL
+ * blocks and standardizes emphasis hierarchy.
+ * ========================================================================= */
+.list-muted {
+  margin: 6px 0 6px 18px;
+  color: var(--muted);
+}
+.list-muted li { margin: 2px 0; }
+
+/* =========================================================================
+ * .lesson-prose — long-form content inside a card.
+ * The lesson bodies use literal `<br><br>` as paragraph breaks (rather than
+ * <p> tags, because <p> can't legally contain <pre>/<ul>/<table>/<div>).
+ * To get real paragraph rhythm, we turn `<br> + <br>` into a block-level
+ * gap with vertical margin, and we give every block-level child its own
+ * generous breathing room. Mobile gets a heavier dose since that's where
+ * density bites hardest.
+ * ========================================================================= */
+.lesson-prose {
+  font-size: 15px;
+  line-height: 1.7;
+}
+.lesson-prose b, .lesson-prose strong { font-weight: 600; }
+
+/* Real paragraph spacing from <br><br> — adjacent <br> becomes a block-
+ * level gap, not just two line-heights. */
+.lesson-prose br + br {
+  display: block;
+  content: "";
+  margin-top: 0.55em;
+}
+/* Make block children breathe. We're forgiving of authored authors: code,
+ * lists, callouts, and tables all get clear above/below space. */
+.lesson-prose pre        { margin: 1.05em 0; }
+/* Off-screen code blocks + tables skip paint/layout when scrolling
+ * through a long lesson. Each <pre> has Prism tokens applied, plus
+ * background + border-radius + box-shadow, plus the prism CSS theme
+ * paints token spans. With several blocks per lesson that adds up to
+ * 30-50% of the per-frame paint budget while scrolling. content-
+ * visibility:auto skips both layout and paint when the element is
+ * outside the viewport; contain-intrinsic-size keeps the scrollbar
+ * position stable. No visual change to on-screen blocks. */
+.lesson-prose pre,
+.lesson-prose table {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 160px;
+}
+.lesson-prose ul,
+.lesson-prose ol         { margin: 0.95em 0 0.95em 22px; }
+.lesson-prose ul li,
+.lesson-prose ol li      { margin: 0.25em 0; }
+.lesson-prose .callout   { margin: 1.25em 0; }
+.lesson-prose .lesson-table { margin: 1.15em 0; }
+.lesson-prose img,
+.lesson-prose svg        { margin: 0.9em 0; }
+
+/* Constrain line-length to a comfortable reading measure on wide cards */
+.lesson-prose            { max-width: 72ch; }
+
+@media (max-width: 640px) {
+  .lesson-prose {
+    font-size: 18px;
+    line-height: 1.65;
+    max-width: 100%;
+  }
+  .lesson-prose h1, .lesson-prose h2 { font-size: 1.5rem; line-height: 1.25; }
+  .lesson-prose h3 { font-size: 1.25rem; line-height: 1.3; }
+  .lesson-prose blockquote { font-size: 16.5px; line-height: 1.5; }
+  .lesson-prose pre, .lesson-prose code { font-size: 14.5px; }
+  /* Lesson modal title needs hierarchy above body */
+  .fixed.inset-0 h2.font-display { font-size: 1.55rem; line-height: 1.2; }
+  .lesson-prose br + br      { margin-top: 0.75em; }
+  .lesson-prose pre          { margin: 1.2em 0; font-size: 13.5px; line-height: 1.6; }
+  .lesson-prose ul,
+  .lesson-prose ol           { margin: 1.05em 0 1.05em 22px; }
+  .lesson-prose ul li,
+  .lesson-prose ol li        { margin: 0.4em 0; line-height: 1.65; }
+  .lesson-prose .callout     { margin: 1.4em 0; }
+  .lesson-prose .lesson-table{ margin: 1.3em 0; }
+}
+
+/* Callouts: warn / note / senior / depth. Used as
+ * <div class="callout callout-senior">
+ *   <div class="callout-label">Senior signal</div>
+ *   …body…
+ * </div>
+ */
+.callout {
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin: 14px 0;
+  border: 1px solid;
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+.callout-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.78;
+  margin-bottom: 4px;
+}
+.callout-senior {
+  background: rgba(14, 163, 113, 0.05);
+  border-color: rgba(14, 163, 113, 0.25);
+}
+.callout-senior .callout-label { color: var(--accent); }
+.callout-warn {
+  background: rgba(199, 120, 14, 0.05);
+  border-color: rgba(199, 120, 14, 0.25);
+}
+.callout-warn .callout-label { color: var(--warn); }
+.callout-note {
+  background: rgba(46, 111, 224, 0.05);
+  border-color: rgba(46, 111, 224, 0.25);
+}
+.callout-note .callout-label { color: var(--sde); }
+.callout-depth {
+  background: rgba(120, 73, 224, 0.05);
+  border-color: rgba(120, 73, 224, 0.25);
+}
+.callout-depth .callout-label { color: #6336C7; }
+.callout-bad {
+  background: rgba(215, 56, 76, 0.05);
+  border-color: rgba(215, 56, 76, 0.25);
+}
+.callout-bad .callout-label { color: var(--bad); }
+
+/* Tradeoff tables inside lesson bodies */
+.lesson-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 12px 0;
+}
+.lesson-table thead tr {
+  border-bottom: 1px solid var(--hairline);
+}
+.lesson-table th {
+  text-align: left;
+  padding: 7px 10px;
+  font-weight: 600;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.7;
+}
+.lesson-table td {
+  padding: 7px 10px;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(15,23,42,0.04);
+}
+.lesson-table tr:last-child td { border-bottom: none; }
+.lesson-table td:first-child { font-weight: 600; color: var(--text); }
+blockquote {
+  background: rgba(46,111,224,0.04);
+  border-left: 3px solid var(--sde);
+  border-radius: 6px;
+  padding: 8px 14px;
+  color: var(--muted);
+  font-style: italic;
+  margin: 12px 0;
+}
+
+/* =========================================================================
+ * Form radio chips (onboarding-style)
+ * ========================================================================= */
+.peer:checked + div { /* used in radio-styled buttons */
+  color: var(--accent);
+  border-color: var(--accent) !important;
+  background: var(--accent-fill);
+}
+
+/* =========================================================================
+ * Modal backgrounds (lesson modal, help overlay, etc.)
+ * ========================================================================= */
+.fixed.inset-0[style*="rgba(8,9,12"] {
+  background: rgba(248,249,252,0.85) !important;
+}
+
+/* =========================================================================
+ * Mobile density reduction — hide secondary metadata, sublabels, blurbs
+ * The goal: on phones, show only what advances the user's next action.
+ * Reveal secondary detail on tablet+ (≥640px).
+ * ========================================================================= */
+.mobile-hide { display: none; }
+.mobile-only { display: revert; }
+@media (min-width: 640px) {
+  .mobile-hide { display: revert; }
+  .mobile-only { display: none !important; }
+}
+
+@media (max-width: 640px) {
+  /* === Base typography: bigger and more breathing room on phones ===
+   * The body was 14.5px/1.55 inherited from the inlined critical CSS — readable
+   * on desktop but feels dense on small screens. iOS Safari + Android Chrome
+   * both render system body text at ~16px; matching that avoids the auto-zoom
+   * on input focus AND looks comfortable in long-form lesson bodies. */
+  html, body { font-size: 16px; line-height: 1.65; }
+
+  /* Card content gets a bit more padding so text doesn't crowd the edges */
+  .card { padding: 1.1rem 1.15rem; }
+  .card.elevated { padding: 1.25rem 1.3rem; }
+
+  /* Headings: keep the hierarchy but a little smaller than desktop.
+     Larger than the original mobile shrink — the prior 1.5rem hero felt cramped
+     given the page-title context. */
+  h1.font-display { font-size: 1.75rem; line-height: 1.2; }
+  h2.font-display { font-size: 1.4rem;  line-height: 1.25; }
+  h3.font-display { font-size: 1.125rem; line-height: 1.3; }
+
+  /* Eyebrow labels — readable, not tiny. Used to be 9.5px which was effectively
+     unreadable; bump to 11px and keep them visible. */
+  .eyebrow { font-size: 11px; opacity: 0.7; letter-spacing: 0.06em; }
+
+  /* Lesson body prose: bump to 15.5px and loosen leading. Code blocks too. */
+  .card p, .card li, .card .leading-relaxed { font-size: 15px; line-height: 1.65; }
+  pre, pre code { font-size: 13.5px !important; line-height: 1.55; }
+
+  /* Inline code chips stay readable */
+  code { font-size: 92%; }
+
+  /* Callout blocks: prose-comfortable size, generous line-height */
+  .callout { font-size: 14.5px; line-height: 1.6; padding: 12px 14px; }
+  .callout-label { font-size: 11.5px; }
+
+  /* Lesson-tables: cells need to scan on small screens */
+  .lesson-table { font-size: 14px; }
+  .lesson-table th { font-size: 11.5px; padding: 8px 8px; }
+  .lesson-table td { padding: 8px 8px; }
+
+  /* The dense small Tailwind sizes used across views.js bump UP on phones —
+     readability floor is 12.5px; lesson bodies and meaningful content go to
+     ≥15px. These overrides hit the common dense areas. */
+  .text-\[9px\], .text-\[9\.5px\], .text-\[10px\], .text-\[10\.5px\], .text-\[11px\] { font-size: 12.5px !important; }
+  .text-\[11\.5px\], .text-\[12px\], .text-\[12\.5px\] { font-size: 13.5px !important; }
+  .text-\[13px\], .text-\[13\.5px\] { font-size: 14.5px !important; }
+  .text-\[14px\], .text-\[14\.5px\] { font-size: 15.5px !important; }
+  .text-\[15px\], .text-\[15\.5px\] { font-size: 15.5px !important; }
+  .text-\[16px\], .text-\[16\.5px\], .text-\[17px\] { font-size: 16.5px !important; }
+  /* Tailwind's text-xs (12px) and text-sm (14px) get a bump too */
+  .text-xs { font-size: 13px !important; }
+  .text-sm { font-size: 15px !important; }
+  /* Bump font-mono numeric counters slightly so they aren't tiny */
+  .numeric { font-size: inherit; }
+
+  /* Hide module intros under category-detail summaries (one less line per row) */
+  details summary .text-xs.text-slate-400.mt-1 { display: none; }
+
+  /* Lesson row meta line — drop type/time, keep only XP for scannability */
+  .lesson-row .text-xs.text-slate-500 > span:nth-child(-n+4) { display: none; }
+  .lesson-row .text-xs.text-slate-500 > span.text-accent-400 { display: inline; }
+
+  /* Stat cards: the big number was fighting the smaller numbers for hierarchy.
+     Restore a clear gap — big number stays prominent but not overwhelming. */
+  .card .text-3xl.font-bold { font-size: 1.75rem; }
+
+  /* Lists inside lesson bodies need more spacing between items */
+  .list-muted { margin: 8px 0 8px 20px; }
+  .list-muted li { margin: 4px 0; line-height: 1.6; }
+}
+
+/* ─── Liquid Glass apply-checkbox ────────────────────────────────────
+ * Square checkbox used to mark a role as "applied to". Translucent
+ * substrate + inset rim + soft drop matches the rest of the Liquid
+ * Glass material. Toggling [data-checked] on the wrapper switches the
+ * fill + check-mark in/out via a spring-easing transition. Toggling
+ * happens on click (handled in JS) — no native <input> involvement.
+ */
+.applied-cb {
+  position: relative;
+  flex-shrink: 0;
+  width: 24px; height: 24px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(15, 23, 42, 0.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -1px 0 rgba(15, 23, 42, 0.05),
+    0 1px 2px rgba(15, 23, 42, 0.08);
+  -webkit-backdrop-filter: blur(8px) saturate(160%);
+  backdrop-filter:        blur(8px) saturate(160%);
+  cursor: pointer;
+  transition:
+    background 0.22s var(--spring-settle, ease),
+    border-color 0.22s var(--spring-settle, ease),
+    transform 0.18s var(--spring-settle, ease);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+}
+.applied-cb:hover {
+  border-color: color-mix(in srgb, var(--accent) 50%, rgba(15,23,42,0.18));
+}
+.applied-cb:active { transform: scale(0.92); }
+/* The checkmark glyph — rendered via CSS so we don't need an inline SVG. */
+.applied-cb::after {
+  content: '';
+  position: absolute;
+  left: 7px; top: 3px;
+  width: 7px; height: 12px;
+  border-right: 2.5px solid #ffffff;
+  border-bottom: 2.5px solid #ffffff;
+  transform: rotate(45deg) scale(0);
+  opacity: 0;
+  transition: transform 0.24s var(--spring-overshoot, ease),
+              opacity 0.18s var(--spring-settle, ease);
+}
+.applied-cb[data-checked="1"] {
+  background: var(--accent, #0EA371);
+  border-color: var(--accent, #0EA371);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 2px 6px -2px color-mix(in srgb, var(--accent, #0EA371) 70%, transparent);
+}
+.applied-cb[data-checked="1"]::after {
+  transform: rotate(45deg) scale(1);
+  opacity: 1;
+}
+
+/* ─── Morning bonus banner on the apps card ───────────────────────────
+ * Active before 11am local. Warm-sunrise gradient + amber accent so the
+ * "log apps now" nudge reads as a high-signal CTA, not just chrome. */
+.morning-bonus-banner {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 12px;
+  border-radius: 12px;
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: #6b3a0a;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, #FFB95C 22%, #fff),
+    color-mix(in srgb, #FFB95C 8%, #fff)
+  );
+  border: 1px solid color-mix(in srgb, #FFB95C 40%, transparent);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.7),
+    0 2px 6px -2px color-mix(in srgb, #FFB95C 50%, transparent);
+  animation: mb-pulse 2.6s var(--spring-settle) infinite;
+}
+.morning-bonus-banner .mb-icon { font-size: 16px; line-height: 1; flex-shrink: 0; }
+.morning-bonus-banner .mb-body { flex: 1; }
+.morning-bonus-banner b { font-weight: 700; color: #b45309; }
+@keyframes mb-pulse {
+  0%,100% { box-shadow: inset 0 1px 0 rgba(255,255,255,0.7), 0 2px 6px -2px color-mix(in srgb, #FFB95C 50%, transparent); }
+  50%     { box-shadow: inset 0 1px 0 rgba(255,255,255,0.85), 0 4px 14px -4px color-mix(in srgb, #FFB95C 80%, transparent); }
+}
+@media (prefers-color-scheme: dark) {
+  .morning-bonus-banner {
+    color: #fde9c2;
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, #FFB95C 28%, transparent),
+      color-mix(in srgb, #FFB95C 8%, transparent)
+    );
+  }
+  .morning-bonus-banner b { color: #FFB95C; }
+}
+
+/* ─── Interview-question card (Company detail) ───────────────────────── */
+.ivq-round {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--text) 3%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 6%, transparent);
+}
+.ivq-round-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.ivq-round-tag {
+  display: inline-block;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+.ivq-qs {
+  margin: 6px 0 6px 18px;
+  padding: 0;
+  list-style: disc;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text);
+}
+.ivq-qs li { margin: 3px 0; }
+.ivq-notes {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.45;
+  padding-top: 4px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 8%, transparent);
+  margin-top: 6px;
+}
+.ivq-role-notes {
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+.ivq-role-notes b { color: var(--accent); }
+.ivq-sources {
+  margin: 8px 0 0 18px;
+  padding: 0;
+  list-style: disc;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.ivq-sources a { color: var(--accent); text-decoration: none; }
+.ivq-sources a:hover { text-decoration: underline; }
