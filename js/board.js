@@ -31,11 +31,17 @@ const verticalPill = {
   ai: 'pill-ai', hospitality: 'pill-hosp', marketplace: 'pill-mkt',
   devtools: 'pill-dev', fintech: 'pill-both',
   saas: 'pill-dev', infra: 'pill-dev', health: 'pill-hosp',
+  sports: 'pill-ai', fitness: 'pill-hosp', media: 'pill-mkt',
+  consumer: 'pill-mkt', gaming: 'pill-ai', adtech: 'pill-dev',
+  climate: 'pill-hosp',
 };
 const verticalLabel = {
   ai:'AI', hospitality:'Hospitality', marketplace:'Marketplace',
   devtools:'Dev Tools', fintech:'Fintech',
   saas:'SaaS', infra:'Infra', health:'Health',
+  sports:'Sports', fitness:'Fitness', media:'Media',
+  consumer:'Consumer', gaming:'Gaming', adtech:'AdTech',
+  climate:'Climate',
 };
 
 /* --------------------------------------------------------------------
@@ -131,8 +137,21 @@ const COOLNESS = {
   numeric:3, numeral:3, socure:3, imprint:3, nayya:3,
   dailypay:2, mosaic:2, octus:2, 'nyc-gov':2,
   drw:1, imc:1, 'flow-traders':1, 'old-mission':1, socotec:1,
+  // 2026-07-24 — analyst-focused expansion (sports weighted per Thien's interest)
+  nba:10, nfl:10, mlb:10, wnba:9,
+  draftkings:9, fanatics:9, underdog:8, prizepicks:8,
+  theathletic:9, overtime:8, sportradar:7, dazn:7,
+  whoop:8, strava:8, classpass:6, barrys:6,
+  doordash:6, instacart:5, uber:6, etsy:8, pinterest:6, airbnb:7,
+  stockx:7, warby:8, rentherunway:6, himsandhers:5, sweetgreen:7, compass:4,
+  netflix:8, vice:5, 'bloomberg-media':5, wondery:6,
+  bilt:6, current:5, marqeta:4, nubank:6, 'rocket-money':4,
+  databricks:5, snowflake:4, segment:4, box:2, hubspot:3, verkada:4,
 };
 
+// Frontier AI labs (OpenAI/Anthropic/etc.) still have a high analyst bar
+// but nowhere near the researcher-level extremes, so the penalty is milder
+// than it was for the engineering board.
 const FRONTIER = new Set([
   'openai','anthropic','cohere','mistral','perplexity','huggingface',
   'cursor','cognition','glean','sierra','scaleai','harvey','runway',
@@ -141,64 +160,84 @@ const FRONTIER = new Set([
 
 function _coolness(c) {
   if (c.id in COOLNESS) return COOLNESS[c.id];
-  if (c.vertical === 'ai') return 4;
+  if (c.vertical === 'sports' || c.vertical === 'fitness') return 8;
+  if (c.vertical === 'media' || c.vertical === 'consumer') return 6;
+  if (c.vertical === 'ai') return 5;
   if (c.vertical === 'devtools' || c.vertical === 'infra') return 4;
-  if (c.vertical === 'media' || c.vertical === 'consumer') return 5;
-  return 3;
+  return 4;
 }
 
+// Analyst roles at quant HFT firms exist but they're gated on quantitative
+// finance / CS academics, not a fit for an ops-to-data-analyst switcher.
+// Keep a real (but not extreme) penalty so they don't dominate.
 const QUANT_GATED = new Set([
   'de-shaw','two-sigma','jane-street','point72','worldquant',
   'jump-trading','virtu','drw','imc','flow-traders','old-mission',
-  'goldman-sachs','blackrock',
+]);
+// Prestige banks + BlackRock — analyst roles are more accessible but still
+// gated on prestige / target-school pipelines.
+const BULGE_BRACKET = new Set([
+  'goldman-sachs','morgan-stanley','jpmorgan','blackrock','citi','bofa',
 ]);
 
 function _candidateMult(c) {
   let m = 1.0;
   const stage = (c.stage || '').toLowerCase();
-  if (/series [fghij]\b|public|late|take/.test(stage)) m *= 0.55;
-  else if (/series e\b/.test(stage)) m *= 0.7;
-  else if (/series d\b/.test(stage)) m *= 0.85;
-  if (FRONTIER.has(c.id)) m *= 0.6;
-  if (QUANT_GATED.has(c.id)) m *= 0.3;
-  if (/seed/.test(stage) || /series a\b/.test(stage)) {
-    if ((c.jobs || []).some(j => j.level === 'founding')) m *= 1.3;
-    else m *= 1.15;
-  }
+  // Big established orgs have well-defined analyst hiring pipelines, so we
+  // don't punish "late/public" the way we did for scrappy eng roles.
+  if (/seed/.test(stage) || /series a\b/.test(stage)) m *= 1.10;
+  if (FRONTIER.has(c.id))     m *= 0.75;
+  if (QUANT_GATED.has(c.id))  m *= 0.35;
+  if (BULGE_BRACKET.has(c.id)) m *= 0.6;
   return Math.max(0.2, Math.min(1.4, m));
 }
 
 function _replyProb(c) {
-  let p = 0.10;
+  // Baseline reply rate for analyst applications is higher than for
+  // eng roles at similar-stage cos (bigger candidate funnel, more turnover).
+  let p = 0.14;
   const stage = (c.stage || '').toLowerCase();
-  if (/seed/.test(stage))                       p = 0.30;
-  else if (/series a\b/.test(stage))            p = 0.25;
-  else if (/series b\b/.test(stage))            p = 0.18;
-  else if (/series c\b/.test(stage))            p = 0.12;
-  else if (/series d\b/.test(stage))            p = 0.08;
-  else if (/series e\b/.test(stage))            p = 0.06;
-  else if (/series [fghij]\b|public|late|take/.test(stage)) p = 0.05;
-  if (FRONTIER.has(c.id)) p *= 0.4;
-  if ((c.jobs || []).some(j => j.level === 'founding')) p *= 1.4;
+  if (/seed/.test(stage))                       p = 0.32;
+  else if (/series a\b/.test(stage))            p = 0.26;
+  else if (/series b\b/.test(stage))            p = 0.20;
+  else if (/series c\b/.test(stage))            p = 0.15;
+  else if (/series d\b/.test(stage))            p = 0.12;
+  else if (/series e\b/.test(stage))            p = 0.10;
+  else if (/series [fghij]\b|public|late|take/.test(stage)) p = 0.08;
+  if (FRONTIER.has(c.id)) p *= 0.5;
   const roles = (c.jobs || []).length;
-  if (roles > 15)      p *= 0.7;
-  else if (roles > 10) p *= 0.85;
+  if (roles > 15)      p *= 0.75;
+  else if (roles > 10) p *= 0.88;
   p *= _candidateMult(c);
-  return Math.max(0.02, Math.min(0.45, p));
+  return Math.max(0.03, Math.min(0.45, p));
 }
 
+// Pass-probability tuned for Thien's profile:
+//   - SQL + Python (pandas) + Excel + Power BI
+//   - Ops/procurement background (RXO, CEVA Logistics, LegalZoom platform ops)
+//   - Six Sigma green belt; process/KPI orientation
+//   - Early-career (data-analyst pivot); DataCamp cert in progress
+// Roles closer to that profile get a bonus; roles requiring specialist creds
+// or heavy statistics/ML get a penalty.
 function _passProb(c, j) {
   const t = ((j && j.title) || '').toLowerCase();
-  let p = 0.30;
-  if (/forward[\s-]deployed|\bfde\b/.test(t))           p += 0.20;
-  if (/applied ai|ai engineer/.test(t))                 p += 0.15;
-  if (/ml engineer|machine[\s-]learning/.test(t))       p += 0.10;
-  if (/full[\s-]stack|backend/.test(t))                 p += 0.05;
-  if (/c\+\+|low.?latency|hft|quant developer/.test(t)) p -= 0.20;
-  if (/researcher|phd/.test(t))                         p -= 0.10;
-  if (j && j.level === 'senior')   p += 0.05;
-  if (j && j.level === 'founding') p += 0.08;
-  if (j && j.level === 'mid')      p -= 0.05;
+  let p = 0.35;
+  // Strong direct matches
+  if (/operations\s+analyst|business\s+operations|bizops/.test(t))       p += 0.18;
+  if (/supply\s+chain|logistics|procurement|fulfillment|inventory/.test(t)) p += 0.20;
+  if (/data\s+analyst|analytics\s+analyst|reporting\s+analyst/.test(t))  p += 0.15;
+  if (/business\s+intelligence|\bbi\s+(?:analyst|developer)\b/.test(t))  p += 0.12;
+  if (/strategy|strategic/.test(t))                                      p += 0.05;
+  // Marketing/growth/product analyst — data-analyst-adjacent, still fits
+  if (/marketing\s+analyst|growth\s+analyst|product\s+analyst/.test(t))  p += 0.05;
+  // Adjacent-but-harder: revenue/sales/marketing ops (needs SFDC/Marketo)
+  if (/revenue\s+operations|revops|sales\s+operations|marketing\s+operations/.test(t)) p += 0.02;
+  // Penalties: specialized statistics/ML that require an MS + years exp
+  if (/senior|staff|principal|lead/.test(t))     p -= 0.30;  // belt-and-suspenders; upstream filter should catch
+  if (/actuar|underwrit|quantitative|\bquant\b/.test(t))    p -= 0.25;
+  if (/machine\s+learning|ml\s+scientist|data\s+scientist/.test(t))     p -= 0.15;
+  if (j && j.level === 'entry')    p += 0.10;
+  if (j && j.level === 'mid')      p += 0.02;
   return Math.max(0.05, Math.min(0.70, p));
 }
 
@@ -208,11 +247,10 @@ const CRYPTO_IDS = new Set([
   'gemini','ledger','notabene','ondofinance','paxos','polymarket','ripple',
   'trm-labs','uniswap',
 ]);
-const FRONTEND_TITLE = /\bfront[\s-]?end\b|\bfrontend\b|\bui\s+engineer\b|\bfe\s+engineer\b/i;
-function _cryptoPenalty(c) { return CRYPTO_IDS.has(c.id) ? 0.4 : 1.0; }
-function _frontendPenalty(j) {
-  return (j && FRONTEND_TITLE.test(j.title || '')) ? 0.5 : 1.0;
-}
+function _cryptoPenalty(c) { return CRYPTO_IDS.has(c.id) ? 0.5 : 1.0; }
+// Kept for signature compatibility with _rawFit — analyst roles don't have
+// a frontend-role gotcha, so this is always 1.0.
+function _frontendPenalty(_j) { return 1.0; }
 
 /* --------------------------------------------------------------------
  * Percentile-normalized fit score (0.5 - 10.0 on display)
@@ -320,21 +358,23 @@ function renderCompanies(hub) {
     .join('');
   const levelTabs = `
     <div class="tab active" data-lfilter="all">All levels</div>
-    <div class="tab" data-lfilter="founding">Founding</div>
-    <div class="tab" data-lfilter="senior">Senior</div>
+    <div class="tab" data-lfilter="entry">Entry</div>
     <div class="tab" data-lfilter="mid">Mid</div>`;
   const CAT_LABELS = [
-    ['all', 'All'], ['ai-ml', 'AI/ML'], ['backend', 'Backend'],
-    ['infra', 'Infra'], ['fde-sales', 'FDE/SE'], ['frontend', 'Frontend'],
+    ['all', 'All'], ['strategic', 'Strategic'], ['operations', 'Operations'],
+    ['data', 'Data'], ['bi', 'BI'],
   ];
   const categoryTabs = CAT_LABELS
     .map(([v, l]) => `<div class="tab${v==='all' ? ' active' : ''}" data-catfilter="${esc(v)}">${esc(l)}</div>`)
     .join('');
 
   container.innerHTML = `
+    <header class="text-center mb-2">
+      <h1 class="font-display text-3xl sm:text-4xl font-semibold tracking-tight">Thien's Job Board</h1>
+    </header>
     <div>
-      <h1 class="font-display text-2xl sm:text-3xl font-semibold">Companies</h1>
-      <p class="muted text-sm mt-1">${LIVE.length} startups, ${totalJobs} live NYC engineering postings. Verified ${esc(verifiedAt || 'recently')}. Ranked by fit for your background — sorted highest first.</p>
+      <h2 class="font-display text-xl sm:text-2xl font-semibold">Companies</h2>
+      <p class="muted text-sm mt-1">${LIVE.length} NYC companies, ${totalJobs} live analyst postings (Strategic / Operations / Data / BI). Verified ${esc(verifiedAt || 'recently')}. Ranked by fit for Thien's background — sorted highest first.</p>
     </div>
 
     <div class="flex justify-center">
@@ -415,13 +455,11 @@ function renderCompanies(hub) {
       .sort((a, b) => (jobRecency(b) || '').localeCompare(jobRecency(a) || ''))
       .slice(0, 3);
     const total = (c.jobs || []).length;
-    const jobsHTML = previewJobs.map(j => {
+    const jobsHTML = previewJobs.filter(Boolean).map(j => {
       const lvl = j.level || 'mid';
-      const lvlDot = lvl === 'founding'
-        ? '<span class="role-dot" style="background:#7849E0"></span>'
-        : (lvl === 'senior'
-          ? '<span class="role-dot" style="background:#0EA371"></span>'
-          : '<span class="role-dot" style="background:#94A3B8"></span>');
+      const lvlDot = lvl === 'entry'
+        ? '<span class="role-dot" style="background:#0EA371"></span>'
+        : '<span class="role-dot" style="background:#94A3B8"></span>';
       return `
         <a href="${esc(j.url)}" target="_blank" rel="noopener noreferrer"
            class="role-pill flex items-center gap-2 text-[12px]" title="${esc(j.title)}">
@@ -517,14 +555,11 @@ function renderCompanies(hub) {
 
   function roleCategory(title) {
     const t = (title || '').toLowerCase();
-    if (/\b(forward[\s-]deployed|\bfde\b|solutions?\s+engineer|sales\s+engineer|presales\s+engineer)\b/.test(t)) return 'fde-sales';
-    if (/\b(ai[/]?ml|machine[\s-]learning|genai|\bllm\b|agentic?|agents?\b|research\s+engineer|mlops|applied\s+ai|\bai\s+engineer|\bml\s+engineer)\b/.test(t)
-      || /,\s*(ai|ml|agents?|agentic|research|genai|llm|mlops)\b/.test(t)) return 'ai-ml';
-    if (/\b(frontend|front[\s-]end|ui\s+engineer|fe\s+engineer|ios|android|mobile)\b/.test(t)
-      || /,\s*(frontend|front[\s-]end|ui|ios|android|mobile)\b/.test(t)) return 'frontend';
-    if (/\b(security|devops|\bsre\b|site\s+reliability|infrastructure|platform\s+engineer|cloud\s+engineer|reliability\s+engineer|production\s+engineer|data\s+(engineer|platform))\b/.test(t)
-      || /,\s*(security|platform|infrastructure|infra|cloud|devops|production\s+engineering|developer\s+platform|developer\s+productivity|developer\s+experience|data)\b/.test(t)) return 'infra';
-    return 'backend';
+    if (/business\s+intelligence|\bbi\s+(?:analyst|developer)\b/.test(t)) return 'bi';
+    if (/\b(strategic|strategy|corporate\s+strategy|business\s+strategy)\b/.test(t)) return 'strategic';
+    if (/\b(operations|ops|revops|sales\s+operations|marketing\s+operations|supply\s+chain|logistics|procurement|fulfillment|inventory|revenue\s+operations)\b/.test(t)) return 'operations';
+    if (/\b(data|analytics|reporting|product\s+analyst|growth\s+analyst|marketing\s+analyst)\b/.test(t)) return 'data';
+    return 'operations';
   }
 
   function paintRoles() {
@@ -566,8 +601,8 @@ function renderCompanies(hub) {
         ? `<img src="https://www.google.com/s2/favicons?domain=${domain}&sz=64" alt="${esc(c.name)}" loading="lazy" decoding="async" width="28" height="28" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;object-fit:cover" onerror="this.style.display='none'"/>`
         : `<div class="role-row-letter">${esc(c.name[0])}</div>`;
       const lvl = r.level || 'mid';
-      const lvlClass = lvl === 'founding' ? 'pill-ai' : (lvl === 'senior' ? 'pill-both' : 'pill-dev');
-      const lvlLabel = lvl === 'founding' ? 'Founding' : (lvl === 'senior' ? 'Senior' : 'Mid');
+      const lvlClass = lvl === 'entry' ? 'pill-both' : 'pill-dev';
+      const lvlLabel = lvl === 'entry' ? 'Entry' : 'Mid';
       const dateStr = fmtDate(r.posted || r.added);
       const newTag = isNewJob(r) ? '<span class="pill pill-ai" style="font-size:9px;padding:1px 5px">New</span>' : '';
       return `

@@ -61,58 +61,58 @@ NON_NYC_TITLE_CITY = re.compile(
 )
 TITLE_INCLUDE = re.compile(
   r"\b("
-  r"forward[\s-]deployed|fde|founding[\s-]engineer|"
-  r"software[\s-]engineer|swe(?:\s|$)|sde(?:\s|$)|"
-  r"backend[\s-]engineer|frontend[\s-]engineer|fullstack[\s-]engineer|"
-  r"full[\s-]stack[\s-]engineer|product[\s-]engineer|"
-  r"ai[\s-]engineer|applied[\s-]ai[\s-]engineer|ml[\s-]engineer|"
-  r"machine[\s-]learning[\s-]engineer|infrastructure[\s-]engineer|"
-  r"platform[\s-]engineer|data[\s-]engineer|systems[\s-]engineer|"
-  # DevOps / SRE / Cloud / Security / Reliability — infra-adjacent IC roles.
-  r"devops[\s-]engineer|site[\s-]reliability[\s-]engineer|sre(?:\s|$)|"
-  r"cloud[\s-]engineer|security[\s-]engineer|reliability[\s-]engineer|"
-  # AI/ML variants — slash-separated (AI/ML), GenAI, LLM, Agent, Research,
-  # MLOps. "Research Engineer" is the elite-AI-lab pattern (Anthropic,
-  # OpenAI, DeepMind); TITLE_EXCLUDE's "researcher" doesn't catch it.
-  r"ai[/]ml[\s-]engineer|ml[/]ai[\s-]engineer|"
-  r"genai[\s-]engineer|llm[\s-]engineer|agent[\s-]engineer|"
-  r"agentic[\s-]engineer|mlops[\s-]engineer|research[\s-]engineer|"
-  # Solutions / Sales / Presales Engineer — customer-facing eng roles.
-  # Removed from TITLE_EXCLUDE and explicitly allowed here.
-  r"solutions?[\s-]engineer|sales[\s-]engineer|presales[\s-]engineer|"
-  # Agency title variants — reverse-order (Engineer, Front-end) and
-  # parenthetical (Engineer (Front-end)) forms common at Code and Theory /
-  # DEPT / Instrument / etc.
-  r"engineer,\s*(?:front|back|full[\s-]?stack|frontend|backend|fullstack|"
-  r"devops|sre|site\s+reliability|cloud|security|reliability|"
-  r"ai|ml|ai[/]ml|ml[/]ai|genai|llm|agent|agentic|mlops|applied[\s-]ai|research|"
-  r"solutions?|sales|presales)|"
-  r"engineer\s*\((?:front|back|full[\s-]?stack|frontend|backend|fullstack|"
-  r"devops|sre|site\s+reliability|cloud|security|reliability|"
-  r"ai|ml|ai[/]ml|ml[/]ai|genai|llm|agent|agentic|mlops|applied[\s-]ai|research|"
-  r"solutions?|sales|presales)|"
-  # "Developer" role names — DEPT uses these for mobile + software roles
-  # ("Android Developer", "iOS Developer", "Software Developer").
-  r"software[\s-]developer|"
-  r"(?:android|ios|mobile|web|full[\s-]?stack|frontend|backend)[\s-]developer"
+  # Strategy / Strategic / BizOps analyst
+  r"strategic[\s-]analyst|strategy[\s-]analyst|"
+  r"corporate[\s-]strategy[\s-]analyst|business[\s-]strategy[\s-]analyst|"
+  r"business[\s-]operations[\s-]analyst|business[\s-]ops[\s-]analyst|bizops[\s-]analyst|"
+  r"strategy[\s-]&[\s-]operations[\s-]analyst|strategy[\s-]and[\s-]operations[\s-]analyst|"
+  r"strategy[\s-]operations[\s-]analyst|"
+  # Operations analyst variants (incl. Thien's supply-chain/procurement background)
+  r"operations[\s-]analyst|"
+  r"revenue[\s-]operations[\s-]analyst|revops[\s-]analyst|"
+  r"sales[\s-]operations[\s-]analyst|marketing[\s-]operations[\s-]analyst|"
+  r"supply[\s-]chain[\s-]analyst|logistics[\s-]analyst|procurement[\s-]analyst|"
+  r"fulfillment[\s-]analyst|inventory[\s-]analyst|"
+  # Data analyst variants
+  r"data[\s-]analyst|analytics[\s-]analyst|reporting[\s-]analyst|"
+  r"product[\s-]analyst|growth[\s-]analyst|marketing[\s-]analyst|"
+  # Business intelligence analyst / BI developer
+  r"business[\s-]intelligence[\s-]analyst|business[\s-]intelligence[\s-]developer|"
+  r"bi[\s-]analyst|bi[\s-]developer|"
+  # Reverse-comma / parenthetical qualifier forms:
+  # "Analyst, Strategy", "Analyst, Data", "Analyst (Business Intelligence)"
+  r"analyst,\s*(?:strategy|strategic|business[\s-]?operations|business[\s-]?ops|bizops|"
+  r"operations|revenue[\s-]?operations|revops|sales[\s-]?operations|"
+  r"marketing[\s-]?operations|supply[\s-]?chain|logistics|procurement|"
+  r"data|analytics|reporting|product|growth|marketing|"
+  r"business[\s-]?intelligence|\bbi\b)|"
+  r"analyst\s*\((?:strategy|strategic|business[\s-]?operations|business[\s-]?ops|bizops|"
+  r"operations|revenue[\s-]?operations|revops|sales[\s-]?operations|"
+  r"marketing[\s-]?operations|supply[\s-]?chain|logistics|procurement|"
+  r"data|analytics|reporting|product|growth|marketing|"
+  r"business[\s-]?intelligence|\bbi\b)"
   r")\b", re.IGNORECASE)
-# Dual-tagged seniority ("Senior/Staff Backend Engineer") = still senior IC.
-# When the title contains "senior" we mask out staff/principal tokens BEFORE
-# running TITLE_EXCLUDE so those titles survive; the rest of the exclusions
-# (manager, sales/solutions/customer eng, etc.) still apply.
-SENIORITY_MARK = re.compile(r'\bsenior\b|\bsr[.\s]', re.I)
-STAFF_PRINCIPAL = re.compile(r'\b(staff|principal)\b', re.I)
 TITLE_EXCLUDE = re.compile(
   r"\b("
-  r"staff[\s,]|principal|^lead\s|\slead\s|\slead$|head\s|chief|director|"
-  r"manager|engineering\s+manager|technical\s+program|vp\s|vice\s+president|"
-  r"intern|internship|research\s+scientist|researcher|"
-  # Kept excluded: customer / field engineer. Solutions + Sales Engineer
-  # were previously here but are now explicitly allowed (see TITLE_INCLUDE).
-  r"customer\s+engineer|field\s+engineer|"
-  r"support\s+engineer|implementation\s+engineer|partner\s+engineer|"
-  r"developer\s+advocate|developer\s+relations|devrel|recruiter|recruiting|"
-  r"account\s+executive|account\s+manager|operations\s+manager"
+  # Seniority: Thien is early-career, filter out senior/staff/principal/lead/etc.
+  r"senior\b|\bsr[.\s]|staff[\s,]|principal|^lead\s|\slead\s|\slead$|head\s|chief|director|"
+  r"manager|technical\s+program|vp\s|vice\s+president|"
+  r"intern|internship|"
+  # Wrong-domain analysts — quant/finance/risk/compliance/security roles
+  # that share the word but require specialized credentials or don't fit
+  # a data/ops/BI switcher profile.
+  r"quantitative\s+analyst|quant\s+analyst|"
+  r"investment\s+analyst|equity\s+(?:research\s+)?analyst|"
+  r"credit\s+analyst|underwriting\s+analyst|actuarial\s+analyst|"
+  r"risk\s+analyst|fraud\s+analyst|"
+  r"compliance\s+analyst|regulatory\s+analyst|policy\s+analyst|"
+  r"security\s+analyst|threat\s+analyst|intelligence\s+analyst|soc\s+analyst|"
+  r"treasury\s+analyst|tax\s+analyst|audit\s+analyst|"
+  r"payroll\s+analyst|billing\s+analyst|benefits\s+analyst|"
+  r"research\s+scientist|researcher|research\s+analyst|"
+  # Non-analyst roles the include-regex might accidentally allow
+  r"account\s+executive|account\s+manager|operations\s+manager|"
+  r"recruiter|recruiting|paralegal|counsel|attorney"
   r")\b", re.IGNORECASE)
 
 # ── Candidates ───────────────────────────────────────────────────────────
@@ -591,6 +591,275 @@ CANDIDATES = [
   ("goop","Goop","greenhouse","goop","consumer","Wellness + lifestyle content commerce","Series C","$100M+","Democracy Partners",["Democracy","NEA","Lightspeed"],"LA HQ, NYC retail. Gwyneth Paltrow's brand."),
   ("livenation","Live Nation Entertainment","smartrecruiters","LiveNationEntertainment","media","Live-events + ticketing conglomerate (NYSE: LYV)","Public","(NYSE: LYV)","NYSE",["NYSE"],"NYC office. Ticketmaster + concert-promoter parent."),
   ("honestco","The Honest Company","greenhouse","thehonestcompany","consumer","Wellness + baby DTC (NASDAQ: HNST)","Public","(NASDAQ: HNST)","NASDAQ",["NASDAQ"],"LA HQ. Jessica Alba's co. Board empty today; kept as future-surfacing candidate."),
+
+  # ── 2026-07-24 — Analyst-focused expansion for Thien ──────────────────
+  # Bias toward companies that hire heavily for Strategic / Operations /
+  # Data / Business Intelligence analyst roles in NYC. Sports & fitness
+  # weighted heavily per candidate interest; big consumer + marketplace +
+  # fintech + media brands added for volume.
+
+  # Sports / sports-betting / fantasy — the candidate is a sports fan.
+  ("draftkings","DraftKings","greenhouse","draftkings","sports","Sports betting + fantasy (NASDAQ: DKNG)","Public","$500M+ pre-IPO","Raine",["NASDAQ","Raine"],"Boston HQ, big NYC office. Massive analyst pipeline — trading ops, marketing analytics, product analytics."),
+  ("fanatics","Fanatics","greenhouse","fanaticscareers","sports","Sports merchandise + betting + collectibles","Late stage","$5.3B","Silver Lake",["Silver Lake","Fidelity","Michael Rubin"],"NYC office growing fast (Fanatics Betting + Gaming HQ). $31B valuation. Merch + betting + trading cards + live events."),
+  ("underdog","Underdog Fantasy","greenhouse","underdogsports","sports","Daily fantasy sports + pick-em","Series B","$103M","Spark Capital",["Spark","BlackRock","Kevin Durant"],"NYC HQ. Fastest-growing DFS operator; heavy on product + growth + trading analyst pipeline."),
+  ("prizepicks","PrizePicks","greenhouse","prizepicks","sports","Fantasy sports pick-em","Series B","$50M","Sequoia",["Sequoia"],"Atlanta HQ, NYC office. Fantasy pick-em leader. Big trading + ops analyst function."),
+  ("theathletic","The Athletic","greenhouse","theathletic","media","Sports journalism (NYT subsidiary)","Acquired","$140M (pre-acq)","NYT",["NYT"],"NYT-owned sports newsroom. NYC office. Analytics + product analytics for a growing subscription business."),
+  ("overtime","Overtime","greenhouse","overtimesports","sports","Next-gen sports media + leagues","Series D","$355M","Liberty Media",["Liberty Media","Andreessen Horowitz","Jeff Bezos","Drake"],"NYC HQ. Basketball + football leagues (OTE, OT7) + social-first sports media. Growth + content analyst pipeline."),
+  ("sportradar","Sportradar","smartrecruiters","sportradargroupag","sports","Sports data + integrity (NASDAQ: SRAD)","Public","$700M pre-IPO","CPPIB",["NASDAQ","CPPIB"],"Global sports-data provider. NYC office (Times Square). Powers most US sportsbooks + leagues."),
+  ("dazn","DAZN","smartrecruiters","daznathletegroupllc","sports","Global sports streaming","Series H","$4.9B","Access Industries",["Access Industries","Len Blavatnik"],"Sports OTT platform. NYC office for Americas ops. Data + BI + subscriber analytics."),
+  ("wnba","WNBA","workday","nba/wd1/WNBACareers","sports","Women's basketball league","N/A","(league)","NBA",["NBA"],"NYC HQ (Manhattan). League office; business ops + basketball analytics."),
+  ("nfl","NFL","workday","nflcareers/wd1/NFL","sports","National Football League","N/A","(league)","NFL",["NFL"],"NYC HQ (Park Ave). League office; media + product + digital ops analyst pipeline."),
+  ("mlb","MLB","workday","mlb/wd1/MLBCareers","sports","Major League Baseball","N/A","(league)","MLB",["MLB"],"NYC HQ (Park Ave). League office; ops + product + data + BI analyst pipeline."),
+  ("nba","NBA","workday","nba/wd1/NBACareers","sports","National Basketball Association","N/A","(league)","NBA",["NBA"],"NYC HQ (5th Ave). League office; big analyst pipeline across basketball + media + digital."),
+
+  # Fitness / wellness — sports-adjacent, mid-size analyst pipelines.
+  ("whoop","WHOOP","greenhouse","whoop","fitness","Fitness / recovery wearable","Series F","$405M","SoftBank",["SoftBank","IVP"],"Boston HQ, NYC office. Wearable + subscription. Product + growth analyst pipeline."),
+  ("strava","Strava","greenhouse","strava","fitness","Social fitness / athlete network","Series G","$150M+","Sequoia",["Sequoia","Madrone"],"SF HQ, NYC hires. Freemium fitness social network. Product analytics + growth heavy."),
+  ("classpass","ClassPass","greenhouse","classpass","fitness","Fitness class marketplace (Mindbody)","Late stage","$549M (pre-acq)","TCV",["TCV","Google Ventures"],"NYC HQ. Fitness class marketplace, part of Mindbody. Analyst pipeline for supply/demand marketplace ops."),
+  ("barrys","Barry's","greenhouse","barrys","fitness","Boutique fitness studio chain","Late stage","$100M+","North Castle Partners",["North Castle"],"NYC HQ. Global fitness class chain. Operations + finance analyst hires."),
+
+  # Consumer / marketplace / DTC — analyst-heavy business models.
+  ("doordash","DoorDash","greenhouse","doordash","marketplace","Food delivery (NASDAQ: DASH)","Public","$2.5B pre-IPO","Sequoia",["NASDAQ","Sequoia","SoftBank"],"SF HQ, huge NYC eng + analyst office. Strategy & ops analyst pipeline is legendary — a top launching pad."),
+  ("instacart","Instacart","greenhouse","instacart","marketplace","Grocery delivery (NASDAQ: CART)","Public","$3B pre-IPO","Sequoia",["NASDAQ","Sequoia"],"SF HQ, NYC hires. Marketplace ops + data + BI analyst hires."),
+  ("uber","Uber","workday","uber/wd5/UberExternalCareers","marketplace","Rideshare + delivery (NYSE: UBER)","Public","$25B pre-IPO","Benchmark",["NYSE","Benchmark","SoftBank"],"SF HQ, big NYC office. City ops + strategy analysts are the classic launching-pad role."),
+  ("etsy","Etsy","greenhouse","etsy","marketplace","Handmade + vintage marketplace (NASDAQ: ETSY)","Public","$97M pre-IPO","Accel",["NASDAQ","Accel","Union Square"],"NYC HQ (DUMBO). Marketplace analytics + seller ops + BI pipeline."),
+  ("pinterest","Pinterest","greenhouse","pinterest","consumer","Visual discovery (NYSE: PINS)","Public","$1.5B pre-IPO","Bessemer",["NYSE","Bessemer","Andreessen Horowitz"],"SF HQ, NYC office. Analyst + product analytics roles across ads + monetization."),
+  ("airbnb","Airbnb","greenhouse","airbnb","hospitality","Home-sharing (NASDAQ: ABNB)","Public","$4.4B pre-IPO","Sequoia",["NASDAQ","Sequoia"],"SF HQ, NYC office. City ops + trust & safety + finance ops analyst hires."),
+  ("stockx","StockX","greenhouse","stockx","marketplace","Sneaker + apparel marketplace","Series E","$690M","GV",["GV","Tiger","DST"],"Detroit HQ, NYC office. Marketplace ops + trading + authentication analyst pipeline."),
+  ("warby","Warby Parker","greenhouse","warbyparker","consumer","Eyewear DTC (NYSE: WRBY)","Public","$550M pre-IPO","Tiger",["NYSE","Tiger","General Catalyst"],"NYC HQ (SoHo). Retail ops + supply chain + BI analyst hires — great fit for supply-chain background."),
+  ("rentherunway","Rent the Runway","greenhouse","renttherunway","consumer","Rental fashion (NASDAQ: RENT)","Public","$540M pre-IPO","Bain Capital",["NASDAQ","Bain","Kleiner"],"NYC HQ. Rental + inventory ops — supply chain + reverse logistics analyst pipeline."),
+  ("himsandhers","Hims & Hers","greenhouse","hims","health","Telehealth + DTC pharma (NYSE: HIMS)","Public","$197M pre-IPO","Founders Fund",["NYSE","Founders Fund","IVP"],"SF HQ, NYC office. Growth + supply chain + operations analyst pipeline."),
+  ("sweetgreen","Sweetgreen","greenhouse","sweetgreen","consumer","Fast-casual salad (NYSE: SG)","Public","$465M pre-IPO","T. Rowe Price",["NYSE","T. Rowe Price","Fidelity"],"LA HQ, NYC office. Restaurant ops + supply chain + labor analyst hires."),
+  ("compass","Compass","greenhouse","compass","consumer","Residential real estate (NYSE: COMP)","Public","$1.6B pre-IPO","SoftBank",["NYSE","SoftBank"],"NYC HQ. Real-estate brokerage tech. Ops + BI + finance analyst pipeline."),
+
+  # Media / entertainment / gaming.
+  ("netflix","Netflix","greenhouse","netflix","media","Streaming entertainment (NASDAQ: NFLX)","Public","$4.5B raised total","IVP",["NASDAQ","IVP"],"LA HQ, NYC office. Content + finance + programming ops analyst hires."),
+  ("vice","Vice Media","greenhouse","vice","media","Youth-focused media","Restructured","$1.5B raised total","TPG",["TPG","Disney"],"NYC HQ (Williamsburg). Digital media + editorial analytics."),
+  ("bloomberg-media","Bloomberg","lever","bloombergdotorg","media","Financial data + media (private)","Private","Self-funded","Private",["Private"],"NYC HQ (Park Ave). Newsroom + terminal + BI analytics; strong analyst hiring pipeline."),
+  ("wondery","Wondery","greenhouse","wondery","media","Podcast network (Amazon subsidiary)","Acquired","$300M (pre-acq)","Amazon",["Amazon"],"LA HQ, NYC hires. Amazon podcasting arm. Content + programming analytics."),
+
+  # Fintech (accessible analyst pipelines).
+  ("bilt","Bilt Rewards","ashby","bilt","fintech","Rewards for renters + homeowners","Series C","$150M+","Kroeger",["Kroeger","Mastercard","Wells Fargo"],"NYC HQ. Loyalty + card program. Ops + partner + finance analyst hires."),
+  ("current","Current","greenhouse","current","fintech","Consumer neobank","Series D","$400M","Andreessen Horowitz",["a16z","Tiger","QED"],"NYC HQ. Consumer banking. Growth + ops + data analyst pipeline."),
+  ("marqeta","Marqeta","greenhouse","marqeta","fintech","Modern card issuing (NASDAQ: MQ)","Public","$528M pre-IPO","Iconiq",["NASDAQ","ICONIQ"],"Oakland HQ, NYC office. Payments infra. Client + partner ops + finance analyst."),
+  ("nubank","Nu","greenhouse","nubank","fintech","LatAm neobank (NYSE: NU)","Public","$4B raised total","Sequoia",["NYSE","Sequoia","Tencent"],"Brazil HQ, NYC finance/strategy office. Strategy analyst pipeline for a $70B+ neobank."),
+  ("rocket-money","Rocket Money","greenhouse","rocketcompanies","fintech","Personal finance + subscriptions","Acquired","$40M (pre-acq)","Rocket Cos",["Rocket Companies"],"NYC HQ. Personal-finance app (formerly Truebill). Product + growth + finance analyst."),
+
+  # SaaS / analyst-heavy enterprise.
+  ("databricks","Databricks","greenhouse","databricks","devtools","Data + AI platform (private)","Late stage","$10B+","T. Rowe Price",["T. Rowe Price","Fidelity"],"SF HQ, NYC hires. $62B valuation. Field ops + revenue analyst + BI hires."),
+  ("snowflake","Snowflake","greenhouse","snowflake","devtools","Cloud data warehouse (NYSE: SNOW)","Public","$1.4B pre-IPO","Sequoia",["NYSE","Sequoia"],"Bozeman HQ, NYC office. Field + revenue + product analyst pipeline."),
+  ("segment","Twilio Segment","greenhouse","twilio","devtools","CDP (Twilio subsidiary)","Acquired","$284M (pre-acq)","Accel",["NYSE Twilio"],"SF HQ, NYC office. Twilio's CDP arm. Data analyst pipeline."),
+  ("box","Box","greenhouse","boxinc","saas","Cloud content (NYSE: BOX)","Public","$562M pre-IPO","DFJ",["NYSE","DFJ"],"Redwood City HQ, NYC office. Enterprise-scale analyst pipeline."),
+  ("hubspot","HubSpot","greenhouse","hubspot","saas","Inbound marketing (NYSE: HUBS)","Public","$100M pre-IPO","General Catalyst",["NYSE","General Catalyst"],"Cambridge HQ, NYC hires. Big revenue-ops + product analyst pipeline."),
+  ("verkada","Verkada","greenhouse","verkada","saas","Enterprise physical security","Series D","$460M","Sequoia",["Sequoia","Meritech","Felicis"],"SF HQ, NYC office. Ops + growth analyst hires."),
+
+  # ── 2026-07-24 — 200-company expansion (bulk analyst-hiring probe) ─────
+  # Slugs are best-guesses from public careers pages; non-matches drop silently.
+  # Organized by domain to make gaps easy to spot when auditing.
+
+  # More sports / sports-betting / sports media
+  ("wynnbet","WynnBET","greenhouse","wynnresorts","sports","Sports betting","Public","(NASDAQ: WYNN)","NASDAQ",["NASDAQ"],"NYC office. Casino + sports betting parent."),
+  ("bet365","bet365","workable","bet365","sports","Global sports betting operator","Private","Private","Private",["Private"],"UK HQ, NYC office."),
+  ("caesars-digital","Caesars Digital","workday","caesars/wd1/Caesars_External_Career_Site","sports","Sports betting + iGaming","Public","(NASDAQ: CZR)","NASDAQ",["NASDAQ"],"Caesars parent. Sports betting arm has NYC hires."),
+  ("betmgm","BetMGM","greenhouse","betmgm","sports","Sports betting + iGaming","JV","JV MGM/Entain","MGM",["MGM","Entain"],"MGM + Entain JV. NYC hires."),
+  ("fubotv","Fubo","greenhouse","fubotv","sports","Sports streaming (NYSE: FUBO)","Public","$346M pre-IPO","Northzone",["NYSE","Northzone"],"NYC HQ. Live sports + streaming."),
+  ("nascar","NASCAR","workday","nascar/wd1/NASCARJobs","sports","Auto racing league","N/A","(league)","NASCAR",["NASCAR"],"Daytona HQ, NYC office."),
+  ("mls","Major League Soccer","workday","mlssoccer/wd1/MLS","sports","Soccer league","N/A","(league)","MLS",["MLS"],"NYC HQ (5th Ave). Analyst pipeline."),
+  ("nhl","National Hockey League","workday","nhl/wd1/NHLJobs","sports","Hockey league","N/A","(league)","NHL",["NHL"],"NYC HQ. Analyst pipeline."),
+  ("uspgatour","PGA Tour","workday","pgatour/wd1/PGATOUR","sports","Pro golf tour","N/A","(league)","PGA",["PGA"],"Ponte Vedra HQ, NYC media office."),
+  ("usta","USTA","workday","usta/wd1/USTA","sports","US Tennis Association","N/A","(association)","USTA",["USTA"],"NYC-area HQ (White Plains). US Open. Analyst pipeline."),
+  ("vividseats","Vivid Seats","greenhouse","vividseats","sports","Ticket resale (NASDAQ: SEAT)","Public","$115M pre-IPO","GTCR",["NASDAQ","GTCR"],"Chicago HQ, NYC hires."),
+  ("stubhub","StubHub","greenhouse","stubhubholdings","sports","Ticket resale","Private","$1.4B raised","Madrone",["Madrone","WestCap"],"NYC office. Ticketing marketplace."),
+  ("bleacher-report","Bleacher Report","greenhouse","bleacherreport","sports","Sports media (WBD)","Acquired","(WBD subsidiary)","WBD",["WBD"],"NYC HQ. Sports media."),
+  ("wsc-sports","WSC Sports","greenhouse","wscsports","sports","AI sports video","Series D","$135M","ION Crossover",["ION","Dawn"],"NYC office. Sports AI + video."),
+  ("frankly-sports","Frankly Sports","greenhouse","franklysports","sports","AI sports content","Seed","$4M","Contrary",["Contrary"],"NYC. Sports AI."),
+  ("skims","SKIMS","greenhouse","skims","consumer","Kim Kardashian shapewear","Series C","$670M","Wellington",["Wellington","Imaginary","Thrive"],"LA HQ, NYC hires. Growth + BI + ops."),
+  ("nike","Nike","workday","nike/wd1/nikecareers","consumer","Athletic apparel (NYSE: NKE)","Public","(NYSE: NKE)","NYSE",["NYSE"],"Beaverton HQ, NYC hires."),
+  ("on-running","On","workday","on/wd103/ExternalCareers","fitness","Swiss running shoes (NYSE: ONON)","Public","$746M pre-IPO","Point Break Capital",["NYSE"],"Zurich HQ, NYC office. Global growth analyst pipeline."),
+  ("lululemon","Lululemon","workday","lululemon/wd3/lululemoncareers","consumer","Athletic apparel (NASDAQ: LULU)","Public","(NASDAQ: LULU)","NASDAQ",["NASDAQ"],"Vancouver HQ, NYC office (SoHo)."),
+  ("hoka","HOKA","workday","deckers/wd1/DeckersCareers","consumer","Running shoes (Deckers)","Public","(NYSE: DECK)","NYSE",["NYSE"],"Goleta HQ. Deckers-owned."),
+
+  # More fitness / wellness
+  ("mindbody","Mindbody","greenhouse","mindbodyinc","fitness","Wellness biz software","Acquired","(pre-acq $529M)","Vista",["Vista"],"CA HQ, NYC hires."),
+  ("f45","F45 Training","greenhouse","f45","fitness","Franchise HIIT (private)","Take-private","(pre-buyout NYSE)","Kennedy Lewis",["Kennedy Lewis"],"Austin HQ. Fitness franchise."),
+  ("rumble-boxing","Rumble Boxing","greenhouse","xponential","fitness","Boxing fitness","Public","(NYSE: XPOF via Xponential)","NYSE",["NYSE"],"NYC HQ. Boutique fitness."),
+  ("solidcore","[solidcore]","greenhouse","solidcore","fitness","Boutique fitness","Private","$100M raised","Peterson Partners",["Peterson"],"DC HQ, NYC hires."),
+  ("fabletics","Fabletics","greenhouse","techstyle","consumer","Activewear DTC","Private","$400M raised","Passport","Passport","LA HQ, NYC hires. Kate Hudson brand."),
+  ("outdoor-voices","Outdoor Voices","greenhouse","outdoorvoices","consumer","Activewear DTC","Recap","$64M","Consortium",["Consortium"],"NYC HQ."),
+
+  # More fintech
+  ("goldmansachs","Goldman Sachs","workday","goldmansachs/wd1/GS_External_Career_Site","fintech","Investment bank (NYSE: GS)","Public","(NYSE: GS)","NYSE",["NYSE"],"NYC HQ. Analyst pipeline is the classic path."),
+  ("morganstanley","Morgan Stanley","workday","morganstanley/wd5/MSCareers","fintech","Investment bank (NYSE: MS)","Public","(NYSE: MS)","NYSE",["NYSE"],"NYC HQ. Analyst pipeline."),
+  ("jpmorgan","JPMorgan Chase","workday","jpmc/wd1/jpmc","fintech","Diversified bank (NYSE: JPM)","Public","(NYSE: JPM)","NYSE",["NYSE"],"NYC HQ. Analyst pipeline; enormous."),
+  ("citi","Citi","workday","citi/wd5/2","fintech","Diversified bank (NYSE: C)","Public","(NYSE: C)","NYSE",["NYSE"],"NYC HQ."),
+  ("bofa","Bank of America","workday","bankofamerica/wd1/BAAMCareers","fintech","Diversified bank (NYSE: BAC)","Public","(NYSE: BAC)","NYSE",["NYSE"],"Charlotte HQ, NYC office."),
+  ("wellsfargo","Wells Fargo","workday","wd1.myworkdaysite.com/wf/WFCareers","fintech","Diversified bank (NYSE: WFC)","Public","(NYSE: WFC)","NYSE",["NYSE"],"SF HQ, NYC office."),
+  ("capitalone","Capital One","workday","capitalone/wd12/CapitalOne","fintech","Consumer + card bank (NYSE: COF)","Public","(NYSE: COF)","NYSE",["NYSE"],"McLean HQ, NYC office. Analyst pipeline."),
+  ("americanexpress","American Express","workday","amex/wd1/careers","fintech","Card issuer (NYSE: AXP)","Public","(NYSE: AXP)","NYSE",["NYSE"],"NYC HQ."),
+  ("mastercard","Mastercard","workday","mastercard/wd1/CorporateCareers","fintech","Card network (NYSE: MA)","Public","(NYSE: MA)","NYSE",["NYSE"],"Purchase NY HQ."),
+  ("visa","Visa","workday","visa/wd1/JobSearch","fintech","Card network (NYSE: V)","Public","(NYSE: V)","NYSE",["NYSE"],"SF HQ, NYC office."),
+  ("bnymellon","BNY Mellon","workday","mellon/wd5/BNYMExternalSite","fintech","Custodian bank (NYSE: BK)","Public","(NYSE: BK)","NYSE",["NYSE"],"NYC HQ."),
+  ("statestreet","State Street","workday","statestreet/wd1/StateStreetCareers","fintech","Custodian bank (NYSE: STT)","Public","(NYSE: STT)","NYSE",["NYSE"],"Boston HQ, NYC office."),
+  ("kkr","KKR","workday","kkr/wd1/KKR","fintech","Alt asset manager (NYSE: KKR)","Public","(NYSE: KKR)","NYSE",["NYSE"],"NYC HQ."),
+  ("blackstone","Blackstone","workday","blackstone/wd1/Blackstone","fintech","Alt asset manager (NYSE: BX)","Public","(NYSE: BX)","NYSE",["NYSE"],"NYC HQ."),
+  ("apollo","Apollo Global","workday","apollo/wd1/AGM","fintech","Alt asset manager (NYSE: APO)","Public","(NYSE: APO)","NYSE",["NYSE"],"NYC HQ."),
+  ("axelar","Axelar","greenhouse","axelar","fintech","Crypto interop","Series B","$85M","Polychain",["Polychain","Dragonfly"],"NYC office."),
+  ("nyshex","NYSHEX","greenhouse","nyshex","fintech","Shipping contracts","Series B","$25M","Goldman",["Goldman","Maersk"],"NYC HQ. Container logistics fintech — supply-chain fit."),
+  ("clear","Clear","greenhouse","clear","fintech","Identity (NYSE: YOU)","Public","$300M pre-IPO","TPG",["NYSE","TPG"],"NYC HQ. Airport identity."),
+  ("meow-analyst","Meow","greenhouse","meow","fintech","Cash yield for startups","Series A","$27M","Tiger",["Tiger"],"NYC HQ."),
+
+  # More marketplace + consumer
+  ("faire","Faire","greenhouse","faire","marketplace","Wholesale marketplace","Series G","$1.7B","Sequoia",["Sequoia","Founders Fund"],"SF HQ, NYC hires. Marketplace ops + BI."),
+  ("depop","Depop","greenhouse","depop","marketplace","Gen-Z resale (Etsy)","Acquired","$105M (pre-acq)","Etsy",["Etsy"],"London HQ, NYC office."),
+  ("grailed","Grailed","greenhouse","grailed","marketplace","Men's fashion resale","Acquired","$60M (pre-acq)","GOAT",["GOAT"],"NYC HQ."),
+  ("goat","GOAT","greenhouse","goatgroup","marketplace","Sneaker + apparel resale","Series F","$492M","D1 Capital",["D1 Capital","Foot Locker"],"LA HQ, NYC hires."),
+  ("thredup","ThredUP","greenhouse","thredup","marketplace","Resale (NASDAQ: TDUP)","Public","$305M pre-IPO","Goldman",["NASDAQ","Goldman"],"Oakland HQ, NYC hires."),
+  ("poshmark","Poshmark","greenhouse","poshmark","marketplace","Resale (Naver)","Acquired","$135M pre-IPO","Menlo",["Menlo","Naver"],"SF HQ, NYC hires."),
+  ("ebay","eBay","workday","ebay/wd1/careers","marketplace","Marketplace (NASDAQ: EBAY)","Public","(NASDAQ)","NASDAQ",["NASDAQ"],"San Jose HQ, NYC office."),
+  ("shopify","Shopify","lever","shopify","saas","Ecom platform (NYSE: SHOP)","Public","(NYSE: SHOP)","NYSE",["NYSE"],"Ottawa HQ, NYC hires."),
+  ("wayfair","Wayfair","workday","wayfair/wd1/wayfair","marketplace","Home goods (NYSE: W)","Public","$358M pre-IPO","Great Hill",["NYSE"],"Boston HQ, NYC hires."),
+  ("chewy","Chewy","workday","chewyinc/wd1/chewy","marketplace","Pet ecommerce (NYSE: CHWY)","Public","(NYSE: CHWY)","NYSE",["NYSE"],"Plantation HQ, NYC office."),
+  ("hellofresh","HelloFresh","greenhouse","hellofresh","consumer","Meal kits","Public","(FSE: HFG)","FSE",["FSE"],"NYC + Berlin offices."),
+  ("blueapron","Blue Apron","greenhouse","blueapron","consumer","Meal kits","Take-private","(pre-take-private NYSE)","Wonder",["Wonder"],"NYC HQ."),
+  ("gopuff","Gopuff","greenhouse","gopuff","marketplace","Instant delivery","Late stage","$4B","SoftBank",["SoftBank","Accel"],"Philadelphia HQ, NYC hires."),
+  ("swell","Swell","greenhouse","swell","consumer","Ecom platform","Series A","$20M","Benchmark",["Benchmark"],"LA HQ, NYC hires."),
+  ("glossier","Glossier","greenhouse","glossier","consumer","Beauty DTC","Series E","$266M","Sequoia",["Sequoia"],"NYC HQ. Growth + BI + supply chain analyst."),
+  ("olive-and-june","Olive & June","greenhouse","oliveandjune","consumer","Nail care DTC","Series C","$50M","IVP",["IVP"],"LA HQ, NYC hires."),
+  ("hu-kitchen","Hu Kitchen","greenhouse","hukitchen","consumer","Better-for-you snacks","Acquired","(Mondelez subsidiary)","Mondelez",["Mondelez"],"NYC HQ."),
+  ("hydrow","Hydrow","greenhouse","hydrow","fitness","Rowing machine","Series C","$155M","L Catterton",["L Catterton"],"Boston HQ, NYC hires."),
+  ("tonal","Tonal","greenhouse","tonal","fitness","Home strength","Series E","$450M","L Catterton",["L Catterton","Ross"],"SF HQ, NYC hires."),
+  ("mirror","Mirror","greenhouse","lululemondigitalfitness","fitness","Home fitness (Lululemon)","Acquired","(Lululemon subsidiary)","Lululemon",["Lululemon"],"NYC HQ."),
+
+  # Adtech + growth
+  ("simulmedia","Simulmedia","greenhouse","simulmedia","adtech","TV ad targeting","Series D","$91M","Time Warner",["Time Warner"],"NYC HQ."),
+  ("persado","Persado","greenhouse","persado","adtech","AI marketing copy","Series D","$66M","Goldman Sachs",["Goldman"],"NYC HQ."),
+  ("mediamath","MediaMath","greenhouse","mediamath","adtech","DSP","Late stage","$500M","Spring Lake",["Spring Lake"],"NYC HQ (recent restructuring)."),
+  ("integralad","Integral Ad Science","greenhouse","integralads","adtech","Ad verification (NASDAQ: IAS)","Public","(NASDAQ: IAS)","NASDAQ",["NASDAQ"],"NYC HQ."),
+  ("dv360-google","Google","workday","google/wd1/GoogleCareers","saas","Search + ads (NASDAQ: GOOG)","Public","(NASDAQ)","NASDAQ",["NASDAQ"],"MTV HQ, NYC office."),
+  ("meta","Meta","workday","meta/wd1/MetaCareers","saas","Social + ads (NASDAQ: META)","Public","(NASDAQ)","NASDAQ",["NASDAQ"],"Menlo HQ, NYC office."),
+  ("amazon-nyc","Amazon","workday","amazon/wd1/AmazonJobs","marketplace","Ecom + cloud (NASDAQ: AMZN)","Public","(NASDAQ)","NASDAQ",["NASDAQ"],"Seattle HQ, NYC office."),
+  ("microsoft-nyc","Microsoft","workday","microsoft/wd1/MicrosoftCareers","saas","Software + cloud (NASDAQ: MSFT)","Public","(NASDAQ)","NASDAQ",["NASDAQ"],"Redmond HQ, NYC office."),
+
+  # Health / biotech + wellness
+  ("cityblock","Cityblock Health","workday","cityblockhealth/wd1/CityblockExternalCareerSite","health","Community-based primary care","Series D","$400M","General Catalyst",["GC","Kinnevik"],"NYC HQ (Brooklyn)."),
+  ("ro","Ro","greenhouse","roman","health","Direct-to-consumer healthcare","Series D","$876M","General Catalyst",["GC","FirstMark"],"NYC HQ."),
+  ("nurx","Nurx","greenhouse","nurx","health","Telehealth (women's)","Series C","$113M","Union Square",["Union Square","Kleiner"],"SF HQ, NYC hires."),
+  ("k-health","K Health","greenhouse","khealth","health","AI-first primary care","Series E","$291M","Valor",["Valor","Anthem"],"NYC HQ."),
+  ("cedar-health","Cedar","greenhouse","cedar","health","Patient billing SaaS","Series D","$351M","Concord Health Partners",["Concord","Andreessen Horowitz"],"NYC HQ."),
+  ("particle-health","Particle Health","greenhouse","particlehealth","health","Health data API","Series B","$45M","IVP",["IVP","Menlo"],"NYC HQ."),
+  ("komodo-health","Komodo Health","greenhouse","komodohealth","health","Real-world health data","Series E","$314M","Tiger",["Tiger"],"SF HQ, NYC office."),
+  ("spring-health","Spring Health","greenhouse","springhealth","health","Employer mental health","Series E","$466M","Kinnevik",["Kinnevik"],"NYC HQ."),
+  ("kindbody","Kindbody","greenhouse","kindbody","health","Women's health clinics","Series C","$154M","Perceptive Advisors",["Perceptive"],"NYC HQ."),
+
+  # SaaS + productivity + workflow
+  ("smartsheet","Smartsheet","greenhouse","smartsheet","saas","Work management (NYSE: SMAR)","Public","(NYSE: SMAR)","NYSE",["NYSE"],"Bellevue HQ, NYC hires."),
+  ("miro","Miro","greenhouse","miro","saas","Online whiteboard","Series C","$476M","ICONIQ",["ICONIQ"],"Amsterdam HQ, NYC hires."),
+  ("mural","Mural","greenhouse","mural","saas","Online whiteboard","Series C","$200M","Insight",["Insight","Radical"],"Argentina HQ, NYC hires."),
+  ("clickup","ClickUp","greenhouse","clickup","saas","Work management","Series C","$400M","Andreessen Horowitz",["a16z","Craft"],"SD HQ, NYC hires."),
+  ("monday","monday.com","greenhouse","monday","saas","Work management (NASDAQ: MNDY)","Public","(NASDAQ: MNDY)","NASDAQ",["NASDAQ"],"TLV HQ, NYC hires."),
+  ("gong","Gong","greenhouse","gong","saas","Sales conversation AI","Series E","$584M","Franklin",["Franklin","Salesforce"],"SF HQ, NYC hires."),
+  ("outreach","Outreach","greenhouse","outreach","saas","Sales engagement","Series G","$489M","Salesforce",["Salesforce"],"Seattle HQ, NYC hires."),
+  ("salesloft","Salesloft","greenhouse","salesloft","saas","Sales engagement","Late stage","$245M","Vista",["Vista"],"Atlanta HQ, NYC hires."),
+  ("apollo-io","Apollo.io","greenhouse","apolloio","saas","Sales intelligence","Series D","$310M","Bain","Bain","SF HQ, NYC hires."),
+  ("6sense","6sense","greenhouse","6sense","saas","B2B intent data","Series E","$426M","Softbank",["Softbank","MMC"],"SF HQ, NYC hires."),
+  ("clari","Clari","greenhouse","clari","saas","Revenue analytics","Series F","$496M","Blackstone",["Blackstone","Sequoia"],"SF HQ, NYC hires."),
+  ("everlaw","Everlaw","greenhouse","everlaw","saas","Legal e-discovery","Series D","$113M","CapitalG",["CapitalG"],"Oakland HQ, NYC hires."),
+  ("brex-alt","Brex — analyst","greenhouse","brex","fintech","(dedup)","Series D","$1.5B","DST",["DST"],"dup skip."),
+  ("gladly","Gladly","greenhouse","gladly","saas","Customer service platform","Series E","$156M","Greylock",["Greylock"],"SF HQ, NYC hires."),
+  ("intercom","Intercom","greenhouse","intercom","saas","Customer messaging","Late stage","$241M","Kleiner",["Kleiner","GV"],"SF HQ, NYC hires."),
+  ("front","Front","greenhouse","front","saas","Shared inbox","Series D","$204M","Sequoia",["Sequoia","Salesforce"],"SF HQ, NYC hires."),
+  ("dropbox","Dropbox","greenhouse","dropbox","saas","Cloud storage (NASDAQ: DBX)","Public","$607M pre-IPO","Sequoia",["NASDAQ","Sequoia"],"SF HQ, NYC hires."),
+  ("okta","Okta","greenhouse","okta","saas","Identity (NASDAQ: OKTA)","Public","$229M pre-IPO","Andreessen Horowitz",["NASDAQ","a16z"],"SF HQ, NYC hires."),
+  ("cloudflare","Cloudflare","greenhouse","cloudflare","infra","CDN + security (NYSE: NET)","Public","$332M pre-IPO","Pelion",["NYSE","Pelion"],"SF HQ, NYC hires."),
+  ("elastic","Elastic","greenhouse","elastic","devtools","Search platform (NYSE: ESTC)","Public","$104M pre-IPO","Benchmark",["NYSE","Benchmark"],"Amsterdam HQ, NYC hires."),
+  ("hashicorp","HashiCorp","greenhouse","hashicorp","devtools","Cloud infra (NASDAQ: HCP → IBM)","Acquired","$349M pre-IPO","IBM",["IBM"],"SF HQ, NYC hires."),
+  ("jamf","Jamf","greenhouse","jamf","saas","Apple device mgmt (NASDAQ: JAMF)","Public","(NASDAQ)","NASDAQ",["NASDAQ"],"Minneapolis HQ."),
+  ("confluent","Confluent","greenhouse","confluent","devtools","Kafka platform (NASDAQ: CFLT)","Public","(NASDAQ: CFLT)","NASDAQ",["NASDAQ"],"Mountain View HQ, NYC hires."),
+  ("mparticle","mParticle","greenhouse","mparticle","adtech","Customer data platform","Series D","$115M","Bain",["Bain","Harmony"],"NYC HQ."),
+  ("appcues","Appcues","greenhouse","appcues","saas","Product analytics","Series B","$28M","Sierra Ventures",["Sierra"],"Boston HQ, NYC hires."),
+  ("fullstory","FullStory","greenhouse","fullstory","saas","Digital experience","Series D","$164M","Permira","Permira","Atlanta HQ, NYC hires."),
+  ("hotjar","Hotjar","greenhouse","hotjarcontentsquare","saas","Behavior analytics","Acquired","(Contentsquare)","Contentsquare",["Contentsquare"],"Malta HQ."),
+  ("mixpanel","Mixpanel","greenhouse","mixpanel","saas","Product analytics","Series C","$77M","Andreessen Horowitz",["a16z"],"SF HQ, NYC hires."),
+
+  # More travel / hospitality
+  ("marriott","Marriott","workday","marriott/wd5/MarriottCareers","hospitality","Hotels (NASDAQ: MAR)","Public","(NASDAQ)","NASDAQ",["NASDAQ"],"Bethesda HQ, NYC office."),
+  ("hilton","Hilton","workday","hilton/wd5/HiltonCareers","hospitality","Hotels (NYSE: HLT)","Public","(NYSE)","NYSE",["NYSE"],"McLean HQ, NYC office."),
+  ("hyatt","Hyatt","workday","hyatt/wd1/HyattCareers","hospitality","Hotels (NYSE: H)","Public","(NYSE)","NYSE",["NYSE"],"Chicago HQ, NYC office."),
+  ("ihg","IHG","workday","ihg/wd1/IHGCareers","hospitality","Hotels (LSE: IHG)","Public","(LSE)","LSE",["LSE"],"UK HQ, NYC office."),
+  ("delta","Delta Air Lines","workday","delta/wd5/DeltaCareers","hospitality","Airline (NYSE: DAL)","Public","(NYSE)","NYSE",["NYSE"],"Atlanta HQ, NYC office."),
+  ("jetblue","JetBlue","workday","jetblue/wd1/JetBlueCareers","hospitality","Airline (NASDAQ: JBLU)","Public","(NASDAQ)","NASDAQ",["NASDAQ"],"NYC-area HQ."),
+  ("united","United Airlines","workday","united/wd5/UnitedCareers","hospitality","Airline (NASDAQ: UAL)","Public","(NASDAQ)","NASDAQ",["NASDAQ"],"Chicago HQ, NYC office."),
+  ("aa-airlines","American Airlines","workday","aa/wd1/AACareers","hospitality","Airline (NASDAQ: AAL)","Public","(NASDAQ)","NASDAQ",["NASDAQ"],"Fort Worth HQ, NYC office."),
+  ("expedia","Expedia","greenhouse","expedia","hospitality","Travel booking (NASDAQ: EXPE)","Public","(NASDAQ)","NASDAQ",["NASDAQ"],"Seattle HQ, NYC office."),
+  ("kayak","Kayak","greenhouse","kayak","hospitality","Travel search (Booking)","Acquired","(Booking Holdings)","Booking",["Booking"],"NYC office."),
+  ("todaytix","TodayTix","greenhouse","todaytixgroup","hospitality","Broadway ticketing","Series E","$79M","Great Hill",["Great Hill"],"NYC HQ."),
+  ("resy-nyc","Resy","greenhouse","resy","hospitality","Restaurant reservations (Amex)","Acquired","(Amex subsidiary)","Amex",["Amex"],"NYC HQ."),
+  ("opentable","OpenTable","greenhouse","opentable","hospitality","Restaurant reservations (Booking)","Acquired","(Booking Holdings)","Booking",["Booking"],"SF HQ, NYC hires."),
+  ("yelp","Yelp","greenhouse","yelp","consumer","Local business reviews (NYSE: YELP)","Public","(NYSE)","NYSE",["NYSE"],"SF HQ, NYC office."),
+
+  # More media / entertainment / creator
+  ("nytco","New York Times","workday","nyt/wd1/NYTCareers","media","News + subscriptions (NYSE: NYT)","Public","(NYSE)","NYSE",["NYSE"],"NYC HQ."),
+  ("dowjones","Dow Jones / WSJ","workday","dowjones/wd1/DJCareers","media","News + data (News Corp)","Acquired","(News Corp)","News Corp",["News Corp"],"NYC HQ."),
+  ("bloombergterm","Bloomberg L.P.","greenhouse","bloomberg","media","Financial data + terminal","Private","Self-funded","Private",["Private"],"NYC HQ."),
+  ("condenast","Condé Nast","workday","condenast/wd1/ExternalCareerSite","media","Magazines + digital","Private","Advance Publications","Advance",["Advance"],"NYC HQ."),
+  ("hearst","Hearst","workday","hearst/wd1/hearst","media","Diversified media","Private","Private","Private",["Private"],"NYC HQ."),
+  ("meredith","Meredith / Dotdash","workday","dotdashmeredith/wd1/careers","media","Digital + magazines (IAC)","Acquired","(IAC)","IAC",["IAC"],"NYC HQ."),
+  ("iac","IAC","greenhouse","iac","media","Internet holding co","Public","(NASDAQ: IAC)","NASDAQ",["NASDAQ"],"NYC HQ (Chelsea)."),
+  ("nypublicradio","New York Public Radio","greenhouse","nypublicradio","media","Public radio (WNYC)","Nonprofit","Nonprofit","Nonprofit",["Nonprofit"],"NYC HQ."),
+  ("vox","Vox Media","greenhouse","voxmedia","media","Digital media (SB Nation, The Verge)","Series D","$307M","Comcast Ventures",["Comcast","Accel"],"NYC HQ."),
+  ("buzzfeed","BuzzFeed","greenhouse","buzzfeed","media","Digital media (NASDAQ: BZFD)","Public","(NASDAQ)","NASDAQ",["NASDAQ"],"NYC HQ."),
+  ("axel-springer","Axel Springer","greenhouse","axelspringer","media","Insider + Politico parent","Public","(FSE: SPR)","FSE",["FSE"],"NYC office (Insider + Politico)."),
+  ("politico","Politico","greenhouse","politico","media","Political news (Axel Springer)","Acquired","(AS)","AS",["AS"],"DC HQ, NYC hires."),
+  ("morning-consult","Morning Consult","greenhouse","morningconsult","media","Research + polling","Series B","$60M","Advance","Advance","DC HQ, NYC hires."),
+  ("thomson-reuters","Thomson Reuters","workday","tr/wd3/thomsonreuters","media","News + legal data (NYSE: TRI)","Public","(NYSE)","NYSE",["NYSE"],"NYC office."),
+
+  # Gaming / interactive entertainment
+  ("taketwo","Take-Two Interactive","workday","take2/wd1/Take2ExternalCareerSite","gaming","Games (NASDAQ: TTWO)","Public","(NASDAQ)","NASDAQ",["NASDAQ"],"NYC HQ. Owns Rockstar + 2K."),
+  ("2k-games","2K","workday","take2/wd1/Take2ExternalCareerSite","gaming","Sports + strategy games (T2)","Public","(T2 subsidiary)","T2",["T2"],"Novato HQ, NYC hires."),
+  ("epicgames","Epic Games","workable","epicgames","gaming","Fortnite + Unreal","Late stage","$3.7B","Sony",["Sony","Tencent"],"NC HQ, NYC hires."),
+  ("blizzard","Activision Blizzard","workday","microsoft/wd1/gaming","gaming","Games (Microsoft)","Acquired","(Microsoft subsidiary)","Microsoft",["Microsoft"],"CA HQ, NYC hires."),
+  ("roblox","Roblox","greenhouse","roblox","gaming","UGC gaming (NYSE: RBLX)","Public","(NYSE)","NYSE",["NYSE"],"SF HQ, NYC hires."),
+  ("unity","Unity","greenhouse","unity","gaming","Game engine (NYSE: U)","Public","(NYSE)","NYSE",["NYSE"],"SF HQ, NYC hires."),
+  ("dream-games","Dream Games","greenhouse","dreamgames","gaming","Mobile puzzle","Series C","$255M","IVP",["IVP"],"TR HQ, NYC hires."),
+  ("scopely","Scopely","greenhouse","scopely","gaming","Mobile games (Savvy Group)","Acquired","(Savvy)","Savvy",["Savvy"],"LA HQ, NYC hires."),
+
+  # Real estate / proptech
+  ("compass-nyc","Compass","greenhouse","compass","consumer","Residential real estate (NYSE: COMP) — dup","Public","dup","(dup)",["dup"],"dup skip."),
+  ("zillow","Zillow","greenhouse","zillow","consumer","Real estate (NASDAQ: Z)","Public","(NASDAQ)","NASDAQ",["NASDAQ"],"Seattle HQ, NYC hires."),
+  ("redfin","Redfin","greenhouse","redfin","consumer","Real estate (NASDAQ: RDFN)","Public","(NASDAQ)","NASDAQ",["NASDAQ"],"Seattle HQ, NYC hires."),
+  ("opendoor","Opendoor","greenhouse","opendoor","consumer","iBuyer (NASDAQ: OPEN)","Public","(NASDAQ)","NASDAQ",["NASDAQ"],"SF HQ, NYC hires."),
+  ("streeteasy","StreetEasy","greenhouse","zillow","consumer","NYC real estate (Zillow) — dup slug skip","Acquired","(Zillow subsidiary)","(dup)",["dup"],"dup skip."),
+  ("common","Common","greenhouse","common","consumer","Co-living","Series D","$113M","Nrgene","Nrgene","NYC HQ."),
+  ("industrious","Industrious","greenhouse","industrious","hospitality","Flex-office","Late stage","$300M","Riverwood",["Riverwood"],"NYC HQ."),
+  ("wework","WeWork","workday","wework/wd1/Careers","hospitality","Flex-office","Post-bankruptcy","(post-BK)","(private)",["(private)"],"NYC HQ."),
+
+  # Consumer packaged goods / beverage
+  ("chobani","Chobani","smartrecruiters","chobani","consumer","Greek yogurt","Public","(NASDAQ: CHR)","NASDAQ",["NASDAQ"],"NYC HQ. Growth + supply chain + ops analyst pipeline."),
+  ("vita-coco","Vita Coco","greenhouse","vitacoco","consumer","Coconut water (NASDAQ: COCO)","Public","(NASDAQ)","NASDAQ",["NASDAQ"],"NYC HQ."),
+  ("poppi","Poppi","greenhouse","poppi","consumer","Prebiotic soda","Late stage","$100M+","CAVU","CAVU","Austin HQ, NYC hires."),
+  ("olipop-cpg","Olipop","greenhouse","olipop","consumer","Prebiotic soda","Series C","$130M","J.P. Morgan","J.P. Morgan","Oakland HQ, NYC hires."),
+  ("mateo","Mateo","greenhouse","mateo","consumer","CPG","Series A","$20M","Prelude","Prelude","NYC HQ."),
+  ("everlane","Everlane","greenhouse","everlane","consumer","Apparel DTC","Series F","$110M","L Catterton","L Catterton","SF HQ, NYC hires."),
+  ("reformation","Reformation","greenhouse","reformation","consumer","Sustainable fashion","Acquired","(pre-acq $50M)","Permira","Permira","LA HQ, NYC office."),
+  ("kate-spade","Kate Spade","workday","tapestry/wd1/TapestryCareers","consumer","Apparel (Tapestry)","Public","(NYSE: TPR)","NYSE",["NYSE"],"NYC HQ."),
+  ("coach","Coach","workday","tapestry/wd1/TapestryCareers","consumer","Apparel (Tapestry) — dup","Public","(dup)","(dup)",["dup"],"dup skip."),
+  ("michael-kors","Michael Kors","workday","capri/wd1/CapriHoldings","consumer","Apparel (Capri Holdings)","Public","(NYSE: CPRI)","NYSE",["NYSE"],"NYC HQ."),
+  ("ralph-lauren","Ralph Lauren","workday","ralphlauren/wd1/RLCareers","consumer","Apparel (NYSE: RL)","Public","(NYSE)","NYSE",["NYSE"],"NYC HQ."),
+  ("estee-lauder","Estée Lauder","workday","esteelauder/wd1/EL_External_Career_Site","consumer","Beauty (NYSE: EL)","Public","(NYSE)","NYSE",["NYSE"],"NYC HQ."),
+  ("loreal","L'Oréal","workday","loreal/wd103/LOreal_Careers","consumer","Beauty (Euronext: OR)","Public","(Euronext)","Euronext",["Euronext"],"Paris HQ, NYC office."),
+
+  # NYC startups (assorted)
+  ("dagster","Dagster","greenhouse","dagsterlabs","devtools","Data orchestration","Series B","$44M","Coatue","Coatue","SF HQ, NYC hires."),
+  ("prefect","Prefect","greenhouse","prefect","devtools","Data orchestration","Series C","$83M","Ridgeline","Ridgeline","DC HQ, NYC hires."),
+  ("weights-biases","Weights & Biases","greenhouse","wandb","devtools","ML experiment tracking","Series C","$250M","Insight","Insight","SF HQ, NYC hires."),
+  ("hex-tech","Hex","greenhouse","hex","devtools","Notebook analytics","Series C","$79M","Sequoia","Sequoia","SF HQ, NYC hires."),
+  ("dbt-labs","dbt Labs","greenhouse","dbtlabs","devtools","Data transformation","Series D","$414M","Andreessen Horowitz",["a16z","Sequoia"],"Philadelphia HQ, NYC hires."),
+  ("hightouch-nyc","Hightouch","greenhouse","hightouch","devtools","Reverse ETL","Series C","$54M","Bain","Bain","SF HQ, NYC hires."),
+  ("census","Census","greenhouse","getcensus","devtools","Reverse ETL","Series B","$76M","Sequoia","Sequoia","SF HQ, NYC hires."),
+  ("amplitude","Amplitude","greenhouse","amplitude","saas","Product analytics (NASDAQ: AMPL)","Public","(NASDAQ)","NASDAQ",["NASDAQ"],"SF HQ, NYC hires."),
+  ("sigma-alt","Sigma","greenhouse","sigmacomputing","devtools","Cloud BI — dup slug skip","Series D","dup","dup",["dup"],"dup skip."),
+  ("looker","Looker","greenhouse","google","devtools","BI (Google) — internal","Acquired","(GOOG subsidiary)","GOOG",["GOOG"],"skip."),
+  ("tableau","Tableau","workday","salesforce/wd1/External_Career_Site","devtools","BI (Salesforce)","Acquired","(CRM subsidiary)","Salesforce",["Salesforce"],"Seattle HQ."),
 ]
 
 # Clearbit logo domains, keyed by company id. Companies absent from this
@@ -703,6 +972,21 @@ DOMAINS = {
   "whoop":"whoop.com","sylvera":"sylvera.com","crusoe":"crusoe.ai",
   "arcadia":"arcadia.com","newsbreak":"newsbreak.com","axios":"axios.com",
   "morningbrew":"morningbrew.com","rockstargames":"rockstargames.com",
+  # 2026-07-24 analyst-expansion additions
+  "draftkings":"draftkings.com","fanatics":"fanatics.com","underdog":"underdogfantasy.com",
+  "prizepicks":"prizepicks.com","theathletic":"theathletic.com","overtime":"overtime.tv",
+  "sportradar":"sportradar.com","dazn":"dazn.com",
+  "wnba":"wnba.com","nfl":"nfl.com","mlb":"mlb.com","nba":"nba.com",
+  "strava":"strava.com","classpass":"classpass.com","barrys":"barrys.com",
+  "doordash":"doordash.com","instacart":"instacart.com","uber":"uber.com",
+  "etsy":"etsy.com","pinterest":"pinterest.com","airbnb":"airbnb.com",
+  "stockx":"stockx.com","warby":"warbyparker.com","rentherunway":"renttherunway.com",
+  "himsandhers":"forhims.com","sweetgreen":"sweetgreen.com","compass":"compass.com",
+  "netflix":"netflix.com","vice":"vice.com","bloomberg-media":"bloomberg.com",
+  "wondery":"wondery.com",
+  "bilt":"biltrewards.com","marqeta":"marqeta.com","nubank":"nubank.com.br",
+  "rocket-money":"rocketmoney.com","databricks":"databricks.com","snowflake":"snowflake.com",
+  "segment":"segment.com","box":"box.com","hubspot":"hubspot.com","verkada":"verkada.com",
   "affirm":"affirm.com","flexport":"flexport.com","rga":"rga.com",
   # Teamtailor
   "toteme":"toteme.com","ganni":"ganni.com","oatly":"oatly.com",
@@ -826,9 +1110,13 @@ def fetch(ats, slug):
 
 # ── Filtering ────────────────────────────────────────────────────────────
 def level(title):
+  """Return 'entry' for junior/associate/I titles, else 'mid'.
+  Senior/staff/lead are excluded upstream by TITLE_EXCLUDE."""
   low = title.lower()
-  if "founding" in low: return "founding"
-  if "senior" in low or "sr." in low or "sr " in low: return "senior"
+  if re.search(r'\b(junior|jr\.?|associate|entry[\s-]level|graduate|early[\s-]career)\b', low):
+    return "entry"
+  if re.search(r'\banalyst\s+i\b|\banalyst,\s*i\b|\banalyst\s*-\s*i\b', low):
+    return "entry"
   return "mid"
 
 def _date10(v):
@@ -926,15 +1214,11 @@ def filter_jobs(ats, raw, slug=""):
     # non-NYC city, drop even if the ATS location field said "New York"
     # (common in multi-location listings where NYC was just one of several).
     if NON_NYC_TITLE_CITY.search(title) and not NYC.search(title): continue
-    title_for_check = STAFF_PRINCIPAL.sub("", title) if SENIORITY_MARK.search(title) else title
-    if TITLE_EXCLUDE.search(title_for_check): continue
+    if TITLE_EXCLUDE.search(title): continue
     if not TITLE_INCLUDE.search(title): continue
     out.append({"title": title, "url": url, "level": level(title), "posted": posted})
-  # founding > senior > mid
-  out.sort(key=lambda j: (
-    0 if "founding" in j["title"].lower() else 1,
-    0 if "senior" in j["title"].lower() else 1,
-  ))
+  # entry > mid — entry-level roles bubble first for an early-career candidate.
+  out.sort(key=lambda j: (0 if j["level"] == "entry" else 1, j["title"].lower()))
   return out
 
 

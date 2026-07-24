@@ -1,15 +1,19 @@
 # thien
 
-Standalone NYC-engineering job board. Extracted from the InterviewPrep tracker
-(the sibling repo) into a minimal single-page app: **just the Companies +
-Individual Roles view**, no gamification / lessons / flashcards / quizzes.
+NYC analyst job board for Thien Nguyen. Filters live public ATS postings
+across ~250 NYC companies down to the four role families that match his
+data/ops/BI transition:
 
-## What it is
+- **Strategic Analyst** — Corporate + business strategy, S&O
+- **Operations Analyst** — BizOps, RevOps, supply chain, procurement, logistics
+- **Data Analyst** — Analytics, reporting, marketing/product/growth analyst
+- **Business Intelligence Analyst** — BI analyst + BI developer
 
-- 234 companies, ~1160 live NYC engineering postings
-- Ranked by a per-role fit score (percentile-normalized across the full pool)
-- Role filters: vertical / level / role-family (AI/ML, Backend, Infra, FDE/SE, Frontend)
-- Apply-tracking persisted to `localStorage` under `thien_applied`
+Ranked by a per-role fit score tuned for his profile (SQL, Python pandas,
+Excel, Power BI; ex-supply-chain / procurement; Six Sigma; early-career).
+Sports and fitness companies are prestige-boosted since he's a sports fan.
+
+Apply-tracking persists to `localStorage` under `thien_applied`.
 
 ## Running locally
 
