@@ -22,6 +22,38 @@
  */
 const COMPANIES_VERIFIED_AT = '2026-07-24';
 const COMPANIES = [
+  { id:"anthropic", name:"Anthropic", vertical:"ai",
+    sub:"Claude \u2014 AI safety lab",
+    stage:"Series F", raised:"$18B+", lead:"Amazon",
+    badges:["Amazon", "Google", "Spark"],
+    totalRoles:14,
+    notes:"Heavy values screen; expect ethical-dilemma and downside-risk questions. Applied-AI eng roles are FDE-flavored.",
+    jobs:[
+      { title:"Business System Analyst Lead, Opportunity Acceleration", url:"https://job-boards.greenhouse.io/anthropic/jobs/5287240008", level:"mid" },
+      { title:"Safeguards Enforcement Analyst, Access Controls & Identity", url:"https://job-boards.greenhouse.io/anthropic/jobs/5319626008", level:"mid" },
+      { title:"Safeguards Enforcement Analyst, Account Takeover & Credential Abuse", url:"https://job-boards.greenhouse.io/anthropic/jobs/5319624008", level:"mid" },
+      { title:"Safeguards Enforcement Analyst, Age-Appropriate Design", url:"https://job-boards.greenhouse.io/anthropic/jobs/5311234008", level:"mid" },
+      { title:"Safeguards Enforcement Analyst, Ban Evasion & Recidivism", url:"https://job-boards.greenhouse.io/anthropic/jobs/5319592008", level:"mid" },
+      { title:"Safeguards Enforcement Analyst, Bio Harms", url:"https://job-boards.greenhouse.io/anthropic/jobs/5319696008", level:"mid" },
+      { title:"Safeguards Enforcement Analyst, Chem & Explosives Harms", url:"https://job-boards.greenhouse.io/anthropic/jobs/5319700008", level:"mid" },
+      { title:"Safeguards Enforcement Analyst, Child Safety", url:"https://job-boards.greenhouse.io/anthropic/jobs/5311237008", level:"mid" },
+      { title:"Safeguards Enforcement Analyst, Cyber Harm", url:"https://job-boards.greenhouse.io/anthropic/jobs/5311159008", level:"mid" },
+      { title:"Safeguards Enforcement Analyst, Fraud & Scams", url:"https://job-boards.greenhouse.io/anthropic/jobs/5319554008", level:"mid" },
+      { title:"Safeguards Enforcement Analyst, Integrity & Authenticity", url:"https://job-boards.greenhouse.io/anthropic/jobs/5311149008", level:"mid" },
+      { title:"Safeguards Enforcement Analyst, Radiological & Nuclear Harms", url:"https://job-boards.greenhouse.io/anthropic/jobs/5319702008", level:"mid" },
+      { title:"Safeguards Enforcement Analyst, Safety Evaluations", url:"https://job-boards.greenhouse.io/anthropic/jobs/5137183008", level:"mid" },
+      { title:"Safeguards Enforcement Analyst, Violence & Extremism", url:"https://job-boards.greenhouse.io/anthropic/jobs/5343907008", level:"mid" }
+    ] },
+  { id:"rilla", name:"Rilla", vertical:"ai",
+    sub:"AI for field-sales coaching",
+    stage:"Series A", raised:"$24M", lead:"Sequoia",
+    badges:["Sequoia"],
+    totalRoles:2,
+    notes:"Speech AI for outside sales. ASR, summarization, ranking.",
+    jobs:[
+      { title:"Business Operations", url:"https://jobs.ashbyhq.com/rilla/8ac44792-e79b-49cb-9c6e-18ddd6875fa8", level:"mid" },
+      { title:"FP&A Analyst", url:"https://jobs.ashbyhq.com/rilla/1f78dc1d-3015-48b2-ac36-797b705ccf8e", level:"mid" }
+    ] },
   { id:"cohere", name:"Cohere", vertical:"ai",
     sub:"Enterprise LLM platform",
     stage:"Series C", raised:"$945M", lead:"Inovia",
@@ -31,43 +63,115 @@ const COMPANIES = [
     jobs:[
       { title:"Revenue Operations Analyst (Analytics)", url:"https://jobs.ashbyhq.com/cohere/cd3eacfe-1169-4df0-8164-93a857d5ddf0", level:"mid" }
     ] },
+  { id:"cursor", name:"Cursor", vertical:"ai",
+    sub:"AI-first code editor",
+    stage:"Series B", raised:"$170M", lead:"Andreessen Horowitz",
+    badges:["a16z", "Thrive", "OpenAI"],
+    totalRoles:1,
+    notes:"AI code editor. Frontier model integration, latency, UX.",
+    jobs:[
+      { title:"Full Stack Analyst, GTM", url:"https://jobs.ashbyhq.com/cursor/7bc441a4-9bb6-45cb-a9e0-5ae1b9c7ac5b", level:"mid" }
+    ] },
+  { id:"baseten", name:"Baseten", vertical:"ai",
+    sub:"ML model deployment",
+    stage:"Series C", raised:"$135M", lead:"IVP",
+    badges:["IVP", "Spark", "Greylock"],
+    totalRoles:1,
+    notes:"Model deployment infra. Inference engineering, autoscaling GPU.",
+    jobs:[
+      { title:"Revenue Strategy & Operations", url:"https://jobs.ashbyhq.com/baseten/6d32aa11-ac93-4f90-8f62-bdeb79214ee5", level:"mid" }
+    ] },
   { id:"stripe", name:"Stripe", vertical:"fintech",
     sub:"Payments + financial infra",
     stage:"Late stage", raised:"$8.7B", lead:"Sequoia",
     badges:["Sequoia", "a16z", "General Catalyst"],
-    totalRoles:2,
+    totalRoles:4,
     notes:"Payments at planet scale. Distributed systems, idempotency, money.",
     jobs:[
       { title:"Data Analyst, Financial Data Engineering", url:"https://stripe.com/jobs/search?gh_jid=8070572", level:"mid" },
-      { title:"Finance & Strategy Analyst", url:"https://stripe.com/jobs/search?gh_jid=7985368", level:"mid" }
+      { title:"Finance & Strategy Analyst", url:"https://stripe.com/jobs/search?gh_jid=7985368", level:"mid" },
+      { title:"Sales Compensation Analytics & Systems Specialist", url:"https://stripe.com/jobs/search?gh_jid=7739207", level:"mid" },
+      { title:"Strategy and Operations Lead, Deal Pricing", url:"https://stripe.com/jobs/search?gh_jid=8044391", level:"mid" }
     ] },
   { id:"ramp", name:"Ramp", vertical:"fintech",
     sub:"Corporate cards + finance ops",
     stage:"Series E", raised:"$1.3B", lead:"Founders Fund",
     badges:["Founders Fund", "Sequoia", "Stripe"],
-    totalRoles:1,
+    totalRoles:2,
     notes:"Ledger, fraud, integrations at scale. High autonomy bar.",
     jobs:[
-      { title:"AML Operations Analyst", url:"https://jobs.ashbyhq.com/ramp/16fb536d-fe10-4ea7-8956-d6d0cbddd6f5", level:"mid" }
+      { title:"AML Operations Analyst", url:"https://jobs.ashbyhq.com/ramp/16fb536d-fe10-4ea7-8956-d6d0cbddd6f5", level:"mid" },
+      { title:"Employee Lifecycle Analyst", url:"https://jobs.ashbyhq.com/ramp/1c8e2b03-fcb3-4949-9113-07812f138eb6", level:"mid" }
     ] },
   { id:"brex", name:"Brex", vertical:"fintech",
     sub:"Corporate cards + spend mgmt (acq. by Capital One Apr 2026)",
     stage:"Series D", raised:"$1.5B", lead:"DST",
     badges:["YC", "DST", "Greenoaks"],
-    totalRoles:2,
+    totalRoles:3,
     notes:"Cards, banking, expense. Now part of Capital One; still hiring under Brex brand. PCI, ledger, large eng org.",
     jobs:[
       { title:"Data Analyst II", url:"https://www.brex.com/careers/8463702002?gh_jid=8463702002", level:"mid" },
-      { title:"Data Analyst III", url:"https://www.brex.com/careers/8463704002?gh_jid=8463704002", level:"mid" }
+      { title:"Data Analyst III", url:"https://www.brex.com/careers/8463704002?gh_jid=8463704002", level:"mid" },
+      { title:"Systems Analyst II", url:"https://www.brex.com/careers/8641732002?gh_jid=8641732002", level:"mid" }
     ] },
   { id:"plaid", name:"Plaid", vertical:"fintech",
     sub:"Banking API + financial data",
     stage:"Series D", raised:"$734M", lead:"Altimeter",
     badges:["Altimeter", "a16z", "Index"],
-    totalRoles:1,
+    totalRoles:3,
     notes:"Bank-data connectivity infra. Integration breadth, reliability.",
     jobs:[
-      { title:"Fraud and Abuse Operations Analyst", url:"https://jobs.ashbyhq.com/plaid/02569523-bd54-4f1f-b88e-38beef2f824d", level:"mid" }
+      { title:"Business Operations", url:"https://jobs.ashbyhq.com/plaid/6b08e0e9-2159-4002-bf54-b30dd5bda80c", level:"mid" },
+      { title:"Fraud and Abuse Operations Analyst", url:"https://jobs.ashbyhq.com/plaid/02569523-bd54-4f1f-b88e-38beef2f824d", level:"mid" },
+      { title:"GTM Strategy & Operations", url:"https://jobs.ashbyhq.com/plaid/33379e81-e111-4bb8-8c6b-9e64d4fa51c5", level:"mid" }
+    ] },
+  { id:"gusto", name:"Gusto", vertical:"fintech",
+    sub:"Payroll / HR for SMBs",
+    stage:"Series E", raised:"$716M", lead:"Generation",
+    badges:["Generation", "Kleiner", "YC"],
+    totalRoles:1,
+    notes:"Payroll engine + benefits. Compliance, money movement, multi-state tax.",
+    jobs:[
+      { title:"Fraud Investigations Analyst", url:"https://job-boards.greenhouse.io/gusto/jobs/8029175", level:"mid" }
+    ] },
+  { id:"sofi", name:"SoFi", vertical:"fintech",
+    sub:"Personal finance (NASDAQ)",
+    stage:"Public", raised:"$2.6B pre-IPO", lead:"SoftBank",
+    badges:["NASDAQ", "SoftBank", "Silver Lake"],
+    totalRoles:1,
+    notes:"Consumer finance super-app. Lending, banking, brokerage.",
+    jobs:[
+      { title:"Associate AI Financial Planning Analyst", url:"https://sofi.com/careers/job/7781335003?gh_jid=7781335003", level:"entry" }
+    ] },
+  { id:"gemini", name:"Gemini", vertical:"fintech",
+    sub:"Crypto exchange + prediction markets (NASDAQ: GEMI)",
+    stage:"Public", raised:"$400M", lead:"Morgan Creek",
+    badges:["Morgan Creek"],
+    totalRoles:1,
+    notes:"Public co (GEMI) since Sept 2025. Winklevoss-led; US-focused after intl exit. Exchange + CFTC-regulated derivatives.",
+    jobs:[
+      { title:"Analyst, Compliance (Investigations)", url:"https://boards.greenhouse.io/embed/job_app?for=gemini&token=8065112&gh_jid=8065112", level:"mid" }
+    ] },
+  { id:"datadog", name:"Datadog", vertical:"devtools",
+    sub:"Cloud monitoring (NASDAQ)",
+    stage:"Public", raised:"$148M pre-IPO", lead:"Index",
+    badges:["NASDAQ", "Index", "OpenView"],
+    totalRoles:3,
+    notes:"Public co. Time-series infra, alerting, observability depth.",
+    jobs:[
+      { title:"GTM Strategy and Operations Associate", url:"https://careers.datadoghq.com/detail/7843331/?gh_jid=7843331", level:"entry" },
+      { title:"Deal Desk Analyst - NYC", url:"https://careers.datadoghq.com/detail/7993638/?gh_jid=7993638", level:"mid" },
+      { title:"FP&A Analyst - Data Insights", url:"https://careers.datadoghq.com/detail/7964916/?gh_jid=7964916", level:"mid" }
+    ] },
+  { id:"oscar", name:"Oscar Health", vertical:"health",
+    sub:"Tech-driven health insurance (NYSE)",
+    stage:"Public", raised:"$1.6B pre-IPO", lead:"Founders Fund",
+    badges:["NYSE", "Founders Fund", "General Catalyst"],
+    totalRoles:2,
+    notes:"Public co. Insurance platform with member-facing tech.",
+    jobs:[
+      { title:"Analyst, Regulatory Affairs", url:"http://www.hioscar.com/careers/7983436?gh_jid=7983436", level:"mid" },
+      { title:"Workday Reporting & Analytics Lead, People Analytics", url:"http://www.hioscar.com/careers/8056691?gh_jid=8056691", level:"mid" }
     ] },
   { id:"ridgeline", name:"Ridgeline", vertical:"saas",
     sub:"Cloud OS for investment mgmt",
@@ -78,63 +182,261 @@ const COMPANIES = [
     jobs:[
       { title:"Investment Operations Analyst - Reconciliation Specialist (US Start of Day)", url:"https://boards.greenhouse.io/ridgeline/jobs/7811812003?gh_jid=7811812003", level:"mid" }
     ] },
+  { id:"figma", name:"Figma", vertical:"saas",
+    sub:"Collaborative design",
+    stage:"Pre-IPO", raised:"$333M", lead:"Index",
+    badges:["Index", "Sequoia", "Greylock"],
+    totalRoles:1,
+    notes:"Multiplayer collaboration at scale. CRDT, real-time infra, design tooling depth.",
+    jobs:[
+      { title:"Workforce Management Analyst", url:"https://boards.greenhouse.io/figma/jobs/6099183004?gh_jid=6099183004", level:"mid" }
+    ] },
+  { id:"justworks", name:"Justworks", vertical:"saas",
+    sub:"HR / payroll / benefits",
+    stage:"Late stage", raised:"$143M", lead:"Bain Capital",
+    badges:["Bain", "Index"],
+    totalRoles:1,
+    notes:"PEO platform. Multi-tenant, integrations with payroll + carriers.",
+    jobs:[
+      { title:"Sr. Identity and Access Management Analyst", url:"https://boards.greenhouse.io/justworks/jobs/7751588?gh_jid=7751588", level:"mid" }
+    ] },
+  { id:"kalshi", name:"Kalshi", vertical:"fintech",
+    sub:"Regulated event-contracts exchange",
+    stage:"Series C", raised:"$185M", lead:"Sequoia",
+    badges:["Sequoia", "Charles Schwab"],
+    totalRoles:1,
+    notes:"CFTC-regulated prediction market. Markets infra, compliance.",
+    jobs:[
+      { title:"Surveillance Analyst", url:"https://jobs.ashbyhq.com/kalshi/72111d46-0815-47bf-bad2-152cf530b010", level:"mid" }
+    ] },
   { id:"polymarket", name:"Polymarket", vertical:"fintech",
     sub:"Crypto prediction markets",
     stage:"Series B", raised:"$70M", lead:"Founders Fund",
     badges:["Founders Fund", "Peter Thiel"],
-    totalRoles:2,
+    totalRoles:3,
     notes:"Decentralized prediction markets. On-chain settlement + UX.",
     jobs:[
       { title:"Growth Data Analyst", url:"https://jobs.ashbyhq.com/polymarket/fc6fa07f-b39c-4916-b54e-1adca738c1be", level:"mid" },
-      { title:"Market Operations Analyst", url:"https://jobs.ashbyhq.com/polymarket/13f17951-8755-48ee-88e3-53c8df4c2e3b", level:"mid" }
+      { title:"Market Operations Analyst", url:"https://jobs.ashbyhq.com/polymarket/13f17951-8755-48ee-88e3-53c8df4c2e3b", level:"mid" },
+      { title:"Trade Surveillance Analyst", url:"https://jobs.ashbyhq.com/polymarket/82d6403d-a0a0-4032-a666-2bdf4e694687", level:"mid" }
     ] },
   { id:"the-trade-desk", name:"The Trade Desk", vertical:"saas",
     sub:"DSP for digital advertising (NASDAQ)",
     stage:"Public", raised:"$26M pre-IPO", lead:"IA Ventures",
     badges:["NASDAQ", "IA Ventures"],
-    totalRoles:1,
+    totalRoles:2,
     notes:"Public co. Real-time bidding + ad tech at scale.",
     jobs:[
-      { title:"Financial Analyst, Product Finance", url:"https://job-boards.greenhouse.io/thetradedesk/jobs/5182494007", level:"mid" }
+      { title:"Financial Analyst, Product Finance", url:"https://job-boards.greenhouse.io/thetradedesk/jobs/5182494007", level:"mid" },
+      { title:"Sr. Finance Analyst - FP&A", url:"https://job-boards.greenhouse.io/thetradedesk/jobs/5146876007", level:"mid" }
     ] },
   { id:"lyft", name:"Lyft", vertical:"consumer",
     sub:"Rideshare + mobility (NASDAQ)",
     stage:"Public", raised:"$5B pre-IPO", lead:"Andreessen Horowitz",
     badges:["NASDAQ", "a16z", "Founders Fund"],
-    totalRoles:2,
+    totalRoles:3,
     notes:"Public co. Mobility platform \u2014 matching, payments, mapping.",
     jobs:[
+      { title:"Analytics Lead, Safety & Customer Care", url:"https://app.careerpuck.com/job-board/lyft/job/8474709002?gh_jid=8474709002", level:"mid" },
       { title:"Data Analyst - Global Growth Luxury Strategy", url:"https://app.careerpuck.com/job-board/lyft/job/8514400002?gh_jid=8514400002", level:"mid" },
       { title:"Data Analyst, Operations Planning", url:"https://app.careerpuck.com/job-board/lyft/job/8568512002?gh_jid=8568512002", level:"mid" }
+    ] },
+  { id:"reddit", name:"Reddit", vertical:"media",
+    sub:"Social discussion platform (NYSE)",
+    stage:"Public", raised:"$1.3B pre-IPO", lead:"Advance",
+    badges:["NYSE", "Advance", "Tencent"],
+    totalRoles:1,
+    notes:"Public co. Massive social platform with rich data + recs.",
+    jobs:[
+      { title:"Business Lead, Revenue Strategy & Operations", url:"https://job-boards.greenhouse.io/reddit/jobs/7731931", level:"mid" }
+    ] },
+  { id:"jane-street", name:"Jane Street", vertical:"fintech",
+    sub:"Quant trading firm",
+    stage:"Private", raised:"Self-funded", lead:"Private",
+    badges:["Private"],
+    totalRoles:11,
+    notes:"Quant trading. Strong on functional programming (OCaml), CS fundamentals.",
+    jobs:[
+      { title:"AML Onboarding Analyst", url:"https://job-boards.greenhouse.io/janestreet/jobs/8347073002", level:"mid" },
+      { title:"Fundamental Research Analyst", url:"https://job-boards.greenhouse.io/janestreet/jobs/8347286002", level:"mid" },
+      { title:"Grains and Oilseeds Analyst", url:"https://job-boards.greenhouse.io/janestreet/jobs/8180726002", level:"mid" },
+      { title:"Indirect Procurement Specialist", url:"https://job-boards.greenhouse.io/janestreet/jobs/8442082002", level:"mid" },
+      { title:"IT Logistics and Warehouse Specialist", url:"https://job-boards.greenhouse.io/janestreet/jobs/8589762002", level:"mid" },
+      { title:"Natural Gas Analyst/Trader", url:"https://job-boards.greenhouse.io/janestreet/jobs/8436137002", level:"mid" },
+      { title:"Oil and Refined Products Analyst/Trader", url:"https://job-boards.greenhouse.io/janestreet/jobs/8413554002", level:"mid" },
+      { title:"Personal Accounts Trading Analyst", url:"https://job-boards.greenhouse.io/janestreet/jobs/8431856002", level:"mid" },
+      { title:"Power Analyst/Trader", url:"https://job-boards.greenhouse.io/janestreet/jobs/7950706002", level:"mid" },
+      { title:"Procurement Specialist, IT Hardware", url:"https://job-boards.greenhouse.io/janestreet/jobs/7419820002", level:"mid" },
+      { title:"Procurement Specialist, IT Services", url:"https://job-boards.greenhouse.io/janestreet/jobs/7419948002", level:"mid" }
+    ] },
+  { id:"middesk", name:"Middesk", vertical:"fintech",
+    sub:"KYB / business identity infra",
+    stage:"Series B", raised:"$57M", lead:"Sequoia",
+    badges:["Sequoia", "Accel"],
+    totalRoles:1,
+    notes:"Business identity verification for fintech. Identity graph + compliance.",
+    jobs:[
+      { title:"Revenue Operations Associate", url:"https://jobs.ashbyhq.com/middesk/41bcf252-36a4-4fc0-84a3-2f6ada177edc", level:"entry" }
+    ] },
+  { id:"spotify", name:"Spotify", vertical:"media",
+    sub:"Audio streaming (NYSE)",
+    stage:"Public", raised:"$540M pre-IPO", lead:"TCV",
+    badges:["NYSE", "TCV", "DST"],
+    totalRoles:1,
+    notes:"Public co. Audio infra + recs + ads + creator tools.",
+    jobs:[
+      { title:"Analyst, Licensing Finance \u2013 FP&A", url:"https://jobs.lever.co/spotify/cc5ccf57-b851-4c25-8840-ed4cd0535c12", level:"mid" }
+    ] },
+  { id:"point72", name:"Point72", vertical:"fintech",
+    sub:"Quant + multi-strat hedge fund",
+    stage:"Private", raised:"Self-funded", lead:"Private",
+    badges:["Private"],
+    totalRoles:8,
+    notes:"Steve Cohen's quant firm. Trading systems + ML + low-latency infra.",
+    jobs:[
+      { title:"Business Analyst, Equities Technology", url:"https://boards.greenhouse.io/point72/jobs/8409245002?gh_jid=8409245002", level:"mid" },
+      { title:"Credit Research Analyst, Global Macro", url:"https://boards.greenhouse.io/point72/jobs/7605647002?gh_jid=7605647002", level:"mid" },
+      { title:"Identity & Privileged Governance Analyst", url:"https://boards.greenhouse.io/point72/jobs/8488737002?gh_jid=8488737002", level:"mid" },
+      { title:"Point72 Fund Flow Analyst", url:"https://boards.greenhouse.io/point72/jobs/8003977002?gh_jid=8003977002", level:"mid" },
+      { title:"Quantitative Portfolio Analyst \u2013 2026 Grad", url:"https://boards.greenhouse.io/point72/jobs/8169967002?gh_jid=8169967002", level:"mid" },
+      { title:"Sector Analyst, MI-Data", url:"https://boards.greenhouse.io/point72/jobs/7820104002?gh_jid=7820104002", level:"mid" },
+      { title:"Systems Analyst, Financial Technology", url:"https://boards.greenhouse.io/point72/jobs/8445692002?gh_jid=8445692002", level:"mid" },
+      { title:"Systems Analyst, Workday HCM/Payroll", url:"https://boards.greenhouse.io/point72/jobs/8128613002?gh_jid=8128613002", level:"mid" }
+    ] },
+  { id:"lovable", name:"Lovable", vertical:"ai",
+    sub:"AI app generator",
+    stage:"Series A", raised:"$15M", lead:"Creandum",
+    badges:["Creandum", "byFounders"],
+    totalRoles:1,
+    notes:"AI builder for apps. Frontier model integration + product engineering.",
+    jobs:[
+      { title:"Finance & BizOps, Marketing", url:"https://jobs.ashbyhq.com/lovable/7ee5ea78-9858-43c3-92b1-1d9a263414e1", level:"mid" }
+    ] },
+  { id:"hopper", name:"Hopper", vertical:"hospitality",
+    sub:"B2B travel tech + fintech (HTS)",
+    stage:"Series G", raised:"$750M", lead:"Goldman Sachs",
+    badges:["Goldman Sachs", "Inovia", "Capital One"],
+    totalRoles:1,
+    notes:"Hopper Technology Solutions powers partners (Capital One, Uber, Nubank) with booking + travel fintech (price-freeze, cancel-for-any-reason). B2B is now majority of revenue.",
+    jobs:[
+      { title:"Lead, Finance Analytics & Enablement AI/ML", url:"https://jobs.ashbyhq.com/hopper/c65b8784-f1ce-460a-88bf-b01b10cb60fb", level:"mid" }
+    ] },
+  { id:"hang", name:"Hang", vertical:"hospitality",
+    sub:"Autonomous marketing system for brands",
+    stage:"Series A", raised:"$32M", lead:"Paradigm",
+    badges:["Paradigm", "a16z"],
+    totalRoles:1,
+    notes:"AI-driven marketing + CDP + loyalty stack for restaurants/retailers (Ulta, ASICS, Cinemark). Identity resolution, segmentation, gamified engagement.",
+    jobs:[
+      { title:"Business Operations & Strategy", url:"https://jobs.ashbyhq.com/hang/36a6254d-b093-4eee-8c91-c0193ab17c69", level:"mid" }
+    ] },
+  { id:"metropolis", name:"Metropolis", vertical:"ai",
+    sub:"AI computer-vision parking",
+    stage:"Series C", raised:"$1.7B", lead:"Eldridge",
+    badges:["Eldridge", "RXR", "3L"],
+    totalRoles:1,
+    notes:"Computer-vision parking platform (acquired SP Plus). Edge AI, payments, infrastructure.",
+    jobs:[
+      { title:"Revenue Economics Analyst", url:"https://job-boards.greenhouse.io/metropolis/jobs/7785694003", level:"mid" }
+    ] },
+  { id:"partiful", name:"Partiful", vertical:"consumer",
+    sub:"Modern event-invite app",
+    stage:"Series A", raised:"$20M", lead:"Andreessen Horowitz",
+    badges:["a16z", "FirstMark"],
+    totalRoles:1,
+    notes:"Mobile event invites + RSVPs. Social graph, mobile UX, identity.",
+    jobs:[
+      { title:"Business Operations Associate", url:"https://jobs.ashbyhq.com/partiful/65c09a92-084e-4930-b171-05cc7ecb8a15", level:"entry" }
+    ] },
+  { id:"warp", name:"Warp", vertical:"ai",
+    sub:"AI-native terminal",
+    stage:"Series B", raised:"$73M", lead:"Sequoia",
+    badges:["Sequoia", "GV"],
+    totalRoles:1,
+    notes:"Reimagined terminal with AI. Heavy on developer experience, latency, prompt design for code.",
+    jobs:[
+      { title:"Business Operations", url:"https://jobs.ashbyhq.com/warp/59650451-8549-4744-8770-30e37be07f4d", level:"mid" }
     ] },
   { id:"harvey", name:"Harvey", vertical:"ai",
     sub:"Legal AI for major firms",
     stage:"Series F+", raised:"$806M+", lead:"Andreessen Horowitz",
     badges:["a16z", "Kleiner", "Coatue", "Sequoia", "GIC"],
-    totalRoles:3,
+    totalRoles:6,
     notes:"Legal AI for top law firms; $11B valuation (Mar 2026). FDE-style deploys, document workflows, reasoning eval.",
     jobs:[
+      { title:"Analyst, Customer Trust", url:"https://jobs.ashbyhq.com/harvey/1cf585c3-27e2-4813-ade9-dc8c53c2d5b0", level:"mid" },
       { title:"Deal Operations Analyst", url:"https://jobs.ashbyhq.com/harvey/ed12b54a-71f6-40f0-9975-900754c5ae08", level:"mid" },
       { title:"IT Operations Analyst", url:"https://jobs.ashbyhq.com/harvey/203e2d3b-6aeb-4d13-8e2f-62f7526658df", level:"mid" },
-      { title:"Support Operations Data Analyst", url:"https://jobs.ashbyhq.com/harvey/f8857e81-4062-4669-a7e3-7b73b114979b", level:"mid" }
+      { title:"Sr. Workday Integrations Analyst", url:"https://jobs.ashbyhq.com/harvey/42dba02b-71ab-4316-a5b2-fdf31d91a1a2", level:"mid" },
+      { title:"Support Operations Data Analyst", url:"https://jobs.ashbyhq.com/harvey/f8857e81-4062-4669-a7e3-7b73b114979b", level:"mid" },
+      { title:"Technology Enablement Analyst", url:"https://jobs.ashbyhq.com/harvey/5960be42-443f-42f2-a771-266810e3d263", level:"mid" }
     ] },
   { id:"coreweave", name:"CoreWeave", vertical:"infra",
     sub:"Specialized GPU cloud (NASDAQ: CRWV)",
     stage:"Public", raised:"$1.5B IPO ($14B+ pre-IPO)", lead:"NASDAQ",
     badges:["NASDAQ", "Coatue", "NVIDIA", "Blackstone"],
-    totalRoles:1,
+    totalRoles:3,
     notes:"GPU cloud powering AI labs; IPO\\'d Mar 2025. Bare-metal infra + scheduling.",
     jobs:[
+      { title:"Data Center Lease Analyst", url:"https://coreweave.com/careers/job?4698065006&board=coreweave&gh_jid=4698065006", level:"mid" },
+      { title:"Finance Analyst, Capacity Finance", url:"https://coreweave.com/careers/job?4692714006&board=coreweave&gh_jid=4692714006", level:"mid" },
       { title:"Operations Enablement Analyst, Data Center Operations", url:"https://coreweave.com/careers/job?4698084006&board=coreweave&gh_jid=4698084006", level:"mid" }
+    ] },
+  { id:"pagaya", name:"Pagaya", vertical:"fintech",
+    sub:"AI lending platform (NASDAQ)",
+    stage:"Public", raised:"$500M+ pre-IPO", lead:"Israel Growth Partners",
+    badges:["NASDAQ", "Aflac", "Viola"],
+    totalRoles:2,
+    notes:"NYC AI-lending. ML credit + capital-markets plumbing.",
+    jobs:[
+      { title:"Analyst, Capital Markets", url:"https://job-boards.greenhouse.io/pagaya/jobs/7815382003", level:"mid" },
+      { title:"Lead, Commercial Strategy & Operations", url:"https://job-boards.greenhouse.io/pagaya/jobs/7797854003", level:"mid" }
+    ] },
+  { id:"neon", name:"Neon", vertical:"devtools",
+    sub:"Serverless Postgres (acq. by Databricks May 2025)",
+    stage:"Series B", raised:"$104M", lead:"Menlo",
+    badges:["Menlo", "General Catalyst", "GGV"],
+    totalRoles:1,
+    notes:"Branchable serverless Postgres. Now part of Databricks; product still runs standalone. Storage separation, autoscaling.",
+    jobs:[
+      { title:"FP&A Analyst", url:"https://jobs.ashbyhq.com/neon/d0b2522b-1eae-4bc6-9db0-f9c2df622502", level:"mid" }
+    ] },
+  { id:"blackrock", name:"BlackRock", vertical:"fintech",
+    sub:"World's largest asset manager (NYSE: BLK)",
+    stage:"Public", raised:"$2.6B pre-IPO", lead:"NYSE",
+    badges:["NYSE", "S&P 500"],
+    totalRoles:1,
+    notes:"NYC HQ. Aladdin platform \u2014 risk + portfolio mgmt. Heavy systems / data eng.",
+    jobs:[
+      { title:"Analyst, GIP Human Resources", url:"https://blackrock.wd1.myworkdayjobs.com/en-US/BlackRock_Professional/job/New-York-NY/GIP-Human-Resources-Analyst_R265558", level:"mid" }
+    ] },
+  { id:"etsy", name:"Etsy", vertical:"marketplace",
+    sub:"Marketplace for handmade + vintage (NASDAQ: ETSY)",
+    stage:"Public", raised:"$307M pre-IPO", lead:"NASDAQ",
+    badges:["NASDAQ", "S&P MidCap"],
+    totalRoles:1,
+    notes:"Brooklyn HQ. Recommendations, search, payments, ML \u2014 strong Python culture.",
+    jobs:[
+      { title:"Quantitative UX Research Analyst II", url:"https://etsy.wd5.myworkdayjobs.com/en-US/Etsy_Careers/job/Brooklyn-New-York/Quantitative-UX-Research-Analyst-II_JR5713-2", level:"mid" }
     ] },
   { id:"nbcuniversal", name:"Comcast (NBCUniversal)", vertical:"media",
     sub:"Media + telecom (NASDAQ: CMCSA)",
     stage:"Public", raised:"$1.1B pre-IPO", lead:"NASDAQ",
     badges:["NASDAQ", "S&P 500"],
-    totalRoles:1,
+    totalRoles:2,
     notes:"NBCU + Peacock streaming. NYC: ad tech + media engineering.",
     jobs:[
-      { title:"Activation Operations Analyst, FreeWheel", url:"https://comcast.wd5.myworkdayjobs.com/en-US/Comcast_Careers/job/NY---New-York-1407-Broadway-Floor-12/Activation-Operations-Analyst--FreeWheel_R440422", level:"mid" }
+      { title:"Activation Operations Analyst, FreeWheel", url:"https://comcast.wd5.myworkdayjobs.com/en-US/Comcast_Careers/job/NY---New-York-1407-Broadway-Floor-12/Activation-Operations-Analyst--FreeWheel_R440422", level:"mid" },
+      { title:"Analyst, Revenue Finance (FP&A)", url:"https://comcast.wd5.myworkdayjobs.com/en-US/Comcast_Careers/job/NY---New-York-1407-Broadway-Floor-12/Analyst--Revenue-Finance--FP-A-_R441319", level:"mid" }
+    ] },
+  { id:"zocdoc", name:"Zocdoc", vertical:"health",
+    sub:"Doctor booking marketplace",
+    stage:"Series D", raised:"$375M", lead:"Francisco Partners",
+    badges:["Francisco Partners", "Baillie Gifford"],
+    totalRoles:1,
+    notes:"NYC healthtech. Provider search + scheduling marketplace; high-traffic systems.",
+    jobs:[
+      { title:"FP&A Associate", url:"https://job-boards.greenhouse.io/zocdoc/jobs/8002903", level:"entry" }
     ] },
   { id:"flow-traders", name:"Flow Traders", vertical:"fintech",
     sub:"ETF + crypto market maker",
@@ -145,55 +447,169 @@ const COMPANIES = [
     jobs:[
       { title:"Middle Office Operations Analyst", url:"https://job-boards.greenhouse.io/flowtraders/jobs/7931072", level:"mid" }
     ] },
+  { id:"sonder", name:"Sonder", vertical:"hospitality",
+    sub:"Tech-enabled hotels + short-stay (NASDAQ: SOND)",
+    stage:"Public", raised:"$425M+ pre-IPO", lead:"Greenoaks",
+    badges:["NASDAQ", "Greenoaks", "Founders Fund"],
+    totalRoles:1,
+    notes:"Tech-enabled hotel + short-stay operator. Inventory mgmt + booking + ops automation.",
+    jobs:[
+      { title:"Revenue Management Analyst", url:"https://sonder.wd1.myworkdayjobs.com/en-US/Join_Sonder/job/New-York/Revenue-Management-Analyst_JR103503", level:"mid" }
+    ] },
   { id:"vestwell", name:"Vestwell", vertical:"fintech",
     sub:"Retirement / 401k infra",
     stage:"Series D", raised:"$227M", lead:"Wellington",
     badges:["Wellington", "Fin Capital"],
-    totalRoles:1,
+    totalRoles:2,
     notes:"NYC HQ. White-label recordkeeping API.",
     jobs:[
+      { title:"Associate, Sales Operations", url:"https://job-boards.greenhouse.io/vestwell/jobs/7800389003", level:"entry" },
       { title:"Freelance Paid Marketing Analyst", url:"https://job-boards.greenhouse.io/vestwell/jobs/7806814003", level:"mid" }
+    ] },
+  { id:"dashlane", name:"Dashlane", vertical:"security",
+    sub:"Password manager / identity",
+    stage:"Series D", raised:"$200M+", lead:"Sequoia",
+    badges:["Sequoia", "Bessemer"],
+    totalRoles:1,
+    notes:"NYC HQ. Snyk-adjacent security, mature eng org.",
+    jobs:[
+      { title:"Revenue Operations Associate", url:"https://job-boards.greenhouse.io/dashlane/jobs/7793423", level:"entry" }
+    ] },
+  { id:"taboola", name:"Taboola", vertical:"saas",
+    sub:"Content + ad tech",
+    stage:"Public", raised:"(NASDAQ: TBLA)", lead:"NASDAQ",
+    badges:["NASDAQ"],
+    totalRoles:1,
+    notes:"NYC major office. Recommendation engine, big data pipelines.",
+    jobs:[
+      { title:"Salesforce System Analyst", url:"https://www.taboola.com/careers/job/7954624?gh_jid=7954624", level:"mid" }
+    ] },
+  { id:"sisense", name:"Sisense", vertical:"saas",
+    sub:"Embedded analytics + BI",
+    stage:"Series F", raised:"$200M+", lead:"Insight",
+    badges:["Insight"],
+    totalRoles:1,
+    notes:"NYC HQ. Embedded analytics.",
+    jobs:[
+      { title:"Sales Enablement Analyst", url:"https://www.sisense.com/about/careers/7918419?gh_jid=7918419", level:"mid" }
     ] },
   { id:"fanduel", name:"FanDuel", vertical:"consumer",
     sub:"Sports betting / gaming",
     stage:"Public", raised:"(Flutter subsidiary)", lead:"Flutter",
     badges:["Flutter", "LSE"],
-    totalRoles:2,
+    totalRoles:3,
     notes:"NYC HQ. Leading US sportsbook, real-time betting infra.",
     jobs:[
       { title:"Campaign Analytics, Data Analyst", url:"https://www.fanduel.careers/open-positions?gh_jid=8055746", level:"mid" },
+      { title:"Commercial Analyst - Casino", url:"https://www.fanduel.careers/open-positions?gh_jid=7953986", level:"mid" },
       { title:"Product Analyst", url:"https://www.fanduel.careers/open-positions?gh_jid=7808673", level:"mid" }
+    ] },
+  { id:"crusoe", name:"Crusoe", vertical:"climate",
+    sub:"Flare-gas + clean-energy AI datacenters",
+    stage:"Series C", raised:"$1.4B+", lead:"G2 Venture Partners",
+    badges:["G2 VP", "Founders Fund"],
+    totalRoles:1,
+    notes:"NYC office. Novel energy-transition compute.",
+    jobs:[
+      { title:"Analytics Lead, Total Rewards", url:"https://jobs.ashbyhq.com/crusoe/522c52a3-de47-41ea-b46e-b5e328de5250", level:"mid" }
+    ] },
+  { id:"flexport", name:"Flexport", vertical:"saas",
+    sub:"Freight + logistics tech",
+    stage:"Series E", raised:"$2.3B+", lead:"Founders Fund",
+    badges:["Founders Fund", "SoftBank"],
+    totalRoles:1,
+    notes:"NYC office. Logistics + supply-chain ML.",
+    jobs:[
+      { title:"Analyst, Transportation & Supply Chain Strategy", url:"https://job-boards.greenhouse.io/flexport/jobs/8011615", level:"mid" }
     ] },
   { id:"linkedin", name:"LinkedIn", vertical:"saas",
     sub:"Professional social / SaaS",
     stage:"Public", raised:"(Microsoft: MSFT)", lead:"Microsoft",
     badges:["Microsoft", "NASDAQ"],
-    totalRoles:1,
+    totalRoles:2,
     notes:"Empire State Building NYC office. Sr enterprise systems eng roles.",
     jobs:[
+      { title:"Sr. Sales Operations Associate", url:"https://jobs.smartrecruiters.com/LinkedIn3/744000139369029", level:"entry" },
       { title:"Marketing Science Strategic Analyst, Marketing Science and Technology", url:"https://jobs.smartrecruiters.com/LinkedIn3/744000135405349", level:"mid" }
+    ] },
+  { id:"equinox", name:"Equinox Group", vertical:"consumer",
+    sub:"Luxury fitness / hospitality",
+    stage:"PE-backed", raised:"$1B+", lead:"L Catterton",
+    badges:["L Catterton", "Related Cos"],
+    totalRoles:1,
+    notes:"HQ Hudson Yards NYC. Sr Data Engineer + site-testing eng roles.",
+    jobs:[
+      { title:"Sr. Compensation Analyst", url:"https://jobs.smartrecruiters.com/Equinox/744000138130540", level:"mid" }
     ] },
   { id:"nyc-gov", name:"City of New York", vertical:"saas",
     sub:"Public sector (dept of tech)",
     stage:"Public sector", raised:"$110B budget", lead:"\u2014",
     badges:["Public sector"],
-    totalRoles:14,
+    totalRoles:62,
     notes:"NYC gov. Sr SWE GeoSupport, .NET, City Environmental Quality Review roles.",
     jobs:[
       { title:"Procurement Analyst I", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014241476", level:"entry" },
+      { title:"Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014164076", level:"mid" },
+      { title:"Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014163861", level:"mid" },
+      { title:"Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014047076", level:"mid" },
+      { title:"Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013873751", level:"mid" },
+      { title:"Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013505676", level:"mid" },
+      { title:"Analyst -  Transportation", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014047616", level:"mid" },
       { title:"Analyst, Procurement Operations", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014264196", level:"mid" },
       { title:"Analyst, Procurement Operations", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014218196", level:"mid" },
       { title:"Analyst, Procurement Operations", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014163566", level:"mid" },
+      { title:"Analyst, Service Desk Operations", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013761146", level:"mid" },
+      { title:"Analyst, Service Desk Operations", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013761077", level:"mid" },
+      { title:"Analyst, Service Desk Operations", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013761136", level:"mid" },
+      { title:"Appian Dev-Reporting & Analytics", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014073916", level:"mid" },
+      { title:"Appointments Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013851606", level:"mid" },
+      { title:"APU Payment Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013611896", level:"mid" },
       { title:"Asthma Data Analyst, Bureau of Bronx Neighborhood Health", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013657661", level:"mid" },
+      { title:"Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014144071", level:"mid" },
+      { title:"Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014122627", level:"mid" },
+      { title:"Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013953151", level:"mid" },
+      { title:"Bus Priority Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013595346", level:"mid" },
+      { title:"Business Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013784746", level:"mid" },
+      { title:"Business Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013366106", level:"mid" },
+      { title:"Business Analyst for the  Division of Budget and Program Operations", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013415806", level:"mid" },
+      { title:"Business and Systems Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013761756", level:"mid" },
+      { title:"Capital Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014047286", level:"mid" },
+      { title:"Capital Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013315337", level:"mid" },
+      { title:"Capital Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013314887", level:"mid" },
+      { title:"Cell Site Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013443036", level:"mid" },
+      { title:"CONTRACTING ANALYST", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014217386", level:"mid" },
+      { title:"Cryptocurrency Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013575721", level:"mid" },
+      { title:"Data & Metrics Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013851921", level:"mid" },
       { title:"Data Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013554322", level:"mid" },
+      { title:"Digital Forensic Lab Analyst (DFL Analyst)", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013701731", level:"mid" },
+      { title:"EPMO DATA  ANALYST", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013760886", level:"mid" },
       { title:"Facilities Operations Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013738366", level:"mid" },
+      { title:"IT Purchasing Assistant Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013387226", level:"mid" },
+      { title:"Litigation Support Advanced Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013702066", level:"mid" },
+      { title:"Litigation Support Advanced Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013387601", level:"mid" },
+      { title:"Mainframe Programmer Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013595581", level:"mid" },
       { title:"Management Audit and Data Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013387686", level:"mid" },
+      { title:"NPS Program Eligibility Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014163666", level:"mid" },
       { title:"Operations Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013976326", level:"mid" },
+      { title:"PASSPort Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014122496", level:"mid" },
+      { title:"Payment Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013761567", level:"mid" },
       { title:"Procurement Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014241911", level:"mid" },
       { title:"Procurement Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014217206", level:"mid" },
       { title:"Procurement Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013611836", level:"mid" },
       { title:"Procurement Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013344856", level:"mid" },
-      { title:"Strategic Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013575511", level:"mid" }
+      { title:"Procurement Coordinator", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013998046", level:"mid" },
+      { title:"Procurement Generalist", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013679996", level:"mid" },
+      { title:"Program Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014241851", level:"mid" },
+      { title:"Program Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013657716", level:"mid" },
+      { title:"PS Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013874346", level:"mid" },
+      { title:"Quality Assurance Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013826766", level:"mid" },
+      { title:"Research Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014025676", level:"mid" },
+      { title:"Strategic Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013575511", level:"mid" },
+      { title:"Structured Hiring Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013922646", level:"mid" },
+      { title:"Structured Hiring Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013922481", level:"mid" },
+      { title:"Structured Hiring Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013922606", level:"mid" },
+      { title:"Systems Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014217241", level:"mid" },
+      { title:"Timekeeping Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013899124", level:"mid" }
     ] },
   { id:"palantir", name:"Palantir", vertical:"saas",
     sub:"Elite FDE consultancy (NYSE: PLTR)",
@@ -206,7 +622,54 @@ const COMPANIES = [
       { title:"Site Reliability Operations Analyst - Commercial", url:"https://jobs.lever.co/palantir/5174e95b-2e0a-46f8-8db7-e2c837a0ac94", level:"mid" },
       { title:"Site Reliability Operations Analyst - US Government", url:"https://jobs.lever.co/palantir/7d91ca36-1e23-4603-b0f1-82a835e27d3f", level:"mid" }
     ] },
+  { id:"turing", name:"Turing", vertical:"ai",
+    sub:"AI dev marketplace + staff",
+    stage:"Late stage", raised:"$140M+", lead:"WestBridge",
+    badges:["WestBridge", "Foundation"],
+    totalRoles:1,
+    notes:"NYC HQ. Elite talent network with staff engineers.",
+    jobs:[
+      { title:"Technical Business Analyst", url:"https://job-boards.greenhouse.io/turing/jobs/6114235004", level:"mid" }
+    ] },
+  { id:"capco", name:"Capco", vertical:"saas",
+    sub:"Financial-services dev consultancy",
+    stage:"Acquired", raised:"(Wipro subsidiary)", lead:"Wipro",
+    badges:["Wipro"],
+    totalRoles:1,
+    notes:"NYC office. Elite banking tech consultancy.",
+    jobs:[
+      { title:"Business Analyst - Retail Energy", url:"https://job-boards.greenhouse.io/capco/jobs/8059556", level:"mid" }
+    ] },
+  { id:"sonymusic", name:"Sony Music Entertainment", vertical:"media",
+    sub:"Global record label (Sony subsidiary)",
+    stage:"Public", raised:"(Sony subsidiary)", lead:"Sony",
+    badges:["Sony"],
+    totalRoles:2,
+    notes:"NYC HQ. Includes The Orchard, Alamo, Columbia. 3 NYC eng today (Data Privacy, Emerging Tech, Sr PM D2C).",
+    jobs:[
+      { title:"Corporate Development Analyst - The Orchard", url:"https://job-boards.greenhouse.io/sonymusicentertainment/jobs/8211669002", level:"mid" },
+      { title:"Sr. Analyst, Business Affairs Admin", url:"https://job-boards.greenhouse.io/sonymusicentertainment/jobs/8468637002", level:"mid" }
+    ] },
+  { id:"pinterest", name:"Pinterest", vertical:"consumer",
+    sub:"Visual discovery (NYSE: PINS)",
+    stage:"Public", raised:"$1.5B pre-IPO", lead:"Bessemer",
+    badges:["NYSE", "Bessemer", "Andreessen Horowitz"],
+    totalRoles:1,
+    notes:"SF HQ, NYC office. Analyst + product analytics roles across ads + monetization.",
+    jobs:[
+      { title:"Financial Analyst II - Sales", url:"https://www.pinterestcareers.com/jobs/?gh_jid=8046824", level:"mid" }
+    ] },
+  { id:"opentable", name:"OpenTable", vertical:"hospitality",
+    sub:"Restaurant reservations (Booking)",
+    stage:"Acquired", raised:"(Booking Holdings)", lead:"Booking",
+    badges:["Booking"],
+    totalRoles:1,
+    notes:"SF HQ, NYC hires.",
+    jobs:[
+      { title:"Sr. Compensation Analyst (Hybrid)", url:"https://job-boards.greenhouse.io/opentable/jobs/8547978002", level:"mid" }
+    ] },
 ];
+
 
 
 
@@ -770,11 +1233,23 @@ const IMAGE_REFS = [
 
 /* ---------- COMPANY DOMAINS (for Clearbit public logo CDN) ---------- */
 const COMPANY_DOMAINS = {
-  'flow-traders':'flowtraders.com', stripe:'stripe.com', ramp:'ramp.com',
-  brex:'brex.com', plaid:'plaid.com', cohere:'cohere.com',
-  ridgeline:'ridgelineapps.com', polymarket:'polymarket.com', 'the-trade-desk':'thetradedesk.com',
-  lyft:'lyft.com', vestwell:'vestwell.com', fanduel:'fanduel.com',
-  linkedin:'linkedin.com', 'nyc-gov':'nyc.gov', palantir:'palantir.com',
+  zocdoc:'zocdoc.com', 'flow-traders':'flowtraders.com', anthropic:'anthropic.com',
+  figma:'figma.com', rilla:'rillavoice.com', stripe:'stripe.com',
+  ramp:'ramp.com', brex:'brex.com', plaid:'plaid.com',
+  gusto:'gusto.com', datadog:'datadoghq.com', cohere:'cohere.com',
+  cursor:'cursor.com', baseten:'baseten.co', sofi:'sofi.com',
+  gemini:'gemini.com', oscar:'hioscar.com', ridgeline:'ridgelineapps.com',
+  justworks:'justworks.com', kalshi:'kalshi.com', polymarket:'polymarket.com',
+  'the-trade-desk':'thetradedesk.com', lyft:'lyft.com', reddit:'reddit.com',
+  'jane-street':'janestreet.com', middesk:'middesk.com', spotify:'spotify.com',
+  point72:'point72.com', lovable:'lovable.dev', hopper:'hopper.com',
+  hang:'hang.xyz', metropolis:'metropolis.io', partiful:'partiful.com',
+  warp:'warp.dev', sonder:'sonder.com', vestwell:'vestwell.com',
+  dashlane:'dashlane.com', taboola:'taboola.com', sisense:'sisense.com',
+  fanduel:'fanduel.com', crusoe:'crusoe.ai', etsy:'etsy.com',
+  pinterest:'pinterest.com', flexport:'flexport.com', linkedin:'linkedin.com',
+  equinox:'equinox.com', 'nyc-gov':'nyc.gov', palantir:'palantir.com',
+  turing:'turing.com', capco:'capco.com', sonymusic:'sonymusic.com',
 };
 
 window.DATA = { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT };

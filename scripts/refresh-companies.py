@@ -59,60 +59,45 @@ NON_NYC_TITLE_CITY = re.compile(
   r'delhi|singapore|tokyo|hong kong|sydney|melbourne'
   r')\b', re.I
 )
+# Permissive analyst matcher: any title with "analyst" or "analytics" (or
+# BI developer / data-related developer). We rely on TITLE_EXCLUDE to filter
+# out senior/manager and the specialist analyst families that don't fit
+# Thien's profile.
 TITLE_INCLUDE = re.compile(
-  r"\b("
-  # Strategy / Strategic / BizOps analyst
-  r"strategic[\s-]analyst|strategy[\s-]analyst|"
-  r"corporate[\s-]strategy[\s-]analyst|business[\s-]strategy[\s-]analyst|"
-  r"business[\s-]operations[\s-]analyst|business[\s-]ops[\s-]analyst|bizops[\s-]analyst|"
-  r"strategy[\s-]&[\s-]operations[\s-]analyst|strategy[\s-]and[\s-]operations[\s-]analyst|"
-  r"strategy[\s-]operations[\s-]analyst|"
-  # Operations analyst variants (incl. Thien's supply-chain/procurement background)
-  r"operations[\s-]analyst|"
-  r"revenue[\s-]operations[\s-]analyst|revops[\s-]analyst|"
-  r"sales[\s-]operations[\s-]analyst|marketing[\s-]operations[\s-]analyst|"
-  r"supply[\s-]chain[\s-]analyst|logistics[\s-]analyst|procurement[\s-]analyst|"
-  r"fulfillment[\s-]analyst|inventory[\s-]analyst|"
-  # Data analyst variants
-  r"data[\s-]analyst|analytics[\s-]analyst|reporting[\s-]analyst|"
-  r"product[\s-]analyst|growth[\s-]analyst|marketing[\s-]analyst|"
-  # Business intelligence analyst / BI developer
-  r"business[\s-]intelligence[\s-]analyst|business[\s-]intelligence[\s-]developer|"
-  r"bi[\s-]analyst|bi[\s-]developer|"
-  # Reverse-comma / parenthetical qualifier forms:
-  # "Analyst, Strategy", "Analyst, Data", "Analyst (Business Intelligence)"
-  r"analyst,\s*(?:strategy|strategic|business[\s-]?operations|business[\s-]?ops|bizops|"
-  r"operations|revenue[\s-]?operations|revops|sales[\s-]?operations|"
-  r"marketing[\s-]?operations|supply[\s-]?chain|logistics|procurement|"
-  r"data|analytics|reporting|product|growth|marketing|"
-  r"business[\s-]?intelligence|\bbi\b)|"
-  r"analyst\s*\((?:strategy|strategic|business[\s-]?operations|business[\s-]?ops|bizops|"
-  r"operations|revenue[\s-]?operations|revops|sales[\s-]?operations|"
-  r"marketing[\s-]?operations|supply[\s-]?chain|logistics|procurement|"
-  r"data|analytics|reporting|product|growth|marketing|"
-  r"business[\s-]?intelligence|\bbi\b)"
-  r")\b", re.IGNORECASE)
+  r"\b(analyst|analytics|business\s+intelligence|"
+  r"bi\s+developer|reporting\s+developer|"
+  r"data\s+analyst|data\s+&\s+insights|data\s+and\s+insights|"
+  r"insights\s+&\s+analytics|insights\s+and\s+analytics|"
+  r"strategy\s+&\s+operations|strategy\s+and\s+operations|"
+  r"business\s+operations|bizops|revenue\s+operations|revops|"
+  r"sales\s+operations|marketing\s+operations|"
+  r"supply\s+chain|procurement|logistics|fulfillment|inventory\s+planning|"
+  r"fp&a|fpa)\b", re.IGNORECASE)
 TITLE_EXCLUDE = re.compile(
   r"\b("
   # Seniority: Thien is early-career, filter out senior/staff/principal/lead/etc.
   r"senior\b|\bsr[.\s]|staff[\s,]|principal|^lead\s|\slead\s|\slead$|head\s|chief|director|"
   r"manager|technical\s+program|vp\s|vice\s+president|"
-  r"intern|internship|"
-  # Wrong-domain analysts — quant/finance/risk/compliance/security roles
-  # that share the word but require specialized credentials or don't fit
-  # a data/ops/BI switcher profile.
+  r"intern|internship|fellow\b|fellowship|apprentice|"
+  # Wrong-domain analysts — specialist roles that share the word but require
+  # specialized credentials or don't fit a data/ops/BI switcher profile.
   r"quantitative\s+analyst|quant\s+analyst|"
-  r"investment\s+analyst|equity\s+(?:research\s+)?analyst|"
+  r"investment\s+analyst|equity\s+(?:research\s+)?analyst|equity\s+analyst|"
   r"credit\s+analyst|underwriting\s+analyst|actuarial\s+analyst|"
-  r"risk\s+analyst|fraud\s+analyst|"
+  r"risk\s+analyst|fraud\s+analyst|financial\s+crimes\s+analyst|"
   r"compliance\s+analyst|regulatory\s+analyst|policy\s+analyst|"
   r"security\s+analyst|threat\s+analyst|intelligence\s+analyst|soc\s+analyst|"
-  r"treasury\s+analyst|tax\s+analyst|audit\s+analyst|"
-  r"payroll\s+analyst|billing\s+analyst|benefits\s+analyst|"
-  r"research\s+scientist|researcher|research\s+analyst|"
-  # Non-analyst roles the include-regex might accidentally allow
-  r"account\s+executive|account\s+manager|operations\s+manager|"
-  r"recruiter|recruiting|paralegal|counsel|attorney"
+  r"cybersecurity\s+analyst|it\s+analyst|network\s+analyst|"
+  r"treasury\s+analyst|tax\s+analyst|audit\s+analyst|internal\s+audit|"
+  r"payroll\s+analyst|billing\s+analyst|benefits\s+analyst|hr\s+analyst|"
+  r"research\s+scientist|researcher|research\s+associate|"
+  r"clinical\s+analyst|epidemiologist|biostatistician|"
+  # Non-analyst roles the permissive include-regex could pull in
+  r"account\s+executive|account\s+manager|operations\s+manager|program\s+manager|"
+  r"recruiter|recruiting|paralegal|counsel|attorney|lawyer|"
+  r"engineer|scientist|architect|developer\s+advocate|"
+  # Support / customer / partner analyst that map to CS roles, not analytics
+  r"customer\s+success|technical\s+support|support\s+analyst"
   r")\b", re.IGNORECASE)
 
 # ── Candidates ───────────────────────────────────────────────────────────
