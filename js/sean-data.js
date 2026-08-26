@@ -18,11 +18,12 @@
  */
 const COMPANIES_VERIFIED_AT = '2026-08-26';
 const COMPANIES = [
+
 ];
 
 /* ---------- COMPANY DOMAINS (favicon CDN lookup) ---------- */
 const COMPANY_DOMAINS = {
-  
+
 };
 
 window.SEAN_DATA = { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT };
