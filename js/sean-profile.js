@@ -93,7 +93,8 @@ window.BOARD_PROFILE = {
       "climate": "Climate",
       "vfx": "VFX",
       "security": "Security",
-      "cpg": "CPG"
+      "cpg": "CPG",
+      "igaming": "iGaming"
     },
     "pills": {
       "gaming": "pill-ai",
@@ -115,7 +116,8 @@ window.BOARD_PROFILE = {
       "climate": "pill-hosp",
       "vfx": "pill-mkt",
       "security": "pill-dev",
-      "cpg": "pill-mkt"
+      "cpg": "pill-mkt",
+      "igaming": "pill-both"
     }
   },
   "scoring": {
@@ -405,5 +407,7 @@ window.BOARD_PROFILE = {
       }
     ]
   },
-  "defaultLevel": "mid"
+  "defaultLevel": "mid",
+  "poolSize": 716,
+  "emptyNote": "The bar is that the job works on a game and sits in New York. Game studios post plenty of art — it is almost never located here."
 };

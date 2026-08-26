@@ -1,5 +1,37 @@
 [
  {
+  "id": "2k",
+  "name": "2K Games",
+  "ats": "greenhouse",
+  "slug": "2k",
+  "vertical": "gaming",
+  "sub": "NBA 2K / Borderlands / Civilization",
+  "stage": "Public (Take-Two)",
+  "raised": "NASDAQ: TTWO",
+  "lead": "\u2014",
+  "badges": [
+   "Take-Two"
+  ],
+  "notes": "Take-Two's other label. Big art board \u2014 UI tech art, associate art director and character work post regularly.",
+  "domain": "2k.com"
+ },
+ {
+  "id": "31stunion",
+  "name": "31st Union",
+  "ats": "greenhouse",
+  "slug": "31stunion",
+  "vertical": "gaming",
+  "sub": "Unannounced 2K IP",
+  "stage": "Public (Take-Two)",
+  "raised": "NASDAQ: TTWO",
+  "lead": "\u2014",
+  "badges": [
+   "Take-Two"
+  ],
+  "notes": "2K's newer Bay Area studio building an original IP.",
+  "domain": "31stunion.com"
+ },
+ {
   "id": "amplify",
   "name": "Amplify",
   "ats": "ashby",
@@ -14,6 +46,22 @@
   ],
   "notes": "NYC edtech publisher with a real in-house illustration pipeline.",
   "domain": "amplify.com"
+ },
+ {
+  "id": "animocabrands",
+  "name": "Animoca Brands",
+  "ats": "lever",
+  "slug": "animocabrands",
+  "vertical": "gaming",
+  "sub": "Web3 games + publishing",
+  "stage": "Private",
+  "raised": "$800M+",
+  "lead": "\u2014",
+  "badges": [
+   "Web3"
+  ],
+  "notes": "Large web3 games group; art roles span its portfolio studios.",
+  "domain": "animocabrands.com"
  },
  {
   "id": "anomaly",
@@ -46,6 +94,23 @@
   ],
   "notes": "NYC art marketplace; brand and product design.",
   "domain": "artsy.net"
+ },
+ {
+  "id": "astrocade",
+  "name": "Astrocade",
+  "ats": "ashby",
+  "slug": "astrocade",
+  "vertical": "ai",
+  "sub": "AI game creation for everyone",
+  "stage": "Seed",
+  "raised": "$12M",
+  "lead": "Andreessen Horowitz",
+  "badges": [
+   "a16z",
+   "Alumni Ventures"
+  ],
+  "notes": "Prompt-to-game platform; the output quality bar is set by people who make games.",
+  "domain": "astrocade.com"
  },
  {
   "id": "avalanchestudios",
@@ -81,6 +146,39 @@
   "domain": "awaytravel.com"
  },
  {
+  "id": "azragames",
+  "name": "Azra Games",
+  "ats": "greenhouse",
+  "slug": "azragames",
+  "vertical": "gaming",
+  "sub": "Project Legends \u2014 collectible RPG",
+  "stage": "Series B",
+  "raised": "$52M",
+  "lead": "a16z Games",
+  "badges": [
+   "a16z",
+   "NetEase"
+  ],
+  "notes": "New RPG studio from an EA veteran; character-collection art is the core loop.",
+  "domain": "azragames.com"
+ },
+ {
+  "id": "bandainamco",
+  "name": "Bandai Namco",
+  "ats": "greenhouse",
+  "slug": "bandainamco",
+  "vertical": "gaming",
+  "sub": "Elden Ring / Tekken (US arm)",
+  "stage": "Public",
+  "raised": "TYO: 7832",
+  "lead": "\u2014",
+  "badges": [
+   "TYO: 7832"
+  ],
+  "notes": "US publishing arm; art roles skew marketing and licensing rather than in-engine.",
+  "domain": "bandainamcoent.com"
+ },
+ {
   "id": "barbarian",
   "name": "Barbarian",
   "ats": "greenhouse",
@@ -95,6 +193,72 @@
   ],
   "notes": "NYC shop doing interactive brand work.",
   "domain": "barbarian.com"
+ },
+ {
+  "id": "beach-bum",
+  "name": "Beach Bum",
+  "ats": "ashby",
+  "slug": "beach-bum",
+  "vertical": "gaming",
+  "sub": "Backgammon / card games",
+  "stage": "Private (Huuuge)",
+  "raised": "Acquired",
+  "lead": "Huuuge",
+  "badges": [
+   "Huuuge"
+  ],
+  "notes": "Tel Aviv social-games studio under Huuuge.",
+  "domain": "beachbumgames.com"
+ },
+ {
+  "id": "believer",
+  "name": "Believer Entertainment",
+  "ats": "ashby",
+  "slug": "believer",
+  "vertical": "gaming",
+  "sub": "The Prodigal \u2014 new IP",
+  "stage": "Series B",
+  "raised": "$55M",
+  "lead": "Lightspeed",
+  "badges": [
+   "Lightspeed",
+   "Griffin Gaming"
+  ],
+  "notes": "New AAA studio; the VFX and UX art seats are on the game itself.",
+  "domain": "believer.com"
+ },
+ {
+  "id": "betr",
+  "name": "Betr",
+  "ats": "lever",
+  "slug": "betr",
+  "vertical": "igaming",
+  "sub": "Micro-betting + fantasy",
+  "stage": "Series B",
+  "raised": "$85M",
+  "lead": "\u2014",
+  "badges": [
+   "Jake Paul"
+  ],
+  "notes": "Betting app with an in-house creative team.",
+  "domain": "betr.app"
+ },
+ {
+  "id": "biggergames",
+  "name": "Bigger Games",
+  "ats": "ashby",
+  "slug": "biggergames",
+  "vertical": "gaming",
+  "sub": "Mobile puzzle",
+  "stage": "Series A",
+  "raised": "$28M",
+  "lead": "Index Ventures",
+  "badges": [
+   "Index",
+   "Balderton"
+  ],
+  "notes": "Istanbul casual studio; game art plus marketing motion.",
+  "domain": "biggergames.com"
  },
  {
   "id": "brainpop",
@@ -178,6 +342,38 @@
   "domain": "camp.com"
  },
  {
+  "id": "cigames",
+  "name": "CI Games",
+  "ats": "teamtailor",
+  "slug": "cigames",
+  "vertical": "gaming",
+  "sub": "Lords of the Fallen / Sniper Ghost Warrior",
+  "stage": "Public",
+  "raised": "WSE: CIG",
+  "lead": "\u2014",
+  "badges": [
+   "WSE: CIG"
+  ],
+  "notes": "Polish AA publisher and studio; freelance art and audio roles are common.",
+  "domain": "cigames.com"
+ },
+ {
+  "id": "coffeestainstudios",
+  "name": "Coffee Stain",
+  "ats": "teamtailor",
+  "slug": "coffeestainstudios",
+  "vertical": "gaming",
+  "sub": "Satisfactory / Goat Simulator",
+  "stage": "Private (Embracer)",
+  "raised": "Acquired",
+  "lead": "Embracer",
+  "badges": [
+   "Embracer"
+  ],
+  "notes": "Swedish studio with a distinctive stylized look; art director and art lead roles post here.",
+  "domain": "coffeestainstudios.com"
+ },
+ {
   "id": "criticalmass",
   "name": "Critical Mass",
   "ats": "greenhouse",
@@ -208,6 +404,54 @@
   ],
   "notes": "Anime licensing + originals. Art roles skew production/brand rather than in-house animation.",
   "domain": "crunchyroll.com"
+ },
+ {
+  "id": "crystaldynamics",
+  "name": "Crystal Dynamics",
+  "ats": "greenhouse",
+  "slug": "crystaldynamics",
+  "vertical": "gaming",
+  "sub": "Tomb Raider",
+  "stage": "Private (Embracer)",
+  "raised": "Acquired",
+  "lead": "Embracer",
+  "badges": [
+   "Embracer"
+  ],
+  "notes": "Tomb Raider studio; character and environment art on a marquee franchise.",
+  "domain": "crystaldynamics.com"
+ },
+ {
+  "id": "dabble",
+  "name": "Dabble",
+  "ats": "teamtailor",
+  "slug": "dabble",
+  "vertical": "igaming",
+  "sub": "Social sports betting",
+  "stage": "Series A",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "Australia"
+  ],
+  "notes": "Australian betting app that staffs actual game designers.",
+  "domain": "dabble.com"
+ },
+ {
+  "id": "daybreakgames",
+  "name": "Daybreak Games",
+  "ats": "greenhouse",
+  "slug": "daybreakgames",
+  "vertical": "gaming",
+  "sub": "EverQuest / DC Universe Online",
+  "stage": "Private (EG7)",
+  "raised": "Acquired",
+  "lead": "EG7",
+  "badges": [
+   "EG7"
+  ],
+  "notes": "Long-running MMOs under Enad Global 7; Darkpaw and Standing Stone post here too.",
+  "domain": "daybreakgames.com"
  },
  {
   "id": "deeplocal",
@@ -312,6 +556,24 @@
   "domain": "dreamgames.com"
  },
  {
+  "id": "epicgames",
+  "name": "Epic Games",
+  "ats": "greenhouse",
+  "slug": "epicgames",
+  "vertical": "gaming",
+  "sub": "Fortnite / Unreal Engine",
+  "stage": "Private",
+  "raised": "$7B+",
+  "lead": "Tencent",
+  "badges": [
+   "Tencent",
+   "Sony",
+   "KIRKBI"
+  ],
+  "notes": "Fortnite plus the engine everyone else's art pipeline runs on. Biggest art board here by far.",
+  "domain": "epicgames.com"
+ },
+ {
   "id": "fandom",
   "name": "Fandom",
   "ats": "greenhouse",
@@ -359,6 +621,54 @@
   ],
   "notes": "AA studio art team \u2014 environment, character, VFX on a shipped live game.",
   "domain": "fatshark.se"
+ },
+ {
+  "id": "firaxis",
+  "name": "Firaxis Games",
+  "ats": "greenhouse",
+  "slug": "firaxis",
+  "vertical": "gaming",
+  "sub": "Civilization / XCOM",
+  "stage": "Public (Take-Two)",
+  "raised": "NASDAQ: TTWO",
+  "lead": "\u2014",
+  "badges": [
+   "Take-Two"
+  ],
+  "notes": "Sid Meier's studio. Strategy-game art: unit, UI and world-map work.",
+  "domain": "firaxisgames.com"
+ },
+ {
+  "id": "firesprite",
+  "name": "Firesprite",
+  "ats": "greenhouse",
+  "slug": "firesprite",
+  "vertical": "gaming",
+  "sub": "Horizon Call of the Mountain",
+  "stage": "Public (Sony)",
+  "raised": "NYSE: SONY",
+  "lead": "\u2014",
+  "badges": [
+   "Sony"
+  ],
+  "notes": "Liverpool PlayStation studio spanning VR and narrative titles.",
+  "domain": "firesprite.com"
+ },
+ {
+  "id": "fnatic",
+  "name": "Fnatic",
+  "ats": "ashby",
+  "slug": "fnatic",
+  "vertical": "sports",
+  "sub": "Esports organization",
+  "stage": "Private",
+  "raised": "$50M+",
+  "lead": "\u2014",
+  "badges": [
+   "Esports"
+  ],
+  "notes": "London esports org; brand and creator-facing design roles.",
+  "domain": "fnatic.com"
  },
  {
   "id": "gearbox",
@@ -411,6 +721,54 @@
   "domain": "gettyimages.com"
  },
  {
+  "id": "gismart",
+  "name": "Gismart",
+  "ats": "ashby",
+  "slug": "gismart",
+  "vertical": "gaming",
+  "sub": "Mobile games + music apps",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "London"
+  ],
+  "notes": "Mobile games and apps; creative production roles support the portfolio.",
+  "domain": "gismart.com"
+ },
+ {
+  "id": "goodgamestudios",
+  "name": "Goodgame Studios",
+  "ats": "teamtailor",
+  "slug": "goodgamestudios",
+  "vertical": "gaming",
+  "sub": "Empire: Four Kingdoms",
+  "stage": "Private (Stillfront)",
+  "raised": "Acquired",
+  "lead": "Stillfront",
+  "badges": [
+   "Stillfront"
+  ],
+  "notes": "Hamburg strategy-game studio; playable-ad and marketing art.",
+  "domain": "goodgamestudios.com"
+ },
+ {
+  "id": "goodjobgames",
+  "name": "Good Job Games",
+  "ats": "greenhouse",
+  "slug": "goodjobgames",
+  "vertical": "gaming",
+  "sub": "Mobile puzzle + casual",
+  "stage": "Series A",
+  "raised": "$25M",
+  "lead": "Balderton",
+  "badges": [
+   "Balderton"
+  ],
+  "notes": "Istanbul mobile studio; 2D artist and 2D animator roles are a standing need.",
+  "domain": "goodjobgames.com"
+ },
+ {
   "id": "grey",
   "name": "Grey",
   "ats": "greenhouse",
@@ -427,6 +785,55 @@
   "domain": "grey.com"
  },
  {
+  "id": "guerrilla-games",
+  "name": "Guerrilla Games",
+  "ats": "greenhouse",
+  "slug": "guerrilla-games",
+  "vertical": "gaming",
+  "sub": "Horizon",
+  "stage": "Public (Sony)",
+  "raised": "NYSE: SONY",
+  "lead": "\u2014",
+  "badges": [
+   "Sony"
+  ],
+  "notes": "Amsterdam first-party studio; environment and creature art are the signature.",
+  "domain": "guerrilla-games.com"
+ },
+ {
+  "id": "hadean",
+  "name": "Hadean",
+  "ats": "teamtailor",
+  "slug": "hadean",
+  "vertical": "gaming",
+  "sub": "Distributed simulation for games",
+  "stage": "Series B",
+  "raised": "$60M+",
+  "lead": "Molten Ventures",
+  "badges": [
+   "Molten",
+   "Epic Games"
+  ],
+  "notes": "London spatial-computing company; its customers are game studios and defence sims.",
+  "domain": "hadean.com"
+ },
+ {
+  "id": "hangar13",
+  "name": "Hangar 13",
+  "ats": "greenhouse",
+  "slug": "hangar13",
+  "vertical": "gaming",
+  "sub": "Mafia",
+  "stage": "Public (Take-Two)",
+  "raised": "NASDAQ: TTWO",
+  "lead": "\u2014",
+  "badges": [
+   "Take-Two"
+  ],
+  "notes": "2K's narrative studio; period-accurate environment and character art.",
+  "domain": "hangar13games.com"
+ },
+ {
   "id": "hasbro",
   "name": "Hasbro",
   "ats": "greenhouse",
@@ -441,6 +848,22 @@
   ],
   "notes": "WotC concept + card art is one of the largest illustration commissions pipelines in the industry.",
   "domain": "hasbro.com"
+ },
+ {
+  "id": "haven",
+  "name": "Haven Studios",
+  "ats": "greenhouse",
+  "slug": "haven",
+  "vertical": "gaming",
+  "sub": "Fairgame$ \u2014 Montreal",
+  "stage": "Public (Sony)",
+  "raised": "NYSE: SONY",
+  "lead": "\u2014",
+  "badges": [
+   "Sony"
+  ],
+  "notes": "Jade Raymond's Sony studio; building an original multiplayer IP from scratch.",
+  "domain": "havenstudios.com"
  },
  {
   "id": "hedra",
@@ -477,6 +900,22 @@
   "domain": "hovercraftstudio.com"
  },
  {
+  "id": "hoyoverse",
+  "name": "HoYoverse",
+  "ats": "ashby",
+  "slug": "hoyoverse",
+  "vertical": "gaming",
+  "sub": "Genshin Impact / Honkai: Star Rail",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "miHoYo"
+  ],
+  "notes": "Anime-styled open worlds. Character art and illustration are the product.",
+  "domain": "hoyoverse.com"
+ },
+ {
   "id": "immutable",
   "name": "Immutable",
   "ats": "lever",
@@ -511,6 +950,40 @@
   "domain": "improbable.io"
  },
  {
+  "id": "insomniac",
+  "name": "Insomniac Games",
+  "ats": "greenhouse",
+  "slug": "insomniac",
+  "vertical": "gaming",
+  "sub": "Marvel's Spider-Man / Ratchet & Clank",
+  "stage": "Public (Sony)",
+  "raised": "NYSE: SONY",
+  "lead": "\u2014",
+  "badges": [
+   "Sony"
+  ],
+  "notes": "Sony first-party with a large in-house art org and a fast shipping cadence.",
+  "domain": "insomniacgames.com"
+ },
+ {
+  "id": "inworld-ai",
+  "name": "Inworld AI",
+  "ats": "ashby",
+  "slug": "inworld-ai",
+  "vertical": "ai",
+  "sub": "AI characters for games",
+  "stage": "Series B",
+  "raised": "$120M",
+  "lead": "Lightspeed",
+  "badges": [
+   "Lightspeed",
+   "Section 32",
+   "Intel"
+  ],
+  "notes": "Character AI middleware built for game studios; hires people who think in game terms.",
+  "domain": "inworld.ai"
+ },
+ {
   "id": "jamcity",
   "name": "Jam City",
   "ats": "lever",
@@ -526,6 +999,22 @@
   ],
   "notes": "Mobile art pipeline \u2014 level art, UI, technical animation.",
   "domain": "jamcity.com"
+ },
+ {
+  "id": "kabam",
+  "name": "Kabam",
+  "ats": "lever",
+  "slug": "kabam",
+  "vertical": "gaming",
+  "sub": "Marvel Contest of Champions",
+  "stage": "Private (Netmarble)",
+  "raised": "Acquired",
+  "lead": "Netmarble",
+  "badges": [
+   "Netmarble"
+  ],
+  "notes": "Mobile action-RPG studio; character art and VFX on a long-running live game.",
+  "domain": "kabam.com"
  },
  {
   "id": "khanacademy",
@@ -544,6 +1033,22 @@
   "domain": "khanacademy.org"
  },
  {
+  "id": "kolibrigames",
+  "name": "Kolibri Games",
+  "ats": "lever",
+  "slug": "kolibrigames",
+  "vertical": "gaming",
+  "sub": "Idle Miner Tycoon",
+  "stage": "Private (Ubisoft)",
+  "raised": "Acquired",
+  "lead": "Ubisoft",
+  "badges": [
+   "Ubisoft"
+  ],
+  "notes": "Berlin idle-game studio under Ubisoft.",
+  "domain": "kolibrigames.com"
+ },
+ {
   "id": "krafton",
   "name": "Krafton",
   "ats": "greenhouse",
@@ -557,6 +1062,22 @@
    "KRX: 259960"
   ],
   "notes": "Large publisher board \u2014 art reqs across owned studios.",
+  "domain": "krafton.com"
+ },
+ {
+  "id": "kraftonamericas",
+  "name": "KRAFTON Americas",
+  "ats": "greenhouse",
+  "slug": "kraftonamericas",
+  "vertical": "gaming",
+  "sub": "PUBG \u2014 Americas arm",
+  "stage": "Public",
+  "raised": "KRX: 259960",
+  "lead": "\u2014",
+  "badges": [
+   "KRX: 259960"
+  ],
+  "notes": "North American arm of the PUBG publisher.",
   "domain": "krafton.com"
  },
  {
@@ -709,6 +1230,54 @@
   "domain": "moonactive.com"
  },
  {
+  "id": "naughtydog",
+  "name": "Naughty Dog",
+  "ats": "greenhouse",
+  "slug": "naughtydog",
+  "vertical": "gaming",
+  "sub": "The Last of Us / Uncharted",
+  "stage": "Public (Sony)",
+  "raised": "NYSE: SONY",
+  "lead": "\u2014",
+  "badges": [
+   "Sony"
+  ],
+  "notes": "PlayStation first-party. Character, environment and cinematic art at the top of the craft ladder.",
+  "domain": "naughtydog.com"
+ },
+ {
+  "id": "neowiz",
+  "name": "Neowiz",
+  "ats": "lever",
+  "slug": "neowiz",
+  "vertical": "gaming",
+  "sub": "Lies of P",
+  "stage": "Public",
+  "raised": "KRX: 095660",
+  "lead": "\u2014",
+  "badges": [
+   "KRX: 095660"
+  ],
+  "notes": "Korean publisher and studio; art reqs are mostly Seoul-based.",
+  "domain": "neowiz.com"
+ },
+ {
+  "id": "neteasegames",
+  "name": "NetEase Games",
+  "ats": "greenhouse",
+  "slug": "neteasegames",
+  "vertical": "gaming",
+  "sub": "Marvel Rivals / Naraka",
+  "stage": "Public",
+  "raised": "NASDAQ: NTES",
+  "lead": "\u2014",
+  "badges": [
+   "NASDAQ: NTES"
+  ],
+  "notes": "Global studios under one board; character and performance animation roles surface regularly.",
+  "domain": "neteasegames.com"
+ },
+ {
   "id": "newsela",
   "name": "Newsela",
   "ats": "greenhouse",
@@ -756,6 +1325,22 @@
   ],
   "notes": "NoA localization/marketing art plus occasional NY retail + brand roles.",
   "domain": "nintendo.com"
+ },
+ {
+  "id": "nordeus",
+  "name": "Nordeus",
+  "ats": "greenhouse",
+  "slug": "nordeus",
+  "vertical": "gaming",
+  "sub": "Top Eleven",
+  "stage": "Private (Take-Two)",
+  "raised": "Acquired",
+  "lead": "Take-Two",
+  "badges": [
+   "Take-Two"
+  ],
+  "notes": "Belgrade sports-game studio under Take-Two.",
+  "domain": "nordeus.com"
  },
  {
   "id": "ogilvy",
@@ -841,6 +1426,22 @@
   "domain": "outschool.com"
  },
  {
+  "id": "paradox-interactive",
+  "name": "Paradox Interactive",
+  "ats": "teamtailor",
+  "slug": "paradox-interactive",
+  "vertical": "gaming",
+  "sub": "Cities: Skylines / Crusader Kings",
+  "stage": "Public",
+  "raised": "STO: PDX",
+  "lead": "\u2014",
+  "badges": [
+   "STO: PDX"
+  ],
+  "notes": "Stockholm strategy publisher and studios; UI and world art for deep sims.",
+  "domain": "paradoxinteractive.com"
+ },
+ {
   "id": "picsart",
   "name": "Picsart",
   "ats": "greenhouse",
@@ -875,6 +1476,38 @@
   "domain": "pika.art"
  },
  {
+  "id": "playagames",
+  "name": "Playa Games",
+  "ats": "teamtailor",
+  "slug": "playagames",
+  "vertical": "gaming",
+  "sub": "Shakes & Fidget",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "Hamburg"
+  ],
+  "notes": "Hamburg browser-game studio; comic-styled 2D art.",
+  "domain": "playagames.com"
+ },
+ {
+  "id": "playson",
+  "name": "Playson",
+  "ats": "ashby",
+  "slug": "playson",
+  "vertical": "gaming",
+  "sub": "Slot game studio",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "iGaming"
+  ],
+  "notes": "Slot studio with a real in-house 2D/UI art department \u2014 game art, just a different genre.",
+  "domain": "playson.com"
+ },
+ {
   "id": "playstation",
   "name": "PlayStation",
   "ats": "greenhouse",
@@ -907,6 +1540,38 @@
   "domain": "prizepicks.com"
  },
  {
+  "id": "pushgaming",
+  "name": "Push Gaming",
+  "ats": "teamtailor",
+  "slug": "pushgaming",
+  "vertical": "gaming",
+  "sub": "Slot game studio",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "iGaming"
+  ],
+  "notes": "Slots studio; game design and art roles on the titles themselves.",
+  "domain": "pushgaming.com"
+ },
+ {
+  "id": "rawfury",
+  "name": "Raw Fury",
+  "ats": "teamtailor",
+  "slug": "rawfury",
+  "vertical": "gaming",
+  "sub": "Indie publisher (Kingdom, Norco)",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "Indie publishing"
+  ],
+  "notes": "Stockholm indie publisher; art roles are publishing-side, supporting a portfolio of small teams.",
+  "domain": "rawfury.com"
+ },
+ {
   "id": "rga",
   "name": "R/GA",
   "ats": "greenhouse",
@@ -937,6 +1602,22 @@
   ],
   "notes": "Deep art org \u2014 splash, character, VFX, environment. NYC postings are rare but the bar and craft standard are the reference point.",
   "domain": "riotgames.com"
+ },
+ {
+  "id": "rushstreetinteractive",
+  "name": "Rush Street Interactive",
+  "ats": "greenhouse",
+  "slug": "rushstreetinteractive",
+  "vertical": "igaming",
+  "sub": "BetRivers casino + sportsbook",
+  "stage": "Public",
+  "raised": "NYSE: RSI",
+  "lead": "\u2014",
+  "badges": [
+   "NYSE: RSI"
+  ],
+  "notes": "Online casino operator; in-house game studio work sits alongside the sportsbook.",
+  "domain": "rushstreetinteractive.com"
  },
  {
   "id": "sandboxvr",
@@ -987,6 +1668,38 @@
   ],
   "notes": "NYC newsroom; design and visual storytelling.",
   "domain": "semafor.com"
+ },
+ {
+  "id": "sharkmob",
+  "name": "Sharkmob",
+  "ats": "teamtailor",
+  "slug": "sharkmob",
+  "vertical": "gaming",
+  "sub": "Exoborne / Bloodhunt",
+  "stage": "Private (Tencent)",
+  "raised": "Acquired",
+  "lead": "Tencent",
+  "badges": [
+   "Tencent"
+  ],
+  "notes": "Malm\u00f6 studio under Tencent; AAA environment and character art.",
+  "domain": "sharkmob.com"
+ },
+ {
+  "id": "skillzinc",
+  "name": "Skillz",
+  "ats": "greenhouse",
+  "slug": "skillzinc",
+  "vertical": "gaming",
+  "sub": "Mobile esports tournaments",
+  "stage": "Public",
+  "raised": "NYSE: SKLZ",
+  "lead": "\u2014",
+  "badges": [
+   "NYSE: SKLZ"
+  ],
+  "notes": "Competition platform for mobile games; art supports the tournament product.",
+  "domain": "skillz.com"
  },
  {
   "id": "skydance",
@@ -1072,6 +1785,38 @@
   "domain": "sphereentertainment.com"
  },
  {
+  "id": "spyke-games",
+  "name": "Spyke Games",
+  "ats": "lever",
+  "slug": "spyke-games",
+  "vertical": "gaming",
+  "sub": "Tile Busters",
+  "stage": "Seed",
+  "raised": "$55M",
+  "lead": "Griffin Gaming",
+  "badges": [
+   "Griffin Gaming"
+  ],
+  "notes": "Istanbul social-casual studio; 2D animation and marketing art.",
+  "domain": "spykegames.com"
+ },
+ {
+  "id": "starstable",
+  "name": "Star Stable Entertainment",
+  "ats": "teamtailor",
+  "slug": "starstable",
+  "vertical": "gaming",
+  "sub": "Star Stable Online",
+  "stage": "Private",
+  "raised": "$50M+",
+  "lead": "\u2014",
+  "badges": [
+   "Stockholm"
+  ],
+  "notes": "Horse-adventure MMO with a large, long-running art team.",
+  "domain": "starstable.com"
+ },
+ {
   "id": "storyblocks",
   "name": "Storyblocks",
   "ats": "greenhouse",
@@ -1120,6 +1865,22 @@
   "domain": "supercell.com"
  },
  {
+  "id": "tactilegames",
+  "name": "Tactile Games",
+  "ats": "greenhouse",
+  "slug": "tactilegames",
+  "vertical": "gaming",
+  "sub": "Lily's Garden",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "Copenhagen"
+  ],
+  "notes": "Copenhagen puzzle studio; technical art now includes AI-assisted pipelines.",
+  "domain": "tactilegames.com"
+ },
+ {
   "id": "take-two",
   "name": "Take-Two Interactive",
   "ats": "greenhouse",
@@ -1134,6 +1895,54 @@
   ],
   "notes": "NYC-headquartered publisher above Rockstar and 2K. Central art + brand roles post here.",
   "domain": "take2games.com"
+ },
+ {
+  "id": "tangogameworks",
+  "name": "Tango Gameworks",
+  "ats": "greenhouse",
+  "slug": "tangogameworks",
+  "vertical": "gaming",
+  "sub": "Hi-Fi RUSH / Ghostwire",
+  "stage": "Private (Krafton)",
+  "raised": "Acquired",
+  "lead": "Krafton",
+  "badges": [
+   "Krafton"
+  ],
+  "notes": "Tokyo studio revived under Krafton; stylized character and rigging work.",
+  "domain": "tangogameworks.com"
+ },
+ {
+  "id": "tapnation",
+  "name": "TapNation",
+  "ats": "teamtailor",
+  "slug": "tapnation",
+  "vertical": "gaming",
+  "sub": "Mobile game publisher",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "Paris"
+  ],
+  "notes": "Paris mobile publisher; art support runs through the creative team.",
+  "domain": "tap-nation.io"
+ },
+ {
+  "id": "teamliquid",
+  "name": "Team Liquid",
+  "ats": "teamtailor",
+  "slug": "teamliquid",
+  "vertical": "sports",
+  "sub": "Esports organization",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "aXiomatic",
+  "badges": [
+   "aXiomatic"
+  ],
+  "notes": "Global esports org with an in-house content and design team.",
+  "domain": "teamliquid.com"
  },
  {
   "id": "thatgamecompany",
@@ -1153,6 +1962,22 @@
   "domain": "thatgamecompany.com"
  },
  {
+  "id": "thatsnomoonentertainment",
+  "name": "That's No Moon",
+  "ats": "greenhouse",
+  "slug": "thatsnomoonentertainment",
+  "vertical": "gaming",
+  "sub": "Unannounced narrative action game",
+  "stage": "Series A",
+  "raised": "$100M",
+  "lead": "Smilegate",
+  "badges": [
+   "Smilegate"
+  ],
+  "notes": "Veteran-heavy new studio staffing a AAA narrative title from zero.",
+  "domain": "thatsnomoon.com"
+ },
+ {
   "id": "themill",
   "name": "The Mill",
   "ats": "greenhouse",
@@ -1167,6 +1992,24 @@
   ],
   "notes": "One of the few large VFX shops with a standing New York office.",
   "domain": "themill.com"
+ },
+ {
+  "id": "theorycraftgames",
+  "name": "Theorycraft Games",
+  "ats": "lever",
+  "slug": "theorycraftgames",
+  "vertical": "gaming",
+  "sub": "Supervive",
+  "stage": "Series B",
+  "raised": "$87M",
+  "lead": "NetEase",
+  "badges": [
+   "NetEase",
+   "a16z",
+   "Riot alumni"
+  ],
+  "notes": "Riot-alumni studio shipping a competitive title; small, art-forward team.",
+  "domain": "theorycraftgames.com"
  },
  {
   "id": "tonies",
@@ -1202,6 +2045,22 @@
   "domain": "tripledotstudios.com"
  },
  {
+  "id": "tripwireinteractive",
+  "name": "Tripwire Interactive",
+  "ats": "greenhouse",
+  "slug": "tripwireinteractive",
+  "vertical": "gaming",
+  "sub": "Killing Floor",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "Independent"
+  ],
+  "notes": "Independent studio and publisher; art roles are occasional but on the game.",
+  "domain": "tripwireinteractive.com"
+ },
+ {
   "id": "twitch",
   "name": "Twitch",
   "ats": "greenhouse",
@@ -1216,6 +2075,23 @@
   ],
   "notes": "Gaming-native brand and product art; emotes and channel art culture.",
   "domain": "twitch.tv"
+ },
+ {
+  "id": "underdog",
+  "name": "Underdog",
+  "ats": "greenhouse",
+  "slug": "underdog",
+  "vertical": "igaming",
+  "sub": "Fantasy sports + pick'em",
+  "stage": "Series C",
+  "raised": "$105M",
+  "lead": "Spark Capital",
+  "badges": [
+   "Spark",
+   "Acies"
+  ],
+  "notes": "NYC fantasy-sports company with a strong illustration and motion identity.",
+  "domain": "underdogfantasy.com"
  },
  {
   "id": "vaynermedia",
@@ -1250,6 +2126,39 @@
   "domain": "viggle.ai"
  },
  {
+  "id": "visualconcepts",
+  "name": "Visual Concepts",
+  "ats": "greenhouse",
+  "slug": "visualconcepts",
+  "vertical": "gaming",
+  "sub": "NBA 2K / WWE 2K",
+  "stage": "Public (Take-Two)",
+  "raised": "NASDAQ: TTWO",
+  "lead": "\u2014",
+  "badges": [
+   "Take-Two"
+  ],
+  "notes": "Sports-sim studio; character likeness and environment art at photoreal fidelity.",
+  "domain": "visualconcepts.com"
+ },
+ {
+  "id": "voodoo",
+  "name": "Voodoo",
+  "ats": "ashby",
+  "slug": "voodoo",
+  "vertical": "gaming",
+  "sub": "Hypercasual + casual mobile",
+  "stage": "Private",
+  "raised": "$200M+",
+  "lead": "Goldman Sachs",
+  "badges": [
+   "Goldman Sachs",
+   "Tencent"
+  ],
+  "notes": "Huge mobile board; game art and playable-ad art roles turn over constantly.",
+  "domain": "voodoo.io"
+ },
+ {
   "id": "vrchat",
   "name": "VRChat",
   "ats": "lever",
@@ -1265,6 +2174,39 @@
   ],
   "notes": "Avatar + world art for a user-generated 3D platform.",
   "domain": "vrchat.com"
+ },
+ {
+  "id": "wildlifestudios",
+  "name": "Wildlife Studios",
+  "ats": "greenhouse",
+  "slug": "wildlifestudios",
+  "vertical": "gaming",
+  "sub": "Mobile games (Zooba, Tennis Clash)",
+  "stage": "Series B",
+  "raised": "$180M",
+  "lead": "Benchmark",
+  "badges": [
+   "Benchmark",
+   "a16z"
+  ],
+  "notes": "S\u00e3o Paulo mobile studio with a US presence; 3D and UI art for live games.",
+  "domain": "wildlifestudios.com"
+ },
+ {
+  "id": "wonderstudios",
+  "name": "Wonder Studios",
+  "ats": "greenhouse",
+  "slug": "wonderstudios",
+  "vertical": "media",
+  "sub": "AI-native production studio (NYC)",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "Production"
+  ],
+  "notes": "NYC/London production studio building AI-assisted workflows; occasional 3D and producer roles.",
+  "domain": "wonder.studio"
  },
  {
   "id": "worldlabs",
@@ -1283,5 +2225,21 @@
   ],
   "notes": "Fei-Fei Li's spatial-AI lab. 3D artists shape the training and eval bar.",
   "domain": "worldlabs.ai"
+ },
+ {
+  "id": "xsolla",
+  "name": "Xsolla",
+  "ats": "lever",
+  "slug": "xsolla",
+  "vertical": "gaming",
+  "sub": "Payments + publishing tools for games",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "Game infra"
+  ],
+  "notes": "Commerce and publishing infrastructure for game developers; large, constantly-open board.",
+  "domain": "xsolla.com"
  }
 ]

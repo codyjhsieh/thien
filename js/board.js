@@ -332,6 +332,22 @@ function renderCompanies(hub) {
   `;
   hub.appendChild(container);
 
+  // A board can legitimately be empty — Sean's asks for NYC-located game work,
+  // and on a given day there may be none anywhere on public ATS. Say that,
+  // rather than showing an empty grid that reads as a broken page.
+  if (LIVE.length === 0) {
+    const empty = el('div', 'empty-board');
+    empty.innerHTML = `
+      <div class="empty-board-title">Nothing live right now</div>
+      <p class="empty-board-body">
+        Checked ${esc(String(P.poolSize || 'every'))} ${P.poolSize ? 'candidate companies' : 'candidate company'}
+        on ${esc(verifiedAt || 'the last run')} and none had a matching posting in New York.
+        This board refreshes daily — roles appear here the day they are posted.
+      </p>
+      <p class="empty-board-body muted">${esc(P.emptyNote || '')}</p>`;
+    container.appendChild(empty);
+  }
+
   const grid       = container.querySelector('#co-grid');
   const rolelist   = container.querySelector('#co-rolelist');
   const filterBar  = container.querySelector('#co-filters');

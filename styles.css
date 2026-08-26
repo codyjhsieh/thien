@@ -3004,3 +3004,20 @@ blockquote {
   color: var(--accent); border-color: var(--accent);
   background: color-mix(in srgb, var(--accent) 10%, transparent);
 }
+
+/* ---------- Empty board ----------
+ * A board with nothing on it is a normal state here, not an error: Sean's
+ * asks for NYC-located game work, and some days there is none anywhere on
+ * public ATS. Make that legible instead of showing a blank grid. */
+.empty-board {
+  text-align: center; padding: 40px 20px; margin: 8px 0 4px;
+  border: 1px dashed var(--hairline); border-radius: 14px;
+}
+.empty-board-title {
+  font-weight: 600; font-size: 15px; margin-bottom: 6px; color: var(--text);
+}
+.empty-board-body {
+  font-size: 13px; line-height: 1.55; color: var(--muted);
+  max-width: 46ch; margin: 0 auto;
+}
+.empty-board-body + .empty-board-body { margin-top: 8px; font-size: 12px; }

@@ -65,7 +65,10 @@ for id in "${PROFILES[@]}"; do
     echo "!! a fetch shard failed; logs in $TMP/$id.*.log" >&2
     exit 1
   fi
-  grep -h '^\[ok\]' "$TMP/$id".[0-9]*.log | wc -l | xargs printf '   %s companies with matches\n'
+  # `|| true`: grep exits 1 on no matches, and under `pipefail` that would abort
+  # the run — a board with nothing live today is a normal outcome, not an error.
+  { grep -h '^\[ok\]' "$TMP/$id".[0-9]*.log || true; } | wc -l \
+    | xargs printf '   %s companies with matches\n'
 
   echo "── 2/5 merge"
   python3 scripts/merge-shards.py "$TMP/$id".[0-9]*.json -o "$TMP/$id.json"
