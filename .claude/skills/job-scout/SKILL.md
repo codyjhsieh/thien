@@ -53,7 +53,8 @@ have returned real postings from a real API call in this session.
 Start from what the board is short on. `js/<id>-data.js` shows which verticals
 are already represented; the gaps are the brief. Work from the profile's own
 language — Sean's board wants studios and shops whose *output is visual work*,
-because `filters.adjacentVerticals` only credits brand/creative titles there.
+because `filters.titleIncludeBroad` only widens the net at the verticals listed
+in `filters.broadVerticals`.
 
 Then, per company, resolve the slug by trying the obvious forms against the
 live API. Most slugs are the name lowercased with spaces removed, or

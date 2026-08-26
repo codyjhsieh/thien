@@ -53,13 +53,15 @@ class Profile:
       re.compile(f["titleCityExclude"], re.I) if f.get("titleCityExclude") else None
     )
     self.title_include = re.compile(f["titleInclude"], re.I)
-    # Adjacent craft (brand/graphic/creative direction) is the same hands on a
-    # different brief — but only at companies whose output is visual work. A
-    # brand designer at a game studio counts; one at a bank does not.
-    self.title_include_adjacent = (
-      re.compile(f["titleIncludeAdjacent"], re.I) if f.get("titleIncludeAdjacent") else None
+    # titleInclude has to stand on its own everywhere, so it only matches
+    # titles that name the work itself. At companies that do nothing but this
+    # work, the title no longer has to say so — "Environment Artist" at a game
+    # studio is unambiguous — so titleIncludeBroad widens the net, but only for
+    # the verticals in broadVerticals.
+    self.title_include_broad = (
+      re.compile(f["titleIncludeBroad"], re.I) if f.get("titleIncludeBroad") else None
     )
-    self.adjacent_verticals = set(f.get("adjacentVerticals", []))
+    self.broad_verticals = set(f.get("broadVerticals", []))
     self.title_exclude = (
       re.compile(f["titleExclude"], re.I) if f.get("titleExclude") else None
     )
@@ -286,9 +288,9 @@ def filter_jobs(profile: Profile, ats, raw, slug="", vertical=""):
       continue
     if profile.title_exclude and profile.title_exclude.search(title): continue
     if not profile.title_include.search(title):
-      if not (profile.title_include_adjacent
-              and vertical in profile.adjacent_verticals
-              and profile.title_include_adjacent.search(title)):
+      if not (profile.title_include_broad
+              and vertical in profile.broad_verticals
+              and profile.title_include_broad.search(title)):
         continue
     out.append({"title": title, "url": n["url"], "level": profile.level(title),
                 "posted": n["posted"]})

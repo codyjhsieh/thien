@@ -6,7 +6,7 @@ window.BOARD_PROFILE = {
   "boardTitle": "Sean's Game Art Board",
   "docTitle": "sean — NYC game artist jobs (Concept / 3D / Character / Environment / VFX)",
   "headline": "Studios",
-  "blurb": "live NYC game-art postings. Concept, 3D, character, environment, technical art, animation and VFX — every title on this board is the same job wearing a different name.",
+  "blurb": "live NYC postings where the job works on a game — concept, 3D, character, environment, technical art, animation and VFX. Game studios and everyone else who builds real-time worlds.",
   "page": "sean.html",
   "dataFile": "js/sean-data.js",
   "dataGlobal": "SEAN_DATA",
@@ -20,35 +20,35 @@ window.BOARD_PROFILE = {
     {
       "key": "technical",
       "label": "Tech Art",
-      "match": "technical\\s+art|tech\\s+art|tools?\\s+artist|pipeline|rigger|rigging|shader|material"
+      "match": "technical\\s+art|tech\\s+art|tools?\\s+artist|pipeline|rigg|shader|material|character\\s+td"
     },
     {
       "key": "animation",
       "label": "Animation / VFX",
-      "match": "animat|vfx|visual\\s+effects|motion|cinematic"
+      "match": "animat|vfx|\\bfx\\b|visual\\s+effects|motion|cinematic"
     },
     {
       "key": "character",
       "label": "Character / Concept",
-      "match": "concept|character|creature|illustrat|storyboard|splash|key\\s+art|2d"
+      "match": "concept|character|creature|illustrat|storyboard|splash|key\\s+art|\\b2d\\b"
     },
     {
       "key": "environment",
       "label": "3D / Environment",
-      "match": "3d|environment|prop|level\\s+art|world|modell?er|sculpt|texture|lighting|background"
+      "match": "\\b3d\\b|environment|prop|level|world|modell?er|sculpt|texture|lighting|background"
+    },
+    {
+      "key": "design",
+      "label": "Game Design",
+      "match": "game\\s+design|gameplay|level\\s+design|\\bunreal\\b|\\bunity\\b"
     },
     {
       "key": "direction",
-      "label": "Art Direction / UI",
-      "match": "art\\s+(?:director|lead|manager|supervisor)|creative\\s+director|\\bui\\b|\\bux\\b|brand|marketing\\s+art|production\\s+art"
-    },
-    {
-      "key": "adjacent",
-      "label": "Brand / Creative",
-      "match": "graphic\\s+design|visual\\s+design|brand\\s+design|packaging|presentation\\s+design|multimedia|creative\\s+(?:director|lead)"
+      "label": "Art Direction",
+      "match": "art\\s+(?:director|lead|manager|supervisor|producer)"
     }
   ],
-  "categoryFallback": "adjacent",
+  "categoryFallback": "direction",
   "levels": [
     {
       "key": "all",

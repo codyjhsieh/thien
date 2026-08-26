@@ -60,7 +60,9 @@ jobs:
         run: scripts/pipeline.sh ${{ steps.which.outputs.ids }}
 
       - name: Verify
-        run: python3 scripts/verify-board.py --all
+        run: |
+          python3 scripts/test-filters.py
+          python3 scripts/verify-board.py --all
 
       - name: Commit refreshed data
         run: |

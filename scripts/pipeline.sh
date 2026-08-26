@@ -15,6 +15,10 @@
 #   4. build   — recompile profiles/<id>.json into js/<id>-profile.js
 #   5. verify  — assert the data file parses and every invariant holds
 #
+# Stage 0 runs the offline filter cases first: a regex that is slightly too
+# greedy or too tight both read as "the market is quiet" once the data lands,
+# so it is worth two seconds to catch before a 680-company sweep.
+#
 # `.claude/skills/job-pipeline` runs the same stages but fans stage 1 across
 # subagents instead of subshells; this script is the deterministic path used by
 # CI and by anyone who just wants the boards refreshed.
@@ -41,6 +45,9 @@ for id in "${PROFILES[@]}"; do
   fi
 
   echo "══ $id ══════════════════════════════════════════════"
+  echo "── 0/5 filter cases"
+  python3 scripts/test-filters.py "$id"
+
   echo "── 1/5 fetch (${SHARDS} shards × ${JOBS} probes)"
   rm -f "$TMP/$id".[0-9]*.json
   pids=()

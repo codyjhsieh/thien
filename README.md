@@ -7,7 +7,7 @@ public ATS and keeping what matches a *profile*.
 | Board | Page | Profile | Looking for |
 |---|---|---|---|
 | Thien · Analyst | `index.html` | `profiles/thien.json` | Strategic / Operations / Data / BI analyst roles in NYC |
-| Sean · Game Art | `sean.html` | `profiles/sean.json` | Game-art roles in NYC — concept, 3D, character, environment, technical art, animation, VFX |
+| Sean · Game Art | `sean.html` | `profiles/sean.json` | NYC roles where the job works on a game — concept, 3D, character, environment, technical art, animation, VFX |
 
 Both are the same renderer (`js/board.js`) pointed at different config. Adding
 a third board is a JSON file and an HTML file, not a fork.
@@ -89,9 +89,9 @@ into `js/<id>-profile.js` for the browser.
   "filters": {
     "geoInclude":        "…",        // location must match
     "titleCityExclude":  "…",        // title naming another city wins over location
-    "titleInclude":      "…",        // core disciplines
-    "titleIncludeAdjacent": "…",     // adjacent craft…
-    "adjacentVerticals": ["gaming"], // …but only at these companies
+    "titleInclude":      "…",        // must hold up at any company
+    "titleIncludeBroad": "…",        // a wider net…
+    "broadVerticals":    ["gaming"], // …only where every seat is already the work
     "levelRules":  [{ "key": "senior", "match": "…" }],
     "levelDefault": "mid"
   },
@@ -100,11 +100,23 @@ into `js/<id>-profile.js` for the browser.
 }
 ```
 
-Sean's profile carries the one non-obvious rule worth knowing: brand/graphic/
-creative-direction titles count as adjacent craft, but only at companies whose
-output *is* visual work (`adjacentVerticals`). A brand designer at a game
-studio or an agency is the same hands on a different brief; one at a bank is a
-different job.
+Sean's profile carries the one non-obvious rule worth knowing. The bar is not
+"a game company" — it is **the job works on a game**, which is a different and
+more useful test. So the filters run in two lanes:
+
+- `titleInclude` has to stand on its own anywhere, so it only matches titles
+  that carry the game or real-time pipeline with them: *Game Artist*,
+  *Environment Artist*, *Technical Artist*, *Character Artist*, *3D Artist,
+  Games*, *Level Designer*, anything naming Unreal or Unity. An
+  *Environment Artist* at a toy company or an AI lab is still doing the job;
+  it counts.
+- `titleIncludeBroad` widens to the whole art discipline — *Art Director*,
+  *Animator*, *Illustrator*, *Motion Designer* — but only at the verticals in
+  `broadVerticals` (game studios and real-time worlds), where every seat is on
+  a game whether the title says so or not.
+
+Marketing-side design is excluded in both lanes. A brand designer at a game
+studio is working on the campaign, not the game.
 
 ### Fit scoring
 
@@ -145,10 +157,17 @@ Greenhouse, Lever, Workable, Workday, Teamtailor, SmartRecruiters.
 ## Verifying
 
 ```sh
+python3 scripts/test-filters.py     # what the title filters do and don't match
 python3 scripts/verify-board.py --all
 ```
 
-Checks that every profile regex compiles in both Python and V8, that
+`test-filters.py` is offline and instant — it pins each profile's filters to a
+list of titles that must land and must not. A regex that is slightly too greedy
+fills a board with the wrong job; slightly too tight empties it; both read as
+"the market is quiet" from the outside. Add a case whenever you touch a filter.
+
+
+`verify-board.py` checks that every profile regex compiles in both Python and V8, that
 `categoryFallback` and every emitted level name a real tab, that the generated
 profile script is in step with its JSON, that no two candidates point at the
 same ATS board, and that no data file carries a duplicate company or a

@@ -84,6 +84,7 @@ interleave writes and corrupt it.
    node scripts/merge-additive.js --profile <id> .tmp/<id>.json
    node scripts/check-dead.js --profile <id> --prune
    node scripts/build-profile.js <id>
+   python3 scripts/test-filters.py <id>
    python3 scripts/verify-board.py <id>
    ```
 
@@ -110,12 +111,16 @@ with `--only <id> -v` and read the titles the filter rejected.
 
 ## Reading a thin result
 
-Sean's board is small by nature — NYC-located game-art postings on public ATS
+Sean's board is small by nature — NYC postings where the job works on a game
 number in the low tens at any moment. A drop from 17 roles to 12 is ordinary
-churn. A drop to 0, or a jump past 100, is a bug: check `filters.titleInclude`
-and `filters.titleExclude` in the profile, and remember that
-`titleIncludeAdjacent` only applies at companies whose vertical is listed in
-`filters.adjacentVerticals`.
+churn. A drop to 0, or a jump past 100, is a bug.
+
+Start with `python3 scripts/test-filters.py sean`: it pins the filters to
+titles that must land and must not, offline and instantly. If the cases pass
+and the board is still wrong, the case list is missing the title that broke —
+add it, then fix the regex. Remember that `titleIncludeBroad` only applies at
+companies whose vertical is in `filters.broadVerticals`, so the same title can
+legitimately be in at one company and out at another.
 
 ## Commit
 

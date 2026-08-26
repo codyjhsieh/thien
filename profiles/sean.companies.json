@@ -81,38 +81,6 @@
   "domain": "awaytravel.com"
  },
  {
-  "id": "axisstudios",
-  "name": "Axis Studios",
-  "ats": "teamtailor",
-  "slug": "axis",
-  "vertical": "animation",
-  "sub": "Game cinematics + animation",
-  "stage": "Private",
-  "raised": "\u2014",
-  "lead": "\u2014",
-  "badges": [
-   "Animation"
-  ],
-  "notes": "Cinematics shop \u2014 trailers and in-game cutscenes for game clients.",
-  "domain": "axisstudios.com"
- },
- {
-  "id": "backflip",
-  "name": "Backflip",
-  "ats": "ashby",
-  "slug": "backflip",
-  "vertical": "ai",
-  "sub": "AI 3D modeling from sketches",
-  "stage": "Seed",
-  "raised": "$30M",
-  "lead": "Andreessen Horowitz",
-  "badges": [
-   "a16z"
-  ],
-  "notes": "Sketch-to-3D tooling; hires artists to define the output bar.",
-  "domain": "backflip.ai"
- },
- {
   "id": "barbarian",
   "name": "Barbarian",
   "ats": "greenhouse",
@@ -127,38 +95,6 @@
   ],
   "notes": "NYC shop doing interactive brand work.",
   "domain": "barbarian.com"
- },
- {
-  "id": "bethesda",
-  "name": "Bethesda",
-  "ats": "greenhouse",
-  "slug": "bethesda",
-  "vertical": "gaming",
-  "sub": "Fallout / Elder Scrolls",
-  "stage": "Private (Microsoft)",
-  "raised": "Acquired",
-  "lead": "Microsoft",
-  "badges": [
-   "Microsoft"
-  ],
-  "notes": "AAA art org under Xbox Game Studios.",
-  "domain": "bethesda.net"
- },
- {
-  "id": "boom",
-  "name": "BOOM! Studios",
-  "ats": "ashby",
-  "slug": "boom",
-  "vertical": "media",
-  "sub": "Comics publisher",
-  "stage": "Private (Penguin Random House)",
-  "raised": "Acquired",
-  "lead": "\u2014",
-  "badges": [
-   "PRH"
-  ],
-  "notes": "Comics publishing \u2014 illustration commissioning and design.",
-  "domain": "boom-studios.com"
  },
  {
   "id": "brainpop",
@@ -393,22 +329,6 @@
   "domain": "fandom.com"
  },
  {
-  "id": "faraway",
-  "name": "Faraway",
-  "ats": "teamtailor",
-  "slug": "faraway",
-  "vertical": "gaming",
-  "sub": "Web3 game studio",
-  "stage": "Series A",
-  "raised": "$30M",
-  "lead": "a16z",
-  "badges": [
-   "a16z"
-  ],
-  "notes": "Small studio, generalist art roles.",
-  "domain": "faraway.com"
- },
- {
   "id": "farfetch",
   "name": "Farfetch",
   "ats": "lever",
@@ -539,23 +459,6 @@
   ],
   "notes": "NYC generative-character studio. Art direction and character work sit next to the model team.",
   "domain": "hedra.com"
- },
- {
-  "id": "homa",
-  "name": "Homa",
-  "ats": "teamtailor",
-  "slug": "homa",
-  "vertical": "gaming",
-  "sub": "Mobile games platform",
-  "stage": "Series B",
-  "raised": "$150M",
-  "lead": "Headline",
-  "badges": [
-   "Headline",
-   "Northzone"
-  ],
-  "notes": "Data-driven mobile publisher with in-house creative + game art.",
-  "domain": "homagames.com"
  },
  {
   "id": "hovercraft",
@@ -790,22 +693,6 @@
   "domain": "meshy.ai"
  },
  {
-  "id": "method",
-  "name": "Method Studios",
-  "ats": "ashby",
-  "slug": "method",
-  "vertical": "vfx",
-  "sub": "VFX + design",
-  "stage": "Private",
-  "raised": "\u2014",
-  "lead": "\u2014",
-  "badges": [
-   "VFX"
-  ],
-  "notes": "VFX house; art roles are project-driven.",
-  "domain": "methodstudios.com"
- },
- {
   "id": "moonactive",
   "name": "Moon Active",
   "ats": "ashby",
@@ -869,23 +756,6 @@
   ],
   "notes": "NoA localization/marketing art plus occasional NY retail + brand roles.",
   "domain": "nintendo.com"
- },
- {
-  "id": "odyssey",
-  "name": "Odyssey",
-  "ats": "ashby",
-  "slug": "odyssey",
-  "vertical": "ai",
-  "sub": "Generative interactive video worlds",
-  "stage": "Series A",
-  "raised": "$27M",
-  "lead": "EQT Ventures",
-  "badges": [
-   "EQT",
-   "Air Street"
-  ],
-  "notes": "Interactive world generation \u2014 3D and environment art matter here.",
-  "domain": "odyssey.systems"
  },
  {
   "id": "ogilvy",
@@ -1035,22 +905,6 @@
   ],
   "notes": "Sports product with heavy brand motion output.",
   "domain": "prizepicks.com"
- },
- {
-  "id": "remedy",
-  "name": "Remedy Entertainment",
-  "ats": "greenhouse",
-  "slug": "remedy",
-  "vertical": "gaming",
-  "sub": "Control / Alan Wake",
-  "stage": "Public",
-  "raised": "HEL: REMEDY",
-  "lead": "\u2014",
-  "badges": [
-   "HEL: REMEDY"
-  ],
-  "notes": "Narrative-driven AA with a distinctive art direction.",
-  "domain": "remedygames.com"
  },
  {
   "id": "rga",

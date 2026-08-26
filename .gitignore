@@ -3,3 +3,4 @@ node_modules/
 .tmp/
 .wrangler/
 *.log
+__pycache__/

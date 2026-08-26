@@ -74,7 +74,7 @@ def verify(pid: str) -> int:
   # ── regexes ────────────────────────────────────────────────────────────
   pats = []
   for key in ("geoInclude", "titleCityExclude", "titleInclude",
-              "titleIncludeAdjacent", "titleExclude"):
+              "titleIncludeBroad", "titleExclude"):
     if f.get(key):
       pats.append((f"filters.{key}", f[key]))
   for i, r in enumerate(f.get("levelRules", [])):
