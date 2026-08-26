@@ -170,8 +170,8 @@ const COMPANIES = [
     totalRoles:2,
     notes:"Public co. Insurance platform with member-facing tech.",
     jobs:[
-      { title:"Analyst, Regulatory Affairs", url:"http://www.hioscar.com/careers/7983436?gh_jid=7983436", level:"mid" },
-      { title:"Workday Reporting & Analytics Lead, People Analytics", url:"http://www.hioscar.com/careers/8056691?gh_jid=8056691", level:"mid" }
+      { title:"Analyst, Regulatory Affairs", url:"https://www.hioscar.com/careers/7983436?gh_jid=7983436", level:"mid" },
+      { title:"Workday Reporting & Analytics Lead, People Analytics", url:"https://www.hioscar.com/careers/8056691?gh_jid=8056691", level:"mid" }
     ] },
   { id:"ridgeline", name:"Ridgeline", vertical:"saas",
     sub:"Cloud OS for investment mgmt",

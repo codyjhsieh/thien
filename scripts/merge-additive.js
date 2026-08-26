@@ -26,12 +26,30 @@ const argv = process.argv.slice(2);
 const flags = {};
 const pos = [];
 for (let i = 0; i < argv.length; i++) {
-  if (argv[i].startsWith('--')) flags[argv[i].slice(2)] = argv[++i];
-  else pos.push(argv[i]);
+  if (!argv[i].startsWith('--')) { pos.push(argv[i]); continue; }
+  const key = argv[i].slice(2);
+  // Value-less switches (--no-dedup) must not swallow the next positional.
+  const next = argv[i + 1];
+  flags[key] = next !== undefined && !next.startsWith('--') && key !== 'no-dedup'
+    ? argv[++i] : true;
+}
+// --profile <id> resolves the target data file (and the domain table) from
+// profiles/<id>.json, so callers don't have to know where a board's data lives.
+// Explicit paths still work: `merge-additive.js js/data.js src.json`.
+let profile = null;
+if (flags.profile) {
+  profile = JSON.parse(fs.readFileSync(`profiles/${flags.profile}.json`, 'utf8'));
+  if (pos.length === 1) pos.unshift(profile.dataFile);
 }
 const [targetPath, sourcePath] = pos;
 if (!targetPath || !sourcePath) {
-  console.error('usage: node scripts/merge-additive.js js/data.js <source.js|source.json> [--baseline f.js] [--today YYYY-MM-DD]');
+  console.error('usage: node scripts/merge-additive.js [--profile <id>] [js/data.js] <source.js|source.json>\n' +
+                '                                      [--baseline f.js] [--today YYYY-MM-DD] [--no-dedup]');
+  process.exit(1);
+}
+if (!fs.existsSync(targetPath)) {
+  console.error(`target ${targetPath} does not exist — generate it first with:\n` +
+                `  python3 scripts/refresh-companies.py --profile ${flags.profile || '<id>'}`);
   process.exit(1);
 }
 
@@ -181,11 +199,45 @@ let out = origSrc.slice(0, start) + block + origSrc.slice(end);
 if (today) {
   out = out.replace(/const COMPANIES_VERIFIED_AT = '[^']+';/, `const COMPANIES_VERIFIED_AT = '${today}';`);
 }
+
+// ── Keep COMPANY_DOMAINS in step with the companies now present ───────────
+// New companies arrive through this merge (job-scout appends them to the
+// profile's candidate file), so their favicon domain has to come along or the
+// card renders a bare letter forever.
+let domainsAdded = 0;
+if (profile) {
+  const refs = Array.isArray(profile.companies) ? profile.companies : [profile.companies];
+  const known = {};
+  for (const ref of refs) {
+    for (const c of JSON.parse(fs.readFileSync(ref, 'utf8'))) {
+      if (c.domain && !(c.id in known)) known[c.id] = c.domain;
+    }
+  }
+  const present = new Set(orig.map((c) => c.id));
+  const m = out.match(/const COMPANY_DOMAINS = \{[\s\S]*?\n\};/);
+  if (m) {
+    // eslint-disable-next-line no-eval
+    const cur = eval('(' + m[0].slice(m[0].indexOf('{'), m[0].lastIndexOf('}') + 1) + ')');
+    for (const [id, dom] of Object.entries(known)) {
+      if (present.has(id) && !(id in cur)) { cur[id] = dom; domainsAdded++; }
+    }
+    const lines = [];
+    const entries = Object.entries(cur).sort(([a], [b]) => a.localeCompare(b));
+    for (let i = 0; i < entries.length; i += 3) {
+      lines.push('  ' + entries.slice(i, i + 3)
+        .map(([id, dom]) => `${/^[A-Za-z_$][\w$]*$/.test(id) ? id : JSON.stringify(id)}:${JSON.stringify(dom)}`)
+        .join(', ') + ',');
+    }
+    out = out.replace(m[0], 'const COMPANY_DOMAINS = {\n' + lines.join('\n') + '\n};');
+  }
+}
+
 fs.writeFileSync(targetPath, out);
 
 const totalJobs = orig.reduce((n, c) => n + (c.jobs || []).length, 0);
 console.log(`Companies: ${orig.length} (added ${newCompanies})`);
 console.log(`Jobs:      ${totalJobs} (added ${newJobs}, deduped ${removed.length} stale repost${removed.length === 1 ? '' : 's'})`);
+if (domainsAdded) console.log(`Domains:   +${domainsAdded} favicon domain(s)`);
 console.log(`Verified:  ${today}${baselineDate ? `   (backfilled added=${baselineDate} for baseline jobs, added=${today} for ${stampedNew} newer)` : ''}`);
 console.log('---');
 for (const a of added) console.log(a);

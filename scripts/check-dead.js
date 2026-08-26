@@ -5,17 +5,23 @@
  * network blip never falsely flags a role; a role that merely moved location or
  * changed title still counts live because we match the unfiltered board).
  *
- *   node scripts/check-dead.js            # report only
- *   node scripts/check-dead.js --prune    # also remove confirmed-dead from data.js
+ *   node scripts/check-dead.js --profile sean            # report only
+ *   node scripts/check-dead.js --profile sean --prune    # also prune the data file
  *
- * ATS + slug come from refresh-companies.py's CANDIDATES; for hand-curated
+ * ATS + slug come from the profile's candidate file(s); for hand-curated
  * companies absent there, they're inferred from a posting URL. */
 'use strict';
 const fs = require('fs');
 const { execFileSync } = require('child_process');
 
-const DATA = 'js/data.js';
-const prune = process.argv.includes('--prune');
+// --profile <id> picks the board to check (default: thien). Explicit
+// `--data <path>` still works for one-off checks.
+const argv = process.argv.slice(2);
+const argOf = (name) => { const i = argv.indexOf(name); return i >= 0 ? argv[i + 1] : null; };
+const PROFILE_ID = argOf('--profile') || 'thien';
+const PROFILE = JSON.parse(fs.readFileSync(`profiles/${PROFILE_ID}.json`, 'utf8'));
+const DATA = argOf('--data') || PROFILE.dataFile;
+const prune = argv.includes('--prune');
 
 function extractCompanies(src) {
   const a = src.indexOf('[', src.indexOf('const COMPANIES = ['));
@@ -25,10 +31,13 @@ function extractCompanies(src) {
 const src = fs.readFileSync(DATA, 'utf8');
 const { companies } = extractCompanies(src);
 
-// id -> [ats, slug] from CANDIDATES tuples (id, name, ats, slug, ...)
-const py = fs.readFileSync('scripts/refresh-companies.py', 'utf8');
+// id -> [ats, slug] from the profile's candidate file(s).
 const slugMap = {};
-for (const m of py.matchAll(/\("([^"]+)","[^"]*","([^"]+)","([^"]+)"/g)) slugMap[m[1]] = [m[2], m[3]];
+for (const ref of (Array.isArray(PROFILE.companies) ? PROFILE.companies : [PROFILE.companies])) {
+  for (const c of JSON.parse(fs.readFileSync(ref, 'utf8'))) {
+    if (!(c.id in slugMap) && c.ats && c.slug) slugMap[c.id] = [c.ats, c.slug];
+  }
+}
 
 // Overrides for hand-curated companies (absent from CANDIDATES) whose careers
 // page is a custom domain that hides a known ATS board behind it.

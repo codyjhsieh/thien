@@ -1,0 +1,1433 @@
+[
+ {
+  "id": "amplify",
+  "name": "Amplify",
+  "ats": "ashby",
+  "slug": "amplify",
+  "vertical": "consumer",
+  "sub": "K-12 curriculum (NYC)",
+  "stage": "Private",
+  "raised": "$200M+",
+  "lead": "\u2014",
+  "badges": [
+   "EdTech"
+  ],
+  "notes": "NYC edtech publisher with a real in-house illustration pipeline.",
+  "domain": "amplify.com"
+ },
+ {
+  "id": "anomaly",
+  "name": "Anomaly",
+  "ats": "lever",
+  "slug": "anomaly",
+  "vertical": "media",
+  "sub": "Independent creative agency (NYC)",
+  "stage": "Private",
+  "raised": "Independent",
+  "lead": "\u2014",
+  "badges": [
+   "Independent"
+  ],
+  "notes": "NYC independent agency.",
+  "domain": "anomaly.com"
+ },
+ {
+  "id": "artsy",
+  "name": "Artsy",
+  "ats": "ashby",
+  "slug": "artsy",
+  "vertical": "media",
+  "sub": "Online art marketplace (NYC)",
+  "stage": "Series D",
+  "raised": "$100M+",
+  "lead": "\u2014",
+  "badges": [
+   "Art market"
+  ],
+  "notes": "NYC art marketplace; brand and product design.",
+  "domain": "artsy.net"
+ },
+ {
+  "id": "avalanchestudios",
+  "name": "Avalanche Studios",
+  "ats": "lever",
+  "slug": "avalanchestudios",
+  "vertical": "gaming",
+  "sub": "Just Cause / Contraband \u2014 NYC studio",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "Nordisk Games",
+  "badges": [
+   "Nordisk Games"
+  ],
+  "notes": "Open-world studio with a real New York office; art reqs land in NYC as well as Stockholm.",
+  "domain": "avalanchestudios.com"
+ },
+ {
+  "id": "away",
+  "name": "Away",
+  "ats": "ashby",
+  "slug": "away",
+  "vertical": "consumer",
+  "sub": "DTC luggage (NYC)",
+  "stage": "Series D",
+  "raised": "$156M",
+  "lead": "Wellington",
+  "badges": [
+   "Wellington",
+   "Global Founders"
+  ],
+  "notes": "NYC brand with in-house design and creative.",
+  "domain": "awaytravel.com"
+ },
+ {
+  "id": "axisstudios",
+  "name": "Axis Studios",
+  "ats": "teamtailor",
+  "slug": "axis",
+  "vertical": "animation",
+  "sub": "Game cinematics + animation",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "Animation"
+  ],
+  "notes": "Cinematics shop \u2014 trailers and in-game cutscenes for game clients.",
+  "domain": "axisstudios.com"
+ },
+ {
+  "id": "backflip",
+  "name": "Backflip",
+  "ats": "ashby",
+  "slug": "backflip",
+  "vertical": "ai",
+  "sub": "AI 3D modeling from sketches",
+  "stage": "Seed",
+  "raised": "$30M",
+  "lead": "Andreessen Horowitz",
+  "badges": [
+   "a16z"
+  ],
+  "notes": "Sketch-to-3D tooling; hires artists to define the output bar.",
+  "domain": "backflip.ai"
+ },
+ {
+  "id": "barbarian",
+  "name": "Barbarian",
+  "ats": "greenhouse",
+  "slug": "barbarian",
+  "vertical": "media",
+  "sub": "Creative + technology agency (NYC)",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "Agency"
+  ],
+  "notes": "NYC shop doing interactive brand work.",
+  "domain": "barbarian.com"
+ },
+ {
+  "id": "bethesda",
+  "name": "Bethesda",
+  "ats": "greenhouse",
+  "slug": "bethesda",
+  "vertical": "gaming",
+  "sub": "Fallout / Elder Scrolls",
+  "stage": "Private (Microsoft)",
+  "raised": "Acquired",
+  "lead": "Microsoft",
+  "badges": [
+   "Microsoft"
+  ],
+  "notes": "AAA art org under Xbox Game Studios.",
+  "domain": "bethesda.net"
+ },
+ {
+  "id": "boom",
+  "name": "BOOM! Studios",
+  "ats": "ashby",
+  "slug": "boom",
+  "vertical": "media",
+  "sub": "Comics publisher",
+  "stage": "Private (Penguin Random House)",
+  "raised": "Acquired",
+  "lead": "\u2014",
+  "badges": [
+   "PRH"
+  ],
+  "notes": "Comics publishing \u2014 illustration commissioning and design.",
+  "domain": "boom-studios.com"
+ },
+ {
+  "id": "brainpop",
+  "name": "BrainPOP",
+  "ats": "greenhouse",
+  "slug": "brainpop",
+  "vertical": "animation",
+  "sub": "Animated learning (NYC)",
+  "stage": "Private equity",
+  "raised": "Acquired",
+  "lead": "KIRKBI",
+  "badges": [
+   "KIRKBI"
+  ],
+  "notes": "NYC animation shop with a small in-house art team \u2014 character/animation work on a real production cadence.",
+  "domain": "brainpop.com"
+ },
+ {
+  "id": "brooklinen",
+  "name": "Brooklinen",
+  "ats": "ashby",
+  "slug": "brooklinen",
+  "vertical": "consumer",
+  "sub": "DTC home goods (Brooklyn)",
+  "stage": "Series B",
+  "raised": "$60M+",
+  "lead": "Summit Partners",
+  "badges": [
+   "Summit"
+  ],
+  "notes": "Brooklyn DTC brand with an in-house creative studio.",
+  "domain": "brooklinen.com"
+ },
+ {
+  "id": "bungie",
+  "name": "Bungie",
+  "ats": "greenhouse",
+  "slug": "bungie",
+  "vertical": "gaming",
+  "sub": "Destiny / Marathon",
+  "stage": "Public (Sony)",
+  "raised": "Acquired",
+  "lead": "Sony",
+  "badges": [
+   "Sony"
+  ],
+  "notes": "AAA art pipeline. Mostly Bellevue, but remote-eligible art reqs surface.",
+  "domain": "bungie.net"
+ },
+ {
+  "id": "cameo",
+  "name": "Cameo",
+  "ats": "greenhouse",
+  "slug": "cameo",
+  "vertical": "media",
+  "sub": "Personalized video from talent",
+  "stage": "Series C",
+  "raised": "$165M",
+  "lead": "e.ventures",
+  "badges": [
+   "e.ventures",
+   "Kleiner Perkins"
+  ],
+  "notes": "Small brand/motion team; roles are rare but land in NYC when they open.",
+  "domain": "cameo.com"
+ },
+ {
+  "id": "camp",
+  "name": "Camp",
+  "ats": "greenhouse",
+  "slug": "camp",
+  "vertical": "consumer",
+  "sub": "Family experience retail (NYC)",
+  "stage": "Series B",
+  "raised": "$46M",
+  "lead": "\u2014",
+  "badges": [
+   "Retail"
+  ],
+  "notes": "NYC experiential retail \u2014 character performance and set/production art.",
+  "domain": "camp.com"
+ },
+ {
+  "id": "criticalmass",
+  "name": "Critical Mass",
+  "ats": "greenhouse",
+  "slug": "criticalmass",
+  "vertical": "media",
+  "sub": "Digital experience agency",
+  "stage": "Public (Omnicom)",
+  "raised": "NYSE: OMC",
+  "lead": "\u2014",
+  "badges": [
+   "Omnicom"
+  ],
+  "notes": "Digital agency with NYC design roles.",
+  "domain": "criticalmass.com"
+ },
+ {
+  "id": "crunchyroll",
+  "name": "Crunchyroll",
+  "ats": "greenhouse",
+  "slug": "crunchyroll",
+  "vertical": "animation",
+  "sub": "Anime streaming + originals",
+  "stage": "Public (Sony)",
+  "raised": "Acquired",
+  "lead": "Sony",
+  "badges": [
+   "Sony"
+  ],
+  "notes": "Anime licensing + originals. Art roles skew production/brand rather than in-house animation.",
+  "domain": "crunchyroll.com"
+ },
+ {
+  "id": "deeplocal",
+  "name": "Deeplocal",
+  "ats": "greenhouse",
+  "slug": "deeplocal",
+  "vertical": "immersive",
+  "sub": "Experiential invention studio",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "Experiential"
+  ],
+  "notes": "Builds physical/interactive brand experiences; fabrication + 3D.",
+  "domain": "deeplocal.com"
+ },
+ {
+  "id": "descript",
+  "name": "Descript",
+  "ats": "greenhouse",
+  "slug": "descript",
+  "vertical": "consumer",
+  "sub": "AI video + audio editor",
+  "stage": "Series C",
+  "raised": "$100M",
+  "lead": "OpenAI Startup Fund",
+  "badges": [
+   "OpenAI",
+   "a16z",
+   "Redpoint"
+  ],
+  "notes": "Editing tool with an in-house motion + brand practice.",
+  "domain": "descript.com"
+ },
+ {
+  "id": "digitalextremes",
+  "name": "Digital Extremes",
+  "ats": "greenhouse",
+  "slug": "digitalextremes",
+  "vertical": "gaming",
+  "sub": "Warframe",
+  "stage": "Private (Tencent)",
+  "raised": "Acquired",
+  "lead": "Tencent",
+  "badges": [
+   "Tencent"
+  ],
+  "notes": "Live-service art team \u2014 VFX and character work on a decade-old game.",
+  "domain": "digitalextremes.com"
+ },
+ {
+  "id": "discord",
+  "name": "Discord",
+  "ats": "greenhouse",
+  "slug": "discord",
+  "vertical": "gaming",
+  "sub": "Chat + communities for gamers",
+  "stage": "Series H",
+  "raised": "$1B+",
+  "lead": "Dragoneer",
+  "badges": [
+   "Dragoneer",
+   "Index",
+   "Benchmark"
+  ],
+  "notes": "Game-adjacent product surface with a real illustration/motion practice \u2014 brand, emotes, activities art.",
+  "domain": "discord.com"
+ },
+ {
+  "id": "downtownmusic",
+  "name": "Downtown Music",
+  "ats": "greenhouse",
+  "slug": "downtownmusic",
+  "vertical": "media",
+  "sub": "Music rights + services (NYC)",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "Music"
+  ],
+  "notes": "NYC music services; brand design roles.",
+  "domain": "downtownmusic.com"
+ },
+ {
+  "id": "dreamgames",
+  "name": "Dream Games",
+  "ats": "lever",
+  "slug": "dreamgames",
+  "vertical": "gaming",
+  "sub": "Royal Match \u2014 mobile puzzle",
+  "stage": "Series C",
+  "raised": "$255M",
+  "lead": "Index Ventures",
+  "badges": [
+   "Index",
+   "Balderton",
+   "Blackstone"
+  ],
+  "notes": "Casual mobile art pipeline: level art, UI, marketing creative.",
+  "domain": "dreamgames.com"
+ },
+ {
+  "id": "fandom",
+  "name": "Fandom",
+  "ats": "greenhouse",
+  "slug": "fandom",
+  "vertical": "gaming",
+  "sub": "Wikis + gaming media (GameSpot, Giant Bomb)",
+  "stage": "Private equity",
+  "raised": "$1B+",
+  "lead": "TPG",
+  "badges": [
+   "TPG",
+   "Fidelity"
+  ],
+  "notes": "Gaming media at scale. Design/illustration roles sit inside brand + editorial rather than a game team.",
+  "domain": "fandom.com"
+ },
+ {
+  "id": "faraway",
+  "name": "Faraway",
+  "ats": "teamtailor",
+  "slug": "faraway",
+  "vertical": "gaming",
+  "sub": "Web3 game studio",
+  "stage": "Series A",
+  "raised": "$30M",
+  "lead": "a16z",
+  "badges": [
+   "a16z"
+  ],
+  "notes": "Small studio, generalist art roles.",
+  "domain": "faraway.com"
+ },
+ {
+  "id": "farfetch",
+  "name": "Farfetch",
+  "ats": "lever",
+  "slug": "farfetch",
+  "vertical": "consumer",
+  "sub": "Luxury fashion marketplace",
+  "stage": "Private (Coupang)",
+  "raised": "Acquired",
+  "lead": "Coupang",
+  "badges": [
+   "Coupang"
+  ],
+  "notes": "Luxury e-commerce with 3D/CGI product imagery work.",
+  "domain": "farfetch.com"
+ },
+ {
+  "id": "fatshark",
+  "name": "Fatshark",
+  "ats": "teamtailor",
+  "slug": "fatshark",
+  "vertical": "gaming",
+  "sub": "Warhammer: Vermintide / Darktide",
+  "stage": "Private (Tencent)",
+  "raised": "Acquired",
+  "lead": "Tencent",
+  "badges": [
+   "Tencent"
+  ],
+  "notes": "AA studio art team \u2014 environment, character, VFX on a shipped live game.",
+  "domain": "fatshark.se"
+ },
+ {
+  "id": "gearbox",
+  "name": "Gearbox",
+  "ats": "greenhouse",
+  "slug": "gearbox",
+  "vertical": "gaming",
+  "sub": "Borderlands",
+  "stage": "Private (Take-Two)",
+  "raised": "Acquired",
+  "lead": "Take-Two",
+  "badges": [
+   "Take-Two"
+  ],
+  "notes": "Stylized AAA art. Now under the NYC-headquartered Take-Two umbrella.",
+  "domain": "gearboxsoftware.com"
+ },
+ {
+  "id": "genies",
+  "name": "Genies",
+  "ats": "ashby",
+  "slug": "genies",
+  "vertical": "immersive",
+  "sub": "Avatar creation platform",
+  "stage": "Series C",
+  "raised": "$250M",
+  "lead": "Bond",
+  "badges": [
+   "Bond",
+   "Silver Lake",
+   "BOND"
+  ],
+  "notes": "Avatar + wearable 3D art is the core product.",
+  "domain": "genies.com"
+ },
+ {
+  "id": "gettyimages",
+  "name": "Getty Images",
+  "ats": "lever",
+  "slug": "gettyimages",
+  "vertical": "media",
+  "sub": "Stock imagery + editorial",
+  "stage": "Public",
+  "raised": "NYSE: GETY",
+  "lead": "\u2014",
+  "badges": [
+   "NYSE: GETY"
+  ],
+  "notes": "Editorial + creative imagery at scale; NYC creative roles.",
+  "domain": "gettyimages.com"
+ },
+ {
+  "id": "grey",
+  "name": "Grey",
+  "ats": "greenhouse",
+  "slug": "grey",
+  "vertical": "media",
+  "sub": "Creative agency (NYC)",
+  "stage": "Public (WPP)",
+  "raised": "LSE: WPP",
+  "lead": "\u2014",
+  "badges": [
+   "WPP"
+  ],
+  "notes": "NYC agency; art direction roles.",
+  "domain": "grey.com"
+ },
+ {
+  "id": "hasbro",
+  "name": "Hasbro",
+  "ats": "greenhouse",
+  "slug": "hasbro",
+  "vertical": "consumer",
+  "sub": "Wizards of the Coast / D&D / Magic",
+  "stage": "Public",
+  "raised": "NASDAQ: HAS",
+  "lead": "\u2014",
+  "badges": [
+   "NASDAQ: HAS"
+  ],
+  "notes": "WotC concept + card art is one of the largest illustration commissions pipelines in the industry.",
+  "domain": "hasbro.com"
+ },
+ {
+  "id": "hedra",
+  "name": "Hedra",
+  "ats": "ashby",
+  "slug": "hedra",
+  "vertical": "ai",
+  "sub": "Generative character video",
+  "stage": "Series A",
+  "raised": "$42M",
+  "lead": "Andreessen Horowitz",
+  "badges": [
+   "a16z",
+   "Index",
+   "Abstract"
+  ],
+  "notes": "NYC generative-character studio. Art direction and character work sit next to the model team.",
+  "domain": "hedra.com"
+ },
+ {
+  "id": "homa",
+  "name": "Homa",
+  "ats": "teamtailor",
+  "slug": "homa",
+  "vertical": "gaming",
+  "sub": "Mobile games platform",
+  "stage": "Series B",
+  "raised": "$150M",
+  "lead": "Headline",
+  "badges": [
+   "Headline",
+   "Northzone"
+  ],
+  "notes": "Data-driven mobile publisher with in-house creative + game art.",
+  "domain": "homagames.com"
+ },
+ {
+  "id": "hovercraft",
+  "name": "Hovercraft",
+  "ats": "greenhouse",
+  "slug": "hovercraft",
+  "vertical": "immersive",
+  "sub": "Experience design studio",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "Experiential"
+  ],
+  "notes": "Interactive installations and brand experiences.",
+  "domain": "hovercraftstudio.com"
+ },
+ {
+  "id": "immutable",
+  "name": "Immutable",
+  "ats": "lever",
+  "slug": "immutable",
+  "vertical": "gaming",
+  "sub": "Web3 game platform",
+  "stage": "Series C",
+  "raised": "$280M",
+  "lead": "Temasek",
+  "badges": [
+   "Temasek",
+   "King River"
+  ],
+  "notes": "Publishes and funds games; art roles are occasional.",
+  "domain": "immutable.com"
+ },
+ {
+  "id": "improbable",
+  "name": "Improbable",
+  "ats": "ashby",
+  "slug": "improbable",
+  "vertical": "immersive",
+  "sub": "Metaverse infrastructure + MSquared",
+  "stage": "Series C",
+  "raised": "$600M+",
+  "lead": "SoftBank",
+  "badges": [
+   "SoftBank",
+   "a16z"
+  ],
+  "notes": "Large-scale virtual worlds with an events business; NYC presence.",
+  "domain": "improbable.io"
+ },
+ {
+  "id": "jamcity",
+  "name": "Jam City",
+  "ats": "lever",
+  "slug": "jamcity",
+  "vertical": "gaming",
+  "sub": "Mobile games (Harry Potter, Cookie Jam)",
+  "stage": "Private",
+  "raised": "$1.3B",
+  "lead": "Netmarble",
+  "badges": [
+   "Netmarble",
+   "JPMorgan"
+  ],
+  "notes": "Mobile art pipeline \u2014 level art, UI, technical animation.",
+  "domain": "jamcity.com"
+ },
+ {
+  "id": "khanacademy",
+  "name": "Khan Academy",
+  "ats": "greenhouse",
+  "slug": "khanacademy",
+  "vertical": "consumer",
+  "sub": "Free online education",
+  "stage": "Nonprofit",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "Nonprofit"
+  ],
+  "notes": "Learning content with an animation and illustration practice.",
+  "domain": "khanacademy.org"
+ },
+ {
+  "id": "krafton",
+  "name": "Krafton",
+  "ats": "greenhouse",
+  "slug": "krafton",
+  "vertical": "gaming",
+  "sub": "PUBG / Subnautica",
+  "stage": "Public",
+  "raised": "KRX: 259960",
+  "lead": "\u2014",
+  "badges": [
+   "KRX: 259960"
+  ],
+  "notes": "Large publisher board \u2014 art reqs across owned studios.",
+  "domain": "krafton.com"
+ },
+ {
+  "id": "krea",
+  "name": "Krea",
+  "ats": "ashby",
+  "slug": "krea",
+  "vertical": "ai",
+  "sub": "Real-time generative design",
+  "stage": "Series A",
+  "raised": "$83M",
+  "lead": "Andreessen Horowitz",
+  "badges": [
+   "a16z",
+   "Abstract"
+  ],
+  "notes": "Real-time image generation aimed squarely at working artists.",
+  "domain": "krea.ai"
+ },
+ {
+  "id": "landor",
+  "name": "Landor",
+  "ats": "greenhouse",
+  "slug": "landor",
+  "vertical": "media",
+  "sub": "Brand + design consultancy",
+  "stage": "Public (WPP)",
+  "raised": "LSE: WPP",
+  "lead": "\u2014",
+  "badges": [
+   "WPP"
+  ],
+  "notes": "Brand identity design at agency scale.",
+  "domain": "landor.com"
+ },
+ {
+  "id": "larian",
+  "name": "Larian Studios",
+  "ats": "lever",
+  "slug": "larian",
+  "vertical": "gaming",
+  "sub": "Baldur's Gate 3",
+  "stage": "Private",
+  "raised": "Independent",
+  "lead": "\u2014",
+  "badges": [
+   "Independent"
+  ],
+  "notes": "BG3 studio. Open applications stay live for most art disciplines.",
+  "domain": "larian.com"
+ },
+ {
+  "id": "lightricks",
+  "name": "Lightricks",
+  "ats": "greenhouse",
+  "slug": "lightricks",
+  "vertical": "consumer",
+  "sub": "Facetune / Videoleap / LTX Studio",
+  "stage": "Series D",
+  "raised": "$330M",
+  "lead": "Insight Partners",
+  "badges": [
+   "Insight",
+   "Goldman Sachs"
+  ],
+  "notes": "Creative tools with a generative-video studio arm; design and motion roles run through NYC.",
+  "domain": "lightricks.com"
+ },
+ {
+  "id": "lumaai",
+  "name": "Luma AI",
+  "ats": "ashby",
+  "slug": "lumaai",
+  "vertical": "ai",
+  "sub": "Dream Machine \u2014 generative video + 3D",
+  "stage": "Series B",
+  "raised": "$70M+",
+  "lead": "Andreessen Horowitz",
+  "badges": [
+   "a16z",
+   "Amplify",
+   "Matrix"
+  ],
+  "notes": "Generative 3D/video. Art direction sits beside the research team.",
+  "domain": "lumalabs.ai"
+ },
+ {
+  "id": "macmillan",
+  "name": "Macmillan",
+  "ats": "teamtailor",
+  "slug": "macmillan",
+  "vertical": "media",
+  "sub": "Book publisher (NYC)",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "Holtzbrinck",
+  "badges": [
+   "Holtzbrinck"
+  ],
+  "notes": "NYC publisher; jacket design and illustration roles.",
+  "domain": "macmillan.com"
+ },
+ {
+  "id": "manvsmachine",
+  "name": "Man vs Machine",
+  "ats": "greenhouse",
+  "slug": "manvsmachine",
+  "vertical": "animation",
+  "sub": "Motion + design studio",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "Motion"
+  ],
+  "notes": "Small high-craft motion studio.",
+  "domain": "mvsm.com"
+ },
+ {
+  "id": "meshy",
+  "name": "Meshy",
+  "ats": "ashby",
+  "slug": "meshy",
+  "vertical": "ai",
+  "sub": "Text/image-to-3D generation",
+  "stage": "Series A",
+  "raised": "$52M",
+  "lead": "Sequoia China",
+  "badges": [
+   "Sequoia",
+   "GGV"
+  ],
+  "notes": "3D-generation tooling. Hires artists as much as engineers \u2014 asset quality is the product.",
+  "domain": "meshy.ai"
+ },
+ {
+  "id": "method",
+  "name": "Method Studios",
+  "ats": "ashby",
+  "slug": "method",
+  "vertical": "vfx",
+  "sub": "VFX + design",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "VFX"
+  ],
+  "notes": "VFX house; art roles are project-driven.",
+  "domain": "methodstudios.com"
+ },
+ {
+  "id": "moonactive",
+  "name": "Moon Active",
+  "ats": "ashby",
+  "slug": "moonactive",
+  "vertical": "gaming",
+  "sub": "Coin Master",
+  "stage": "Private",
+  "raised": "$300M",
+  "lead": "Insight Partners",
+  "badges": [
+   "Insight"
+  ],
+  "notes": "Casual mobile at huge scale; playable-ad and monetization art roles.",
+  "domain": "moonactive.com"
+ },
+ {
+  "id": "newsela",
+  "name": "Newsela",
+  "ats": "greenhouse",
+  "slug": "newsela",
+  "vertical": "consumer",
+  "sub": "K-12 instructional content",
+  "stage": "Series D",
+  "raised": "$180M",
+  "lead": "TCV",
+  "badges": [
+   "TCV",
+   "Owl Ventures"
+  ],
+  "notes": "Edtech content with design and illustration needs.",
+  "domain": "newsela.com"
+ },
+ {
+  "id": "newsweek",
+  "name": "Newsweek",
+  "ats": "greenhouse",
+  "slug": "newsweek",
+  "vertical": "media",
+  "sub": "News magazine (NYC)",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "Media"
+  ],
+  "notes": "NYC newsroom with design and graphics roles.",
+  "domain": "newsweek.com"
+ },
+ {
+  "id": "nintendo",
+  "name": "Nintendo",
+  "ats": "greenhouse",
+  "slug": "nintendo",
+  "vertical": "gaming",
+  "sub": "Nintendo of America",
+  "stage": "Public",
+  "raised": "TYO: 7974",
+  "lead": "\u2014",
+  "badges": [
+   "TYO: 7974"
+  ],
+  "notes": "NoA localization/marketing art plus occasional NY retail + brand roles.",
+  "domain": "nintendo.com"
+ },
+ {
+  "id": "odyssey",
+  "name": "Odyssey",
+  "ats": "ashby",
+  "slug": "odyssey",
+  "vertical": "ai",
+  "sub": "Generative interactive video worlds",
+  "stage": "Series A",
+  "raised": "$27M",
+  "lead": "EQT Ventures",
+  "badges": [
+   "EQT",
+   "Air Street"
+  ],
+  "notes": "Interactive world generation \u2014 3D and environment art matter here.",
+  "domain": "odyssey.systems"
+ },
+ {
+  "id": "ogilvy",
+  "name": "Ogilvy",
+  "ats": "greenhouse",
+  "slug": "ogilvy",
+  "vertical": "media",
+  "sub": "Global creative agency (NYC)",
+  "stage": "Public (WPP)",
+  "raised": "LSE: WPP",
+  "lead": "\u2014",
+  "badges": [
+   "WPP"
+  ],
+  "notes": "Largest NYC agency board on this list \u2014 art director and design roles post steadily.",
+  "domain": "ogilvy.com"
+ },
+ {
+  "id": "opensea",
+  "name": "OpenSea",
+  "ats": "ashby",
+  "slug": "opensea",
+  "vertical": "marketplace",
+  "sub": "NFT marketplace",
+  "stage": "Series C",
+  "raised": "$427M",
+  "lead": "Paradigm",
+  "badges": [
+   "Paradigm",
+   "a16z"
+  ],
+  "notes": "NFT marketplace; brand design roles. Crypto exposure is priced in.",
+  "domain": "opensea.io"
+ },
+ {
+  "id": "opusclip",
+  "name": "OpusClip",
+  "ats": "ashby",
+  "slug": "opusclip",
+  "vertical": "ai",
+  "sub": "AI video repurposing",
+  "stage": "Series A",
+  "raised": "$50M",
+  "lead": "SoftBank",
+  "badges": [
+   "SoftBank",
+   "Millennium"
+  ],
+  "notes": "Short-form video tooling; motion design roles.",
+  "domain": "opus.pro"
+ },
+ {
+  "id": "outfit7",
+  "name": "Outfit7",
+  "ats": "greenhouse",
+  "slug": "outfit7",
+  "vertical": "gaming",
+  "sub": "Talking Tom",
+  "stage": "Private (Zhongshan)",
+  "raised": "Acquired",
+  "lead": "\u2014",
+  "badges": [
+   "Acquired"
+  ],
+  "notes": "Character-first mobile franchise; animation and game design roles.",
+  "domain": "outfit7.com"
+ },
+ {
+  "id": "outschool",
+  "name": "Outschool",
+  "ats": "greenhouse",
+  "slug": "outschool",
+  "vertical": "consumer",
+  "sub": "Live online classes for kids",
+  "stage": "Series D",
+  "raised": "$240M",
+  "lead": "Coatue",
+  "badges": [
+   "Coatue",
+   "Lightspeed"
+  ],
+  "notes": "Kids learning marketplace; brand and illustration work.",
+  "domain": "outschool.com"
+ },
+ {
+  "id": "picsart",
+  "name": "Picsart",
+  "ats": "greenhouse",
+  "slug": "picsart",
+  "vertical": "consumer",
+  "sub": "Creative editing platform",
+  "stage": "Series C",
+  "raised": "$195M",
+  "lead": "SoftBank",
+  "badges": [
+   "SoftBank",
+   "Sequoia"
+  ],
+  "notes": "Consumer creative tooling \u2014 in-house illustration/motion supports the content library.",
+  "domain": "picsart.com"
+ },
+ {
+  "id": "pika",
+  "name": "Pika",
+  "ats": "ashby",
+  "slug": "pika",
+  "vertical": "ai",
+  "sub": "Generative video",
+  "stage": "Series B",
+  "raised": "$135M",
+  "lead": "Spark Capital",
+  "badges": [
+   "Spark",
+   "Lightspeed"
+  ],
+  "notes": "Generative video product with a strong creative team.",
+  "domain": "pika.art"
+ },
+ {
+  "id": "playstation",
+  "name": "PlayStation",
+  "ats": "greenhouse",
+  "slug": "sonyinteractiveentertainmentglobal",
+  "vertical": "gaming",
+  "sub": "Sony Interactive Entertainment",
+  "stage": "Public (Sony)",
+  "raised": "NYSE: SONY",
+  "lead": "\u2014",
+  "badges": [
+   "Sony"
+  ],
+  "notes": "Global first-party art org. Big board, so worth scanning even though NYC reqs are occasional.",
+  "domain": "playstation.com"
+ },
+ {
+  "id": "prizepicks",
+  "name": "PrizePicks",
+  "ats": "greenhouse",
+  "slug": "prizepicks",
+  "vertical": "sports",
+  "sub": "Daily fantasy",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "DFS"
+  ],
+  "notes": "Sports product with heavy brand motion output.",
+  "domain": "prizepicks.com"
+ },
+ {
+  "id": "remedy",
+  "name": "Remedy Entertainment",
+  "ats": "greenhouse",
+  "slug": "remedy",
+  "vertical": "gaming",
+  "sub": "Control / Alan Wake",
+  "stage": "Public",
+  "raised": "HEL: REMEDY",
+  "lead": "\u2014",
+  "badges": [
+   "HEL: REMEDY"
+  ],
+  "notes": "Narrative-driven AA with a distinctive art direction.",
+  "domain": "remedygames.com"
+ },
+ {
+  "id": "rga",
+  "name": "R/GA",
+  "ats": "greenhouse",
+  "slug": "rga",
+  "vertical": "media",
+  "sub": "Design + innovation agency (NYC)",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "Agency"
+  ],
+  "notes": "NYC-born digital agency; design and motion roles.",
+  "domain": "rga.com"
+ },
+ {
+  "id": "riotgames",
+  "name": "Riot Games",
+  "ats": "greenhouse",
+  "slug": "riotgames",
+  "vertical": "gaming",
+  "sub": "League of Legends / VALORANT",
+  "stage": "Public (Tencent)",
+  "raised": "Acquired",
+  "lead": "Tencent",
+  "badges": [
+   "Tencent"
+  ],
+  "notes": "Deep art org \u2014 splash, character, VFX, environment. NYC postings are rare but the bar and craft standard are the reference point.",
+  "domain": "riotgames.com"
+ },
+ {
+  "id": "sandboxvr",
+  "name": "Sandbox VR",
+  "ats": "lever",
+  "slug": "sandboxvr",
+  "vertical": "immersive",
+  "sub": "Location-based VR experiences",
+  "stage": "Series C",
+  "raised": "$120M",
+  "lead": "Andreessen Horowitz",
+  "badges": [
+   "a16z",
+   "Alibaba"
+  ],
+  "notes": "Builds its own VR titles; art roles sit on a real game team.",
+  "domain": "sandboxvr.com"
+ },
+ {
+  "id": "seconddinner",
+  "name": "Second Dinner",
+  "ats": "ashby",
+  "slug": "seconddinner",
+  "vertical": "gaming",
+  "sub": "Marvel Snap",
+  "stage": "Series B",
+  "raised": "$100M",
+  "lead": "Griffin Gaming",
+  "badges": [
+   "Griffin Gaming",
+   "NetEase"
+  ],
+  "notes": "Card-game art at Marvel scale; heavy illustration commissioning.",
+  "domain": "seconddinner.com"
+ },
+ {
+  "id": "semafor",
+  "name": "Semafor",
+  "ats": "greenhouse",
+  "slug": "semafor",
+  "vertical": "media",
+  "sub": "Global news startup (NYC)",
+  "stage": "Series B",
+  "raised": "$44M",
+  "lead": "\u2014",
+  "badges": [
+   "Media"
+  ],
+  "notes": "NYC newsroom; design and visual storytelling.",
+  "domain": "semafor.com"
+ },
+ {
+  "id": "skydance",
+  "name": "Skydance",
+  "ats": "lever",
+  "slug": "skydance",
+  "vertical": "animation",
+  "sub": "Skydance Animation + Interactive",
+  "stage": "Private",
+  "raised": "$1B+",
+  "lead": "RedBird",
+  "badges": [
+   "RedBird",
+   "Tencent"
+  ],
+  "notes": "Feature animation plus a games arm; 2D/3D and character design roles.",
+  "domain": "skydance.com"
+ },
+ {
+  "id": "skymavis",
+  "name": "Sky Mavis",
+  "ats": "ashby",
+  "slug": "skymavis",
+  "vertical": "gaming",
+  "sub": "Axie Infinity",
+  "stage": "Series B",
+  "raised": "$152M",
+  "lead": "a16z",
+  "badges": [
+   "a16z",
+   "Paradigm"
+  ],
+  "notes": "Game art for a web3 title; treat the crypto exposure with open eyes.",
+  "domain": "skymavis.com"
+ },
+ {
+  "id": "sleeper",
+  "name": "Sleeper",
+  "ats": "ashby",
+  "slug": "sleeper",
+  "vertical": "sports",
+  "sub": "Fantasy sports + social betting (NYC)",
+  "stage": "Series C",
+  "raised": "$100M+",
+  "lead": "Andreessen Horowitz",
+  "badges": [
+   "a16z",
+   "Founders Fund"
+  ],
+  "notes": "NYC sports app with a strong illustration + motion identity.",
+  "domain": "sleeper.com"
+ },
+ {
+  "id": "sothebys",
+  "name": "Sotheby's",
+  "ats": "greenhouse",
+  "slug": "sothebys",
+  "vertical": "media",
+  "sub": "Auction house (NYC)",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "Patrick Drahi",
+  "badges": [
+   "Auction"
+  ],
+  "notes": "NYC auction house \u2014 cataloguing and design roles.",
+  "domain": "sothebys.com"
+ },
+ {
+  "id": "sphereentertainment",
+  "name": "Sphere Entertainment",
+  "ats": "greenhouse",
+  "slug": "sphereentertainment",
+  "vertical": "immersive",
+  "sub": "Sphere Las Vegas + MSG Networks \u2014 immersive venue content",
+  "stage": "Public",
+  "raised": "NYSE: SPHR",
+  "lead": "\u2014",
+  "badges": [
+   "NYSE: SPHR"
+  ],
+  "notes": "NYC-headquartered immersive content studio. Real-time/Unreal, 16K content pipelines \u2014 the closest thing to a game art job that isn't a game.",
+  "domain": "sphereentertainment.com"
+ },
+ {
+  "id": "storyblocks",
+  "name": "Storyblocks",
+  "ats": "greenhouse",
+  "slug": "storyblocks",
+  "vertical": "media",
+  "sub": "Stock video + motion library",
+  "stage": "Private equity",
+  "raised": "Acquired",
+  "lead": "Great Hill",
+  "badges": [
+   "Great Hill"
+  ],
+  "notes": "Stock motion library \u2014 commissions and curates motion art.",
+  "domain": "storyblocks.com"
+ },
+ {
+  "id": "subset",
+  "name": "Subset",
+  "ats": "teamtailor",
+  "slug": "subset",
+  "vertical": "animation",
+  "sub": "Motion design studio",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "Motion"
+  ],
+  "notes": "Boutique motion shop.",
+  "domain": "subset.tv"
+ },
+ {
+  "id": "supercell",
+  "name": "Supercell",
+  "ats": "ashby",
+  "slug": "supercell",
+  "vertical": "gaming",
+  "sub": "Clash of Clans / Brawl Stars",
+  "stage": "Private (Tencent)",
+  "raised": "Acquired",
+  "lead": "Tencent",
+  "badges": [
+   "Tencent"
+  ],
+  "notes": "Tiny cells with senior artists; the art bar is one of the highest in mobile.",
+  "domain": "supercell.com"
+ },
+ {
+  "id": "take-two",
+  "name": "Take-Two Interactive",
+  "ats": "greenhouse",
+  "slug": "taketwo",
+  "vertical": "gaming",
+  "sub": "Rockstar / 2K / Zynga \u2014 NYC HQ",
+  "stage": "Public",
+  "raised": "NASDAQ: TTWO",
+  "lead": "\u2014",
+  "badges": [
+   "NASDAQ: TTWO"
+  ],
+  "notes": "NYC-headquartered publisher above Rockstar and 2K. Central art + brand roles post here.",
+  "domain": "take2games.com"
+ },
+ {
+  "id": "thatgamecompany",
+  "name": "thatgamecompany",
+  "ats": "ashby",
+  "slug": "thatgamecompany",
+  "vertical": "gaming",
+  "sub": "Journey / Sky: Children of the Light",
+  "stage": "Series B",
+  "raised": "$160M",
+  "lead": "Sequoia China",
+  "badges": [
+   "Sequoia",
+   "TPG"
+  ],
+  "notes": "Small art-led team; character and environment craft is the whole product.",
+  "domain": "thatgamecompany.com"
+ },
+ {
+  "id": "themill",
+  "name": "The Mill",
+  "ats": "greenhouse",
+  "slug": "mill",
+  "vertical": "vfx",
+  "sub": "VFX + design studio (NYC office)",
+  "stage": "Private (Technicolor)",
+  "raised": "Acquired",
+  "lead": "\u2014",
+  "badges": [
+   "Technicolor"
+  ],
+  "notes": "One of the few large VFX shops with a standing New York office.",
+  "domain": "themill.com"
+ },
+ {
+  "id": "tonies",
+  "name": "tonies",
+  "ats": "ashby",
+  "slug": "tonies",
+  "vertical": "consumer",
+  "sub": "Audio characters for kids",
+  "stage": "Public",
+  "raised": "FRA: TNIE",
+  "lead": "\u2014",
+  "badges": [
+   "FRA: TNIE"
+  ],
+  "notes": "Character-driven kids audio brand; illustration and character design.",
+  "domain": "tonies.com"
+ },
+ {
+  "id": "tripledot",
+  "name": "Tripledot Studios",
+  "ats": "greenhouse",
+  "slug": "tripledotstudios",
+  "vertical": "gaming",
+  "sub": "Mobile puzzle + casual games",
+  "stage": "Series B",
+  "raised": "$116M",
+  "lead": "Access Industries",
+  "badges": [
+   "Access Industries",
+   "Eldridge"
+  ],
+  "notes": "Mobile casual at scale \u2014 2D/UI art and ad-creative motion work.",
+  "domain": "tripledotstudios.com"
+ },
+ {
+  "id": "twitch",
+  "name": "Twitch",
+  "ats": "greenhouse",
+  "slug": "twitch",
+  "vertical": "gaming",
+  "sub": "Live game streaming",
+  "stage": "Private (Amazon)",
+  "raised": "Acquired",
+  "lead": "Amazon",
+  "badges": [
+   "Amazon"
+  ],
+  "notes": "Gaming-native brand and product art; emotes and channel art culture.",
+  "domain": "twitch.tv"
+ },
+ {
+  "id": "vaynermedia",
+  "name": "VaynerMedia",
+  "ats": "greenhouse",
+  "slug": "vaynermedia",
+  "vertical": "media",
+  "sub": "Social-first creative agency",
+  "stage": "Private",
+  "raised": "Bootstrapped",
+  "lead": "\u2014",
+  "badges": [
+   "Agency"
+  ],
+  "notes": "High-volume NYC creative shop. Motion/3D/design roles are steady even when studio art reqs dry up.",
+  "domain": "vaynermedia.com"
+ },
+ {
+  "id": "viggle",
+  "name": "Viggle",
+  "ats": "ashby",
+  "slug": "viggle",
+  "vertical": "ai",
+  "sub": "Controllable character video",
+  "stage": "Series A",
+  "raised": "$39M",
+  "lead": "Andreessen Horowitz",
+  "badges": [
+   "a16z"
+  ],
+  "notes": "Character animation from video \u2014 animation-literate hires.",
+  "domain": "viggle.ai"
+ },
+ {
+  "id": "vrchat",
+  "name": "VRChat",
+  "ats": "lever",
+  "slug": "vrchat",
+  "vertical": "immersive",
+  "sub": "Social VR worlds",
+  "stage": "Series D",
+  "raised": "$100M",
+  "lead": "Anthos Capital",
+  "badges": [
+   "Anthos",
+   "Makers Fund"
+  ],
+  "notes": "Avatar + world art for a user-generated 3D platform.",
+  "domain": "vrchat.com"
+ },
+ {
+  "id": "worldlabs",
+  "name": "World Labs",
+  "ats": "greenhouse",
+  "slug": "worldlabs",
+  "vertical": "ai",
+  "sub": "Spatial intelligence / 3D world models",
+  "stage": "Series A",
+  "raised": "$230M",
+  "lead": "NEA",
+  "badges": [
+   "NEA",
+   "a16z",
+   "Radical"
+  ],
+  "notes": "Fei-Fei Li's spatial-AI lab. 3D artists shape the training and eval bar.",
+  "domain": "worldlabs.ai"
+ }
+]

@@ -1,0 +1,89 @@
+name: refresh boards
+
+# The unattended half of the pipeline: every morning, re-probe every candidate
+# company, merge what is live, prune what is gone, and commit the diff. The
+# agentic half (widening the candidate pool, retuning filters) stays a human-
+# or Claude-initiated action — see .claude/skills/job-{pipeline,scout}.
+
+on:
+  schedule:
+    - cron: '17 11 * * *'   # 07:17 America/New_York (EDT) / 06:17 (EST)
+  workflow_dispatch:
+    inputs:
+      profiles:
+        description: 'Space-separated profile ids (default: all)'
+        required: false
+        default: ''
+      shards:
+        description: 'Parallel fetch shards'
+        required: false
+        default: '6'
+
+permissions:
+  contents: write
+
+concurrency:
+  # Two refreshes writing the same data files would interleave their merges.
+  group: refresh-boards
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Resolve profiles
+        id: which
+        run: |
+          if [ -n "${{ inputs.profiles }}" ]; then
+            echo "ids=${{ inputs.profiles }}" >> "$GITHUB_OUTPUT"
+          else
+            ids=$(ls profiles/*.json | grep -v '\.companies\.json$' \
+                  | xargs -n1 basename | sed 's/\.json$//' | tr '\n' ' ')
+            echo "ids=$ids" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run pipeline
+        env:
+          SHARDS: ${{ inputs.shards || '6' }}
+          JOBS: '14'
+        run: scripts/pipeline.sh ${{ steps.which.outputs.ids }}
+
+      - name: Verify
+        run: python3 scripts/verify-board.py --all
+
+      - name: Commit refreshed data
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add js profiles *.html
+          if git diff --cached --quiet; then
+            echo "no change — boards already current"
+            exit 0
+          fi
+          summary=$(python3 - <<'PY'
+          import json, subprocess, glob, os, re
+          out = []
+          for p in sorted(glob.glob('profiles/*.json')):
+              if p.endswith('.companies.json'):
+                  continue
+              prof = json.load(open(p))
+              src = open(prof['dataFile']).read()
+              n = len(re.findall(r'\n      \{ title:', src))
+              cos = len(re.findall(r'\n  \{ id:', src))
+              out.append(f"{prof['id']} {cos} cos/{n} roles")
+          print('; '.join(out))
+          PY
+          )
+          git commit -m "Refresh boards — $summary"
+          git push

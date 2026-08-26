@@ -2985,3 +2985,22 @@ blockquote {
 }
 .ivq-sources a { color: var(--accent); text-decoration: none; }
 .ivq-sources a:hover { text-decoration: underline; }
+
+/* ---------- Board switcher ----------
+ * One repo, several boards. The nav is the only chrome shared across them, so
+ * it stays out of the profile config and lives here with the rest of the CSS. */
+.board-nav {
+  display: flex; gap: 6px; justify-content: center;
+  padding: 14px 12px 0; flex-wrap: wrap;
+}
+.board-nav-link {
+  font-size: 12.5px; font-weight: 500; letter-spacing: .01em;
+  padding: 5px 12px; border-radius: 999px; text-decoration: none;
+  color: var(--muted); border: 1px solid var(--hairline);
+  background: transparent; transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+.board-nav-link:hover { color: var(--text); border-color: var(--accent); }
+.board-nav-link.active {
+  color: var(--accent); border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}

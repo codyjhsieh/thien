@@ -1,6 +1,7 @@
-// thien — job board (standalone extract from InterviewPrep)
-// Single-file rendering + scoring for the Companies + Individual Roles views.
-// Applied-state is persisted to localStorage under `thien_applied`.
+// Shared job-board renderer — one file, many boards.
+// Reads window.BOARD_PROFILE (js/<id>-profile.js) + the data global it names,
+// then renders the Companies + Individual Roles views for that profile.
+// Applied-state persists to localStorage under the profile's storageKey.
 
 'use strict';
 
@@ -9,7 +10,14 @@
 // classic-script scope (which throws SyntaxError and blanks the page).
 (function () {
 
-const { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT } = window.DATA;
+// Every board in this repo is the same renderer pointed at a different
+// profile: js/<id>-profile.js sets window.BOARD_PROFILE (generated from
+// profiles/<id>.json), and the data file it names supplies the postings.
+const P = window.BOARD_PROFILE;
+if (!P) throw new Error('board.js: no window.BOARD_PROFILE — load js/<id>-profile.js first');
+const DATA = window[P.dataGlobal || 'DATA'];
+if (!DATA) throw new Error(`board.js: window.${P.dataGlobal} is missing — load the data file first`);
+const { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT } = DATA;
 
 /* --------------------------------------------------------------------
  * Tiny DOM helpers
@@ -23,26 +31,20 @@ function el(tag, cls, html) {
 function esc(s) {
   return String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
+// Profile patterns arrive as strings so one regex source can drive both the
+// Python fetch stage and this renderer. Compile each pattern once.
+const _reCache = new Map();
+function rx(src) {
+  let r = _reCache.get(src);
+  if (!r) { r = new RegExp(src, 'i'); _reCache.set(src, r); }
+  return r;
+}
 
 /* --------------------------------------------------------------------
- * Company + role classification tables
+ * Vertical labelling (profile-supplied)
  * ------------------------------------------------------------------ */
-const verticalPill = {
-  ai: 'pill-ai', hospitality: 'pill-hosp', marketplace: 'pill-mkt',
-  devtools: 'pill-dev', fintech: 'pill-both',
-  saas: 'pill-dev', infra: 'pill-dev', health: 'pill-hosp',
-  sports: 'pill-ai', fitness: 'pill-hosp', media: 'pill-mkt',
-  consumer: 'pill-mkt', gaming: 'pill-ai', adtech: 'pill-dev',
-  climate: 'pill-hosp',
-};
-const verticalLabel = {
-  ai:'AI', hospitality:'Hospitality', marketplace:'Marketplace',
-  devtools:'Dev Tools', fintech:'Fintech',
-  saas:'SaaS', infra:'Infra', health:'Health',
-  sports:'Sports', fitness:'Fitness', media:'Media',
-  consumer:'Consumer', gaming:'Gaming', adtech:'AdTech',
-  climate:'Climate',
-};
+const verticalPill  = (P.verticals && P.verticals.pills)  || {};
+const verticalLabel = (P.verticals && P.verticals.labels) || {};
 
 /* --------------------------------------------------------------------
  * Date helpers
@@ -71,194 +73,94 @@ function isNewJob(j) {
 }
 
 /* --------------------------------------------------------------------
- * COOLNESS lookup — hand-scored 1-10 tier per company
+ * Fit scoring — every table below comes from the profile, so tuning a
+ * board means editing profiles/<id>.json, never this file.
+ *
+ *   fit = coolness × P(reply) × P(bar-pass) × penalties
+ *
+ * then percentile-mapped across the board's own role pool onto 0.5-10.0.
  * ------------------------------------------------------------------ */
-const COOLNESS = {
-  // Tier 10 — peak LES-cool
-  partiful:10, dorsia:10, suno:10, flora:10, udio:10,
-  // Tier 9
-  substack:9, plot:9, qloo:9, slate:9, patreon:9, hang:9, beacons:9,
-  'aura-frames':9, output:9, runway:9, hedra:9,
-  // Tier 8
-  ideogram:8, 'hume-ai':8, lovable:8, warp:8, cursor:8, etsy:8, nyt:8, reddit:8,
-  // Tier 7
-  seatgeek:7, 'opus-training':7, glossgenius:7, bombas:7, resortpass:7,
-  spotify:7, huggingface:7, perplexity:7, notion:7, linear:7, figma:7,
-  elevenlabs:7, 'mighty-networks':7, crosby:7,
-  // Tier 6
-  vercel:6, replit:6, airtable:6, glide:6, blockworks:6, kalshi:6,
-  polymarket:6, whatnot:6, ro:6, hopper:6, lyft:6, bilt:6, mirage:6,
-  'sesame-ai':6, 'black-forest-labs':6,
-  // Tier 5 — neutral
-  navan:5, metropolis:5, via:5, cityblock:5, propel:5, loopai:5, blee:5,
-  sequence:5, headway:5, 'maven-clinic':5, 'spring-health':5, talkspace:5,
-  'k-health':5, camber:5, abridge:5, squarespace:5, mercury:5, stripe:5,
-  robinhood:5, block:5, 'reflex-robotics':5, cartesia:5, 'clay-labs':5,
-  // Tier 4
-  commure:4, oscar:4, zocdoc:4, lemonade:4, rho:4, brigit:4, stash:4,
-  chime:4, betterment:4, airgoods:4, hebbia:4, openai:4, anthropic:4,
-  mistral:4, cognition:4, modal:4, 'normal-computing':4, stainless:4,
-  hex:4, watershed:4, ramp:4, disney:4, mercor:4,
-  // Tier 3
-  sofi:3, wealthfront:3, affirm:3, doordash:3, alphasense:3, 'snorkel-ai':3,
-  cohere:3, harvey:3, writer:3, decagon:3, sierra:3, unify:3, kustomer:3,
-  attentive:3, iterable:3, braze:3, knock:3, plaid:3, alchemy:3,
-  'galaxy-digital':3, brex:3, tavily:3, langchain:3, baseten:3, deepgram:3,
-  assemblyai:3, poolside:3, fireworks:3, pinecone:3, braintrust:3, arize:3,
-  logrocket:3, 'general-context':3, sola:3, gusto:3,
-  // Tier 2
-  yext:2, 'the-trade-desk':2, doubleverify:2, asana:2, mongodb:2, datadog:2,
-  'cockroach-labs':2, neon:2, 'monte-carlo':2, carta:2, 'modern-treasury':2,
-  alloy:2, middesk:2, pinwheel:2, sandbar:2, fireblocks:2, gemini:2,
-  'jane-street':2, 'two-sigma':2, justworks:2, distyl:2, glean:2, rilla:2,
-  credal:2, clear:2, scaleai:2, coreweave:2, 'sigma-computing':2,
-  nbcuniversal:2,
-  // Tier 1 — anti-LES
-  drata:1, secureframe:1, ridgeline:1, salesforce:1, forge:1, blackrock:1,
-  'goldman-sachs':1, 'de-shaw':1, worldquant:1, point72:1, 'jump-trading':1,
-  virtu:1,
-  // 2026-07-21 batch — expansion candidates
-  ideo:8, hugeinc:6, metalab:6, instrument:6, akqa:5, codeandtheory:5,
-  kettle:5, dept:4, nearform:4, thoughtworks:4, vsapartners:4,
-  palantir:5, factory:6, openevidence:6, vannevarlabs:5, andela:3,
-  turing:3, toptal:3, pariveda:3, capco:2,
-  ultra:6, 'tuesday-labs':6, offdeal:5, clarion:4, spur:4, ryvn:4,
-  pointone:4, ambral:3, 'codes-health':3, greenboard:3,
-  diligencesquared:3, fleetline:3,
-  piramidalinc:6, tennr:5, 'fortuna-health':5, junction:5, garage:5,
-  loula:4, 'prosper-ai':4, finny:4, careswift:4, atg:4,
-  avallon:3, solva:3, 'claim-health':3,
-  a24:9, aimeleondore:8, splice:6, sonymusic:6, goop:5, livenation:4, honestco:3,
-  // 2026-07-21 additions
-  ganni:9, rockstargames:9, duolingo:8, blackbird:8, bdg:8,
-  'farmers-dog':7, soundcloud:7, uniswap:6, attio:6, graphite:6, browserbase:6, fanduel:6,
-  handshake:5, midpage:5, semgrep:5,
-  peloton:4, equinox:4, materialize:4, knotapi:4, extend:4, ripple:4, databento:4,
-  numeric:3, numeral:3, socure:3, imprint:3, nayya:3,
-  dailypay:2, mosaic:2, octus:2, 'nyc-gov':2,
-  drw:1, imc:1, 'flow-traders':1, 'old-mission':1, socotec:1,
-  // 2026-07-24 — analyst-focused expansion (sports weighted per Thien's interest)
-  nba:10, nfl:10, mlb:10, wnba:9,
-  draftkings:9, fanatics:9, underdog:8, prizepicks:8,
-  theathletic:9, overtime:8, sportradar:7, dazn:7,
-  whoop:8, strava:8, classpass:6, barrys:6,
-  doordash:6, instacart:5, uber:6, etsy:8, pinterest:6, airbnb:7,
-  stockx:7, warby:8, rentherunway:6, himsandhers:5, sweetgreen:7, compass:4,
-  netflix:8, vice:5, 'bloomberg-media':5, wondery:6,
-  bilt:6, current:5, marqeta:4, nubank:6, 'rocket-money':4,
-  databricks:5, snowflake:4, segment:4, box:2, hubspot:3, verkada:4,
-};
-
-// Frontier AI labs (OpenAI/Anthropic/etc.) still have a high analyst bar
-// but nowhere near the researcher-level extremes, so the penalty is milder
-// than it was for the engineering board.
-const FRONTIER = new Set([
-  'openai','anthropic','cohere','mistral','perplexity','huggingface',
-  'cursor','cognition','glean','sierra','scaleai','harvey','runway',
-  'black-forest-labs',
-]);
-
-function _coolness(c) {
-  if (c.id in COOLNESS) return COOLNESS[c.id];
-  if (c.vertical === 'sports' || c.vertical === 'fitness') return 8;
-  if (c.vertical === 'media' || c.vertical === 'consumer') return 6;
-  if (c.vertical === 'ai') return 5;
-  if (c.vertical === 'devtools' || c.vertical === 'infra') return 4;
-  return 4;
+const S = P.scoring || {};
+const GROUPS = {};
+for (const [name, ids] of Object.entries(S.groups || {})) GROUPS[name] = new Set(ids);
+function inGroup(name, id) {
+  const g = GROUPS[name];
+  return !!g && g.has(id);
 }
 
-// Analyst roles at quant HFT firms exist but they're gated on quantitative
-// finance / CS academics, not a fit for an ops-to-data-analyst switcher.
-// Keep a real (but not extreme) penalty so they don't dominate.
-const QUANT_GATED = new Set([
-  'de-shaw','two-sigma','jane-street','point72','worldquant',
-  'jump-trading','virtu','drw','imc','flow-traders','old-mission',
-]);
-// Prestige banks + BlackRock — analyst roles are more accessible but still
-// gated on prestige / target-school pipelines.
-const BULGE_BRACKET = new Set([
-  'goldman-sachs','morgan-stanley','jpmorgan','blackrock','citi','bofa',
-]);
+function _coolness(c) {
+  const cool = S.coolness || {};
+  if (cool.map && c.id in cool.map) return cool.map[c.id];
+  const byV = cool.byVertical || {};
+  if (c.vertical in byV) return byV[c.vertical];
+  return cool.default != null ? cool.default : 5;
+}
+
+function _clamp(v, range, lo, hi) {
+  const [a, b] = range || [lo, hi];
+  return Math.max(a, Math.min(b, v));
+}
 
 function _candidateMult(c) {
+  const cfg = S.candidateMult || {};
   let m = 1.0;
   const stage = (c.stage || '').toLowerCase();
-  // Big established orgs have well-defined analyst hiring pipelines, so we
-  // don't punish "late/public" the way we did for scrappy eng roles.
-  if (/seed/.test(stage) || /series a\b/.test(stage)) m *= 1.10;
-  if (FRONTIER.has(c.id))     m *= 0.75;
-  if (QUANT_GATED.has(c.id))  m *= 0.35;
-  if (BULGE_BRACKET.has(c.id)) m *= 0.6;
-  return Math.max(0.2, Math.min(1.4, m));
+  for (const [pat, mult] of cfg.stageBoost || []) {
+    if (rx(pat).test(stage)) m *= mult;
+  }
+  for (const [group, mult] of Object.entries(cfg.groupMult || {})) {
+    if (inGroup(group, c.id)) m *= mult;
+  }
+  return _clamp(m, cfg.clamp, 0.2, 1.4);
 }
 
 function _replyProb(c) {
-  // Baseline reply rate for analyst applications is higher than for
-  // eng roles at similar-stage cos (bigger candidate funnel, more turnover).
-  let p = 0.14;
+  const cfg = S.replyProb || {};
+  let p = cfg.base != null ? cfg.base : 0.14;
   const stage = (c.stage || '').toLowerCase();
-  if (/seed/.test(stage))                       p = 0.32;
-  else if (/series a\b/.test(stage))            p = 0.26;
-  else if (/series b\b/.test(stage))            p = 0.20;
-  else if (/series c\b/.test(stage))            p = 0.15;
-  else if (/series d\b/.test(stage))            p = 0.12;
-  else if (/series e\b/.test(stage))            p = 0.10;
-  else if (/series [fghij]\b|public|late|take/.test(stage)) p = 0.08;
-  if (FRONTIER.has(c.id)) p *= 0.5;
+  // First matching row wins — the table is ordered seed -> late.
+  for (const [pat, val] of cfg.stageTable || []) {
+    if (rx(pat).test(stage)) { p = val; break; }
+  }
+  for (const [group, mult] of Object.entries(cfg.groupMult || {})) {
+    if (inGroup(group, c.id)) p *= mult;
+  }
   const roles = (c.jobs || []).length;
-  if (roles > 15)      p *= 0.75;
-  else if (roles > 10) p *= 0.88;
+  for (const [threshold, mult] of cfg.roleCountPenalty || []) {
+    if (roles > threshold) { p *= mult; break; }
+  }
   p *= _candidateMult(c);
-  return Math.max(0.03, Math.min(0.45, p));
+  return _clamp(p, cfg.clamp, 0.03, 0.45);
 }
 
-// Pass-probability tuned for Thien's profile:
-//   - SQL + Python (pandas) + Excel + Power BI
-//   - Ops/procurement background (RXO, CEVA Logistics, LegalZoom platform ops)
-//   - Six Sigma green belt; process/KPI orientation
-//   - Early-career (data-analyst pivot); DataCamp cert in progress
-// Roles closer to that profile get a bonus; roles requiring specialist creds
-// or heavy statistics/ML get a penalty.
 function _passProb(c, j) {
+  const cfg = S.passProb || {};
   const t = ((j && j.title) || '').toLowerCase();
-  let p = 0.35;
-  // Strong direct matches
-  if (/operations\s+analyst|business\s+operations|bizops/.test(t))       p += 0.18;
-  if (/supply\s+chain|logistics|procurement|fulfillment|inventory/.test(t)) p += 0.20;
-  if (/data\s+analyst|analytics\s+analyst|reporting\s+analyst/.test(t))  p += 0.15;
-  if (/business\s+intelligence|\bbi\s+(?:analyst|developer)\b/.test(t))  p += 0.12;
-  if (/strategy|strategic/.test(t))                                      p += 0.05;
-  // Marketing/growth/product analyst — data-analyst-adjacent, still fits
-  if (/marketing\s+analyst|growth\s+analyst|product\s+analyst/.test(t))  p += 0.05;
-  // Adjacent-but-harder: revenue/sales/marketing ops (needs SFDC/Marketo)
-  if (/revenue\s+operations|revops|sales\s+operations|marketing\s+operations/.test(t)) p += 0.02;
-  // Penalties: specialized statistics/ML that require an MS + years exp
-  if (/senior|staff|principal|lead/.test(t))     p -= 0.30;  // belt-and-suspenders; upstream filter should catch
-  if (/actuar|underwrit|quantitative|\bquant\b/.test(t))    p -= 0.25;
-  if (/machine\s+learning|ml\s+scientist|data\s+scientist/.test(t))     p -= 0.15;
-  if (j && j.level === 'entry')    p += 0.10;
-  if (j && j.level === 'mid')      p += 0.02;
-  return Math.max(0.05, Math.min(0.70, p));
+  let p = cfg.base != null ? cfg.base : 0.35;
+  for (const [pat, delta] of cfg.titleRules || []) {
+    if (rx(pat).test(t)) p += delta;
+  }
+  const bonus = cfg.levelBonus || {};
+  if (j && j.level && j.level in bonus) p += bonus[j.level];
+  return _clamp(p, cfg.clamp, 0.05, 0.7);
 }
 
 // Taste penalties — multiplicative on raw fit BEFORE percentile normalization.
-const CRYPTO_IDS = new Set([
-  'alchemy','blockworks','chainalysis','elliptic','fireblocks','galaxy-digital',
-  'gemini','ledger','notabene','ondofinance','paxos','polymarket','ripple',
-  'trm-labs','uniswap',
-]);
-function _cryptoPenalty(c) { return CRYPTO_IDS.has(c.id) ? 0.5 : 1.0; }
-// Kept for signature compatibility with _rawFit — analyst roles don't have
-// a frontend-role gotcha, so this is always 1.0.
-function _frontendPenalty(_j) { return 1.0; }
+function _penalties(c, j) {
+  let m = 1.0;
+  for (const rule of S.penalties || []) {
+    if (rule.ids && rule.ids.includes(c.id)) { m *= rule.mult; continue; }
+    if (rule.titleMatch && j && rx(rule.titleMatch).test(j.title || '')) m *= rule.mult;
+  }
+  return m;
+}
 
 /* --------------------------------------------------------------------
  * Percentile-normalized fit score (0.5 - 10.0 on display)
  * ------------------------------------------------------------------ */
 let _fitPool = null;
 function _rawFit(c, j) {
-  return (_coolness(c) / 10) * _replyProb(c) * _passProb(c, j)
-    * _cryptoPenalty(c) * _frontendPenalty(j);
+  return (_coolness(c) / 10) * _replyProb(c) * _passProb(c, j) * _penalties(c, j);
 }
 function _computeFitPool() {
   const scores = [];
@@ -282,11 +184,15 @@ function _normalize(raw) {
 }
 function companyFitScore(c)   { return _normalize(_rawFit(c, null)); }
 function roleFitScore(c, j)   { return _normalize(_rawFit(c, j)); }
+const TIERS = S.tiers || [
+  { min: 8,  label: 'Goldilocks',   cls: 'fit-strong' },
+  { min: 5,  label: 'Worth trying', cls: 'fit-worth'  },
+  { min: 2,  label: 'Long shot',    cls: 'fit-long'   },
+  { min: -1, label: 'Tough bar',    cls: 'fit-tough'  },
+];
 function fitTier(score) {
-  if (score >= 8)   return { label: 'Goldilocks',   cls: 'fit-strong' };
-  if (score >= 5)   return { label: 'Worth trying', cls: 'fit-worth'  };
-  if (score >= 2)   return { label: 'Long shot',    cls: 'fit-long'   };
-  return                   { label: 'Tough bar',    cls: 'fit-tough'  };
+  for (const t of TIERS) if (score >= t.min) return t;
+  return TIERS[TIERS.length - 1];
 }
 function fitBadgeHTML(score) {
   const tier = fitTier(score);
@@ -294,6 +200,28 @@ function fitBadgeHTML(score) {
   return `<span class="fit-badge ${tier.cls}" title="${esc(tier.label)} · ${shown}/10">
     <span class="fit-num">${shown}</span>
   </span>`;
+}
+
+/* --------------------------------------------------------------------
+ * Level + category tables (profile-supplied)
+ * ------------------------------------------------------------------ */
+const LEVELS = P.levels || [
+  { key: 'all', label: 'All levels' }, { key: 'entry', label: 'Entry' }, { key: 'mid', label: 'Mid' },
+];
+const LEVEL_LABEL = {};
+for (const l of LEVELS) if (l.key !== 'all') LEVEL_LABEL[l.key] = l.label;
+const LEVEL_PILL = P.levelPills || { entry: 'pill-both', mid: 'pill-dev', senior: 'pill-ai' };
+const DEFAULT_LEVEL = P.defaultLevel || 'mid';
+const CATEGORIES = P.categories || [{ key: 'all', label: 'All' }];
+// First matching category wins; anything unmatched lands in the fallback so a
+// role can never disappear from every filtered view.
+function roleCategory(title) {
+  const t = (title || '').toLowerCase();
+  for (const c of CATEGORIES) {
+    if (c.key === 'all' || !c.match) continue;
+    if (rx(c.match).test(t)) return c.key;
+  }
+  return P.categoryFallback || (CATEGORIES[1] && CATEGORIES[1].key) || 'all';
 }
 
 function makeRoleKey(company, job) {
@@ -304,7 +232,7 @@ function makeRoleKey(company, job) {
 /* --------------------------------------------------------------------
  * Applied-state — persisted to localStorage as a JSON array of keys
  * ------------------------------------------------------------------ */
-const APPLIED_KEY = 'thien_applied';
+const APPLIED_KEY = P.storageKey || 'board_applied';
 function loadApplied() {
   try { return new Set(JSON.parse(localStorage.getItem(APPLIED_KEY) || '[]')); }
   catch { return new Set(); }
@@ -356,25 +284,20 @@ function renderCompanies(hub) {
   const verticalTabs = ['all', ...verticals]
     .map(v => `<div class="tab${v==='all' ? ' active' : ''}" data-vfilter="${esc(v)}">${v === 'all' ? 'All' : esc(verticalLabel[v] || v)}</div>`)
     .join('');
-  const levelTabs = `
-    <div class="tab active" data-lfilter="all">All levels</div>
-    <div class="tab" data-lfilter="entry">Entry</div>
-    <div class="tab" data-lfilter="mid">Mid</div>`;
-  const CAT_LABELS = [
-    ['all', 'All'], ['strategic', 'Strategic'], ['operations', 'Operations'],
-    ['data', 'Data'], ['bi', 'BI'],
-  ];
-  const categoryTabs = CAT_LABELS
-    .map(([v, l]) => `<div class="tab${v==='all' ? ' active' : ''}" data-catfilter="${esc(v)}">${esc(l)}</div>`)
+  const levelTabs = LEVELS
+    .map(l => `<div class="tab${l.key === 'all' ? ' active' : ''}" data-lfilter="${esc(l.key)}">${esc(l.label)}</div>`)
+    .join('');
+  const categoryTabs = CATEGORIES
+    .map(c => `<div class="tab${c.key === 'all' ? ' active' : ''}" data-catfilter="${esc(c.key)}">${esc(c.label)}</div>`)
     .join('');
 
   container.innerHTML = `
     <header class="text-center mb-2">
-      <h1 class="font-display text-3xl sm:text-4xl font-semibold tracking-tight">Thien's Job Board</h1>
+      <h1 class="font-display text-3xl sm:text-4xl font-semibold tracking-tight">${esc(P.boardTitle || 'Job Board')}</h1>
     </header>
     <div>
-      <h2 class="font-display text-xl sm:text-2xl font-semibold">Companies</h2>
-      <p class="muted text-sm mt-1">${LIVE.length} NYC companies, ${totalJobs} live analyst postings (Strategic / Operations / Data / BI). Verified ${esc(verifiedAt || 'recently')}. Ranked by fit for Thien's background — sorted highest first.</p>
+      <h2 class="font-display text-xl sm:text-2xl font-semibold">${esc(P.headline || 'Companies')}</h2>
+      <p class="muted text-sm mt-1">${LIVE.length} companies, ${totalJobs} ${esc(P.blurb || 'live postings.')} Verified ${esc(verifiedAt || 'recently')}.</p>
     </div>
 
     <div class="flex justify-center">
@@ -456,7 +379,7 @@ function renderCompanies(hub) {
       .slice(0, 3);
     const total = (c.jobs || []).length;
     const jobsHTML = previewJobs.filter(Boolean).map(j => {
-      const lvl = j.level || 'mid';
+      const lvl = j.level || DEFAULT_LEVEL;
       const lvlDot = lvl === 'entry'
         ? '<span class="role-dot" style="background:#0EA371"></span>'
         : '<span class="role-dot" style="background:#94A3B8"></span>';
@@ -553,14 +476,6 @@ function renderCompanies(hub) {
     grid.appendChild(f);
   }
 
-  function roleCategory(title) {
-    const t = (title || '').toLowerCase();
-    if (/business\s+intelligence|\bbi\s+(?:analyst|developer)\b/.test(t)) return 'bi';
-    if (/\b(strategic|strategy|corporate\s+strategy|business\s+strategy)\b/.test(t)) return 'strategic';
-    if (/\b(operations|ops|revops|sales\s+operations|marketing\s+operations|supply\s+chain|logistics|procurement|fulfillment|inventory|revenue\s+operations)\b/.test(t)) return 'operations';
-    if (/\b(data|analytics|reporting|product\s+analyst|growth\s+analyst|marketing\s+analyst)\b/.test(t)) return 'data';
-    return 'operations';
-  }
 
   function paintRoles() {
     rolelist.innerHTML = '';
@@ -600,9 +515,9 @@ function renderCompanies(hub) {
       const logoMini = domain
         ? `<img src="https://www.google.com/s2/favicons?domain=${domain}&sz=64" alt="${esc(c.name)}" loading="lazy" decoding="async" width="28" height="28" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;object-fit:cover" onerror="this.style.display='none'"/>`
         : `<div class="role-row-letter">${esc(c.name[0])}</div>`;
-      const lvl = r.level || 'mid';
-      const lvlClass = lvl === 'entry' ? 'pill-both' : 'pill-dev';
-      const lvlLabel = lvl === 'entry' ? 'Entry' : 'Mid';
+      const lvl = r.level || DEFAULT_LEVEL;
+      const lvlClass = LEVEL_PILL[lvl] || 'pill-dev';
+      const lvlLabel = LEVEL_LABEL[lvl] || lvl;
       const dateStr = fmtDate(r.posted || r.added);
       const newTag = isNewJob(r) ? '<span class="pill pill-ai" style="font-size:9px;padding:1px 5px">New</span>' : '';
       return `
@@ -736,6 +651,7 @@ function renderCompanies(hub) {
  * Bootstrap
  * ------------------------------------------------------------------ */
 window.addEventListener('DOMContentLoaded', () => {
+  if (P.docTitle) document.title = P.docTitle;
   const root = document.getElementById('root');
   if (root) renderCompanies(root);
 });
