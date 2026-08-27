@@ -454,6 +454,22 @@
   "domain": "daybreakgames.com"
  },
  {
+  "id": "deck13",
+  "name": "Deck13 Interactive",
+  "ats": "personio",
+  "slug": "deck13",
+  "vertical": "gaming",
+  "sub": "The Surge / Atlas Fallen",
+  "stage": "Private (Focus)",
+  "raised": "Acquired",
+  "lead": "Focus Entertainment",
+  "badges": [
+   "Focus"
+  ],
+  "notes": "Frankfurt action-RPG studio; VFX and character art on shipped titles.",
+  "domain": "deck13.com"
+ },
+ {
   "id": "deeplocal",
   "name": "Deeplocal",
   "ats": "greenhouse",
@@ -801,6 +817,22 @@
   "domain": "guerrilla-games.com"
  },
  {
+  "id": "gurustudio",
+  "name": "Guru Studio",
+  "ats": "bamboohr",
+  "slug": "gurustudio",
+  "vertical": "animation",
+  "sub": "PAW Patrol \u2014 Toronto animation",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "Animation"
+  ],
+  "notes": "Toronto animation house; pipeline TD and production art on series work.",
+  "domain": "gurustudio.com"
+ },
+ {
   "id": "hadean",
   "name": "Hadean",
   "ats": "teamtailor",
@@ -1096,6 +1128,22 @@
   ],
   "notes": "Real-time image generation aimed squarely at working artists.",
   "domain": "krea.ai"
+ },
+ {
+  "id": "kwalee",
+  "name": "Kwalee",
+  "ats": "pinpoint",
+  "slug": "kwalee",
+  "vertical": "gaming",
+  "sub": "Mobile + PC publisher",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "Leamington Spa"
+  ],
+  "notes": "UK publisher and studio across mobile and PC.",
+  "domain": "kwalee.com"
  },
  {
   "id": "landor",
@@ -1492,6 +1540,22 @@
   "domain": "playagames.com"
  },
  {
+  "id": "playrix",
+  "name": "Playrix",
+  "ats": "recruitee",
+  "slug": "playrix",
+  "vertical": "gaming",
+  "sub": "Homescapes / Gardenscapes",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "Mobile"
+  ],
+  "notes": "One of the largest casual-mobile studios; 2D and AI art roles run through this board.",
+  "domain": "playrix.com"
+ },
+ {
   "id": "playson",
   "name": "Playson",
   "ats": "ashby",
@@ -1506,6 +1570,22 @@
   ],
   "notes": "Slot studio with a real in-house 2D/UI art department \u2014 game art, just a different genre.",
   "domain": "playson.com"
+ },
+ {
+  "id": "playstack",
+  "name": "Playstack",
+  "ats": "bamboohr",
+  "slug": "playstack",
+  "vertical": "gaming",
+  "sub": "Balatro publisher",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "Publishing"
+  ],
+  "notes": "London publisher behind Balatro; 2D art roles support a wide indie portfolio.",
+  "domain": "playstack.com"
  },
  {
   "id": "playstation",
@@ -1602,6 +1682,22 @@
   ],
   "notes": "Deep art org \u2014 splash, character, VFX, environment. NYC postings are rare but the bar and craft standard are the reference point.",
   "domain": "riotgames.com"
+ },
+ {
+  "id": "rocketwerkz",
+  "name": "RocketWerkz",
+  "ats": "recruitee",
+  "slug": "rocketwerkz",
+  "vertical": "gaming",
+  "sub": "Icarus / Stationeers",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "New Zealand"
+  ],
+  "notes": "Dean Hall's Dunedin studio; Unreal gameplay and art roles.",
+  "domain": "rocketwerkz.com"
  },
  {
   "id": "rushstreetinteractive",
@@ -2241,5 +2337,21 @@
   ],
   "notes": "Commerce and publishing infrastructure for game developers; large, constantly-open board.",
   "domain": "xsolla.com"
+ },
+ {
+  "id": "yager",
+  "name": "Yager Development",
+  "ats": "personio",
+  "slug": "yager",
+  "vertical": "gaming",
+  "sub": "Spec Ops: The Line / The Cycle",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "Berlin"
+  ],
+  "notes": "Berlin studio working on an original IP; small senior team.",
+  "domain": "yager.de"
  }
 ]
