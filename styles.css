@@ -3021,3 +3021,18 @@ blockquote {
   max-width: 46ch; margin: 0 auto;
 }
 .empty-board-body + .empty-board-body { margin-top: 8px; font-size: 12px; }
+
+/* ---------- Remote marker ----------
+ * Sean's board carries two geographies. A remote role is not a New York role,
+ * so it is labelled on the row rather than left to the reader to assume. */
+.pill-remote {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+}
+.role-remote-dot {
+  flex-shrink: 0; font-size: 9px; font-weight: 700; line-height: 1;
+  padding: 2px 4px; border-radius: 4px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}

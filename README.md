@@ -7,7 +7,7 @@ public ATS and keeping what matches a *profile*.
 | Board | Page | Profile | Looking for |
 |---|---|---|---|
 | Thien · Analyst | `index.html` | `profiles/thien.json` | Strategic / Operations / Data / BI analyst roles in NYC |
-| Sean · Game Art | `sean.html` | `profiles/sean.json` | NYC roles where the job works on a game — concept, 3D, character, environment, technical art, animation, VFX |
+| Sean · Game Art | `sean.html` | `profiles/sean.json` | Roles where the job works on a game — NYC, plus US-remote ones a NYC artist can take without moving |
 
 Both are the same renderer (`js/board.js`) pointed at different config. Adding
 a third board is a JSON file and an HTML file, not a fork.
@@ -118,6 +118,21 @@ more useful test. So the filters run in two lanes:
 Marketing-side design is excluded in both lanes. A brand designer at a game
 studio is working on the campaign, not the game.
 
+### Two geographies, kept apart
+
+`geoInclude` is New York. `geoRemote` adds roles open to someone working from
+it — but a remote role is not a New York role, so it is never quietly merged
+into one: each carries `remote:true` and its real location string, the row
+shows a **Remote** pill with that location on hover, and the board has an
+All / New York / Remote (US) filter.
+
+"Remote" alone is not enough to qualify. `geoRemoteForeign` names the places a
+New York artist cannot simply work from, and a listing matching one is dropped
+*unless* it also names a home-country option — so `Remote - Canada` is out
+while `Canada-Remote; United Kingdom; United States-Remote` is in, on the
+strength of that third option. Fifteen cases in `test-filters.py` pin the
+boundary.
+
 ### Fit scoring
 
 ```
@@ -199,29 +214,24 @@ profile script is in step with its JSON, that no two candidates point at the
 same ATS board, and that no data file carries a duplicate company or a
 non-https link. The pipeline runs it as its last stage; CI runs it again.
 
-## A note on Sean's board being empty
+## A note on Sean's board being small
 
-It is not a bug, and it was measured rather than assumed. Across the 80
-game and virtual-world companies in the pool there are thousands of live
-postings; on the day this was last checked, 758 candidate companies yielded
-**zero** New York game-art roles. Not few — zero.
+The numbers are worth knowing before reading the board as a market signal.
+Across 760 candidate companies, New York on its own yields **zero** game-art
+roles — measured, not assumed. Those same boards carry nearly 300 open art
+roles, in Los Angeles, Montreal, Helsinki, Istanbul, Seoul and Stockholm. New
+York has publishers, platforms and studios' business functions; the art seats
+are where the studios are. Rockstar had 19 New York postings open and not one
+was art.
 
-The reason is geography, not filtering. Those same boards carried nearly 300
-open art roles: Los Angeles, Montreal, Helsinki, Istanbul, Seoul, Stockholm.
-New York has publishers, platforms and studios' business functions; the art
-seats are where the studios are. Rockstar had 19 New York postings open and not
-one of them was art.
+Adding the remote lane is what makes the board a board: it currently carries a
+handful of roles, all of them remote, at studios like Insomniac,
+thatgamecompany and Disney. Expect single digits, not tens.
 
-So the board is a standing watch rather than a listing. The pool is wide and
-the refresh is daily precisely because the signal is rare — a role appears here
-the day it is posted. Two numbers say whether something broke instead:
+Two numbers say something broke:
 
-- **zero for weeks** with a growing pool is expected; zero right after a filter
-  edit is not — run `scripts/test-filters.py` first
-- **more than about thirty** means a lane has slipped: check that
-  `broadVerticals` still lists only companies that ship a game, and that
-  nothing marketing-side is getting through
-
-If the constraint ever needs relaxing, the honest lever is geography, not the
-title filters. Allowing US-remote surfaces roles a New York artist could take
-without moving; widening the titles just fills the board with near-misses.
+- **zero across both lanes** right after a filter edit — run
+  `scripts/test-filters.py` first
+- **more than about thirty** means a lane slipped: check `broadVerticals` still
+  lists only companies that ship a game, and that nothing marketing-side is
+  getting through

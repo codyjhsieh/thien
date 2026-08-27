@@ -172,6 +172,8 @@ function emitJob(j) {
   if (j.level) s += `, level:"${esc(j.level)}"`;
   if (j.added) s += `, added:"${esc(j.added)}"`;
   if (j.posted) s += `, posted:"${esc(j.posted)}"`;
+  if (j.remote) s += ', remote:true';
+  if (j.loc) s += `, loc:"${esc(j.loc)}"`;
   return s + ' }';
 }
 function emitCompany(c) {

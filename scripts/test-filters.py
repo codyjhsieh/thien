@@ -29,6 +29,38 @@ _argv, sys.argv = sys.argv, ["rc"]
 spec.loader.exec_module(rc)
 sys.argv = _argv
 
+# A title that each profile's filters accept, so a geography case fails on
+# geography rather than on the title.
+GEO_PROBE_TITLE = {"sean": "Environment Artist", "thien": "Operations Analyst"}
+
+# (location, expected lane) — "out" means the role should not appear at all.
+# A profile with no geoRemote never produces "remote".
+GEO_CASES = {
+  "sean": [
+    ("New York, NY",                                    "nyc"),
+    ("Brooklyn, New York",                              "nyc"),
+    ("United States, Remote",                           "remote"),
+    ("Remote - US",                                     "remote"),
+    ("Remote (USA)",                                    "remote"),
+    ("Remote - North America",                          "remote"),
+    ("Remote",                                          "remote"),
+    ("Anywhere",                                        "remote"),
+    # A listing naming a home-country option counts even alongside foreign ones.
+    ("Canada-Remote; United Kingdom; United States-Remote", "remote"),
+    ("Remote - Canada",                                 "out"),
+    ("Remote, United Kingdom",                          "out"),
+    ("Remote - EMEA",                                   "out"),
+    ("Warsaw, Poland (Remote)",                         "out"),
+    ("Los Angeles, CA",                                 "out"),
+    ("Helsinki",                                        "out"),
+  ],
+  "thien": [
+    ("New York, NY",                                    "nyc"),
+    ("Remote - US",                                     "out"),   # no remote lane
+    ("Austin, TX",                                      "out"),
+  ],
+}
+
 CASES = {
   "sean": [
     # The title names the game/real-time pipeline — counts anywhere.
@@ -91,6 +123,25 @@ CASES = {
 }
 
 
+def run_geo(pid: str) -> int:
+  profile = rc.Profile(pid)
+  cases = GEO_CASES.get(pid)
+  if not cases:
+    return 0
+  bad = 0
+  for loc, want in cases:
+    raw = [{"title": GEO_PROBE_TITLE[pid], "location": {"name": loc},
+            "absolute_url": "https://example.com/job", "updated_at": "2026-01-01"}]
+    got = rc.filter_jobs(profile, "greenhouse", raw, "slug", "gaming")
+    lane = "out" if not got else ("remote" if got[0].get("remote") else "nyc")
+    if lane != want:
+      bad += 1
+      print(f"  \u2717 [geo] {loc!r}: expected {want}, got {lane}", file=sys.stderr)
+  if not bad:
+    print(f"   \u2713 {pid}: {len(cases)} geography case(s) pass")
+  return bad
+
+
 def run(pid: str) -> int:
   profile = rc.Profile(pid)
   cases = CASES.get(pid)
@@ -116,7 +167,7 @@ def run(pid: str) -> int:
 def main():
   ids = sys.argv[1:] or sorted(
     p.stem for p in (ROOT / "profiles").glob("*.json") if not p.name.endswith(".companies.json"))
-  sys.exit(1 if sum(run(i) for i in ids) else 0)
+  sys.exit(1 if sum(run(i) + run_geo(i) for i in ids) else 0)
 
 
 if __name__ == "__main__":

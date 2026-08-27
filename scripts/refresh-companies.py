@@ -51,6 +51,18 @@ class Profile:
     self.raw = json.loads(self.path.read_text())
     f = self.raw.get("filters", {})
     self.geo = re.compile(f["geoInclude"], re.I)
+    # Optional second geography: a role a candidate in this city could take
+    # without moving. Kept separate from geoInclude so the board can tell the
+    # two apart rather than quietly calling a Vancouver job a New York one.
+    self.geo_remote = (
+      re.compile(f["geoRemote"], re.I) if f.get("geoRemote") else None
+    )
+    self.geo_remote_home = (
+      re.compile(f["geoRemoteHome"], re.I) if f.get("geoRemoteHome") else None
+    )
+    self.geo_remote_foreign = (
+      re.compile(f["geoRemoteForeign"], re.I) if f.get("geoRemoteForeign") else None
+    )
     self.title_city_exclude = (
       re.compile(f["titleCityExclude"], re.I) if f.get("titleCityExclude") else None
     )
@@ -365,7 +377,18 @@ def filter_jobs(profile: Profile, ats, raw, slug="", vertical=""):
     if not n or not n["title"] or not n["url"]:
       continue
     title, loc = n["title"], n["loc"]
-    if not profile.geo.search(loc): continue
+    remote = False
+    if not profile.geo.search(loc):
+      # Remote lane: "Remote - US" is takeable from the target city; "Remote -
+      # Canada" is not. A listing naming any home-country location counts even
+      # if it also names foreign ones, since one of the options is takeable.
+      if not (profile.geo_remote and profile.geo_remote.search(loc)):
+        continue
+      at_home = bool(profile.geo_remote_home and profile.geo_remote_home.search(loc))
+      foreign = bool(profile.geo_remote_foreign and profile.geo_remote_foreign.search(loc))
+      if not at_home and foreign:
+        continue
+      remote = True
     # Title-authoritative city override: if the title explicitly names a
     # non-NYC city, drop even if the ATS location field said "New York"
     # (common in multi-location listings where NYC was just one of several).
@@ -378,8 +401,12 @@ def filter_jobs(profile: Profile, ats, raw, slug="", vertical=""):
               and vertical in profile.broad_verticals
               and profile.title_include_broad.search(title)):
         continue
-    out.append({"title": title, "url": n["url"], "level": profile.level(title),
-                "posted": n["posted"]})
+    job = {"title": title, "url": n["url"], "level": profile.level(title),
+           "posted": n["posted"]}
+    if remote:
+      job["remote"] = True
+      job["loc"] = n["loc"].strip()[:60]
+    out.append(job)
   # Sort by the profile's own level order (entry-first for early-career
   # boards, entry > mid > senior where a profile keeps senior roles).
   order = profile.raw.get("levelOrder") or ["entry", "mid", "senior"]
@@ -412,7 +439,9 @@ def emit_companies_block(profile: Profile, rows, today):
   for c in rows:
     jobs_inner = ",\n      ".join(
       "{ title:" + json.dumps(j["title"]) + ", url:" + json.dumps(j["url"]) +
-      ", level:" + json.dumps(j["level"]) + " }"
+      ", level:" + json.dumps(j["level"]) +
+      (", remote:true" if j.get("remote") else "") +
+      (", loc:" + json.dumps(j["loc"]) if j.get("loc") else "") + " }"
       for j in c["jobs"]
     )
     badges_inner = ", ".join(json.dumps(b) for b in c["badges"])

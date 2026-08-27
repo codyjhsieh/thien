@@ -2,9 +2,9 @@
   "id": "sean",
   "person": "Sean",
   "boardTitle": "Sean's Game Art Board",
-  "docTitle": "sean \u2014 NYC game artist jobs (Concept / 3D / Character / Environment / VFX)",
+  "docTitle": "sean \u2014 game artist jobs, NYC + US-remote (Concept / 3D / Character / VFX)",
   "headline": "Studios",
-  "blurb": "live NYC postings where the job works on a game \u2014 concept, 3D, character, environment, technical art, animation and VFX. Game studios and everyone else who builds real-time worlds.",
+  "blurb": "live postings where the job works on a game \u2014 concept, 3D, character, environment, technical art, animation and VFX. New York roles plus US-remote ones a New York artist can take without moving.",
   "page": "sean.html",
   "dataFile": "js/sean-data.js",
   "dataGlobal": "SEAN_DATA",
@@ -39,7 +39,10 @@
     "broadVerticals": [
       "gaming",
       "immersive"
-    ]
+    ],
+    "geoRemote": "\\bremote\\b|\\bwork\\s+from\\s+home\\b|\\banywhere\\b|\\bdistributed\\b",
+    "geoRemoteHome": "\\b(u\\.?s\\.?a?|united\\s+states|north\\s+america|americas|nyc|new\\s+york|east\\s+coast|nationwide)\\b",
+    "geoRemoteForeign": "\\b(canada|canadian|ontario|quebec|british\\s+columbia|toronto|vancouver|montr[e\u00e9]al|uk|united\\s+kingdom|england|scotland|ireland|london|emea|apac|latam|europe|european|eu\\b|germany|france|spain|portugal|italy|netherlands|belgium|switzerland|austria|sweden|norway|denmark|finland|iceland|poland|czech|slovakia|hungary|romania|bulgaria|serbia|croatia|greece|ukraine|lithuania|latvia|estonia|india|china|japan|korea|singapore|malaysia|indonesia|vietnam|philippines|thailand|australia|new\\s+zealand|brazil|mexico|argentina|colombia|chile|peru|israel|turkey|t[u\u00fc]rkiye|uae|dubai|egypt|south\\s+africa|nigeria|kenya)\\b"
   },
   "categories": [
     {
@@ -444,5 +447,19 @@
   },
   "defaultLevel": "mid",
   "poolSize": 760,
-  "emptyNote": "The bar is that the job works on a game and sits in New York. Game studios post plenty of art \u2014 it is almost never located here."
+  "emptyNote": "The bar is that the job works on a game, and sits in New York or is open to someone working from it.",
+  "locations": [
+    {
+      "key": "all",
+      "label": "All"
+    },
+    {
+      "key": "nyc",
+      "label": "New York"
+    },
+    {
+      "key": "remote",
+      "label": "Remote (US)"
+    }
+  ]
 }

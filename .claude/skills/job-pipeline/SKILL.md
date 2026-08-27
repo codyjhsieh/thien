@@ -134,8 +134,10 @@ near-misses is worse than an honest empty one.
 
 ## Reading a thin result
 
-Sean's board is small by nature — NYC postings where the job works on a game
-number in the low tens at any moment. A drop from 17 roles to 12 is ordinary
+Sean's board is small by nature. It runs two geographies — New York and
+US-remote — and New York on its own has repeatedly measured zero, so nearly
+everything on it arrives through the remote lane and carries `remote:true`.
+Single digits is normal. A drop from 17 roles to 12 is ordinary
 churn. A drop to 0, or a jump past 100, is a bug.
 
 Start with `python3 scripts/test-filters.py sean`: it pins the filters to

@@ -4,9 +4,9 @@ window.BOARD_PROFILE = {
   "id": "sean",
   "person": "Sean",
   "boardTitle": "Sean's Game Art Board",
-  "docTitle": "sean — NYC game artist jobs (Concept / 3D / Character / Environment / VFX)",
+  "docTitle": "sean — game artist jobs, NYC + US-remote (Concept / 3D / Character / VFX)",
   "headline": "Studios",
-  "blurb": "live NYC postings where the job works on a game — concept, 3D, character, environment, technical art, animation and VFX. Game studios and everyone else who builds real-time worlds.",
+  "blurb": "live postings where the job works on a game — concept, 3D, character, environment, technical art, animation and VFX. New York roles plus US-remote ones a New York artist can take without moving.",
   "page": "sean.html",
   "dataFile": "js/sean-data.js",
   "dataGlobal": "SEAN_DATA",
@@ -415,5 +415,19 @@ window.BOARD_PROFILE = {
   },
   "defaultLevel": "mid",
   "poolSize": 760,
-  "emptyNote": "The bar is that the job works on a game and sits in New York. Game studios post plenty of art — it is almost never located here."
+  "emptyNote": "The bar is that the job works on a game, and sits in New York or is open to someone working from it.",
+  "locations": [
+    {
+      "key": "all",
+      "label": "All"
+    },
+    {
+      "key": "nyc",
+      "label": "New York"
+    },
+    {
+      "key": "remote",
+      "label": "Remote (US)"
+    }
+  ]
 };

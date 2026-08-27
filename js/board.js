@@ -213,6 +213,10 @@ for (const l of LEVELS) if (l.key !== 'all') LEVEL_LABEL[l.key] = l.label;
 const LEVEL_PILL = P.levelPills || { entry: 'pill-both', mid: 'pill-dev', senior: 'pill-ai' };
 const DEFAULT_LEVEL = P.defaultLevel || 'mid';
 const CATEGORIES = P.categories || [{ key: 'all', label: 'All' }];
+// Location tabs only appear when a profile actually has a second geography;
+// on a single-geography board they would be three tabs that all mean "all".
+const LOCATIONS = P.locations || [];
+function roleLocation(j) { return j && j.remote ? 'remote' : 'nyc'; }
 // First matching category wins; anything unmatched lands in the fallback so a
 // role can never disappear from every filtered view.
 function roleCategory(title) {
@@ -290,6 +294,9 @@ function renderCompanies(hub) {
   const categoryTabs = CATEGORIES
     .map(c => `<div class="tab${c.key === 'all' ? ' active' : ''}" data-catfilter="${esc(c.key)}">${esc(c.label)}</div>`)
     .join('');
+  const locationTabs = LOCATIONS
+    .map(l => `<div class="tab${l.key === 'all' ? ' active' : ''}" data-locfilter="${esc(l.key)}">${esc(l.label)}</div>`)
+    .join('');
 
   container.innerHTML = `
     <header class="text-center mb-2">
@@ -318,6 +325,7 @@ function renderCompanies(hub) {
       <div class="tabs" id="co-cat-filters">
         ${categoryTabs}
       </div>
+      ${locationTabs ? `<div class="tabs" id="co-loc-filters">${locationTabs}</div>` : ''}
       <div class="flex items-center gap-2 mt-2">
         <span class="text-[11px] muted">Sort</span>
         <div class="tabs" id="co-sort">
@@ -352,14 +360,17 @@ function renderCompanies(hub) {
   const rolelist   = container.querySelector('#co-rolelist');
   const filterBar  = container.querySelector('#co-filters');
   const catBar     = container.querySelector('#co-cat-filters');
+  const locBar     = container.querySelector('#co-loc-filters');
   function syncLevelVis() {
     filterBar.classList.toggle('hide-levels', curMode === 'companies');
     if (catBar) catBar.style.display = curMode === 'companies' ? 'none' : '';
+    if (locBar) locBar.style.display = curMode === 'companies' ? 'none' : '';
   }
   let curMode      = 'companies';
   let curVFilter   = 'all';
   let curLFilter   = 'all';
   let curCatFilter = 'all';
+  let curLocFilter = 'all';
   let curQuery     = '';
   let curSort      = 'fit';
   let _lastCoSort  = null;
@@ -403,6 +414,7 @@ function renderCompanies(hub) {
         <a href="${esc(j.url)}" target="_blank" rel="noopener noreferrer"
            class="role-pill flex items-center gap-2 text-[12px]" title="${esc(j.title)}">
           ${lvlDot}<span class="truncate flex-1 min-w-0">${esc(j.title)}</span>
+          ${j.remote ? '<span class="role-remote-dot" title="Remote">R</span>' : ''}
           <span class="role-arrow muted">↗</span>
         </a>`;
     }).join('');
@@ -501,6 +513,7 @@ function renderCompanies(hub) {
       if (curVFilter !== 'all' && r._company.vertical !== curVFilter) return false;
       if (curLFilter !== 'all' && r.level !== curLFilter) return false;
       if (curCatFilter !== 'all' && roleCategory(r.title) !== curCatFilter) return false;
+      if (curLocFilter !== 'all' && roleLocation(r) !== curLocFilter) return false;
       if (!q) return true;
       const hay = (r.title + ' ' + r._company.name + ' ' + r._company.sub + ' ' + (r._company.badges||[]).join(' ')).toLowerCase();
       return hay.includes(q);
@@ -536,6 +549,11 @@ function renderCompanies(hub) {
       const lvlLabel = LEVEL_LABEL[lvl] || lvl;
       const dateStr = fmtDate(r.posted || r.added);
       const newTag = isNewJob(r) ? '<span class="pill pill-ai" style="font-size:9px;padding:1px 5px">New</span>' : '';
+      // A remote role is not a New York role; say so on the row rather than
+      // letting the board imply everything on it is local.
+      const remoteTag = r.remote
+        ? `<span class="pill pill-remote" style="font-size:9px;padding:1px 5px" title="${esc(r.loc || 'Remote')}">Remote</span>`
+        : '';
       return `
         <div class="role-row" data-role-row data-role-key="${esc(roleKey)}" data-role-url="${esc(r.url)}"
              data-co-id="${esc(c.id)}" data-co-name="${esc(c.name)}" data-role-title="${esc(r.title)}">
@@ -544,7 +562,7 @@ function renderCompanies(hub) {
                 aria-label="Mark as applied"></span>
           ${logoMini}
           <div class="role-row-text">
-            <div class="role-row-title truncate">${esc(r.title)} ${newTag}</div>
+            <div class="role-row-title truncate">${esc(r.title)} ${newTag}${remoteTag}</div>
             <div class="role-row-co truncate">
               <span class="font-medium">${esc(c.name)}</span>
               <span class="dim mx-1">·</span>
@@ -616,7 +634,7 @@ function renderCompanies(hub) {
       paint();
     });
   });
-  container.querySelectorAll('#co-filters .tab, #co-cat-filters .tab').forEach(tab => {
+  container.querySelectorAll('#co-filters .tab, #co-cat-filters .tab, #co-loc-filters .tab').forEach(tab => {
     tab.addEventListener('click', () => {
       if (tab.dataset.vfilter) {
         container.querySelectorAll('#co-filters .tab[data-vfilter]').forEach(t => t.classList.remove('active'));
@@ -630,6 +648,10 @@ function renderCompanies(hub) {
         container.querySelectorAll('#co-cat-filters .tab[data-catfilter]').forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
         curCatFilter = tab.dataset.catfilter;
+      } else if (tab.dataset.locfilter) {
+        container.querySelectorAll('#co-loc-filters .tab[data-locfilter]').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        curLocFilter = tab.dataset.locfilter;
       }
       rolesShown = ROLES_PAGE;
       paint();
