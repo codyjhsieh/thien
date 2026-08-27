@@ -162,10 +162,17 @@ def fetch(ats, slug):
     d = curl_json(f"https://{slug}.recruitee.com/api/offers/")
     return d.get("offers", []) if d else []
   if ats == "personio":
-    # {slug}.jobs.personio.de — search.json is what their careers SPA calls.
-    # Returns a bare array; no posting URL or date, so both are derived below.
-    d = curl_json(f"https://{slug}.jobs.personio.de/search.json?language=en")
-    return d if isinstance(d, list) else []
+    # search.json is what their careers SPA calls. Tenants live on either the
+    # .de or the .com host depending on when they signed up, and the wrong one
+    # 404s silently — try both. Returns a bare array; no posting URL or date,
+    # so both are derived in normalize().
+    for tld in ("de", "com"):
+      d = curl_json(f"https://{slug}.jobs.personio.{tld}/search.json?language=en")
+      if isinstance(d, list) and d:
+        for row in d:
+          row["_tld"] = tld
+        return d
+    return []
   if ats == "bamboohr":
     d = curl_json(f"https://{slug}.bamboohr.com/careers/list")
     return (d or {}).get("result", []) or []
@@ -288,7 +295,8 @@ def normalize(ats, j, slug=""):
     offices = j.get("offices") or []
     loc = (j.get("office") or "") + " " + " ".join(
       o.get("name", "") if isinstance(o, dict) else str(o) for o in offices)
-    url = f"https://{slug}.jobs.personio.de/job/{j.get('id','')}?display=en" if j.get("id") else ""
+    tld = j.get("_tld", "de")
+    url = f"https://{slug}.jobs.personio.{tld}/job/{j.get('id','')}?display=en" if j.get("id") else ""
     posted = ""
   elif ats == "bamboohr":
     title = (j.get("jobOpeningName") or "").strip()

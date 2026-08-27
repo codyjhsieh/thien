@@ -165,10 +165,14 @@ function boardTokens(ats, slug) {
     return R(true);
   }
   if (ats === 'personio') {
-    const d = curl(`https://${slug}.jobs.personio.de/search.json?language=en`);
-    if (!Array.isArray(d)) return R(false);
-    d.forEach(j => { toks.add(String(j.id)); addT(j.name); });
-    return R(true);
+    for (const tld of ['de', 'com']) {
+      const d = curl(`https://${slug}.jobs.personio.${tld}/search.json?language=en`);
+      if (Array.isArray(d) && d.length) {
+        d.forEach(j => { toks.add(String(j.id)); addT(j.name); });
+        return R(true);
+      }
+    }
+    return R(false);
   }
   if (ats === 'bamboohr') {
     const d = curl(`https://${slug}.bamboohr.com/careers/list`);
