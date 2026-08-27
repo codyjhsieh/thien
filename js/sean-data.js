@@ -21,20 +21,20 @@ const COMPANIES = [
   { id:"believer", name:"Believer Entertainment", vertical:"gaming",
     sub:"The Prodigal \u2014 new IP",
     stage:"Series B", raised:"$55M", lead:"Lightspeed",
-    badges:["Lightspeed", "Griffin Gaming"],
+    badges:["Lightspeed","Griffin Gaming"],
     totalRoles:1,
     notes:"New AAA studio; the VFX and UX art seats are on the game itself.",
     jobs:[
-      { title:"Staff VFX Artist", url:"https://jobs.ashbyhq.com/believer/fadae54c-240b-428f-a51f-c31a0fe28126", level:"senior", remote:true, loc:"Remote" }
+      { title:"Staff VFX Artist", url:"https://jobs.ashbyhq.com/believer/fadae54c-240b-428f-a51f-c31a0fe28126", level:"senior", added:"2026-08-27", posted:"2026-08-26", remote:true, loc:"Remote" }
     ] },
   { id:"disney", name:"The Walt Disney Company", vertical:"media",
     sub:"Streaming + studios + parks (NYSE: DIS)",
     stage:"Public", raised:"$1B+ pre-IPO", lead:"NYSE",
-    badges:["NYSE", "S&P 500"],
+    badges:["NYSE","S&P 500"],
     totalRoles:1,
     notes:"NYC tech: ABC News, Hulu, ESPN+, Disney+. Streaming infra + content systems.",
     jobs:[
-      { title:"Senior Concept Artist", url:"https://disney.wd5.myworkdayjobs.com/en-US/disneycareer/job/Remote-Worker-Location-USA/Senior-Concept-Artist_10157163-1", level:"senior", remote:true, loc:"Remote Worker Location, USA" }
+      { title:"Senior Concept Artist", url:"https://disney.wd5.myworkdayjobs.com/en-US/disneycareer/job/Remote-Worker-Location-USA/Senior-Concept-Artist_10157163-1", level:"senior", added:"2026-08-27", remote:true, loc:"Remote Worker Location, USA" }
     ] },
   { id:"insomniac", name:"Insomniac Games", vertical:"gaming",
     sub:"Marvel's Spider-Man / Ratchet & Clank",
@@ -43,8 +43,8 @@ const COMPANIES = [
     totalRoles:2,
     notes:"Sony first-party with a large in-house art org and a fast shipping cadence.",
     jobs:[
-      { title:"Senior Facial Character TD (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6143980004", level:"senior", remote:true, loc:"United States, Remote" },
-      { title:"Senior Gameplay Animator (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6138863004", level:"senior", remote:true, loc:"United States, Remote" }
+      { title:"Senior Facial Character TD (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6143980004", level:"senior", added:"2026-08-27", posted:"2026-08-27", remote:true, loc:"United States, Remote" },
+      { title:"Senior Gameplay Animator (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6138863004", level:"senior", added:"2026-08-27", posted:"2026-08-27", remote:true, loc:"United States, Remote" }
     ] },
   { id:"neteasegames", name:"NetEase Games", vertical:"gaming",
     sub:"Marvel Rivals / Naraka",
@@ -53,25 +53,25 @@ const COMPANIES = [
     totalRoles:2,
     notes:"Global studios under one board; character and performance animation roles surface regularly.",
     jobs:[
-      { title:"Character Performance Animator", url:"https://job-boards.greenhouse.io/neteasegames/jobs/5166671007", level:"mid", remote:true, loc:"Canada-Remote; United Kingdom - Guildford Onsite; United Sta" },
-      { title:"FPS 1P View Gameplay Animator", url:"https://job-boards.greenhouse.io/neteasegames/jobs/5166658007", level:"mid", remote:true, loc:"Canada-Remote; Spain-Remote; United Kingdom - Guildford Onsi" }
+      { title:"Character Performance Animator", url:"https://job-boards.greenhouse.io/neteasegames/jobs/5166671007", level:"mid", added:"2026-08-27", posted:"2026-08-24", remote:true, loc:"Canada-Remote; United Kingdom - Guildford Onsite; United Sta" },
+      { title:"FPS 1P View Gameplay Animator", url:"https://job-boards.greenhouse.io/neteasegames/jobs/5166658007", level:"mid", added:"2026-08-27", posted:"2026-08-24", remote:true, loc:"Canada-Remote; Spain-Remote; United Kingdom - Guildford Onsi" }
     ] },
   { id:"thatgamecompany", name:"thatgamecompany", vertical:"gaming",
     sub:"Journey / Sky: Children of the Light",
     stage:"Series B", raised:"$160M", lead:"Sequoia China",
-    badges:["Sequoia", "TPG"],
+    badges:["Sequoia","TPG"],
     totalRoles:2,
     notes:"Small art-led team; character and environment craft is the whole product.",
     jobs:[
-      { title:"Technical Game Designer", url:"https://jobs.ashbyhq.com/thatgamecompany/22deed1d-6098-45eb-a04d-41634b23ec30", level:"mid", remote:true, loc:"Remote - US" },
-      { title:"3D Character Artist (Mid-Senior)", url:"https://jobs.ashbyhq.com/thatgamecompany/36e101a4-c7ba-4884-8999-cd04abb979ee", level:"senior", remote:true, loc:"Remote - US" }
-    ] },
+      { title:"Technical Game Designer", url:"https://jobs.ashbyhq.com/thatgamecompany/22deed1d-6098-45eb-a04d-41634b23ec30", level:"mid", added:"2026-08-27", posted:"2026-07-07", remote:true, loc:"Remote - US" },
+      { title:"3D Character Artist (Mid-Senior)", url:"https://jobs.ashbyhq.com/thatgamecompany/36e101a4-c7ba-4884-8999-cd04abb979ee", level:"senior", added:"2026-08-27", posted:"2026-05-08", remote:true, loc:"Remote - US" }
+    ] }
 ];
 
 /* ---------- COMPANY DOMAINS (favicon CDN lookup) ---------- */
 const COMPANY_DOMAINS = {
-  believer:'believer.com', insomniac:'insomniacgames.com', neteasegames:'neteasegames.com',
-  thatgamecompany:'thatgamecompany.com',
+  believer:"believer.com", insomniac:"insomniacgames.com", neteasegames:"neteasegames.com",
+  thatgamecompany:"thatgamecompany.com",
 };
 
 window.SEAN_DATA = { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT };
