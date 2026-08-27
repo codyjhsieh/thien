@@ -42,6 +42,14 @@ CASES = {
     ("Level Designer",                          "gaming",   True),
     ("VFX Artist",                              "animation", True),
     ("Illustrator, Trading Card Games",         "consumer", True),
+    # Generic craft titles say nothing about the medium on their own.
+    ("3D Artist",                               "media",    False),   # archviz, not a game
+    ("3D Artist",                               "gaming",   True),
+    ("Texture Artist",                          "vfx",      False),
+    ("Texture Artist",                          "gaming",   True),
+    ("Lighting Artist",                         "animation", False),
+    ("Senior Illustrator",                      "consumer", False),
+    ("Senior Illustrator",                      "gaming",   True),
     # Whole discipline counts, but only where every seat is on a game.
     ("Art Director",                            "gaming",   True),
     ("Art Director",                            "media",    False),
