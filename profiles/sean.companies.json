@@ -784,6 +784,22 @@
   "domain": "everymatrix.com"
  },
  {
+  "id": "explodingkittens",
+  "name": "Exploding Kittens",
+  "ats": "lever",
+  "slug": "explodingkittens",
+  "vertical": "consumer",
+  "sub": "Card games + mobile adaptations",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "Tabletop"
+  ],
+  "notes": "Card-game publisher with a mobile arm; illustration is the brand and it hires game designers on contract.",
+  "domain": "explodingkittens.com"
+ },
+ {
   "id": "fanaticscollectibles",
   "name": "Fanatics Collectibles",
   "ats": "greenhouse",
@@ -2237,6 +2253,22 @@
   ],
   "notes": "NYC sports app with a strong illustration + motion identity.",
   "domain": "sleeper.com"
+ },
+ {
+  "id": "softswiss",
+  "name": "SOFTSWISS",
+  "ats": "teamtailor",
+  "slug": "softswiss",
+  "vertical": "igaming",
+  "sub": "iGaming platform + in-house game studio",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [
+   "iGaming"
+  ],
+  "notes": "Casino platform that runs its own slot studio; game art sits inside it.",
+  "domain": "softswiss.com"
  },
  {
   "id": "sonypicturesimageworks",
