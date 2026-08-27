@@ -414,6 +414,6 @@ window.BOARD_PROFILE = {
     ]
   },
   "defaultLevel": "mid",
-  "poolSize": 716,
+  "poolSize": 758,
   "emptyNote": "The bar is that the job works on a game and sits in New York. Game studios post plenty of art — it is almost never located here."
 };

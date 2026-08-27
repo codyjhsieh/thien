@@ -199,9 +199,29 @@ profile script is in step with its JSON, that no two candidates point at the
 same ATS board, and that no data file carries a duplicate company or a
 non-https link. The pipeline runs it as its last stage; CI runs it again.
 
-## A note on Sean's board being small
+## A note on Sean's board being empty
 
-NYC-located game-art postings on public ATS boards number in the low tens at
-any given moment — the pipeline probes ~680 companies to find them. Ten to
-twenty roles is a healthy day. Zero is a filter bug; a hundred means the
-adjacent lane has slipped its leash.
+It is not a bug, and it was measured rather than assumed. Across the 80
+game and virtual-world companies in the pool there are thousands of live
+postings; on the day this was last checked, 758 candidate companies yielded
+**zero** New York game-art roles. Not few — zero.
+
+The reason is geography, not filtering. Those same boards carried nearly 300
+open art roles: Los Angeles, Montreal, Helsinki, Istanbul, Seoul, Stockholm.
+New York has publishers, platforms and studios' business functions; the art
+seats are where the studios are. Rockstar had 19 New York postings open and not
+one of them was art.
+
+So the board is a standing watch rather than a listing. The pool is wide and
+the refresh is daily precisely because the signal is rare — a role appears here
+the day it is posted. Two numbers say whether something broke instead:
+
+- **zero for weeks** with a growing pool is expected; zero right after a filter
+  edit is not — run `scripts/test-filters.py` first
+- **more than about thirty** means a lane has slipped: check that
+  `broadVerticals` still lists only companies that ship a game, and that
+  nothing marketing-side is getting through
+
+If the constraint ever needs relaxing, the honest lever is geography, not the
+title filters. Allowing US-remote surfaces roles a New York artist could take
+without moving; widening the titles just fills the board with near-misses.
