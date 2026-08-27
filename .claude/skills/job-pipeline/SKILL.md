@@ -19,6 +19,13 @@ profiles/<id>.json ──┬─→ refresh-companies.py ─→ shard JSON ─┐
 Profiles that exist today: `thien` (NYC analyst roles), `sean` (NYC game-art
 roles). `ls profiles/*.json` is authoritative — never assume the list.
 
+Thirteen ATS backends are supported: Ashby, Greenhouse, Lever, Workable,
+Workday, Teamtailor, SmartRecruiters, Recruitee, Personio, BambooHR, Breezy,
+Pinpoint and Rippling. Each reads a public JSON endpoint with no key; the
+endpoint table is in the README. Personio and BambooHR publish no posting date,
+so roles from them sort by the day they entered the dataset, not the day they
+were posted — a board suddenly showing them as "new" is that, not a bug.
+
 ## Decide the shape first
 
 Run `scripts/pipeline.sh <id>` and stop when **all** of these hold:
@@ -89,15 +96,25 @@ interleave writes and corrupt it.
    ```
 
    `merge-additive.js` only ever adds; `check-dead.js --prune` is the only step
-   that removes a posting, and only after confirming the company's board
-   fetched successfully and the posting is absent from it.
+   that removes anything, and only after confirming the company's board
+   fetched successfully and the posting is absent from it. Prune also drops a
+   company whose last posting just died — the board cannot render an empty
+   company, and the candidate pool still lists it, so it returns on its own the
+   next time it posts.
 
 ## Verify before you commit
 
 `python3 scripts/verify-board.py --all` must exit 0. It checks that every
 profile regex compiles in both Python and V8, that `categoryFallback` and every
 job's level name a real tab, that the generated `js/<id>-profile.js` is in step
-with its JSON, and that no company id or job url is duplicated.
+with its JSON, that no company id or job url is duplicated, that no two
+candidates point at the same ATS board, that no company is an empty shell, and
+that the data file declares nothing beyond the three constants the board reads.
+
+`python3 scripts/verify-board.py --summary` prints `<id> N cos/M roles` per
+profile — use it for the commit message rather than counting the file yourself.
+A regex over a generated file will count things you did not mean; that is how a
+67-company board once got committed as "470 cos".
 
 Then load the page and look at it — the verifier cannot see a blank board:
 
@@ -108,6 +125,12 @@ python3 -m http.server 8000    # open sean.html / index.html
 A board that renders zero roles after a refresh is a filter bug far more often
 than an empty market. Before concluding the market is quiet, re-run one company
 with `--only <id> -v` and read the titles the filter rejected.
+
+An empty board is nonetheless a legitimate outcome here, and the pipeline
+handles it: the fetch stage returning nothing is not an error, and the page
+renders a state naming how many companies were checked and when. Say so plainly
+rather than widening a filter to make the board look populated — a board of
+near-misses is worse than an honest empty one.
 
 ## Reading a thin result
 
