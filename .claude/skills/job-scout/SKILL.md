@@ -38,8 +38,10 @@ have returned real postings from a real API call in this session.
 - `id` — stable, lowercase, hyphenated. It keys applied-state in the browser
   and dedupes across profiles, so **never rename an existing one**.
 - `ats` + `slug` — one of `ashby`, `greenhouse`, `lever`, `workable`,
-  `teamtailor`, `smartrecruiters`, `workday`. Workday's slug is the triple
-  `tenant/wdN/site`.
+  `teamtailor`, `smartrecruiters`, `workday`, `recruitee`, `personio`,
+  `bamboohr`, `breezy`, `pinpoint`, `rippling`. Workday's slug is the triple
+  `tenant/wdN/site`; every other backend takes the bare subdomain. The full
+  endpoint table is in the README.
 - `vertical` — must already have a label in the profile's `verticals.labels`,
   or the card renders a raw key. Add the label and a `verticals.pills` class in
   the same edit if the vertical is new.
@@ -68,7 +70,9 @@ spec = importlib.util.spec_from_file_location("rc", "scripts/refresh-companies.p
 rc = importlib.util.module_from_spec(spec); sys.argv = ["rc"]; spec.loader.exec_module(rc)
 from concurrent.futures import ThreadPoolExecutor
 
-GUESSES = [("greenhouse", "arkadium"), ("lever", "arkadium"), ("ashby", "arkadium")]
+ATS = ["greenhouse", "ashby", "lever", "workable", "teamtailor",
+       "recruitee", "personio", "bamboohr", "breezy", "pinpoint"]
+GUESSES = [(a, s) for a in ATS for s in ("arkadium", "arkadium-games")]
 with ThreadPoolExecutor(max_workers=16) as p:
     for g, n in p.map(lambda g: (g, len(rc.fetch(*g))), GUESSES):
         print(f"{g[0]:16s} {g[1]:24s} {n} posting(s)")
@@ -81,8 +85,10 @@ not add it. A slug is confirmed only when the call returns postings.
 If a company's careers page is custom, open it and look at where the "Apply"
 links point: `job-boards.greenhouse.io/<slug>`, `jobs.ashbyhq.com/<slug>`,
 `jobs.lever.co/<slug>`, `apply.workable.com/<slug>`, `<slug>.teamtailor.com`,
-`jobs.smartrecruiters.com/<slug>`, `<tenant>.wdN.myworkdayjobs.com/…/<site>`.
-That link contains the slug, exactly. Companies on iCIMS, Taleo, BambooHR,
+`jobs.smartrecruiters.com/<slug>`, `<tenant>.wdN.myworkdayjobs.com/…/<site>`,
+`<slug>.recruitee.com`, `<slug>.jobs.personio.de`, `<slug>.bamboohr.com`,
+`<slug>.breezy.hr`, `<slug>.pinpointhq.com`, `ats.rippling.com/<slug>`.
+That link contains the slug, exactly. Companies on iCIMS, Taleo, Jobvite,
 Paylocity or a bespoke board have no public JSON here — skip them rather than
 inventing an entry.
 

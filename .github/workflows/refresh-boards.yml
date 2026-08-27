@@ -73,19 +73,6 @@ jobs:
             echo "no change — boards already current"
             exit 0
           fi
-          summary=$(python3 - <<'PY'
-          import json, subprocess, glob, os, re
-          out = []
-          for p in sorted(glob.glob('profiles/*.json')):
-              if p.endswith('.companies.json'):
-                  continue
-              prof = json.load(open(p))
-              src = open(prof['dataFile']).read()
-              n = len(re.findall(r'\n      \{ title:', src))
-              cos = len(re.findall(r'\n  \{ id:', src))
-              out.append(f"{prof['id']} {cos} cos/{n} roles")
-          print('; '.join(out))
-          PY
-          )
+          summary=$(python3 scripts/verify-board.py --summary)
           git commit -m "Refresh boards — $summary"
           git push

@@ -142,8 +142,34 @@ python3 scripts/verify-board.py sean
 ```
 
 `-v` prints how many postings were on the board when none matched, which
-separates "wrong slug" from "filters too tight". Supported ATS backends: Ashby,
-Greenhouse, Lever, Workable, Workday, Teamtailor, SmartRecruiters.
+separates "wrong slug" from "filters too tight".
+
+### Supported ATS backends
+
+Ashby, Greenhouse, Lever, Workable, Workday, Teamtailor, SmartRecruiters,
+Recruitee, Personio, BambooHR, Breezy, Pinpoint and Rippling — thirteen, each reading a public JSON endpoint with no key:
+
+| Backend | Slug shape | Endpoint |
+|---|---|---|
+| `ashby` | `acme` | `api.ashbyhq.com/posting-api/job-board/{slug}` |
+| `greenhouse` | `acme` | `boards-api.greenhouse.io/v1/boards/{slug}/jobs` |
+| `lever` | `acme` | `api.lever.co/v0/postings/{slug}` |
+| `workable` | `acme` | `apply.workable.com/api/v3/accounts/{slug}/jobs` (POST) |
+| `teamtailor` | `acme` or a full host | `{slug}.teamtailor.com/jobs.json` |
+| `smartrecruiters` | `Acme` | `api.smartrecruiters.com/v1/companies/{slug}/postings` |
+| `workday` | `tenant/wdN/site` | `{tenant}.wdN.myworkdayjobs.com/wday/cxs/…` (POST) |
+| `recruitee` | `acme` | `{slug}.recruitee.com/api/offers/` |
+| `personio` | `acme` | `{slug}.jobs.personio.de/search.json` |
+| `bamboohr` | `acme` | `{slug}.bamboohr.com/careers/list` |
+| `breezy` | `acme` | `{slug}.breezy.hr/json` |
+| `pinpoint` | `acme` | `{slug}.pinpointhq.com/postings.json` |
+| `rippling` | `acme` | `api.rippling.com/platform/api/ats/v1/board/{slug}/jobs` |
+
+Adding a backend means one branch in `fetch()` and one in `normalize()` in
+`scripts/refresh-companies.py`, one in `boardTokens()` plus a URL pattern in
+`scripts/check-dead.js`, and the name in `verify-board.py`'s allowlist. Personio
+and BambooHR publish no posting date, so roles from them sort by the day they
+entered the dataset rather than the day they were posted.
 
 ## Adding a board
 

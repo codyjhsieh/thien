@@ -25,7 +25,9 @@ a JSON edit — no code change — which is what makes the discovery half of the
 pipeline (`.claude/skills/job-scout`) safe to automate.
 
 Supported ATS backends: Ashby, Greenhouse, Lever, Workable, Workday,
-Teamtailor, SmartRecruiters.
+Teamtailor, SmartRecruiters, Recruitee, Personio, BambooHR, Breezy,
+Pinpoint and Rippling — thirteen in all. Every one reads a public JSON
+endpoint; none needs a key.
 """
 
 from __future__ import annotations
@@ -155,6 +157,30 @@ def fetch(ats, slug):
       if offset >= total or not page: break
       if offset > 5000: break  # safety
     return all_postings
+  if ats == "recruitee":
+    # {slug}.recruitee.com — public offers feed, no key needed.
+    d = curl_json(f"https://{slug}.recruitee.com/api/offers/")
+    return d.get("offers", []) if d else []
+  if ats == "personio":
+    # {slug}.jobs.personio.de — search.json is what their careers SPA calls.
+    # Returns a bare array; no posting URL or date, so both are derived below.
+    d = curl_json(f"https://{slug}.jobs.personio.de/search.json?language=en")
+    return d if isinstance(d, list) else []
+  if ats == "bamboohr":
+    d = curl_json(f"https://{slug}.bamboohr.com/careers/list")
+    return (d or {}).get("result", []) or []
+  if ats == "breezy":
+    d = curl_json(f"https://{slug}.breezy.hr/json")
+    return d if isinstance(d, list) else []
+  if ats == "pinpoint":
+    # Pinpoint wraps its list in {data:[...]} on some tenants and returns a
+    # bare array on others.
+    d = curl_json(f"https://{slug}.pinpointhq.com/postings.json")
+    if isinstance(d, list): return d
+    return (d or {}).get("data", []) or []
+  if ats == "rippling":
+    d = curl_json(f"https://api.rippling.com/platform/api/ats/v1/board/{slug}/jobs")
+    return d if isinstance(d, list) else []
   if ats == "workday":
     # Slug encodes the 3-tuple: "tenant/wdN/site"
     # e.g. "cityblockhealth/wd1/CityblockExternalCareerSite"
@@ -250,6 +276,58 @@ def normalize(ats, j, slug=""):
     loc = f"{L.get('city','')} {L.get('region','')} {L.get('fullLocation','')}"
     url = f"https://jobs.smartrecruiters.com/{slug}/{j.get('id','')}"
     posted = _date10(j.get("releasedDate"))
+  elif ats == "recruitee":
+    title = (j.get("title") or "").strip()
+    loc = " ".join(str(j.get(k) or "") for k in ("location", "city", "country"))
+    url = j.get("careers_url") or j.get("careers_apply_url")
+    posted = _date10(j.get("published_at") or j.get("created_at"))
+  elif ats == "personio":
+    # No url and no date in the feed — the posting URL is derivable from the
+    # id, and recency simply is not available from this backend.
+    title = (j.get("name") or "").strip()
+    offices = j.get("offices") or []
+    loc = (j.get("office") or "") + " " + " ".join(
+      o.get("name", "") if isinstance(o, dict) else str(o) for o in offices)
+    url = f"https://{slug}.jobs.personio.de/job/{j.get('id','')}?display=en" if j.get("id") else ""
+    posted = ""
+  elif ats == "bamboohr":
+    title = (j.get("jobOpeningName") or "").strip()
+    def _flat(v):
+      # BambooHR returns location and atsLocation as nested objects on some
+      # tenants and plain strings on others.
+      if isinstance(v, dict):
+        return " ".join(_flat(x) for x in v.values())
+      return "" if v is None else str(v)
+    loc = _flat(j.get("location")) + " " + _flat(j.get("atsLocation"))
+    if j.get("isRemote"): loc += " Remote"
+    url = f"https://{slug}.bamboohr.com/careers/{j.get('id','')}" if j.get("id") else ""
+    posted = ""
+  elif ats == "breezy":
+    title = (j.get("name") or "").strip()
+    def _bz(L):
+      if not isinstance(L, dict): return str(L or "")
+      city = L.get("city") or ""
+      st = (L.get("state") or {}).get("name", "") if isinstance(L.get("state"), dict) else (L.get("state") or "")
+      co = (L.get("country") or {}).get("name", "") if isinstance(L.get("country"), dict) else (L.get("country") or "")
+      return f"{city} {st} {co}"
+    loc = _bz(j.get("location")) + " " + " ".join(_bz(x) for x in (j.get("locations") or []))
+    url = j.get("url") or ""
+    posted = _date10(j.get("published_date"))
+  elif ats == "pinpoint":
+    title = (j.get("title") or "").strip()
+    L = j.get("location") or {}
+    loc = " ".join(str(L.get(k) or "") for k in ("name", "city", "province")) if isinstance(L, dict) else str(L)
+    url = j.get("url") or (f"https://{slug}.pinpointhq.com{j.get('path','')}" if j.get("path") else "")
+    posted = _date10(j.get("published_at") or j.get("created_at"))
+  elif ats == "rippling":
+    title = (j.get("name") or "").strip()
+    W = j.get("workLocation")
+    if isinstance(W, dict):
+      loc = " ".join(str(W.get(k) or "") for k in ("city", "state", "country", "label", "name"))
+    else:
+      loc = str(W or "")
+    url = j.get("url") or ""
+    posted = ""
   elif ats == "workday":
     # Workday: locationsText is a free-form string (e.g. "NY - New York"
     # or "MI - Detroit"). externalPath is relative — prefix with the

@@ -15,6 +15,7 @@ Checks:
   · the data file parses, exposes its declared global, and holds no duplicate
     company ids or duplicate job urls within a company
   · totalRoles matches the actual job count
+  · the data file declares nothing beyond the three constants the board reads
   · every job has a title, an https url and a level the profile declares
   · the generated js/<id>-profile.js is in step with profiles/<id>.json
 """
@@ -61,6 +62,17 @@ def load_data(path: Path, global_name: str):
   if r.returncode != 0:
     raise SystemExit(f"  ✗ {path.name}: {r.stderr.strip() or 'failed to load'}")
   return json.loads(r.stdout)
+
+
+def summarize(pid: str) -> str:
+  """`<id> <companies> cos/<roles> roles` — for commit messages and CI logs."""
+  prof = json.loads((ROOT / "profiles" / f"{pid}.json").read_text())
+  dpath = ROOT / prof["dataFile"]
+  if not dpath.exists():
+    return f"{pid} (not generated)"
+  data = load_data(dpath, prof.get("dataGlobal", "DATA"))
+  cos = data.get("COMPANIES", [])
+  return f"{pid} {len(cos)} cos/{sum(len(c.get('jobs', [])) for c in cos)} roles"
 
 
 def verify(pid: str) -> int:
@@ -112,7 +124,8 @@ def verify(pid: str) -> int:
   if isinstance(refs, str):
     refs = [refs]
   ATS = {"ashby", "greenhouse", "lever", "workable", "teamtailor",
-         "smartrecruiters", "workday"}
+         "smartrecruiters", "workday", "recruitee", "personio", "bamboohr",
+         "breezy", "pinpoint", "rippling"}
   vlabels = set((prof.get("verticals") or {}).get("labels", {}))
   seen_ids, seen_boards = set(), {}
   for ref in refs:
@@ -179,6 +192,13 @@ def verify(pid: str) -> int:
         errs.append(f"{c['id']}: job level '{j['level']}' has no tab in levels[]")
   if not data.get("COMPANIES_VERIFIED_AT"):
     errs.append("COMPANIES_VERIFIED_AT is empty")
+  # The data file is generated and must hold nothing else. js/data.js had
+  # carried ~560 lines of unreferenced flashcard and quiz data since the board
+  # was extracted from another app, shipped to every visitor.
+  declared = set(re.findall(r"^const (\w+)", dpath.read_text(), re.M))
+  extra = declared - {"COMPANIES", "COMPANY_DOMAINS", "COMPANIES_VERIFIED_AT"}
+  if extra:
+    errs.append(f"{prof['dataFile']} declares unused constants: {', '.join(sorted(extra))}")
 
   if errs:
     print(f"{pid}: {len(errs)} problem(s)", file=sys.stderr)
@@ -192,11 +212,16 @@ def main():
   ap = argparse.ArgumentParser()
   ap.add_argument("profiles", nargs="*", help="profile ids to verify")
   ap.add_argument("--all", action="store_true", help="verify every profile")
+  ap.add_argument("--summary", action="store_true",
+                  help="print a one-line count per profile instead of verifying")
   args = ap.parse_args()
   ids = args.profiles
   if args.all or not ids:
     ids = sorted(p.stem for p in (ROOT / "profiles").glob("*.json")
                  if not p.name.endswith(".companies.json"))
+  if args.summary:
+    print("; ".join(summarize(i) for i in ids))
+    return
   bad = sum(verify(i) for i in ids)
   sys.exit(1 if bad else 0)
 

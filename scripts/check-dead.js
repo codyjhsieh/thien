@@ -58,6 +58,12 @@ function inferAtsSlug(jobs) {
     if ((m = u.match(/lever\.co\/([^/]+)\//))) return ['lever', m[1]];
     if ((m = u.match(/apply\.workable\.com\/([^/]+)\//))) return ['workable', m[1]];
     if ((m = u.match(/([a-z0-9-]+)\.teamtailor\.com\//))) return ['teamtailor', m[1]];
+    if ((m = u.match(/([a-z0-9-]+)\.recruitee\.com\//))) return ['recruitee', m[1]];
+    if ((m = u.match(/([a-z0-9-]+)\.jobs\.personio\.[a-z]+\//))) return ['personio', m[1]];
+    if ((m = u.match(/([a-z0-9-]+)\.bamboohr\.com\/careers\//))) return ['bamboohr', m[1]];
+    if ((m = u.match(/([a-z0-9-]+)\.breezy\.hr\//))) return ['breezy', m[1]];
+    if ((m = u.match(/([a-z0-9-]+)\.pinpointhq\.com\//))) return ['pinpoint', m[1]];
+    if ((m = u.match(/ats\.rippling\.com\/([^/]+)\//))) return ['rippling', m[1]];
     if ((m = u.match(/jobs\.smartrecruiters\.com\/([^/]+)\//))) return ['smartrecruiters', m[1]];
     if ((m = u.match(/([a-z0-9-]+)\.(wd\d+)\.myworkdayjobs\.com\/[^/]*\/([^/]+)/i)))
       return ['workday', `${m[1]}/${m[2]}/${m[3]}`];
@@ -86,6 +92,12 @@ function urlToken(ats, url) {
   if ((m = url.match(/[?&]gh_jid=(\d+)/))) return m[1];
   if ((m = url.match(/\/jobs\/(\d+)/))) return m[1];
   if ((m = url.match(/\/j\/([A-F0-9]+)/i))) return m[1];           // workable
+  // Recruitee /o/{slug-title} and Personio /job/{id} carry their own shapes.
+  if (/\.recruitee\.com/.test(url) && (m = url.match(/\/o\/([^/?#]+)/))) return m[1];
+  if (/jobs\.personio\./.test(url) && (m = url.match(/\/job\/(\d+)/))) return m[1];
+  if (/\.bamboohr\.com/.test(url) && (m = url.match(/\/careers\/(\d+)/))) return m[1];
+  if (/\.breezy\.hr/.test(url) && (m = url.match(/\/p\/([0-9a-f]+)/i))) return m[1].toLowerCase();
+  if (/ats\.rippling\.com/.test(url) && (m = url.match(UUID))) return m[0].toLowerCase();
   // Teamtailor: /jobs/{numeric-id}-{slug-title} — the numeric id is the token.
   if (/teamtailor\.com/.test(url) && (m = url.match(/\/jobs\/(\d+)/))) return m[1];
   // SmartRecruiters: /{Company}/{numeric-id}[-slug] — take the trailing id.
@@ -144,6 +156,43 @@ function boardTokens(ats, slug) {
       { post: '{"query":"","department":[],"location":[]}', referer: `https://apply.workable.com/${slug}/` });
     if (!d || !d.results) return R(false);
     d.results.forEach(j => { toks.add(String(j.shortcode)); addT(j.title); });
+    return R(true);
+  }
+  if (ats === 'recruitee') {
+    const d = curl(`https://${slug}.recruitee.com/api/offers/`);
+    if (!d || !d.offers) return R(false);
+    d.offers.forEach(j => { toks.add(String(j.id)); addT(j.title); });
+    return R(true);
+  }
+  if (ats === 'personio') {
+    const d = curl(`https://${slug}.jobs.personio.de/search.json?language=en`);
+    if (!Array.isArray(d)) return R(false);
+    d.forEach(j => { toks.add(String(j.id)); addT(j.name); });
+    return R(true);
+  }
+  if (ats === 'bamboohr') {
+    const d = curl(`https://${slug}.bamboohr.com/careers/list`);
+    if (!d || !d.result) return R(false);
+    d.result.forEach(j => { toks.add(String(j.id)); addT(j.jobOpeningName); });
+    return R(true);
+  }
+  if (ats === 'breezy') {
+    const d = curl(`https://${slug}.breezy.hr/json`);
+    if (!Array.isArray(d)) return R(false);
+    d.forEach(j => { toks.add(String(j.id)); addT(j.name); });
+    return R(true);
+  }
+  if (ats === 'pinpoint') {
+    const d = curl(`https://${slug}.pinpointhq.com/postings.json`);
+    const rows = Array.isArray(d) ? d : (d && d.data);
+    if (!rows) return R(false);
+    rows.forEach(j => { toks.add(String(j.id)); addT(j.title); });
+    return R(true);
+  }
+  if (ats === 'rippling') {
+    const d = curl(`https://api.rippling.com/platform/api/ats/v1/board/${slug}/jobs`);
+    if (!Array.isArray(d)) return R(false);
+    d.forEach(j => { toks.add(String(j.uuid).toLowerCase()); addT(j.name); });
     return R(true);
   }
   if (ats === 'teamtailor') {
