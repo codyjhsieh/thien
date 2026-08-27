@@ -336,7 +336,16 @@ function boardTokens(ats, slug) {
       L.push('    ] }');
       return L.join('\n');
     };
-    const block = 'const COMPANIES = [\n' + companies.map(emitCompany).join(',\n') + '\n];';
+    // A company whose every posting just died has nothing left to render — the
+    // board filters it out anyway. Drop it rather than accumulating empty
+    // shells run after run; it comes back on its own the next time it posts,
+    // because the candidate pool still lists it.
+    const emptied = companies.filter(c => !(c.jobs || []).length).map(c => c.id);
+    const kept = companies.filter(c => (c.jobs || []).length);
+    if (emptied.length) {
+      console.log(`--prune: dropped ${emptied.length} company/companies left with no live roles: ${emptied.join(', ')}`);
+    }
+    const block = 'const COMPANIES = [\n' + kept.map(emitCompany).join(',\n') + '\n];';
     const a = src.indexOf('const COMPANIES = [');
     const e = src.indexOf('\n];', src.indexOf('[', a)) + 3;
     fs.writeFileSync(DATA, src.slice(0, a) + block + src.slice(e));

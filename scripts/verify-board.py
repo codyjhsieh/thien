@@ -176,6 +176,8 @@ def verify(pid: str) -> int:
     ids.add(c["id"])
     jobs = c.get("jobs", [])
     jobs_total += len(jobs)
+    if not jobs:
+      errs.append(f"{c['id']}: no jobs — an empty shell the board cannot render")
     if c.get("totalRoles") != len(jobs):
       errs.append(f"{c['id']}: totalRoles={c.get('totalRoles')} but {len(jobs)} jobs")
     urls = set()

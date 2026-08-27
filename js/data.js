@@ -56,15 +56,6 @@ const COMPANIES = [
     jobs:[
       { title:"Business Operations", url:"https://jobs.ashbyhq.com/rilla/8ac44792-e79b-49cb-9c6e-18ddd6875fa8", level:"mid", added:"2026-08-26", posted:"2026-03-22" }
     ] },
-  { id:"cohere", name:"Cohere", vertical:"ai",
-    sub:"Enterprise LLM platform",
-    stage:"Series C", raised:"$945M", lead:"Inovia",
-    badges:["Inovia","Index","Tiger","NVIDIA"],
-    totalRoles:0,
-    notes:"Enterprise LLM toolchain. Strong RAG + finetuning depth.",
-    jobs:[
-
-    ] },
   { id:"cursor", name:"Cursor", vertical:"ai",
     sub:"AI-first code editor",
     stage:"Series B", raised:"$170M", lead:"Andreessen Horowitz",
@@ -129,24 +120,6 @@ const COMPANIES = [
       { title:"GTM Strategy & Operations", url:"https://jobs.ashbyhq.com/plaid/33379e81-e111-4bb8-8c6b-9e64d4fa51c5", level:"mid", added:"2026-08-26", posted:"2026-06-05" },
       { title:"Business Operations", url:"https://jobs.ashbyhq.com/plaid/bf4450b7-6ed5-49ec-a2ad-a1e0ffbcbe50", level:"mid", added:"2026-08-26", posted:"2026-07-27" }
     ] },
-  { id:"gusto", name:"Gusto", vertical:"fintech",
-    sub:"Payroll / HR for SMBs",
-    stage:"Series E", raised:"$716M", lead:"Generation",
-    badges:["Generation","Kleiner","YC"],
-    totalRoles:0,
-    notes:"Payroll engine + benefits. Compliance, money movement, multi-state tax.",
-    jobs:[
-
-    ] },
-  { id:"sofi", name:"SoFi", vertical:"fintech",
-    sub:"Personal finance (NASDAQ)",
-    stage:"Public", raised:"$2.6B pre-IPO", lead:"SoftBank",
-    badges:["NASDAQ","SoftBank","Silver Lake"],
-    totalRoles:0,
-    notes:"Consumer finance super-app. Lending, banking, brokerage.",
-    jobs:[
-
-    ] },
   { id:"gemini", name:"Gemini", vertical:"fintech",
     sub:"Crypto exchange + prediction markets (NASDAQ: GEMI)",
     stage:"Public", raised:"$400M", lead:"Morgan Creek",
@@ -176,15 +149,6 @@ const COMPANIES = [
     jobs:[
       { title:"Analyst, Regulatory Affairs", url:"https://www.hioscar.com/careers/7983436?gh_jid=7983436", level:"mid", added:"2026-08-26", posted:"2026-07-28" },
       { title:"Associate, Strategic Finance (FP&A)", url:"https://www.hioscar.com/careers/8129152?gh_jid=8129152", level:"entry", added:"2026-08-26", posted:"2026-08-24" }
-    ] },
-  { id:"ridgeline", name:"Ridgeline", vertical:"saas",
-    sub:"Cloud OS for investment mgmt",
-    stage:"Series C", raised:"$278M", lead:"Wellington",
-    badges:["Wellington","Sequoia"],
-    totalRoles:0,
-    notes:"Modern investment-management platform. Vertical SaaS at scale.",
-    jobs:[
-
     ] },
   { id:"figma", name:"Figma", vertical:"saas",
     sub:"Collaborative design",
@@ -245,15 +209,6 @@ const COMPANIES = [
       { title:"Data Analyst, Operations Planning", url:"https://app.careerpuck.com/job-board/lyft/job/8568512002?gh_jid=8568512002", level:"mid", added:"2026-08-26", posted:"2026-07-06" },
       { title:"Data Analyst, Go-To-Market Sales Insights", url:"https://app.careerpuck.com/job-board/lyft/job/8697679002?gh_jid=8697679002", level:"mid", added:"2026-08-26", posted:"2026-08-11" }
     ] },
-  { id:"reddit", name:"Reddit", vertical:"media",
-    sub:"Social discussion platform (NYSE)",
-    stage:"Public", raised:"$1.3B pre-IPO", lead:"Advance",
-    badges:["NYSE","Advance","Tencent"],
-    totalRoles:0,
-    notes:"Public co. Massive social platform with rich data + recs.",
-    jobs:[
-
-    ] },
   { id:"jane-street", name:"Jane Street", vertical:"fintech",
     sub:"Quant trading firm",
     stage:"Private", raised:"Self-funded", lead:"Private",
@@ -280,15 +235,6 @@ const COMPANIES = [
     jobs:[
       { title:"Operations Analyst (Temporary)", url:"https://jobs.ashbyhq.com/middesk/63d737cf-47b8-44b6-80f0-1b6f57a7c9b3", level:"mid", added:"2026-08-26", posted:"2026-08-18" }
     ] },
-  { id:"spotify", name:"Spotify", vertical:"media",
-    sub:"Audio streaming (NYSE)",
-    stage:"Public", raised:"$540M pre-IPO", lead:"TCV",
-    badges:["NYSE","TCV","DST"],
-    totalRoles:0,
-    notes:"Public co. Audio infra + recs + ads + creator tools.",
-    jobs:[
-
-    ] },
   { id:"point72", name:"Point72", vertical:"fintech",
     sub:"Quant + multi-strat hedge fund",
     stage:"Private", raised:"Self-funded", lead:"Private",
@@ -312,15 +258,6 @@ const COMPANIES = [
     notes:"AI builder for apps. Frontier model integration + product engineering.",
     jobs:[
       { title:"Finance & BizOps, Marketing", url:"https://jobs.ashbyhq.com/lovable/7ee5ea78-9858-43c3-92b1-1d9a263414e1", level:"mid", added:"2026-08-26", posted:"2026-02-25" }
-    ] },
-  { id:"hopper", name:"Hopper", vertical:"hospitality",
-    sub:"B2B travel tech + fintech (HTS)",
-    stage:"Series G", raised:"$750M", lead:"Goldman Sachs",
-    badges:["Goldman Sachs","Inovia","Capital One"],
-    totalRoles:0,
-    notes:"Hopper Technology Solutions powers partners (Capital One, Uber, Nubank) with booking + travel fintech (price-freeze, cancel-for-any-reason). B2B is now majority of revenue.",
-    jobs:[
-
     ] },
   { id:"hang", name:"Hang", vertical:"hospitality",
     sub:"Autonomous marketing system for brands",
@@ -349,15 +286,6 @@ const COMPANIES = [
     jobs:[
       { title:"Business Operations Associate", url:"https://jobs.ashbyhq.com/partiful/65c09a92-084e-4930-b171-05cc7ecb8a15", level:"entry", added:"2026-08-26", posted:"2026-06-14" }
     ] },
-  { id:"warp", name:"Warp", vertical:"ai",
-    sub:"AI-native terminal",
-    stage:"Series B", raised:"$73M", lead:"Sequoia",
-    badges:["Sequoia","GV"],
-    totalRoles:0,
-    notes:"Reimagined terminal with AI. Heavy on developer experience, latency, prompt design for code.",
-    jobs:[
-
-    ] },
   { id:"harvey", name:"Harvey", vertical:"ai",
     sub:"Legal AI for major firms",
     stage:"Series F+", raised:"$806M+", lead:"Andreessen Horowitz",
@@ -382,24 +310,6 @@ const COMPANIES = [
       { title:"Finance Analyst, Capacity Finance", url:"https://coreweave.com/careers/job?4692714006&board=coreweave&gh_jid=4692714006", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Operations Enablement Analyst, Data Center Operations", url:"https://coreweave.com/careers/job?4698084006&board=coreweave&gh_jid=4698084006", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Data Center Operations Cost Analyst", url:"https://coreweave.com/careers/job?4702795006&board=coreweave&gh_jid=4702795006", level:"mid", added:"2026-08-26", posted:"2026-08-21" }
-    ] },
-  { id:"pagaya", name:"Pagaya", vertical:"fintech",
-    sub:"AI lending platform (NASDAQ)",
-    stage:"Public", raised:"$500M+ pre-IPO", lead:"Israel Growth Partners",
-    badges:["NASDAQ","Aflac","Viola"],
-    totalRoles:0,
-    notes:"NYC AI-lending. ML credit + capital-markets plumbing.",
-    jobs:[
-
-    ] },
-  { id:"neon", name:"Neon", vertical:"devtools",
-    sub:"Serverless Postgres (acq. by Databricks May 2025)",
-    stage:"Series B", raised:"$104M", lead:"Menlo",
-    badges:["Menlo","General Catalyst","GGV"],
-    totalRoles:0,
-    notes:"Branchable serverless Postgres. Now part of Databricks; product still runs standalone. Storage separation, autoscaling.",
-    jobs:[
-
     ] },
   { id:"blackrock", name:"BlackRock", vertical:"fintech",
     sub:"World's largest asset manager (NYSE: BLK)",
@@ -442,15 +352,6 @@ const COMPANIES = [
     jobs:[
       { title:"FP&A Associate", url:"https://job-boards.greenhouse.io/zocdoc/jobs/8002903", level:"entry", added:"2026-08-26", posted:"2026-08-17" }
     ] },
-  { id:"flow-traders", name:"Flow Traders", vertical:"fintech",
-    sub:"ETF + crypto market maker",
-    stage:"Public", raised:"Self-funded", lead:"Euronext",
-    badges:["Euronext"],
-    totalRoles:0,
-    notes:"NYC trading. ETP market-making; trading systems + low-latency infra.",
-    jobs:[
-
-    ] },
   { id:"sonder", name:"Sonder", vertical:"hospitality",
     sub:"Tech-enabled hotels + short-stay (NASDAQ: SOND)",
     stage:"Public", raised:"$425M+ pre-IPO", lead:"Greenoaks",
@@ -470,24 +371,6 @@ const COMPANIES = [
       { title:"Associate, Sales Operations", url:"https://job-boards.greenhouse.io/vestwell/jobs/7800389003", level:"entry", added:"2026-08-26", posted:"2026-08-14" },
       { title:"Freelance Paid Marketing Analyst", url:"https://job-boards.greenhouse.io/vestwell/jobs/7806814003", level:"mid", added:"2026-08-26", posted:"2026-08-14" }
     ] },
-  { id:"dashlane", name:"Dashlane", vertical:"security",
-    sub:"Password manager / identity",
-    stage:"Series D", raised:"$200M+", lead:"Sequoia",
-    badges:["Sequoia","Bessemer"],
-    totalRoles:0,
-    notes:"NYC HQ. Snyk-adjacent security, mature eng org.",
-    jobs:[
-
-    ] },
-  { id:"taboola", name:"Taboola", vertical:"saas",
-    sub:"Content + ad tech",
-    stage:"Public", raised:"(NASDAQ: TBLA)", lead:"NASDAQ",
-    badges:["NASDAQ"],
-    totalRoles:0,
-    notes:"NYC major office. Recommendation engine, big data pipelines.",
-    jobs:[
-
-    ] },
   { id:"sisense", name:"Sisense", vertical:"saas",
     sub:"Embedded analytics + BI",
     stage:"Series F", raised:"$200M+", lead:"Insight",
@@ -506,15 +389,6 @@ const COMPANIES = [
     jobs:[
       { title:"Campaign Analytics, Data Analyst", url:"https://www.fanduel.careers/open-positions?gh_jid=8055746", level:"mid", added:"2026-08-26", posted:"2026-08-12" },
       { title:"Commercial Analyst - Casino", url:"https://www.fanduel.careers/open-positions?gh_jid=8142362", level:"mid", added:"2026-08-26", posted:"2026-08-19" }
-    ] },
-  { id:"crusoe", name:"Crusoe", vertical:"climate",
-    sub:"Flare-gas + clean-energy AI datacenters",
-    stage:"Series C", raised:"$1.4B+", lead:"G2 Venture Partners",
-    badges:["G2 VP","Founders Fund"],
-    totalRoles:0,
-    notes:"NYC office. Novel energy-transition compute.",
-    jobs:[
-
     ] },
   { id:"flexport", name:"Flexport", vertical:"saas",
     sub:"Freight + logistics tech",
@@ -664,15 +538,6 @@ const COMPANIES = [
     jobs:[
       { title:"Sales Strategy & Operations Lead, Agency Deal Ops", url:"https://www.pinterestcareers.com/jobs/?gh_jid=7678715", level:"mid", added:"2026-08-26", posted:"2026-08-20" },
       { title:"Sales Strategy & Operations Lead, JBP Development", url:"https://www.pinterestcareers.com/jobs/?gh_jid=7983334", level:"mid", added:"2026-08-26", posted:"2026-08-20" }
-    ] },
-  { id:"opentable", name:"OpenTable", vertical:"hospitality",
-    sub:"Restaurant reservations (Booking)",
-    stage:"Acquired", raised:"(Booking Holdings)", lead:"Booking",
-    badges:["Booking"],
-    totalRoles:0,
-    notes:"SF HQ, NYC hires.",
-    jobs:[
-
     ] },
   { id:"box", name:"Box", vertical:"saas",
     sub:"Cloud content (NYSE: BOX)",
