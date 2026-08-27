@@ -58,6 +58,14 @@ CASES = {
     ("Animator",                                "gaming",   True),
     ("Animator",                                "animation", False),
     ("2D Effects Artist (Temporary/Freelance)", "animation", False),
+    # The broad lane is for companies whose product IS a game. A platform, a
+    # tool, an ad network or a defence contractor does not qualify, however
+    # game-adjacent it is.
+    ("Art Director",                            "gametech", False),   # Xsolla, Twitch
+    ("Animator",                                "simulation", False), # Anduril, Shield AI
+    ("Illustrator",                             "archviz",  False),
+    ("Environment Artist",                      "simulation", True),  # title still carries it
+    ("Unreal Environment Artist",               "archviz",  True),
     # Marketing-side design is not working on the game.
     ("Brand Designer",                          "gaming",   False),
     ("Senior Brand Designer",                   "fintech",  False),

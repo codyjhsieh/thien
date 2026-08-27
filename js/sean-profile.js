@@ -94,7 +94,10 @@ window.BOARD_PROFILE = {
       "vfx": "VFX",
       "security": "Security",
       "cpg": "CPG",
-      "igaming": "iGaming"
+      "igaming": "iGaming",
+      "gametech": "Game Tech",
+      "simulation": "Simulation",
+      "archviz": "Archviz"
     },
     "pills": {
       "gaming": "pill-ai",
@@ -117,7 +120,10 @@ window.BOARD_PROFILE = {
       "vfx": "pill-mkt",
       "security": "pill-dev",
       "cpg": "pill-mkt",
-      "igaming": "pill-both"
+      "igaming": "pill-both",
+      "gametech": "pill-dev",
+      "simulation": "pill-dev",
+      "archviz": "pill-hosp"
     }
   },
   "scoring": {
