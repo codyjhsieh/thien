@@ -20,7 +20,7 @@
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  *  - jobs are sorted: founding > senior > mid.
  */
-const COMPANIES_VERIFIED_AT = '2026-08-27';
+const COMPANIES_VERIFIED_AT = '2026-08-28';
 const COMPANIES = [
   { id:"anthropic", name:"Anthropic", vertical:"ai",
     sub:"Claude \u2014 AI safety lab",
@@ -78,12 +78,11 @@ const COMPANIES = [
     sub:"Payments + financial infra",
     stage:"Late stage", raised:"$8.7B", lead:"Sequoia",
     badges:["Sequoia","a16z","General Catalyst"],
-    totalRoles:9,
+    totalRoles:8,
     notes:"Payments at planet scale. Distributed systems, idempotency, money.",
     jobs:[
       { title:"Data Analyst, Financial Data Engineering", url:"https://stripe.com/jobs/search?gh_jid=8070572", level:"mid", added:"2026-08-26", posted:"2026-08-18" },
       { title:"Finance & Strategy Analyst", url:"https://stripe.com/jobs/search?gh_jid=7985368", level:"mid", added:"2026-08-26", posted:"2026-08-18" },
-      { title:"Sales Compensation Analytics & Systems Specialist", url:"https://stripe.com/jobs/search?gh_jid=7739207", level:"mid", added:"2026-08-26", posted:"2026-08-18" },
       { title:"Strategy and Operations Lead, Deal Pricing", url:"https://stripe.com/jobs/search?gh_jid=8044391", level:"mid", added:"2026-08-26", posted:"2026-08-18" },
       { title:"Business Partner Analyst", url:"https://stripe.com/jobs/search?gh_jid=8079783", level:"mid", added:"2026-08-26", posted:"2026-08-18" },
       { title:"Business Value Scale Analyst", url:"https://stripe.com/jobs/search?gh_jid=8097047", level:"mid", added:"2026-08-26", posted:"2026-08-25" },
@@ -133,22 +132,24 @@ const COMPANIES = [
     sub:"Cloud monitoring (NASDAQ)",
     stage:"Public", raised:"$148M pre-IPO", lead:"Index",
     badges:["NASDAQ","Index","OpenView"],
-    totalRoles:3,
+    totalRoles:4,
     notes:"Public co. Time-series infra, alerting, observability depth.",
     jobs:[
       { title:"Deal Desk Analyst - NYC", url:"https://careers.datadoghq.com/detail/7993638/?gh_jid=7993638", level:"mid", added:"2026-08-26", posted:"2026-08-24" },
       { title:"FP&A Analyst - Data Insights", url:"https://careers.datadoghq.com/detail/7964916/?gh_jid=7964916", level:"mid", added:"2026-08-26", posted:"2026-08-24" },
-      { title:"Sales Revenue Analyst - NYC", url:"https://careers.datadoghq.com/detail/8132294/?gh_jid=8132294", level:"mid", added:"2026-08-26", posted:"2026-08-24" }
+      { title:"Sales Revenue Analyst - NYC", url:"https://careers.datadoghq.com/detail/8132294/?gh_jid=8132294", level:"mid", added:"2026-08-26", posted:"2026-08-24" },
+      { title:"GTM Strategy and Operations Associate", url:"https://careers.datadoghq.com/detail/7843331/?gh_jid=7843331", level:"entry", added:"2026-08-28", posted:"2026-08-27" }
     ] },
   { id:"oscar", name:"Oscar Health", vertical:"health",
     sub:"Tech-driven health insurance (NYSE)",
     stage:"Public", raised:"$1.6B pre-IPO", lead:"Founders Fund",
     badges:["NYSE","Founders Fund","General Catalyst"],
-    totalRoles:2,
+    totalRoles:3,
     notes:"Public co. Insurance platform with member-facing tech.",
     jobs:[
       { title:"Analyst, Regulatory Affairs", url:"https://www.hioscar.com/careers/7983436?gh_jid=7983436", level:"mid", added:"2026-08-26", posted:"2026-07-28" },
-      { title:"Associate, Strategic Finance (FP&A)", url:"https://www.hioscar.com/careers/8129152?gh_jid=8129152", level:"entry", added:"2026-08-26", posted:"2026-08-24" }
+      { title:"Associate, Strategic Finance (FP&A)", url:"https://www.hioscar.com/careers/8129152?gh_jid=8129152", level:"entry", added:"2026-08-26", posted:"2026-08-24" },
+      { title:"Workday Reporting & Analytics Lead, People Analytics", url:"https://www.hioscar.com/careers/8056691?gh_jid=8056691", level:"mid", added:"2026-08-28", posted:"2026-08-27" }
     ] },
   { id:"figma", name:"Figma", vertical:"saas",
     sub:"Collaborative design",
@@ -213,10 +214,9 @@ const COMPANIES = [
     sub:"Quant trading firm",
     stage:"Private", raised:"Self-funded", lead:"Private",
     badges:["Private"],
-    totalRoles:9,
+    totalRoles:8,
     notes:"Quant trading. Strong on functional programming (OCaml), CS fundamentals.",
     jobs:[
-      { title:"AML Onboarding Analyst", url:"https://www.janestreet.com/join-jane-street/apply/8347073002?gh_jid=8347073002", level:"mid", added:"2026-08-26", posted:"2026-08-04" },
       { title:"Fundamental Research Analyst", url:"https://www.janestreet.com/join-jane-street/apply/8347286002?gh_jid=8347286002", level:"mid", added:"2026-08-26", posted:"2026-08-25" },
       { title:"Grains and Oilseeds Analyst", url:"https://www.janestreet.com/join-jane-street/apply/8180726002?gh_jid=8180726002", level:"mid", added:"2026-08-26", posted:"2026-07-30" },
       { title:"Indirect Procurement Specialist", url:"https://www.janestreet.com/join-jane-street/apply/8442082002?gh_jid=8442082002", level:"mid", added:"2026-08-26", posted:"2026-07-30" },
@@ -319,10 +319,11 @@ const COMPANIES = [
     sub:"Marketplace for handmade + vintage (NASDAQ: ETSY)",
     stage:"Public", raised:"$307M pre-IPO", lead:"NASDAQ",
     badges:["NASDAQ","S&P MidCap"],
-    totalRoles:1,
+    totalRoles:2,
     notes:"Brooklyn HQ. Recommendations, search, payments, ML \u2014 strong Python culture.",
     jobs:[
-      { title:"Quantitative UX Research Analyst II", url:"https://etsy.wd5.myworkdayjobs.com/en-US/Etsy_Careers/job/Brooklyn-New-York/Quantitative-UX-Research-Analyst-II_JR5713-2", level:"mid", added:"2026-08-26" }
+      { title:"Quantitative UX Research Analyst II", url:"https://etsy.wd5.myworkdayjobs.com/en-US/Etsy_Careers/job/Brooklyn-New-York/Quantitative-UX-Research-Analyst-II_JR5713-2", level:"mid", added:"2026-08-26" },
+      { title:"Market Research Analyst III", url:"https://etsy.wd5.myworkdayjobs.com/en-US/Etsy_Careers/job/Brooklyn-New-York/Market-Research-Analyst-III_JR5819-1", level:"mid", added:"2026-08-28" }
     ] },
   { id:"nbcuniversal", name:"Comcast (NBCUniversal)", vertical:"media",
     sub:"Media + telecom (NASDAQ: CMCSA)",
@@ -347,11 +348,10 @@ const COMPANIES = [
     sub:"Retirement / 401k infra",
     stage:"Series D", raised:"$227M", lead:"Wellington",
     badges:["Wellington","Fin Capital"],
-    totalRoles:2,
+    totalRoles:1,
     notes:"NYC HQ. White-label recordkeeping API.",
     jobs:[
-      { title:"Associate, Sales Operations", url:"https://job-boards.greenhouse.io/vestwell/jobs/7800389003", level:"entry", added:"2026-08-26", posted:"2026-08-14" },
-      { title:"Freelance Paid Marketing Analyst", url:"https://job-boards.greenhouse.io/vestwell/jobs/7806814003", level:"mid", added:"2026-08-26", posted:"2026-08-14" }
+      { title:"Associate, Sales Operations", url:"https://job-boards.greenhouse.io/vestwell/jobs/7800389003", level:"entry", added:"2026-08-26", posted:"2026-08-14" }
     ] },
   { id:"sisense", name:"Sisense", vertical:"saas",
     sub:"Embedded analytics + BI",
@@ -394,17 +394,16 @@ const COMPANIES = [
     sub:"Luxury fitness / hospitality",
     stage:"PE-backed", raised:"$1B+", lead:"L Catterton",
     badges:["L Catterton","Related Cos"],
-    totalRoles:2,
+    totalRoles:1,
     notes:"HQ Hudson Yards NYC. Sr Data Engineer + site-testing eng roles.",
     jobs:[
-      { title:"Sr. Compensation Analyst", url:"https://jobs.smartrecruiters.com/Equinox/744000138130540", level:"mid", added:"2026-08-26", posted:"2026-07-16" },
       { title:"Strategic Finance Analyst (Hybrid – OnSite / Remote)", url:"https://jobs.smartrecruiters.com/Equinox/744000143120749", level:"mid", added:"2026-08-26", posted:"2026-08-12" }
     ] },
   { id:"nyc-gov", name:"City of New York", vertical:"saas",
     sub:"Public sector (dept of tech)",
     stage:"Public sector", raised:"$110B budget", lead:"\u2014",
     badges:["Public sector"],
-    totalRoles:70,
+    totalRoles:73,
     notes:"NYC gov. Sr SWE GeoSupport, .NET, City Environmental Quality Review roles.",
     jobs:[
       { title:"Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014163861", level:"mid", added:"2026-08-26", posted:"2026-07-18" },
@@ -476,7 +475,10 @@ const COMPANIES = [
       { title:"Capital Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014864036", level:"mid", added:"2026-08-27", posted:"2026-08-26" },
       { title:"Capital Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014863911", level:"mid", added:"2026-08-27", posted:"2026-08-26" },
       { title:"Counter Terrorism Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014864116", level:"mid", added:"2026-08-27", posted:"2026-08-26" },
-      { title:"Risk and Integrity Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014889332", level:"mid", added:"2026-08-27", posted:"2026-08-27" }
+      { title:"Risk and Integrity Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014889332", level:"mid", added:"2026-08-27", posted:"2026-08-27" },
+      { title:"Operations Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014914568", level:"mid", added:"2026-08-28", posted:"2026-08-28" },
+      { title:"Procurement Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014914526", level:"mid", added:"2026-08-28", posted:"2026-08-28" },
+      { title:"Transit Planner, Bus Priority Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014914671", level:"mid", added:"2026-08-28", posted:"2026-08-28" }
     ] },
   { id:"palantir", name:"Palantir", vertical:"saas",
     sub:"Elite FDE consultancy (NYSE: PLTR)",
@@ -598,15 +600,6 @@ const COMPANIES = [
     jobs:[
       { title:"Enterprise Deal Desk & Pricing Analyst", url:"https://job-boards.greenhouse.io/scaleai/jobs/4725451005", level:"mid", added:"2026-08-26", posted:"2026-08-19" }
     ] },
-  { id:"citi", name:"Citi", vertical:"fintech",
-    sub:"Diversified bank (NYSE: C)",
-    stage:"Public", raised:"(NYSE: C)", lead:"NYSE",
-    badges:["NYSE"],
-    totalRoles:1,
-    notes:"NYC HQ.",
-    jobs:[
-      { title:"Functions - Quantitative Risk Management, Summer Analyst, Buffalo - USA, 2027", url:"https://citi.wd5.myworkdayjobs.com/en-US/2/job/Getzville-New-York-United-States/Functions---Quantitative-Risk-Management--Summer-Analyst--Buffalo---USA--2027_26990039", level:"mid", added:"2026-08-27" }
-    ] },
   { id:"lithic", name:"Lithic", vertical:"fintech",
     sub:"Card-issuing API",
     stage:"Series C", raised:"$110M", lead:"Stripes",
@@ -624,6 +617,24 @@ const COMPANIES = [
     notes:"Edge platform + Next.js. CDN, build, runtime.",
     jobs:[
       { title:"GRC Analyst", url:"https://job-boards.greenhouse.io/vercel/jobs/6102654004", level:"mid", added:"2026-08-27", posted:"2026-08-26" }
+    ] },
+  { id:"disney", name:"The Walt Disney Company", vertical:"media",
+    sub:"Streaming + studios + parks (NYSE: DIS)",
+    stage:"Public", raised:"$1B+ pre-IPO", lead:"NYSE",
+    badges:["NYSE","S&P 500"],
+    totalRoles:1,
+    notes:"NYC tech: ABC News, Hulu, ESPN+, Disney+. Streaming infra + content systems.",
+    jobs:[
+      { title:"Analyst, Subscriber Planning (Project Hire)", url:"https://disney.wd5.myworkdayjobs.com/en-US/disneycareer/job/New-York-CA-USA/Senior-Analyst--Subscriber-Planning--PH-_10152840", level:"mid", added:"2026-08-28" }
+    ] },
+  { id:"warp", name:"Warp", vertical:"ai",
+    sub:"AI-native terminal",
+    stage:"Series B", raised:"$73M", lead:"Sequoia",
+    badges:["Sequoia","GV"],
+    totalRoles:1,
+    notes:"Reimagined terminal with AI. Heavy on developer experience, latency, prompt design for code.",
+    jobs:[
+      { title:"Revenue Operations Specialist", url:"https://jobs.ashbyhq.com/warp/6b4c450d-ab42-426e-afef-32396b9560a6", level:"mid", added:"2026-08-28", posted:"2026-08-27" }
     ] }
 ];
 
