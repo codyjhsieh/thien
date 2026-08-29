@@ -16,7 +16,7 @@
  *           totalRoles, notes, jobs[{ title, url, level, posted, added }] }
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  */
-const COMPANIES_VERIFIED_AT = '2026-08-28';
+const COMPANIES_VERIFIED_AT = '2026-08-29';
 const COMPANIES = [
   { id:"believer", name:"Believer Entertainment", vertical:"gaming",
     sub:"The Prodigal \u2014 new IP",
@@ -40,11 +40,12 @@ const COMPANIES = [
     sub:"Marvel's Spider-Man / Ratchet & Clank",
     stage:"Public (Sony)", raised:"NYSE: SONY", lead:"\u2014",
     badges:["Sony"],
-    totalRoles:2,
+    totalRoles:3,
     notes:"Sony first-party with a large in-house art org and a fast shipping cadence.",
     jobs:[
       { title:"Senior Facial Character TD (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6143980004", level:"senior", added:"2026-08-27", posted:"2026-08-27", remote:true, loc:"United States, Remote" },
-      { title:"Senior Gameplay Animator (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6138863004", level:"senior", added:"2026-08-27", posted:"2026-08-27", remote:true, loc:"United States, Remote" }
+      { title:"Senior Gameplay Animator (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6138863004", level:"senior", added:"2026-08-27", posted:"2026-08-27", remote:true, loc:"United States, Remote" },
+      { title:"Senior Gameplay Programmer (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6173051004", level:"senior", added:"2026-08-29", posted:"2026-08-28", remote:true, loc:"United States, Remote" }
     ] },
   { id:"neteasegames", name:"NetEase Games", vertical:"gaming",
     sub:"Marvel Rivals / Naraka",

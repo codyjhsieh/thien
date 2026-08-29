@@ -20,7 +20,7 @@
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  *  - jobs are sorted: founding > senior > mid.
  */
-const COMPANIES_VERIFIED_AT = '2026-08-28';
+const COMPANIES_VERIFIED_AT = '2026-08-29';
 const COMPANIES = [
   { id:"anthropic", name:"Anthropic", vertical:"ai",
     sub:"Claude \u2014 AI safety lab",
@@ -132,12 +132,11 @@ const COMPANIES = [
     sub:"Cloud monitoring (NASDAQ)",
     stage:"Public", raised:"$148M pre-IPO", lead:"Index",
     badges:["NASDAQ","Index","OpenView"],
-    totalRoles:4,
+    totalRoles:3,
     notes:"Public co. Time-series infra, alerting, observability depth.",
     jobs:[
       { title:"Deal Desk Analyst - NYC", url:"https://careers.datadoghq.com/detail/7993638/?gh_jid=7993638", level:"mid", added:"2026-08-26", posted:"2026-08-24" },
       { title:"FP&A Analyst - Data Insights", url:"https://careers.datadoghq.com/detail/7964916/?gh_jid=7964916", level:"mid", added:"2026-08-26", posted:"2026-08-24" },
-      { title:"Sales Revenue Analyst - NYC", url:"https://careers.datadoghq.com/detail/8132294/?gh_jid=8132294", level:"mid", added:"2026-08-26", posted:"2026-08-24" },
       { title:"GTM Strategy and Operations Associate", url:"https://careers.datadoghq.com/detail/7843331/?gh_jid=7843331", level:"entry", added:"2026-08-28", posted:"2026-08-27" }
     ] },
   { id:"oscar", name:"Oscar Health", vertical:"health",
@@ -403,7 +402,7 @@ const COMPANIES = [
     sub:"Public sector (dept of tech)",
     stage:"Public sector", raised:"$110B budget", lead:"\u2014",
     badges:["Public sector"],
-    totalRoles:73,
+    totalRoles:74,
     notes:"NYC gov. Sr SWE GeoSupport, .NET, City Environmental Quality Review roles.",
     jobs:[
       { title:"Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014163861", level:"mid", added:"2026-08-26", posted:"2026-07-18" },
@@ -469,7 +468,6 @@ const COMPANIES = [
       { title:"Strategic Performance Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014613821", level:"mid", added:"2026-08-26", posted:"2026-08-15" },
       { title:"SYSTEMS PROGRAMMER ANALYST", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014358276", level:"mid", added:"2026-08-26", posted:"2026-07-30" },
       { title:"TESTER/ANALYST", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014380461", level:"mid", added:"2026-08-26", posted:"2026-07-31" },
-      { title:"Transit Planner, Bus Priority Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014641721", level:"mid", added:"2026-08-26", posted:"2026-08-18" },
       { title:"Analyst, Service Desk Operations", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014888956", level:"mid", added:"2026-08-27", posted:"2026-08-27" },
       { title:"Analyst, Service Desk Operations", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014888946", level:"mid", added:"2026-08-27", posted:"2026-08-27" },
       { title:"Capital Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014864036", level:"mid", added:"2026-08-27", posted:"2026-08-26" },
@@ -478,7 +476,9 @@ const COMPANIES = [
       { title:"Risk and Integrity Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014889332", level:"mid", added:"2026-08-27", posted:"2026-08-27" },
       { title:"Operations Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014914568", level:"mid", added:"2026-08-28", posted:"2026-08-28" },
       { title:"Procurement Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014914526", level:"mid", added:"2026-08-28", posted:"2026-08-28" },
-      { title:"Transit Planner, Bus Priority Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014914671", level:"mid", added:"2026-08-28", posted:"2026-08-28" }
+      { title:"Transit Planner, Bus Priority Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014914671", level:"mid", added:"2026-08-28", posted:"2026-08-28" },
+      { title:"Contract Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014937056", level:"mid", added:"2026-08-29", posted:"2026-08-29" },
+      { title:"Transit Planner, Bus Priority Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014937266", level:"mid", added:"2026-08-29", posted:"2026-08-29" }
     ] },
   { id:"palantir", name:"Palantir", vertical:"saas",
     sub:"Elite FDE consultancy (NYSE: PLTR)",
@@ -635,6 +635,15 @@ const COMPANIES = [
     notes:"Reimagined terminal with AI. Heavy on developer experience, latency, prompt design for code.",
     jobs:[
       { title:"Revenue Operations Specialist", url:"https://jobs.ashbyhq.com/warp/6b4c450d-ab42-426e-afef-32396b9560a6", level:"mid", added:"2026-08-28", posted:"2026-08-27" }
+    ] },
+  { id:"alphasense", name:"AlphaSense", vertical:"ai",
+    sub:"AI market intelligence",
+    stage:"Series F", raised:"$650M+", lead:"BDT",
+    badges:["BDT","Viking","Goldman"],
+    totalRoles:1,
+    notes:"NYC enterprise AI search over financial docs. Retrieval + integrations.",
+    jobs:[
+      { title:"Research Quality Analyst", url:"https://job-boards.greenhouse.io/alphasense/jobs/8692344002", level:"mid", added:"2026-08-29", posted:"2026-08-28" }
     ] }
 ];
 
