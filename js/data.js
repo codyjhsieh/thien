@@ -20,7 +20,7 @@
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  *  - jobs are sorted: founding > senior > mid.
  */
-const COMPANIES_VERIFIED_AT = '2026-08-29';
+const COMPANIES_VERIFIED_AT = '2026-08-30';
 const COMPANIES = [
   { id:"anthropic", name:"Anthropic", vertical:"ai",
     sub:"Claude \u2014 AI safety lab",
@@ -402,7 +402,7 @@ const COMPANIES = [
     sub:"Public sector (dept of tech)",
     stage:"Public sector", raised:"$110B budget", lead:"\u2014",
     badges:["Public sector"],
-    totalRoles:74,
+    totalRoles:76,
     notes:"NYC gov. Sr SWE GeoSupport, .NET, City Environmental Quality Review roles.",
     jobs:[
       { title:"Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014163861", level:"mid", added:"2026-08-26", posted:"2026-07-18" },
@@ -413,7 +413,6 @@ const COMPANIES = [
       { title:"Capital Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014047286", level:"mid", added:"2026-08-26", posted:"2026-07-11" },
       { title:"Capital Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013315337", level:"mid", added:"2026-08-26", posted:"2026-05-27" },
       { title:"Capital Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013314887", level:"mid", added:"2026-08-26", posted:"2026-05-27" },
-      { title:"Data & Metrics Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013851921", level:"mid", added:"2026-08-26", posted:"2026-06-30" },
       { title:"Research Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014025676", level:"mid", added:"2026-08-26", posted:"2026-07-10" },
       { title:"Systems Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014217241", level:"mid", added:"2026-08-26", posted:"2026-07-22" },
       { title:"Timekeeping Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013899124", level:"mid", added:"2026-08-26", posted:"2026-07-02" },
@@ -478,7 +477,10 @@ const COMPANIES = [
       { title:"Procurement Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014914526", level:"mid", added:"2026-08-28", posted:"2026-08-28" },
       { title:"Transit Planner, Bus Priority Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014914671", level:"mid", added:"2026-08-28", posted:"2026-08-28" },
       { title:"Contract Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014937056", level:"mid", added:"2026-08-29", posted:"2026-08-29" },
-      { title:"Transit Planner, Bus Priority Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014937266", level:"mid", added:"2026-08-29", posted:"2026-08-29" }
+      { title:"Transit Planner, Bus Priority Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014937266", level:"mid", added:"2026-08-29", posted:"2026-08-29" },
+      { title:"JR. ASSET MANAGEMENT ANALYST", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014937506", level:"entry", added:"2026-08-30", posted:"2026-08-29" },
+      { title:"Analyst - Youth and Community Development (DYCD) / Aging (DFTA) / Veterans’ Services (DVS)", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014937676", level:"mid", added:"2026-08-30", posted:"2026-08-29" },
+      { title:"BUDGET ANALYST", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014937501", level:"mid", added:"2026-08-30", posted:"2026-08-29" }
     ] },
   { id:"palantir", name:"Palantir", vertical:"saas",
     sub:"Elite FDE consultancy (NYSE: PLTR)",
@@ -644,6 +646,15 @@ const COMPANIES = [
     notes:"NYC enterprise AI search over financial docs. Retrieval + integrations.",
     jobs:[
       { title:"Research Quality Analyst", url:"https://job-boards.greenhouse.io/alphasense/jobs/8692344002", level:"mid", added:"2026-08-29", posted:"2026-08-28" }
+    ] },
+  { id:"decagon", name:"Decagon", vertical:"ai",
+    sub:"AI customer-support agents",
+    stage:"Series C", raised:"$240M", lead:"Bain Capital Ventures",
+    badges:["Bain","a16z","Accel"],
+    totalRoles:1,
+    notes:"Enterprise AI agents. FDE-heavy: deploy alongside customer success.",
+    jobs:[
+      { title:"BizOps & Strategy, Pricing", url:"https://jobs.ashbyhq.com/decagon/80e62efe-c1e1-4f00-a9cb-2a75d8cbb577", level:"mid", added:"2026-08-30", posted:"2026-02-20" }
     ] }
 ];
 
@@ -653,22 +664,23 @@ const COMPANY_DOMAINS = {
   brex:"brex.com", capco:"capco.com", "cockroach-labs":"cockroachlabs.com",
   "codes-health":"codeshealth.co", cohere:"cohere.com", crusoe:"crusoe.ai",
   cursor:"cursor.com", dashlane:"dashlane.com", datadog:"datadoghq.com",
-  elevenlabs:"elevenlabs.io", equinox:"equinox.com", etsy:"etsy.com",
-  fanduel:"fanduel.com", figma:"figma.com", flexport:"flexport.com",
-  "flow-traders":"flowtraders.com", gemini:"gemini.com", gusto:"gusto.com",
-  hang:"hang.xyz", hopper:"hopper.com", "jane-street":"janestreet.com",
-  justworks:"justworks.com", kalshi:"kalshi.com", linkedin:"linkedin.com",
-  lovable:"lovable.dev", lyft:"lyft.com", metropolis:"metropolis.io",
-  middesk:"middesk.com", modal:"modal.com", "nyc-gov":"nyc.gov",
-  openai:"openai.com", oscar:"hioscar.com", palantir:"palantir.com",
-  partiful:"partiful.com", perplexity:"perplexity.ai", pinterest:"pinterest.com",
-  plaid:"plaid.com", point72:"point72.com", polymarket:"polymarket.com",
-  ramp:"ramp.com", reddit:"reddit.com", ridgeline:"ridgelineapps.com",
-  rilla:"rillavoice.com", scaleai:"scale.com", sisense:"sisense.com",
-  sofi:"sofi.com", sonder:"sonder.com", sonymusic:"sonymusic.com",
-  spotify:"spotify.com", stripe:"stripe.com", taboola:"taboola.com",
-  "the-trade-desk":"thetradedesk.com", turing:"turing.com", vercel:"vercel.com",
-  vestwell:"vestwell.com", warp:"warp.dev", zocdoc:"zocdoc.com",
+  decagon:"decagon.ai", elevenlabs:"elevenlabs.io", equinox:"equinox.com",
+  etsy:"etsy.com", fanduel:"fanduel.com", figma:"figma.com",
+  flexport:"flexport.com", "flow-traders":"flowtraders.com", gemini:"gemini.com",
+  gusto:"gusto.com", hang:"hang.xyz", hopper:"hopper.com",
+  "jane-street":"janestreet.com", justworks:"justworks.com", kalshi:"kalshi.com",
+  linkedin:"linkedin.com", lovable:"lovable.dev", lyft:"lyft.com",
+  metropolis:"metropolis.io", middesk:"middesk.com", modal:"modal.com",
+  "nyc-gov":"nyc.gov", openai:"openai.com", oscar:"hioscar.com",
+  palantir:"palantir.com", partiful:"partiful.com", perplexity:"perplexity.ai",
+  pinterest:"pinterest.com", plaid:"plaid.com", point72:"point72.com",
+  polymarket:"polymarket.com", ramp:"ramp.com", reddit:"reddit.com",
+  ridgeline:"ridgelineapps.com", rilla:"rillavoice.com", scaleai:"scale.com",
+  sisense:"sisense.com", sofi:"sofi.com", sonder:"sonder.com",
+  sonymusic:"sonymusic.com", spotify:"spotify.com", stripe:"stripe.com",
+  taboola:"taboola.com", "the-trade-desk":"thetradedesk.com", turing:"turing.com",
+  vercel:"vercel.com", vestwell:"vestwell.com", warp:"warp.dev",
+  zocdoc:"zocdoc.com",
 };
 
 window.DATA = { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT };
