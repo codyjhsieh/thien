@@ -20,7 +20,7 @@
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  *  - jobs are sorted: founding > senior > mid.
  */
-const COMPANIES_VERIFIED_AT = '2026-08-31';
+const COMPANIES_VERIFIED_AT = '2026-09-01';
 const COMPANIES = [
   { id:"anthropic", name:"Anthropic", vertical:"ai",
     sub:"Claude \u2014 AI safety lab",
@@ -118,15 +118,6 @@ const COMPANIES = [
     jobs:[
       { title:"GTM Strategy & Operations", url:"https://jobs.ashbyhq.com/plaid/33379e81-e111-4bb8-8c6b-9e64d4fa51c5", level:"mid", added:"2026-08-26", posted:"2026-06-05" },
       { title:"Business Operations", url:"https://jobs.ashbyhq.com/plaid/bf4450b7-6ed5-49ec-a2ad-a1e0ffbcbe50", level:"mid", added:"2026-08-26", posted:"2026-07-27" }
-    ] },
-  { id:"gemini", name:"Gemini", vertical:"fintech",
-    sub:"Crypto exchange + prediction markets (NASDAQ: GEMI)",
-    stage:"Public", raised:"$400M", lead:"Morgan Creek",
-    badges:["Morgan Creek"],
-    totalRoles:1,
-    notes:"Public co (GEMI) since Sept 2025. Winklevoss-led; US-focused after intl exit. Exchange + CFTC-regulated derivatives.",
-    jobs:[
-      { title:"Analyst, Compliance (Investigations)", url:"https://boards.greenhouse.io/embed/job_app?for=gemini&token=8065112&gh_jid=8065112", level:"mid", added:"2026-08-26", posted:"2026-07-30" }
     ] },
   { id:"datadog", name:"Datadog", vertical:"devtools",
     sub:"Cloud monitoring (NASDAQ)",
@@ -238,7 +229,7 @@ const COMPANIES = [
     sub:"Quant + multi-strat hedge fund",
     stage:"Private", raised:"Self-funded", lead:"Private",
     badges:["Private"],
-    totalRoles:7,
+    totalRoles:8,
     notes:"Steve Cohen's quant firm. Trading systems + ML + low-latency infra.",
     jobs:[
       { title:"Business Analyst, Equities Technology", url:"https://boards.greenhouse.io/point72/jobs/8409245002?gh_jid=8409245002", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
@@ -247,7 +238,8 @@ const COMPANIES = [
       { title:"Point72 Fund Flow Analyst", url:"https://boards.greenhouse.io/point72/jobs/8003977002?gh_jid=8003977002", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Quantitative Portfolio Analyst – 2026 Grad", url:"https://boards.greenhouse.io/point72/jobs/8169967002?gh_jid=8169967002", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Sector Analyst, MI-Data", url:"https://boards.greenhouse.io/point72/jobs/7820104002?gh_jid=7820104002", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
-      { title:"Systems Analyst, Workday HCM/Payroll", url:"https://boards.greenhouse.io/point72/jobs/8128613002?gh_jid=8128613002", level:"mid", added:"2026-08-26", posted:"2026-08-21" }
+      { title:"Systems Analyst, Workday HCM/Payroll", url:"https://boards.greenhouse.io/point72/jobs/8128613002?gh_jid=8128613002", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
+      { title:"Procurement Specialist", url:"https://boards.greenhouse.io/point72/jobs/8755415002?gh_jid=8755415002", level:"mid", added:"2026-09-01", posted:"2026-08-31" }
     ] },
   { id:"hang", name:"Hang", vertical:"hospitality",
     sub:"Autonomous marketing system for brands",
@@ -293,11 +285,10 @@ const COMPANIES = [
     sub:"Specialized GPU cloud (NASDAQ: CRWV)",
     stage:"Public", raised:"$1.5B IPO ($14B+ pre-IPO)", lead:"NASDAQ",
     badges:["NASDAQ","Coatue","NVIDIA","Blackstone"],
-    totalRoles:3,
+    totalRoles:2,
     notes:"GPU cloud powering AI labs; IPO\\'d Mar 2025. Bare-metal infra + scheduling.",
     jobs:[
       { title:"Finance Analyst, Capacity Finance", url:"https://coreweave.com/careers/job?4692714006&board=coreweave&gh_jid=4692714006", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
-      { title:"Operations Enablement Analyst, Data Center Operations", url:"https://coreweave.com/careers/job?4698084006&board=coreweave&gh_jid=4698084006", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Data Center Operations Cost Analyst", url:"https://coreweave.com/careers/job?4702795006&board=coreweave&gh_jid=4702795006", level:"mid", added:"2026-08-26", posted:"2026-08-21" }
     ] },
   { id:"blackrock", name:"BlackRock", vertical:"fintech",
@@ -654,6 +645,15 @@ const COMPANIES = [
     notes:"Enterprise AI agents. FDE-heavy: deploy alongside customer success.",
     jobs:[
       { title:"BizOps & Strategy, Pricing", url:"https://jobs.ashbyhq.com/decagon/80e62efe-c1e1-4f00-a9cb-2a75d8cbb577", level:"mid", added:"2026-08-30", posted:"2026-02-20" }
+    ] },
+  { id:"garage", name:"Garage", vertical:"marketplace",
+    sub:"Marketplace for industrial assets",
+    stage:"Seed", raised:"YC + Founders Fund", lead:"Founders Fund",
+    badges:["Founders Fund","YC"],
+    totalRoles:1,
+    notes:"YC W24. NYC. Trucks, machinery, equipment.",
+    jobs:[
+      { title:"People Strategy & Operations", url:"https://jobs.ashbyhq.com/garage/57ff110d-1c9c-412f-b176-fd1fb0bb8449", level:"mid", added:"2026-09-01", posted:"2026-07-21" }
     ] }
 ];
 
@@ -665,21 +665,21 @@ const COMPANY_DOMAINS = {
   cursor:"cursor.com", dashlane:"dashlane.com", datadog:"datadoghq.com",
   decagon:"decagon.ai", elevenlabs:"elevenlabs.io", equinox:"equinox.com",
   etsy:"etsy.com", fanduel:"fanduel.com", figma:"figma.com",
-  flexport:"flexport.com", "flow-traders":"flowtraders.com", gemini:"gemini.com",
-  gusto:"gusto.com", hang:"hang.xyz", hopper:"hopper.com",
-  "jane-street":"janestreet.com", justworks:"justworks.com", kalshi:"kalshi.com",
-  linkedin:"linkedin.com", lovable:"lovable.dev", lyft:"lyft.com",
-  metropolis:"metropolis.io", middesk:"middesk.com", modal:"modal.com",
-  "nyc-gov":"nyc.gov", openai:"openai.com", oscar:"hioscar.com",
-  palantir:"palantir.com", partiful:"partiful.com", perplexity:"perplexity.ai",
-  pinterest:"pinterest.com", plaid:"plaid.com", point72:"point72.com",
-  polymarket:"polymarket.com", ramp:"ramp.com", reddit:"reddit.com",
-  ridgeline:"ridgelineapps.com", rilla:"rillavoice.com", scaleai:"scale.com",
-  sisense:"sisense.com", sofi:"sofi.com", sonder:"sonder.com",
-  sonymusic:"sonymusic.com", spotify:"spotify.com", stripe:"stripe.com",
-  taboola:"taboola.com", "the-trade-desk":"thetradedesk.com", turing:"turing.com",
-  vercel:"vercel.com", vestwell:"vestwell.com", warp:"warp.dev",
-  zocdoc:"zocdoc.com",
+  flexport:"flexport.com", "flow-traders":"flowtraders.com", garage:"garage.com",
+  gemini:"gemini.com", gusto:"gusto.com", hang:"hang.xyz",
+  hopper:"hopper.com", "jane-street":"janestreet.com", justworks:"justworks.com",
+  kalshi:"kalshi.com", linkedin:"linkedin.com", lovable:"lovable.dev",
+  lyft:"lyft.com", metropolis:"metropolis.io", middesk:"middesk.com",
+  modal:"modal.com", "nyc-gov":"nyc.gov", openai:"openai.com",
+  oscar:"hioscar.com", palantir:"palantir.com", partiful:"partiful.com",
+  perplexity:"perplexity.ai", pinterest:"pinterest.com", plaid:"plaid.com",
+  point72:"point72.com", polymarket:"polymarket.com", ramp:"ramp.com",
+  reddit:"reddit.com", ridgeline:"ridgelineapps.com", rilla:"rillavoice.com",
+  scaleai:"scale.com", sisense:"sisense.com", sofi:"sofi.com",
+  sonder:"sonder.com", sonymusic:"sonymusic.com", spotify:"spotify.com",
+  stripe:"stripe.com", taboola:"taboola.com", "the-trade-desk":"thetradedesk.com",
+  turing:"turing.com", vercel:"vercel.com", vestwell:"vestwell.com",
+  warp:"warp.dev", zocdoc:"zocdoc.com",
 };
 
 window.DATA = { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT };
