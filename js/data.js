@@ -20,7 +20,7 @@
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  *  - jobs are sorted: founding > senior > mid.
  */
-const COMPANIES_VERIFIED_AT = '2026-09-02';
+const COMPANIES_VERIFIED_AT = '2026-09-03';
 const COMPANIES = [
   { id:"anthropic", name:"Anthropic", vertical:"ai",
     sub:"Claude \u2014 AI safety lab",
@@ -191,10 +191,9 @@ const COMPANIES = [
     sub:"Rideshare + mobility (NASDAQ)",
     stage:"Public", raised:"$5B pre-IPO", lead:"Andreessen Horowitz",
     badges:["NASDAQ","a16z","Founders Fund"],
-    totalRoles:3,
+    totalRoles:2,
     notes:"Public co. Mobility platform \u2014 matching, payments, mapping.",
     jobs:[
-      { title:"Data Analyst - Global Growth Luxury Strategy", url:"https://app.careerpuck.com/job-board/lyft/job/8514400002?gh_jid=8514400002", level:"mid", added:"2026-08-26", posted:"2026-08-13" },
       { title:"Data Analyst, Operations Planning", url:"https://app.careerpuck.com/job-board/lyft/job/8568512002?gh_jid=8568512002", level:"mid", added:"2026-08-26", posted:"2026-07-06" },
       { title:"Data Analyst, Go-To-Market Sales Insights", url:"https://app.careerpuck.com/job-board/lyft/job/8697679002?gh_jid=8697679002", level:"mid", added:"2026-08-26", posted:"2026-08-11" }
     ] },
@@ -202,7 +201,7 @@ const COMPANIES = [
     sub:"Quant trading firm",
     stage:"Private", raised:"Self-funded", lead:"Private",
     badges:["Private"],
-    totalRoles:8,
+    totalRoles:9,
     notes:"Quant trading. Strong on functional programming (OCaml), CS fundamentals.",
     jobs:[
       { title:"Fundamental Research Analyst", url:"https://www.janestreet.com/join-jane-street/apply/8347286002?gh_jid=8347286002", level:"mid", added:"2026-08-26", posted:"2026-08-25" },
@@ -212,7 +211,8 @@ const COMPANIES = [
       { title:"Oil and Refined Products Analyst/Trader", url:"https://www.janestreet.com/join-jane-street/apply/8413554002?gh_jid=8413554002", level:"mid", added:"2026-08-26", posted:"2026-07-30" },
       { title:"Power Analyst/Trader", url:"https://www.janestreet.com/join-jane-street/apply/7950706002?gh_jid=7950706002", level:"mid", added:"2026-08-26", posted:"2026-07-30" },
       { title:"Procurement Specialist, IT Hardware", url:"https://www.janestreet.com/join-jane-street/apply/7419820002?gh_jid=7419820002", level:"mid", added:"2026-08-26", posted:"2026-07-30" },
-      { title:"Procurement Specialist, IT Services", url:"https://www.janestreet.com/join-jane-street/apply/7419948002?gh_jid=7419948002", level:"mid", added:"2026-08-26", posted:"2026-07-30" }
+      { title:"Procurement Specialist, IT Services", url:"https://www.janestreet.com/join-jane-street/apply/7419948002?gh_jid=7419948002", level:"mid", added:"2026-08-26", posted:"2026-07-30" },
+      { title:"Procurement Specialist", url:"https://www.janestreet.com/join-jane-street/apply/8675914002?gh_jid=8675914002", level:"mid", added:"2026-09-03", posted:"2026-09-02" }
     ] },
   { id:"middesk", name:"Middesk", vertical:"fintech",
     sub:"KYB / business identity infra",
@@ -390,14 +390,13 @@ const COMPANIES = [
     sub:"Public sector (dept of tech)",
     stage:"Public sector", raised:"$110B budget", lead:"\u2014",
     badges:["Public sector"],
-    totalRoles:70,
+    totalRoles:71,
     notes:"NYC gov. Sr SWE GeoSupport, .NET, City Environmental Quality Review roles.",
     jobs:[
       { title:"Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014163861", level:"mid", added:"2026-08-26", posted:"2026-07-18" },
       { title:"Analyst -  Transportation", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014047616", level:"mid", added:"2026-08-26", posted:"2026-07-11" },
       { title:"Analyst, Procurement Operations", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014264196", level:"mid", added:"2026-08-26", posted:"2026-07-24" },
       { title:"Analyst, Procurement Operations", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014218196", level:"mid", added:"2026-08-26", posted:"2026-07-22" },
-      { title:"Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014144071", level:"mid", added:"2026-08-26", posted:"2026-07-17" },
       { title:"Capital Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013315337", level:"mid", added:"2026-08-26", posted:"2026-05-27" },
       { title:"Capital Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013314887", level:"mid", added:"2026-08-26", posted:"2026-05-27" },
       { title:"Research Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014025676", level:"mid", added:"2026-08-26", posted:"2026-07-10" },
@@ -460,9 +459,11 @@ const COMPANIES = [
       { title:"JR. ASSET MANAGEMENT ANALYST", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014937506", level:"entry", added:"2026-08-30", posted:"2026-08-29" },
       { title:"Analyst - Youth and Community Development (DYCD) / Aging (DFTA) / Veterans’ Services (DVS)", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014937676", level:"mid", added:"2026-08-30", posted:"2026-08-29" },
       { title:"BUDGET ANALYST", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014937501", level:"mid", added:"2026-08-30", posted:"2026-08-29" },
-      { title:"Data Analytics Specialist", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015009906", level:"mid", added:"2026-09-02", posted:"2026-09-02" },
       { title:"EEO Program Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014969296", level:"mid", added:"2026-09-02", posted:"2026-09-01" },
-      { title:"Procurement Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014969406", level:"mid", added:"2026-09-02", posted:"2026-09-01" }
+      { title:"Procurement Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014969406", level:"mid", added:"2026-09-02", posted:"2026-09-01" },
+      { title:"Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015041166", level:"mid", added:"2026-09-03", posted:"2026-09-03" },
+      { title:"Hiring Plan Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015010476", level:"mid", added:"2026-09-03", posted:"2026-09-02" },
+      { title:"Strategic Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015041006", level:"mid", added:"2026-09-03", posted:"2026-09-03" }
     ] },
   { id:"palantir", name:"Palantir", vertical:"saas",
     sub:"Elite FDE consultancy (NYSE: PLTR)",
@@ -638,15 +639,6 @@ const COMPANIES = [
     jobs:[
       { title:"People Strategy & Operations", url:"https://jobs.ashbyhq.com/garage/57ff110d-1c9c-412f-b176-fd1fb0bb8449", level:"mid", added:"2026-09-01", posted:"2026-07-21" }
     ] },
-  { id:"gusto", name:"Gusto", vertical:"fintech",
-    sub:"Payroll / HR for SMBs",
-    stage:"Series E", raised:"$716M", lead:"Generation",
-    badges:["Generation","Kleiner","YC"],
-    totalRoles:1,
-    notes:"Payroll engine + benefits. Compliance, money movement, multi-state tax.",
-    jobs:[
-      { title:"CX Business Intelligence Analyst", url:"https://job-boards.greenhouse.io/gusto/jobs/8119978", level:"mid", added:"2026-09-02", posted:"2026-09-01" }
-    ] },
   { id:"hellofresh", name:"HelloFresh", vertical:"consumer",
     sub:"Meal kits",
     stage:"Public", raised:"(FSE: HFG)", lead:"FSE",
@@ -655,6 +647,15 @@ const COMPANIES = [
     notes:"NYC + Berlin offices.",
     jobs:[
       { title:"Analyst, Supply Chain Planning", url:"https://careers.hellofresh.com/global/en/job/8165507?gh_jid=8165507", level:"mid", added:"2026-09-02", posted:"2026-09-01" }
+    ] },
+  { id:"taboola", name:"Taboola", vertical:"saas",
+    sub:"Content + ad tech",
+    stage:"Public", raised:"(NASDAQ: TBLA)", lead:"NASDAQ",
+    badges:["NASDAQ"],
+    totalRoles:1,
+    notes:"NYC major office. Recommendation engine, big data pipelines.",
+    jobs:[
+      { title:"Salesforce and GenAI System Analyst", url:"https://www.taboola.com/careers/job/8173563?gh_jid=8173563", level:"mid", added:"2026-09-03", posted:"2026-09-02" }
     ] }
 ];
 
