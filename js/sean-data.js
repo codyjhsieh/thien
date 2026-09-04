@@ -16,7 +16,7 @@
  *           totalRoles, notes, jobs[{ title, url, level, posted, added }] }
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  */
-const COMPANIES_VERIFIED_AT = '2026-09-03';
+const COMPANIES_VERIFIED_AT = '2026-09-04';
 const COMPANIES = [
   { id:"believer", name:"Believer Entertainment", vertical:"gaming",
     sub:"The Prodigal \u2014 new IP",

@@ -20,13 +20,13 @@
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  *  - jobs are sorted: founding > senior > mid.
  */
-const COMPANIES_VERIFIED_AT = '2026-09-03';
+const COMPANIES_VERIFIED_AT = '2026-09-04';
 const COMPANIES = [
   { id:"anthropic", name:"Anthropic", vertical:"ai",
     sub:"Claude \u2014 AI safety lab",
     stage:"Series F", raised:"$18B+", lead:"Amazon",
     badges:["Amazon","Google","Spark"],
-    totalRoles:18,
+    totalRoles:17,
     notes:"Heavy values screen; expect ethical-dilemma and downside-risk questions. Applied-AI eng roles are FDE-flavored.",
     jobs:[
       { title:"Safeguards Enforcement Analyst, Access Controls & Identity", url:"https://job-boards.greenhouse.io/anthropic/jobs/5319626008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
@@ -39,7 +39,6 @@ const COMPANIES = [
       { title:"Safeguards Enforcement Analyst, Cyber Harm", url:"https://job-boards.greenhouse.io/anthropic/jobs/5311159008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Safeguards Enforcement Analyst, Fraud & Scams", url:"https://job-boards.greenhouse.io/anthropic/jobs/5319554008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Safeguards Enforcement Analyst, Integrity & Authenticity", url:"https://job-boards.greenhouse.io/anthropic/jobs/5311149008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
-      { title:"Safeguards Enforcement Analyst, Radiological & Nuclear Harms", url:"https://job-boards.greenhouse.io/anthropic/jobs/5319702008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Safeguards Enforcement Analyst, Safety Evaluations", url:"https://job-boards.greenhouse.io/anthropic/jobs/5137183008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Safeguards Enforcement Analyst, Violence & Extremism", url:"https://job-boards.greenhouse.io/anthropic/jobs/5343907008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Business Systems Analyst", url:"https://job-boards.greenhouse.io/anthropic/jobs/5394958008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
@@ -79,7 +78,7 @@ const COMPANIES = [
     sub:"Payments + financial infra",
     stage:"Late stage", raised:"$8.7B", lead:"Sequoia",
     badges:["Sequoia","a16z","General Catalyst"],
-    totalRoles:8,
+    totalRoles:9,
     notes:"Payments at planet scale. Distributed systems, idempotency, money.",
     jobs:[
       { title:"Data Analyst, Financial Data Engineering", url:"https://stripe.com/jobs/search?gh_jid=8070572", level:"mid", added:"2026-08-26", posted:"2026-08-18" },
@@ -89,7 +88,8 @@ const COMPANIES = [
       { title:"Business Value Scale Analyst", url:"https://stripe.com/jobs/search?gh_jid=8097047", level:"mid", added:"2026-08-26", posted:"2026-08-25" },
       { title:"GTM Strategy & Operations Analyst", url:"https://stripe.com/jobs/search?gh_jid=8145119", level:"mid", added:"2026-08-26", posted:"2026-08-20" },
       { title:"Sales Strategy & Operations Business Partner", url:"https://stripe.com/jobs/search?gh_jid=8089882", level:"mid", added:"2026-08-26", posted:"2026-08-18" },
-      { title:"Treasury Finance AI and Quantitative Analytics, Americas", url:"https://stripe.com/jobs/search?gh_jid=8079132", level:"mid", added:"2026-08-26", posted:"2026-08-18" }
+      { title:"Treasury Finance AI and Quantitative Analytics, Americas", url:"https://stripe.com/jobs/search?gh_jid=8079132", level:"mid", added:"2026-08-26", posted:"2026-08-18" },
+      { title:"Product Strategy & Operations - Global Product", url:"https://stripe.com/jobs/search?gh_jid=8177640", level:"mid", added:"2026-09-04", posted:"2026-09-03" }
     ] },
   { id:"ramp", name:"Ramp", vertical:"fintech",
     sub:"Corporate cards + finance ops",
@@ -123,10 +123,9 @@ const COMPANIES = [
     sub:"Cloud monitoring (NASDAQ)",
     stage:"Public", raised:"$148M pre-IPO", lead:"Index",
     badges:["NASDAQ","Index","OpenView"],
-    totalRoles:2,
+    totalRoles:1,
     notes:"Public co. Time-series infra, alerting, observability depth.",
     jobs:[
-      { title:"Deal Desk Analyst - NYC", url:"https://careers.datadoghq.com/detail/7993638/?gh_jid=7993638", level:"mid", added:"2026-08-26", posted:"2026-08-24" },
       { title:"GTM Strategy and Operations Associate", url:"https://careers.datadoghq.com/detail/7843331/?gh_jid=7843331", level:"entry", added:"2026-08-28", posted:"2026-08-27" }
     ] },
   { id:"oscar", name:"Oscar Health", vertical:"health",
@@ -227,7 +226,7 @@ const COMPANIES = [
     sub:"Quant + multi-strat hedge fund",
     stage:"Private", raised:"Self-funded", lead:"Private",
     badges:["Private"],
-    totalRoles:8,
+    totalRoles:7,
     notes:"Steve Cohen's quant firm. Trading systems + ML + low-latency infra.",
     jobs:[
       { title:"Business Analyst, Equities Technology", url:"https://boards.greenhouse.io/point72/jobs/8409245002?gh_jid=8409245002", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
@@ -236,7 +235,6 @@ const COMPANIES = [
       { title:"Point72 Fund Flow Analyst", url:"https://boards.greenhouse.io/point72/jobs/8003977002?gh_jid=8003977002", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Quantitative Portfolio Analyst – 2026 Grad", url:"https://boards.greenhouse.io/point72/jobs/8169967002?gh_jid=8169967002", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Sector Analyst, MI-Data", url:"https://boards.greenhouse.io/point72/jobs/7820104002?gh_jid=7820104002", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
-      { title:"Systems Analyst, Workday HCM/Payroll", url:"https://boards.greenhouse.io/point72/jobs/8128613002?gh_jid=8128613002", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Procurement Specialist", url:"https://boards.greenhouse.io/point72/jobs/8755415002?gh_jid=8755415002", level:"mid", added:"2026-09-01", posted:"2026-08-31" }
     ] },
   { id:"hang", name:"Hang", vertical:"hospitality",
@@ -390,7 +388,7 @@ const COMPANIES = [
     sub:"Public sector (dept of tech)",
     stage:"Public sector", raised:"$110B budget", lead:"\u2014",
     badges:["Public sector"],
-    totalRoles:71,
+    totalRoles:70,
     notes:"NYC gov. Sr SWE GeoSupport, .NET, City Environmental Quality Review roles.",
     jobs:[
       { title:"Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014163861", level:"mid", added:"2026-08-26", posted:"2026-07-18" },
@@ -439,7 +437,6 @@ const COMPANIES = [
       { title:"Procurement Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014613936", level:"mid", added:"2026-08-26", posted:"2026-08-15" },
       { title:"Procurement Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014613831", level:"mid", added:"2026-08-26", posted:"2026-08-15" },
       { title:"Procurement Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014578316", level:"mid", added:"2026-08-26", posted:"2026-08-13" },
-      { title:"Procurement Analyst Level I NM", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014696151", level:"mid", added:"2026-08-26", posted:"2026-08-20" },
       { title:"Procurement Generalist", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014667646", level:"mid", added:"2026-08-26", posted:"2026-08-19" },
       { title:"Records Analyst-Trainer", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014358931", level:"mid", added:"2026-08-26", posted:"2026-07-30" },
       { title:"Strategic Performance Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014613821", level:"mid", added:"2026-08-26", posted:"2026-08-15" },
@@ -459,11 +456,11 @@ const COMPANIES = [
       { title:"JR. ASSET MANAGEMENT ANALYST", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014937506", level:"entry", added:"2026-08-30", posted:"2026-08-29" },
       { title:"Analyst - Youth and Community Development (DYCD) / Aging (DFTA) / Veterans’ Services (DVS)", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014937676", level:"mid", added:"2026-08-30", posted:"2026-08-29" },
       { title:"BUDGET ANALYST", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014937501", level:"mid", added:"2026-08-30", posted:"2026-08-29" },
-      { title:"EEO Program Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014969296", level:"mid", added:"2026-09-02", posted:"2026-09-01" },
       { title:"Procurement Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014969406", level:"mid", added:"2026-09-02", posted:"2026-09-01" },
-      { title:"Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015041166", level:"mid", added:"2026-09-03", posted:"2026-09-03" },
-      { title:"Hiring Plan Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015010476", level:"mid", added:"2026-09-03", posted:"2026-09-02" },
-      { title:"Strategic Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015041006", level:"mid", added:"2026-09-03", posted:"2026-09-03" }
+      { title:"Strategic Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015041006", level:"mid", added:"2026-09-03", posted:"2026-09-03" },
+      { title:"Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015071996", level:"mid", added:"2026-09-04", posted:"2026-09-04" },
+      { title:"Data Analytics Specialist", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015041276", level:"mid", added:"2026-09-04", posted:"2026-09-03" },
+      { title:"Hiring Plan Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015041526", level:"mid", added:"2026-09-04", posted:"2026-09-03" }
     ] },
   { id:"palantir", name:"Palantir", vertical:"saas",
     sub:"Elite FDE consultancy (NYSE: PLTR)",
@@ -648,40 +645,50 @@ const COMPANIES = [
     jobs:[
       { title:"Analyst, Supply Chain Planning", url:"https://careers.hellofresh.com/global/en/job/8165507?gh_jid=8165507", level:"mid", added:"2026-09-02", posted:"2026-09-01" }
     ] },
-  { id:"taboola", name:"Taboola", vertical:"saas",
-    sub:"Content + ad tech",
-    stage:"Public", raised:"(NASDAQ: TBLA)", lead:"NASDAQ",
-    badges:["NASDAQ"],
+  { id:"alchemy", name:"Alchemy", vertical:"fintech",
+    sub:"Web3 dev platform",
+    stage:"Series C", raised:"$535M", lead:"Lightspeed",
+    badges:["Lightspeed","Silver Lake","Coatue"],
     totalRoles:1,
-    notes:"NYC major office. Recommendation engine, big data pipelines.",
+    notes:"Web3 infra. RPC, indexing, SDKs.",
     jobs:[
-      { title:"Salesforce and GenAI System Analyst", url:"https://www.taboola.com/careers/job/8173563?gh_jid=8173563", level:"mid", added:"2026-09-03", posted:"2026-09-02" }
+      { title:"Data Systems Analyst", url:"https://jobs.ashbyhq.com/alchemy/75e6dd36-4916-4e72-a596-037945fd741f", level:"mid", added:"2026-09-04", posted:"2026-04-01" }
+    ] },
+  { id:"braze", name:"Braze", vertical:"saas",
+    sub:"Customer engagement (NASDAQ)",
+    stage:"Public", raised:"$175M pre-IPO", lead:"ICONIQ",
+    badges:["NASDAQ","ICONIQ","Battery"],
+    totalRoles:1,
+    notes:"Public co. Cross-channel CRM messaging at scale.",
+    jobs:[
+      { title:"People Data Analyst", url:"https://job-boards.greenhouse.io/braze/jobs/8177766", level:"mid", added:"2026-09-04", posted:"2026-09-03" }
     ] }
 ];
 
 /* ---------- COMPANY DOMAINS (for Clearbit public logo CDN) ---------- */
 const COMPANY_DOMAINS = {
-  anthropic:"anthropic.com", baseten:"baseten.co", box:"box.com",
-  brex:"brex.com", capco:"capco.com", "cockroach-labs":"cockroachlabs.com",
-  "codes-health":"codeshealth.co", cohere:"cohere.com", crusoe:"crusoe.ai",
-  cursor:"cursor.com", dashlane:"dashlane.com", datadog:"datadoghq.com",
-  decagon:"decagon.ai", elevenlabs:"elevenlabs.io", equinox:"equinox.com",
-  etsy:"etsy.com", fanduel:"fanduel.com", figma:"figma.com",
-  flexport:"flexport.com", "flow-traders":"flowtraders.com", garage:"garage.com",
-  gemini:"gemini.com", gusto:"gusto.com", hang:"hang.xyz",
-  hopper:"hopper.com", "jane-street":"janestreet.com", justworks:"justworks.com",
-  kalshi:"kalshi.com", linkedin:"linkedin.com", lovable:"lovable.dev",
-  lyft:"lyft.com", metropolis:"metropolis.io", middesk:"middesk.com",
-  modal:"modal.com", "nyc-gov":"nyc.gov", openai:"openai.com",
-  oscar:"hioscar.com", palantir:"palantir.com", partiful:"partiful.com",
-  perplexity:"perplexity.ai", pinterest:"pinterest.com", plaid:"plaid.com",
-  point72:"point72.com", polymarket:"polymarket.com", ramp:"ramp.com",
-  reddit:"reddit.com", ridgeline:"ridgelineapps.com", rilla:"rillavoice.com",
-  scaleai:"scale.com", sisense:"sisense.com", sofi:"sofi.com",
-  sonder:"sonder.com", sonymusic:"sonymusic.com", spotify:"spotify.com",
-  stripe:"stripe.com", taboola:"taboola.com", "the-trade-desk":"thetradedesk.com",
-  turing:"turing.com", vercel:"vercel.com", vestwell:"vestwell.com",
-  warp:"warp.dev", zocdoc:"zocdoc.com",
+  alchemy:"alchemy.com", anthropic:"anthropic.com", baseten:"baseten.co",
+  box:"box.com", braze:"braze.com", brex:"brex.com",
+  capco:"capco.com", "cockroach-labs":"cockroachlabs.com", "codes-health":"codeshealth.co",
+  cohere:"cohere.com", crusoe:"crusoe.ai", cursor:"cursor.com",
+  dashlane:"dashlane.com", datadog:"datadoghq.com", decagon:"decagon.ai",
+  elevenlabs:"elevenlabs.io", equinox:"equinox.com", etsy:"etsy.com",
+  fanduel:"fanduel.com", figma:"figma.com", flexport:"flexport.com",
+  "flow-traders":"flowtraders.com", garage:"garage.com", gemini:"gemini.com",
+  gusto:"gusto.com", hang:"hang.xyz", hopper:"hopper.com",
+  "jane-street":"janestreet.com", justworks:"justworks.com", kalshi:"kalshi.com",
+  linkedin:"linkedin.com", lovable:"lovable.dev", lyft:"lyft.com",
+  metropolis:"metropolis.io", middesk:"middesk.com", modal:"modal.com",
+  "nyc-gov":"nyc.gov", openai:"openai.com", oscar:"hioscar.com",
+  palantir:"palantir.com", partiful:"partiful.com", perplexity:"perplexity.ai",
+  pinterest:"pinterest.com", plaid:"plaid.com", point72:"point72.com",
+  polymarket:"polymarket.com", ramp:"ramp.com", reddit:"reddit.com",
+  ridgeline:"ridgelineapps.com", rilla:"rillavoice.com", scaleai:"scale.com",
+  sisense:"sisense.com", sofi:"sofi.com", sonder:"sonder.com",
+  sonymusic:"sonymusic.com", spotify:"spotify.com", stripe:"stripe.com",
+  taboola:"taboola.com", "the-trade-desk":"thetradedesk.com", turing:"turing.com",
+  vercel:"vercel.com", vestwell:"vestwell.com", warp:"warp.dev",
+  zocdoc:"zocdoc.com",
 };
 
 window.DATA = { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT };
