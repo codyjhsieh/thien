@@ -20,13 +20,13 @@
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  *  - jobs are sorted: founding > senior > mid.
  */
-const COMPANIES_VERIFIED_AT = '2026-09-04';
+const COMPANIES_VERIFIED_AT = '2026-09-05';
 const COMPANIES = [
   { id:"anthropic", name:"Anthropic", vertical:"ai",
     sub:"Claude \u2014 AI safety lab",
     stage:"Series F", raised:"$18B+", lead:"Amazon",
     badges:["Amazon","Google","Spark"],
-    totalRoles:17,
+    totalRoles:18,
     notes:"Heavy values screen; expect ethical-dilemma and downside-risk questions. Applied-AI eng roles are FDE-flavored.",
     jobs:[
       { title:"Safeguards Enforcement Analyst, Access Controls & Identity", url:"https://job-boards.greenhouse.io/anthropic/jobs/5319626008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
@@ -45,7 +45,8 @@ const COMPANIES = [
       { title:"Safeguards Enforcement Analyst, User Well-being", url:"https://job-boards.greenhouse.io/anthropic/jobs/5374778008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Strategy & Operations Lead, Enterprise Marketing", url:"https://job-boards.greenhouse.io/anthropic/jobs/5389945008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Strategy & Operations, Applied AI - AMER", url:"https://job-boards.greenhouse.io/anthropic/jobs/5284500008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
-      { title:"Safeguards Enforcement Analyst, Conventional Weapons", url:"https://job-boards.greenhouse.io/anthropic/jobs/5410006008", level:"mid", added:"2026-09-02", posted:"2026-09-01" }
+      { title:"Safeguards Enforcement Analyst, Conventional Weapons", url:"https://job-boards.greenhouse.io/anthropic/jobs/5410006008", level:"mid", added:"2026-09-02", posted:"2026-09-01" },
+      { title:"Procurement Operations Business Partner, R&D Operations", url:"https://job-boards.greenhouse.io/anthropic/jobs/5357933008", level:"mid", added:"2026-09-05", posted:"2026-09-04" }
     ] },
   { id:"rilla", name:"Rilla", vertical:"ai",
     sub:"AI for field-sales coaching",
@@ -95,10 +96,11 @@ const COMPANIES = [
     sub:"Corporate cards + finance ops",
     stage:"Series E", raised:"$1.3B", lead:"Founders Fund",
     badges:["Founders Fund","Sequoia","Stripe"],
-    totalRoles:1,
+    totalRoles:2,
     notes:"Ledger, fraud, integrations at scale. High autonomy bar.",
     jobs:[
-      { title:"Business Operations Lead, Compensation & Equity", url:"https://jobs.ashbyhq.com/ramp/ea9f6e2d-8981-417a-ac96-87d421ccbf4c", level:"mid", added:"2026-08-26", posted:"2026-07-28" }
+      { title:"Business Operations Lead, Compensation & Equity", url:"https://jobs.ashbyhq.com/ramp/ea9f6e2d-8981-417a-ac96-87d421ccbf4c", level:"mid", added:"2026-08-26", posted:"2026-07-28" },
+      { title:"GTM Business Systems Analyst – Post Sales", url:"https://jobs.ashbyhq.com/ramp/196e4e25-c452-430d-8b2f-36a40f88a2ae", level:"mid", added:"2026-09-05", posted:"2026-09-04" }
     ] },
   { id:"brex", name:"Brex", vertical:"fintech",
     sub:"Corporate cards + spend mgmt (acq. by Capital One Apr 2026)",
@@ -268,13 +270,12 @@ const COMPANIES = [
     sub:"Legal AI for major firms",
     stage:"Series F+", raised:"$806M+", lead:"Andreessen Horowitz",
     badges:["a16z","Kleiner","Coatue","Sequoia","GIC"],
-    totalRoles:5,
+    totalRoles:4,
     notes:"Legal AI for top law firms; $11B valuation (Mar 2026). FDE-style deploys, document workflows, reasoning eval.",
     jobs:[
       { title:"Analyst, Customer Trust", url:"https://jobs.ashbyhq.com/harvey/1cf585c3-27e2-4813-ade9-dc8c53c2d5b0", level:"mid", added:"2026-08-26", posted:"2026-07-22" },
       { title:"IT Operations Analyst", url:"https://jobs.ashbyhq.com/harvey/203e2d3b-6aeb-4d13-8e2f-62f7526658df", level:"mid", added:"2026-08-26", posted:"2026-06-23" },
       { title:"Support Operations Data Analyst", url:"https://jobs.ashbyhq.com/harvey/f8857e81-4062-4669-a7e3-7b73b114979b", level:"mid", added:"2026-08-26", posted:"2026-06-15" },
-      { title:"Technology Enablement Analyst", url:"https://jobs.ashbyhq.com/harvey/5960be42-443f-42f2-a771-266810e3d263", level:"mid", added:"2026-08-26", posted:"2026-07-23" },
       { title:"IT Operations Analyst", url:"https://jobs.ashbyhq.com/harvey/88905094-1b46-41e1-a88a-cae239431b04", level:"mid", added:"2026-08-26", posted:"2026-08-13" }
     ] },
   { id:"coreweave", name:"CoreWeave", vertical:"infra",
@@ -370,10 +371,11 @@ const COMPANIES = [
     sub:"Professional social / SaaS",
     stage:"Public", raised:"(Microsoft: MSFT)", lead:"Microsoft",
     badges:["Microsoft","NASDAQ"],
-    totalRoles:1,
+    totalRoles:2,
     notes:"Empire State Building NYC office. Sr enterprise systems eng roles.",
     jobs:[
-      { title:"Marketing Science Strategic Analyst, Marketing Science and Technology", url:"https://jobs.smartrecruiters.com/LinkedIn3/744000143176479", level:"mid", added:"2026-08-26", posted:"2026-08-12" }
+      { title:"Marketing Science Strategic Analyst, Marketing Science and Technology", url:"https://jobs.smartrecruiters.com/LinkedIn3/744000143176479", level:"mid", added:"2026-08-26", posted:"2026-08-12" },
+      { title:"Sales Strategy and Operations Associate", url:"https://jobs.smartrecruiters.com/LinkedIn3/744000147566104", level:"entry", added:"2026-09-05", posted:"2026-09-04" }
     ] },
   { id:"equinox", name:"Equinox Group", vertical:"consumer",
     sub:"Luxury fitness / hospitality",
@@ -423,9 +425,6 @@ const COMPANIES = [
       { title:"EPMO DATA  ANALYST", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014863086", level:"mid", added:"2026-08-26", posted:"2026-08-26" },
       { title:"Fleet & Sign Procurement Coordinator", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014736756", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Forensic Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014555616", level:"mid", added:"2026-08-26", posted:"2026-08-12" },
-      { title:"Grant Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014863659", level:"mid", added:"2026-08-26", posted:"2026-08-26" },
-      { title:"Grant Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014863666", level:"mid", added:"2026-08-26", posted:"2026-08-26" },
-      { title:"Grant Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014830766", level:"mid", added:"2026-08-26", posted:"2026-08-25" },
       { title:"HEALTH AND SAFETY ANALYST", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014282696", level:"mid", added:"2026-08-26", posted:"2026-07-25" },
       { title:"Mainframe Programmer Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014282592", level:"mid", added:"2026-08-26", posted:"2026-07-25" },
       { title:"Management Audit and Data Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014466966", level:"mid", added:"2026-08-26", posted:"2026-08-06" },
@@ -460,16 +459,18 @@ const COMPANIES = [
       { title:"Strategic Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015041006", level:"mid", added:"2026-09-03", posted:"2026-09-03" },
       { title:"Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015071996", level:"mid", added:"2026-09-04", posted:"2026-09-04" },
       { title:"Data Analytics Specialist", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015041276", level:"mid", added:"2026-09-04", posted:"2026-09-03" },
-      { title:"Hiring Plan Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015041526", level:"mid", added:"2026-09-04", posted:"2026-09-03" }
+      { title:"Hiring Plan Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015041526", level:"mid", added:"2026-09-04", posted:"2026-09-03" },
+      { title:"Grant Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015092691", level:"mid", added:"2026-09-05", posted:"2026-09-05" },
+      { title:"Grant Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015092701", level:"mid", added:"2026-09-05", posted:"2026-09-05" },
+      { title:"Grant Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015092696", level:"mid", added:"2026-09-05", posted:"2026-09-05" }
     ] },
   { id:"palantir", name:"Palantir", vertical:"saas",
     sub:"Elite FDE consultancy (NYSE: PLTR)",
     stage:"Public", raised:"(NYSE: PLTR)", lead:"NYSE",
     badges:["NYSE"],
-    totalRoles:3,
+    totalRoles:2,
     notes:"NYC major eng hub. Original FDE model. 33 NYC eng roles today.",
     jobs:[
-      { title:"Operations Analyst - US Government Security", url:"https://jobs.lever.co/palantir/2df67493-ffb3-4b34-bf3b-88b6750c3ea7", level:"mid", added:"2026-08-26", posted:"2026-06-09" },
       { title:"Site Reliability Operations Analyst - Commercial", url:"https://jobs.lever.co/palantir/5174e95b-2e0a-46f8-8db7-e2c837a0ac94", level:"mid", added:"2026-08-26", posted:"2023-11-28" },
       { title:"Site Reliability Operations Analyst - US Government", url:"https://jobs.lever.co/palantir/7d91ca36-1e23-4603-b0f1-82a835e27d3f", level:"mid", added:"2026-08-26", posted:"2020-04-13" }
     ] },
@@ -490,15 +491,6 @@ const COMPANIES = [
     notes:"NYC office. Elite banking tech consultancy.",
     jobs:[
       { title:"Business Analyst - Retail Energy", url:"https://job-boards.greenhouse.io/capco/jobs/8059556", level:"mid", added:"2026-08-26", posted:"2026-07-17" }
-    ] },
-  { id:"sonymusic", name:"Sony Music Entertainment", vertical:"media",
-    sub:"Global record label (Sony subsidiary)",
-    stage:"Public", raised:"(Sony subsidiary)", lead:"Sony",
-    badges:["Sony"],
-    totalRoles:1,
-    notes:"NYC HQ. Includes The Orchard, Alamo, Columbia. 3 NYC eng today (Data Privacy, Emerging Tech, Sr PM D2C).",
-    jobs:[
-      { title:"Data Strategy & Analytics Rotation Trainee 2026-2027", url:"https://job-boards.greenhouse.io/sonymusicentertainment/jobs/8654146002", level:"mid", added:"2026-08-26", posted:"2026-08-26" }
     ] },
   { id:"pinterest", name:"Pinterest", vertical:"consumer",
     sub:"Visual discovery (NYSE: PINS)",
@@ -662,6 +654,24 @@ const COMPANIES = [
     notes:"Public co. Cross-channel CRM messaging at scale.",
     jobs:[
       { title:"People Data Analyst", url:"https://job-boards.greenhouse.io/braze/jobs/8177766", level:"mid", added:"2026-09-04", posted:"2026-09-03" }
+    ] },
+  { id:"gusto", name:"Gusto", vertical:"fintech",
+    sub:"Payroll / HR for SMBs",
+    stage:"Series E", raised:"$716M", lead:"Generation",
+    badges:["Generation","Kleiner","YC"],
+    totalRoles:1,
+    notes:"Payroll engine + benefits. Compliance, money movement, multi-state tax.",
+    jobs:[
+      { title:"CX Business Intelligence Analyst", url:"https://job-boards.greenhouse.io/gusto/jobs/8119978", level:"mid", added:"2026-09-05", posted:"2026-09-04" }
+    ] },
+  { id:"seatgeek", name:"SeatGeek", vertical:"marketplace",
+    sub:"Live-events ticketing",
+    stage:"Series E", raised:"$338M", lead:"Wellington",
+    badges:["Wellington","Accel","Causeway"],
+    totalRoles:1,
+    notes:"Tickets marketplace + primary-issuer platform. Marketplace ranking, payments, integrations.",
+    jobs:[
+      { title:"Paid Social & Programmatic Analyst", url:"https://seatgeek.com/jobs/8180508?gh_jid=8180508", level:"mid", added:"2026-09-05", posted:"2026-09-04" }
     ] }
 ];
 
@@ -684,11 +694,11 @@ const COMPANY_DOMAINS = {
   pinterest:"pinterest.com", plaid:"plaid.com", point72:"point72.com",
   polymarket:"polymarket.com", ramp:"ramp.com", reddit:"reddit.com",
   ridgeline:"ridgelineapps.com", rilla:"rillavoice.com", scaleai:"scale.com",
-  sisense:"sisense.com", sofi:"sofi.com", sonder:"sonder.com",
-  sonymusic:"sonymusic.com", spotify:"spotify.com", stripe:"stripe.com",
-  taboola:"taboola.com", "the-trade-desk":"thetradedesk.com", turing:"turing.com",
-  vercel:"vercel.com", vestwell:"vestwell.com", warp:"warp.dev",
-  zocdoc:"zocdoc.com",
+  seatgeek:"seatgeek.com", sisense:"sisense.com", sofi:"sofi.com",
+  sonder:"sonder.com", sonymusic:"sonymusic.com", spotify:"spotify.com",
+  stripe:"stripe.com", taboola:"taboola.com", "the-trade-desk":"thetradedesk.com",
+  turing:"turing.com", vercel:"vercel.com", vestwell:"vestwell.com",
+  warp:"warp.dev", zocdoc:"zocdoc.com",
 };
 
 window.DATA = { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT };
