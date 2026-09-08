@@ -6,7 +6,7 @@ window.BOARD_PROFILE = {
   "boardTitle": "Cody's Data Entry Board",
   "docTitle": "cody — remote data entry + admin jobs, little experience needed",
   "headline": "Employers",
-  "blurb": "live remote postings for data entry, admin and back-office work. Anything stating more than two years of required experience is filtered out, and every listing comes from the employer's own applicant-tracking system — no aggregators.",
+  "blurb": "live remote postings for data entry, admin and back-office work that will train you. Anything asking for more than a year of experience, a licence or a certification is filtered out, every posting is screened for the classic job-scam markers, and every listing comes from the employer's own applicant-tracking system — never an aggregator.",
   "page": "cody.html",
   "dataFile": "js/cody-data.js",
   "dataGlobal": "CODY_DATA",
@@ -383,5 +383,7 @@ window.BOARD_PROFILE = {
         "cls": "fit-tough"
       }
     ]
-  }
+  },
+  "captureSummary": true,
+  "poolSize": 913
 };

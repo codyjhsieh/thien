@@ -79,6 +79,8 @@ class Profile:
     # Drop postings that state a requirement above this many years.
     # None disables the check entirely.
     self.max_years = f.get("maxYearsExperience")
+    self.screen_fraud = bool(f.get("screenFraud"))
+    self.screen_credentials = bool(f.get("screenCredentials"))
     self.title_exclude = (
       re.compile(f["titleExclude"], re.I) if f.get("titleExclude") else None
     )
@@ -422,6 +424,64 @@ def years_required(text):
   return min(hits) if hits else None
 
 
+def _unescape(t):
+  import html as _html
+  return _html.unescape(t or "")
+
+
+# Where a posting stops describing itself and starts describing the work.
+_ROLE_SECTION = re.compile(
+  r"\b(?:what\s+you(?:'|’)?ll\s+(?:do|be\s+doing)|what\s+you\s+will\s+do|"
+  r"in\s+this\s+role|the\s+role|your\s+role|responsibilities|"
+  r"day[\s-]to[\s-]day|what\s+the\s+job\s+(?:is|involves)|about\s+the\s+role|"
+  r"position\s+overview|job\s+summary)\b[:\s-]*", re.I)
+
+
+_BOILER = re.compile(
+  r"^(about\s+(?:us|the\s+(?:role|team|company|job|position))|who\s+we\s+are|"
+  r"the\s+(?:role|opportunity|position)|job\s+(?:description|summary)|overview|"
+  r"description|summary|position\s+summary)\b[:\s-]*", re.I)
+
+
+def summary_of(text, limit=190):
+  """A short, readable opener for the posting.
+
+  On a phone the title alone does not say what the job is, and the full
+  description is far too long, so keep the first couple of sentences. Leading
+  boilerplate headers ("About the role:") carry no information and are dropped,
+  and the cut lands on a sentence or word boundary rather than mid-word."""
+  if not text:
+    return None
+  t = _unescape(text)
+  t = re.sub(r"<[^>]+>", " ", t)
+  t = _unescape(t)                        # entities nested inside text nodes
+  t = re.sub(r"\s+", " ", t).strip()
+  # Prefer the part that describes the job over the company blurb it opens
+  # with: "Affirm is reinventing credit" tells a reader nothing about the role.
+  m = _ROLE_SECTION.search(t)
+  if m and len(t) - m.end() > 80:
+    tail = t[m.end():].strip(" :–-")
+    # Only take the tail if it starts a sentence; otherwise the heading matched
+    # inside prose and the cut would begin mid-clause.
+    if tail[:1].isupper():
+      t = tail
+  for _ in range(3):                      # headers often stack
+    stripped = _BOILER.sub("", t).strip()
+    if stripped == t:
+      break
+    t = stripped
+  if len(t) < 30:
+    return None
+  if len(t) <= limit:
+    return t
+  cut = t[:limit]
+  end = max(cut.rfind(". "), cut.rfind("! "), cut.rfind("? "))
+  if end > limit * 0.5:
+    return cut[:end + 1]
+  sp = cut.rfind(" ")
+  return (cut[:sp] if sp > 0 else cut).rstrip(" ,;:-") + "…"
+
+
 def description_of(ats, j):
   """Description text already present in the list payload, if any. Backends
   that withhold it return None rather than costing an extra request."""
@@ -435,6 +495,82 @@ def description_of(ats, j):
   if ats == "smartrecruiters":
     return json.dumps(j.get("jobAd") or "")
   return None
+
+
+# ── Fraud screening ──────────────────────────────────────────────────────
+# Remote data entry is the single most impersonated job category there is. The
+# structural protection is already in place — every posting here comes from a
+# company's own ATS, never an aggregator — but a compromised or careless
+# posting can still carry the classic markers, so screen for them and drop the
+# posting rather than showing it. A false positive costs one listing; a false
+# negative costs somebody their bank details.
+# Off-platform contact only counts near hiring context. Aircall and Twilio
+# integrate with WhatsApp for a living; "interview over WhatsApp" is the tell,
+# not the word itself. This distinction cost two legitimate Aircall listings
+# before it existed.
+OFF_PLATFORM = re.compile(
+  r"(?:\b(?:interview|screening|onboard\w*|hiring|recruit\w*|contact\s+(?:us|me)|"
+  r"reach\s+(?:us|me)|apply|chat\s+with)\b[^.]{0,70}?"
+  r"\b(?:telegram|whatsapp|signal\s+app|google\s+hangouts|skype)\b"
+  r"|\b(?:telegram|whatsapp|signal\s+app|google\s+hangouts|skype)\b[^.]{0,70}?"
+  r"\b(?:interview|screening|onboard\w*|hiring|recruiter|to\s+apply|for\s+details)\b)",
+  re.I)
+
+# Markers that are damning on their own, wherever they appear.
+SCAM_MARKERS = re.compile(
+  r"(?:"
+  r"\bgift\s+cards?\b|\bwire\s+transfer\b|\bmoneygram\b|\bwestern\s+union\b|"
+  r"\bcashier(?:'|’)?s\s+check\b|\bcheck\s+will\s+be\s+(?:mailed|sent)\b|"
+  r"\bzelle\b|\bcash\s?app\b|\bvenmo\b|\bbitcoin\b|\bcrypto\s+payment\b|"
+  r"(?:purchase|buy|pay\s+for)\s+(?:your\s+own\s+)?(?:equipment|software|laptop|starter\s+kit)|"
+  r"\bequipment\s+fee\b|\btraining\s+fee\b|\bregistration\s+fee\b|\bapplication\s+fee\b|"
+  r"\bstartup\s+cost\b|\bupfront\s+(?:payment|cost|fee)\b|"
+  r"\bno\s+interview\s+(?:required|needed)\b|\bhired\s+immediately\b|\binstant\s+hire\b|"
+  r"\bpersonal\s+(?:bank\s+)?account\b.{0,40}\b(?:deposit|transfer|process)\b|"
+  r"\b(?:process|receive|forward|deposit)\s+(?:payments?|funds?|checks?)\b.{0,50}"
+  r"\bpersonal\s+(?:bank\s+)?account\b|"
+  r"\bmoney\s+mule\b|\bpackage\s+(?:reshipping|forwarding)\b)", re.I)
+# Pay that is not plausible for this kind of work is itself a marker.
+IMPLAUSIBLE_HOURLY = 150.0
+
+
+def fraud_flags(title, text, pay):
+  """Reasons to refuse a posting. Empty list means nothing tripped."""
+  flags = []
+  blob = f"{title} {_unescape(text or '')}"
+  for m in SCAM_MARKERS.finditer(blob):
+    flags.append(m.group(0).strip().lower()[:40])
+  for m in OFF_PLATFORM.finditer(blob):
+    flags.append("off-platform contact: " + re.sub(r"\s+", " ", m.group(0)).strip().lower()[:50])
+  if pay and pay.get("interval") == "hour" and pay.get("min", 0) > IMPLAUSIBLE_HOURLY:
+    flags.append(f"implausible hourly rate {pay['min']}")
+  return sorted(set(flags))
+
+
+# ── Qualification screening ──────────────────────────────────────────────
+# "Entry level" in a title says nothing about the licence, certification or
+# degree buried in the requirements. A candidate coming from an unrelated
+# field cannot get past those, so a board built for them should not list them.
+CREDENTIALS = re.compile(
+  r"\b(?:cpc|ccs|rhia|rhit|cca|cpb|cpma|ahima|aapc)\b|"                     # medical coding
+  r"\b(?:notary\s+public|notary\s+commission)\b|"
+  r"\b(?:insurance|adjuster|producer|real\s+estate|title|escrow|"
+  r"mortgage\s+loan\s+originator|nmls|series\s+(?:6|7|63|65|66)|finra)\s*"
+  r"(?:licen[cs]e[ds]?|certifica\w+)\b|"
+  r"\blicen[cs]ed\s+(?:\w+\s+){0,2}(?:practical\s+nurse|vocational\s+nurse|nurse|"
+  r"pharmacy\s+technician|social\s+worker|therapist|adjuster|agent|producer|"
+  r"broker|appraiser)\b|"
+  r"\b(?:rn|lpn|lvn|cna|cma|emt|paramedic|cdl)\s+(?:licen[cs]e|certifica\w+|required)\b|"
+  r"\bactive\s+(?:licen[cs]e|certification)\b|"
+  r"\b(?:security\s+clearance|ts/sci|top\s+secret|public\s+trust)\b|"
+  r"\bbachelor(?:'|’)?s?\s+degree\s+(?:is\s+)?required\b|"
+  r"\b(?:requires?|must\s+have)\s+(?:a\s+)?(?:bachelor|master|associate)(?:'|’)?s?\s+degree\b|"
+  r"\bcertifi\w+\s+(?:is\s+)?required\b", re.I)
+
+
+def credential_flags(title, text):
+  blob = f"{title} {_unescape(text or '')}"
+  return sorted({m.group(0).strip().lower()[:40] for m in CREDENTIALS.finditer(blob)})
 
 
 def normalize(ats, j, slug=""):
@@ -559,14 +695,15 @@ def normalize(ats, j, slug=""):
     posted = _date10(j.get("startDate"))
   else:
     return None
+  _desc = description_of(ats, j)
   # Some ATS rows come back with an http:// absolute_url (Greenhouse does this
   # for custom career domains). Every one of these hosts serves https, and a
   # board full of http links is a board full of mixed-content warnings.
   if url and url.startswith("http://"):
     url = "https://" + url[len("http://"):]
   return {"title": title, "url": url, "loc": loc, "posted": posted,
-          "pay": pay_of(ats, j), "id": j.get("id"),
-          "years": years_required(description_of(ats, j))}
+          "pay": pay_of(ats, j), "id": j.get("id"), "_desc": _desc,
+          "years": years_required(_desc), "summary": summary_of(_desc)}
 
 
 def filter_jobs(profile: Profile, ats, raw, slug="", vertical=""):
@@ -613,9 +750,25 @@ def filter_jobs(profile: Profile, ats, raw, slug="", vertical=""):
     # silence is not a requirement.
     if profile.max_years is not None and years is not None and years > profile.max_years:
       continue
+    # Paranoid by design: refuse rather than display. Every posting here comes
+    # from a company's own ATS, but that is a reason to be careful, not a
+    # reason to stop checking.
+    if profile.screen_fraud:
+      ff = fraud_flags(title, n.get("_desc"), n.get("pay"))
+      if ff:
+        _refused.append((slug, title, "fraud", ff))
+        continue
+    if profile.screen_credentials:
+      cf = credential_flags(title, n.get("_desc"))
+      if cf:
+        _refused.append((slug, title, "credential", cf))
+        continue
     job = {"title": title, "url": n["url"], "level": level, "posted": n["posted"]}
     if years is not None:
       job["years"] = years
+    # Only boards that ask for it pay the file-size cost.
+    if profile.raw.get("captureSummary") and n.get("summary"):
+      job["summary"] = n["summary"]
     pay = n.get("pay")
     # Greenhouse keeps pay one endpoint deeper. Only spend that request on a
     # posting that already survived the filters — a handful per run, not
@@ -625,6 +778,21 @@ def filter_jobs(profile: Profile, ats, raw, slug="", vertical=""):
       if detail:
         pay = _pay_from_greenhouse_detail(detail)
         # One request, two answers: the same body carries the experience bar.
+        body = detail.get("content")
+        if profile.screen_fraud:
+          ff = fraud_flags(title, body, pay)
+          if ff:
+            _refused.append((slug, title, "fraud", ff))
+            continue
+        if profile.screen_credentials:
+          cf = credential_flags(title, body)
+          if cf:
+            _refused.append((slug, title, "credential", cf))
+            continue
+        if profile.raw.get("captureSummary") and "summary" not in job:
+          sm = summary_of(detail.get("content"))
+          if sm:
+            job["summary"] = sm
         if "years" not in job:
           y = years_required(detail.get("content"))
           if y is not None:
@@ -680,7 +848,8 @@ def emit_companies_block(profile: Profile, rows, today):
       (", loc:" + json.dumps(j["loc"]) if j.get("loc") else "") +
       (", pay:" + json.dumps(j["pay"], separators=(",", ":")) if j.get("pay") else "") +
       (", paySource:" + json.dumps(j["paySource"]) if j.get("paySource") else "") +
-      (", years:" + str(j["years"]) if j.get("years") is not None else "") + " }"
+      (", years:" + str(j["years"]) if j.get("years") is not None else "") +
+      (", summary:" + json.dumps(j["summary"]) if j.get("summary") else "") + " }"
       for j in c["jobs"]
     )
     badges_inner = ", ".join(json.dumps(b) for b in c["badges"])
@@ -753,6 +922,9 @@ def write_data_file(profile: Profile, rows, today):
 
 # ── Entrypoint ───────────────────────────────────────────────────────────
 _print_lock = threading.Lock()
+# Postings the screens refused, reported at the end of a run. A screen nobody
+# can see is a screen nobody can correct.
+_refused = []
 
 
 def probe(profile: Profile, cand, verbose=False):
@@ -835,6 +1007,14 @@ def main():
   no_match = [c["name"] for c, r in zip(cands, results) if not r]
 
   print(f"\n{len(rows)} companies survived (of {len(cands)} probed)", file=sys.stderr)
+  if _refused:
+    by_kind = {}
+    for slug, title, kind, flags in _refused:
+      by_kind.setdefault(kind, []).append(f"{slug}: {title} [{', '.join(flags)}]")
+    for kind, items in sorted(by_kind.items()):
+      print(f"\nrefused {len(items)} posting(s) — {kind}:", file=sys.stderr)
+      for it in items[:20]:
+        print(f"  · {it}", file=sys.stderr)
   if no_match and args.verbose:
     print(f"{len(no_match)} dropped:", *no_match, sep="\n  ", file=sys.stderr)
 

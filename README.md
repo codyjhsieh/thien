@@ -17,8 +17,18 @@ a third board is a JSON file and an HTML file, not a fork.
 
 ```sh
 python3 -m http.server 8000
-# http://localhost:8000          Thien's board
+# http://localhost:8000            Thien's board
 # http://localhost:8000/sean.html  Sean's board
+# http://localhost:8000/cody.html  Cody's board
+```
+
+Each board refreshes on its own — nothing about Cody's run touches Sean's or
+Thien's data:
+
+```sh
+scripts/run-cody.sh              # just Cody: fetch, screen, merge, verify
+scripts/run-cody.sh --serve      # …and open it at localhost:8000
+scripts/pipeline.sh cody         # the same thing, spelled generally
 ```
 
 Apply-tracking persists to `localStorage` under each profile's `storageKey`
@@ -157,6 +167,28 @@ paid $37 a year, and two hourly rates once shipped labelled as salaries.
 `verify-board.py` fails the build on pay without a `paySource`, an inverted
 range, or a figure outside a believable band for its interval.
 
+### Paranoia
+
+Remote data entry is the most impersonated job category there is, so Cody's
+board refuses rather than displays. Beyond the structural protection every
+board has — postings come from a company's own ATS, never an aggregator —
+`filters.screenFraud` drops a posting carrying the classic markers: off-platform
+interviews, gift cards and wire transfers, buying your own equipment, an
+application fee, "hired immediately", processing payments through a personal
+account, or an hourly rate no such job pays.
+
+Off-platform contact only counts near hiring language. Aircall and Twilio
+integrate with WhatsApp for a living, and the blunt version of this rule threw
+away two of their legitimate listings; "interview over WhatsApp" is the tell,
+the word alone is not.
+
+`filters.screenCredentials` drops postings requiring a licence, certification
+or degree — CPC and RHIT for coding, an adjuster or NMLS licence, a security
+clearance — because a title saying "entry level" says nothing about what is
+buried in the requirements. Twenty screening cases in `test-filters.py` pin
+both directions, and every refusal is printed at the end of a run with its
+reason, so a screen that is too eager can be seen and corrected.
+
 ### Experience
 
 `filters.maxYearsExperience` drops a posting that *states* a requirement above
@@ -269,6 +301,6 @@ Two numbers say something broke:
 
 ## Scale
 
-A Cody run probes 841 companies across thirteen ATS backends; Sean's and
-Thien's share most of that pool. Adding a board costs a JSON file and an HTML
+A Cody run probes 913 companies across thirteen ATS backends; the three
+boards share most of that pool. Adding a board costs a JSON file and an HTML
 file, not a fork.

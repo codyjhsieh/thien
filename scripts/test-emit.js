@@ -14,7 +14,8 @@ const company = {
   jobs: [
     { title: 'Data Entry Clerk', url: 'https://example.com/1', level: 'entry',
       added: '2026-01-01', posted: '2026-01-01', remote: true, loc: 'Remote, US',
-      pay: { min: 18, max: 24, interval: 'hour' }, paySource: 'posted', years: 0 },
+      pay: { min: 18, max: 24, interval: 'hour' }, paySource: 'posted', years: 0,
+      summary: 'Enter and verify records in our internal tools. Training provided.' },
     { title: 'Admin Assistant', url: 'https://example.com/2', level: 'mid' },
   ],
 };
@@ -37,7 +38,7 @@ for (const k of Object.keys(company)) {
   }
 }
 // A job with only the required fields must not gain phantom ones.
-for (const k of ['remote', 'pay', 'paySource', 'years', 'loc']) {
+for (const k of ['remote', 'pay', 'paySource', 'years', 'loc', 'summary']) {
   if (k in back[0].jobs[1]) errs.push(`absent field '${k}' was invented on the second job`);
 }
 

@@ -201,6 +201,85 @@ def run_pay(pid: str) -> int:
   return bad
 
 
+# (description, should the posting be refused) — the fraud and credential
+# screens are the two places where a false negative has a real cost, so they
+# get cases rather than trust.
+SCREEN_CASES = {
+  "cody": {
+    "fraud": [
+      ("Contact us on Telegram to start your interview.",            True),
+      ("Your interview will be conducted via WhatsApp.",             True),
+      ("Message our recruiter on Telegram for details.",             True),
+      # A comms company naming the channel as a product is not a scam marker.
+      ("Our platform integrates with WhatsApp and SMS.",             False),
+      ("Build features across WhatsApp, Messenger and Instagram.",   False),
+      ("Support customers over Skype, phone and email.",             False),
+      ("You will purchase your own equipment up front.",             True),
+      ("A cashier's check will be mailed to you.",                   True),
+      ("Process payments through your personal bank account.",       True),
+      ("Payment via Zelle after each shift.",                        True),
+      ("No interview required — hired immediately!",                 True),
+      ("Remote data entry. Apply through our careers site.",         False),
+      ("You will use company-issued equipment, shipped to you.",     False),
+    ],
+    "credential": [
+      ("Must hold an active CPC certification.",                     True),
+      ("Requires a bachelor's degree in business.",                  True),
+      ("Licensed insurance adjuster required.",                      True),
+      ("Active TS/SCI security clearance required.",                 True),
+      ("RN license required.",                                       True),
+      ("We provide full training; no degree needed.",                False),
+      ("High school diploma or equivalent.",                         False),
+    ],
+  },
+}
+
+
+# Greenhouse returns HTML-escaped markup, so entity decoding has to happen
+# before tag stripping — doing it after put "<div class=...>" back into every
+# summary on the board.
+SUMMARY_CASES = [
+  ("&lt;div class=\"intro\"&gt;&lt;p&gt;Enter claims data into our system daily "
+   "and verify it against source documents.&lt;/p&gt;&lt;/div&gt;",
+   "Enter claims data"),
+  ("<p><strong>About the role:</strong></p><p>You will process invoices and keep "
+   "records current for the operations team.</p>", "You will process invoices"),
+]
+
+
+def run_summary() -> int:
+  bad = 0
+  for raw, expect_start in SUMMARY_CASES:
+    got = rc.summary_of(raw) or ""
+    if "<" in got or "&lt;" in got or "&amp;" in got:
+      bad += 1
+      print(f"  \u2717 [summary] markup survived: {got[:70]!r}", file=sys.stderr)
+    elif not got.startswith(expect_start):
+      bad += 1
+      print(f"  \u2717 [summary] expected to start {expect_start!r}, got {got[:70]!r}", file=sys.stderr)
+  if not bad:
+    print(f"   \u2713 summary: {len(SUMMARY_CASES)} case(s) pass, no markup leaks")
+  return bad
+
+
+def run_screens(pid: str) -> int:
+  cases = SCREEN_CASES.get(pid)
+  if not cases:
+    return 0
+  bad = 0
+  for kind, rows in cases.items():
+    fn = rc.fraud_flags if kind == "fraud" else rc.credential_flags
+    for text, want in rows:
+      got = bool(fn("Data Entry Clerk", text, None) if kind == "fraud" else fn("Data Entry Clerk", text))
+      if got != want:
+        bad += 1
+        print(f"  \u2717 [{kind}] {text!r}: expected {'refused' if want else 'kept'}", file=sys.stderr)
+  n = sum(len(v) for v in cases.values())
+  if not bad:
+    print(f"   \u2713 {pid}: {n} screening case(s) pass")
+  return bad
+
+
 def run_geo(pid: str) -> int:
   profile = rc.Profile(pid)
   cases = GEO_CASES.get(pid)
@@ -245,7 +324,7 @@ def run(pid: str) -> int:
 def main():
   ids = sys.argv[1:] or sorted(
     p.stem for p in (ROOT / "profiles").glob("*.json") if not p.name.endswith(".companies.json"))
-  sys.exit(1 if sum(run(i) + run_geo(i) + run_pay(i) for i in ids) else 0)
+  sys.exit(1 if sum(run(i) + run_geo(i) + run_pay(i) + run_screens(i) for i in ids) + run_summary() else 0)
 
 
 if __name__ == "__main__":

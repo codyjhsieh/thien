@@ -612,7 +612,7 @@ function renderCompanies(hub) {
                 aria-label="Mark as applied"></span>
           ${logoMini}
           <div class="role-row-text">
-            <div class="role-row-title truncate">${esc(r.title)} ${newTag}${remoteTag}</div>
+            <div class="role-row-title">${esc(r.title)} ${newTag}${remoteTag}</div>
             <div class="role-row-co truncate">
               <span class="font-medium">${esc(c.name)}</span>
               <span class="dim mx-1">·</span>
@@ -623,14 +623,17 @@ function renderCompanies(hub) {
               <span style="color:var(--accent)" class="font-mono">${esc(c.raised || '')}</span>
               ${dateStr ? `<span class="dim mx-1">·</span><span class="muted">${esc(dateStr)}</span>` : ''}
             </div>
+            ${r.summary ? `<p class="role-row-summary">${esc(r.summary)}</p>` : ''}
           </div>
-          ${expHTML(r)}
-          ${payHTML(r)}
+          <div class="role-row-tags">
+            ${expHTML(r)}
+            ${payHTML(r)}
           <span class="pill ${lvlClass}" style="font-size:10px">${lvlLabel}</span>
-          ${fitBadgeHTML(r._fit)}
-          <a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer"
-             onclick="event.stopPropagation()"
-             style="color:var(--accent); text-decoration:none; padding:4px 6px;">↗</a>
+            ${fitBadgeHTML(r._fit)}
+            <a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer"
+               onclick="event.stopPropagation()"
+               class="role-row-open" aria-label="Open posting">↗</a>
+          </div>
         </div>`;
     }).join('');
     const loadMore = remaining > 0

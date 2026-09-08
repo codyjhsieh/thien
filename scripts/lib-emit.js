@@ -21,6 +21,7 @@ function emitJob(j) {
   if (j.pay) s += `, pay:${JSON.stringify(j.pay)}`;
   if (j.paySource) s += `, paySource:"${esc(j.paySource)}"`;
   if (j.years !== undefined && j.years !== null) s += `, years:${j.years}`;
+  if (j.summary) s += `, summary:"${esc(j.summary)}"`;
   return s + ' }';
 }
 

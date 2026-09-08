@@ -212,6 +212,14 @@ def verify(pid: str) -> int:
           errs.append(f"{c['id']}: yearly pay {lo} outside a believable range")
       elif j.get("paySource"):
         errs.append(f"{c['id']}: paySource without pay")
+      # Summaries are rendered as text, so markup in them is both ugly and a
+      # sign the extractor decoded entities in the wrong order.
+      sm = j.get("summary")
+      if sm:
+        if re.search(r"<[a-z/][^>]*>", sm, re.I) or "&lt;" in sm or "&amp;" in sm:
+          errs.append(f"{c['id']}: summary contains markup — {sm[:60]!r}")
+        if len(sm) > 400:
+          errs.append(f"{c['id']}: summary is {len(sm)} chars, too long for a card")
   if not data.get("COMPANIES_VERIFIED_AT"):
     errs.append("COMPANIES_VERIFIED_AT is empty")
   # The data file is generated and must hold nothing else. js/data.js had

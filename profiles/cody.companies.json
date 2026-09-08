@@ -26,6 +26,19 @@
   "notes": "Business-process outsourcing \u2014 data entry and back-office work is the core service."
  },
  {
+  "id": "7shifts",
+  "name": "7shifts",
+  "ats": "greenhouse",
+  "slug": "7shifts",
+  "vertical": "consumer",
+  "sub": "7shifts",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Commerce and restaurant platforms; order and catalogue operations."
+ },
+ {
   "id": "adonis",
   "name": "Adonis",
   "ats": "ashby",
@@ -37,6 +50,19 @@
   "lead": "\u2014",
   "badges": [],
   "notes": "Healthcare revenue-cycle work \u2014 claims, coding and records processing at volume."
+ },
+ {
+  "id": "advancedmd",
+  "name": "AdvancedMD",
+  "ats": "greenhouse",
+  "slug": "advancedmd",
+  "vertical": "health",
+  "sub": "AdvancedMD",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Health software; records, intake and billing queues are entry-level work."
  },
  {
   "id": "aftership",
@@ -63,6 +89,19 @@
   "lead": "\u2014",
   "badges": [],
   "notes": "Legal services and document review \u2014 high-volume records and intake work."
+ },
+ {
+  "id": "aircall",
+  "name": "Aircall",
+  "ats": "lever",
+  "slug": "aircall",
+  "vertical": "saas",
+  "sub": "Aircall",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Customer-support software; its own support and operations queues hire at entry level."
  },
  {
   "id": "akasa",
@@ -104,6 +143,19 @@
   "notes": "Market and user research \u2014 survey operations and panel data work."
  },
  {
+  "id": "anterior",
+  "name": "Anterior",
+  "ats": "ashby",
+  "slug": "anterior",
+  "vertical": "health",
+  "sub": "Anterior",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Health software; records, intake and billing queues are entry-level work."
+ },
+ {
   "id": "appen",
   "name": "Appen",
   "ats": "lever",
@@ -130,6 +182,32 @@
   "notes": "Logistics operations \u2014 order, shipment and exception data entered all day."
  },
  {
+  "id": "artera",
+  "name": "Artera",
+  "ats": "lever",
+  "slug": "artera",
+  "vertical": "health",
+  "sub": "Artera",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Health software; records, intake and billing queues are entry-level work."
+ },
+ {
+  "id": "assorthealth",
+  "name": "Assort Health",
+  "ats": "ashby",
+  "slug": "assorthealth",
+  "vertical": "health",
+  "sub": "Assort Health",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Health software; records, intake and billing queues are entry-level work."
+ },
+ {
   "id": "atomic-financial",
   "name": "Atomic Financial",
   "ats": "ashby",
@@ -143,6 +221,32 @@
   "notes": "Fintech and verification operations \u2014 document review and KYC queues."
  },
  {
+  "id": "ayahealthcare",
+  "name": "Aya Healthcare",
+  "ats": "greenhouse",
+  "slug": "ayahealthcare",
+  "vertical": "staffing",
+  "sub": "Aya Healthcare",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Healthcare staffing; credentialing and scheduling coordination roles."
+ },
+ {
+  "id": "bandwidth",
+  "name": "Bandwidth",
+  "ats": "greenhouse",
+  "slug": "bandwidth",
+  "vertical": "saas",
+  "sub": "Bandwidth",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Remote-first software company; support and operations roles are fully distributed."
+ },
+ {
   "id": "bestow",
   "name": "Bestow",
   "ats": "ashby",
@@ -154,6 +258,32 @@
   "lead": "\u2014",
   "badges": [],
   "notes": "Insurance operations \u2014 claims intake, policy servicing and document processing."
+ },
+ {
+  "id": "beyondfinance",
+  "name": "Beyond Finance",
+  "ats": "greenhouse",
+  "slug": "beyondfinance",
+  "vertical": "fintech",
+  "sub": "Beyond Finance",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Consumer lending and banking; loan processing and support queues."
+ },
+ {
+  "id": "billcom",
+  "name": "Bill com",
+  "ats": "greenhouse",
+  "slug": "billcom",
+  "vertical": "accounting",
+  "sub": "Bill com",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Spend and invoice software; AP and billing operations roles."
  },
  {
   "id": "bookkeeper360",
@@ -182,6 +312,32 @@
   "notes": "Insurance operations \u2014 claims intake, policy servicing and document processing."
  },
  {
+  "id": "buffer",
+  "name": "Buffer",
+  "ats": "ashby",
+  "slug": "buffer",
+  "vertical": "saas",
+  "sub": "Buffer",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Remote-first software company; support and operations roles are fully distributed."
+ },
+ {
+  "id": "callrail",
+  "name": "CallRail",
+  "ats": "greenhouse",
+  "slug": "callrail",
+  "vertical": "saas",
+  "sub": "CallRail",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Customer-support software; its own support and operations queues hire at entry level."
+ },
+ {
   "id": "candidhealth",
   "name": "Candid Health",
   "ats": "ashby",
@@ -193,6 +349,19 @@
   "lead": "\u2014",
   "badges": [],
   "notes": "Healthcare revenue-cycle work \u2014 claims, coding and records processing at volume."
+ },
+ {
+  "id": "canvasmedical",
+  "name": "Canvas Medical",
+  "ats": "lever",
+  "slug": "canvasmedical",
+  "vertical": "health",
+  "sub": "Canvas Medical",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Health software; records, intake and billing queues are entry-level work."
  },
  {
   "id": "checkr",
@@ -208,6 +377,19 @@
   "notes": "Fintech and verification operations \u2014 document review and KYC queues."
  },
  {
+  "id": "clearco",
+  "name": "Clearco",
+  "ats": "ashby",
+  "slug": "clearco",
+  "vertical": "saas",
+  "sub": "Clearco",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Software company; back-office and support roles surface here periodically."
+ },
+ {
   "id": "codametrix",
   "name": "CodaMetrix",
   "ats": "ashby",
@@ -219,6 +401,19 @@
   "lead": "\u2014",
   "badges": [],
   "notes": "Healthcare revenue-cycle work \u2014 claims, coding and records processing at volume."
+ },
+ {
+  "id": "coherehealth",
+  "name": "Cohere Health",
+  "ats": "greenhouse",
+  "slug": "coherehealth",
+  "vertical": "health",
+  "sub": "Cohere Health",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Health software; records, intake and billing queues are entry-level work."
  },
  {
   "id": "complyadvantage",
@@ -247,6 +442,97 @@
   "notes": "Legal services and document review \u2014 high-volume records and intake work."
  },
  {
+  "id": "constellation",
+  "name": "Constellation Software",
+  "ats": "ashby",
+  "slug": "constellation",
+  "vertical": "saas",
+  "sub": "Constellation Software",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Software company; back-office and support roles surface here periodically."
+ },
+ {
+  "id": "coupa",
+  "name": "Coupa",
+  "ats": "lever",
+  "slug": "coupa",
+  "vertical": "accounting",
+  "sub": "Coupa",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Spend and invoice software; AP and billing operations roles."
+ },
+ {
+  "id": "coursera",
+  "name": "Coursera",
+  "ats": "greenhouse",
+  "slug": "coursera",
+  "vertical": "research",
+  "sub": "Coursera",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Education platforms and training nonprofits; enrolment and records roles."
+ },
+ {
+  "id": "cresta",
+  "name": "Cresta",
+  "ats": "greenhouse",
+  "slug": "cresta",
+  "vertical": "saas",
+  "sub": "Cresta",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Customer-support software; its own support and operations queues hire at entry level."
+ },
+ {
+  "id": "datacamp",
+  "name": "DataCamp",
+  "ats": "greenhouse",
+  "slug": "datacamp",
+  "vertical": "research",
+  "sub": "DataCamp",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Education platforms and training nonprofits; enrolment and records roles."
+ },
+ {
+  "id": "devrev",
+  "name": "DevRev",
+  "ats": "greenhouse",
+  "slug": "devrev",
+  "vertical": "saas",
+  "sub": "DevRev",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Remote-first software company; support and operations roles are fully distributed."
+ },
+ {
+  "id": "dialpad",
+  "name": "Dialpad",
+  "ats": "greenhouse",
+  "slug": "dialpad",
+  "vertical": "saas",
+  "sub": "Dialpad",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Customer-support software; its own support and operations queues hire at entry level."
+ },
+ {
   "id": "dscout",
   "name": "Dscout",
   "ats": "greenhouse",
@@ -260,6 +546,32 @@
   "notes": "Market and user research \u2014 survey operations and panel data work."
  },
  {
+  "id": "elationhealth",
+  "name": "Elation Health",
+  "ats": "greenhouse",
+  "slug": "elationhealth",
+  "vertical": "health",
+  "sub": "Elation Health",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Health software; records, intake and billing queues are entry-level work."
+ },
+ {
+  "id": "emburse",
+  "name": "Emburse",
+  "ats": "lever",
+  "slug": "emburse",
+  "vertical": "accounting",
+  "sub": "Emburse",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Spend and invoice software; AP and billing operations roles."
+ },
+ {
   "id": "encord",
   "name": "Encord",
   "ats": "ashby",
@@ -271,6 +583,19 @@
   "lead": "\u2014",
   "badges": [],
   "notes": "AI training data \u2014 annotation and review work, usually hourly and remote."
+ },
+ {
+  "id": "enova",
+  "name": "Enova",
+  "ats": "greenhouse",
+  "slug": "enova",
+  "vertical": "fintech",
+  "sub": "Enova",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Consumer lending and banking; loan processing and support queues."
  },
  {
   "id": "entrata",
@@ -312,6 +637,19 @@
   "notes": "Insurance operations \u2014 claims intake, policy servicing and document processing."
  },
  {
+  "id": "expensify",
+  "name": "Expensify",
+  "ats": "ashby",
+  "slug": "expensify",
+  "vertical": "accounting",
+  "sub": "Expensify",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Spend and invoice software; AP and billing operations roles."
+ },
+ {
   "id": "federato",
   "name": "Federato",
   "ats": "greenhouse",
@@ -325,6 +663,19 @@
   "notes": "Insurance operations \u2014 claims intake, policy servicing and document processing."
  },
  {
+  "id": "feinternational",
+  "name": "FE International",
+  "ats": "greenhouse",
+  "slug": "feinternational",
+  "vertical": "marketplace",
+  "sub": "FE International",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "E-commerce aggregators; listing, catalogue and inventory data work."
+ },
+ {
   "id": "filevine",
   "name": "Filevine",
   "ats": "lever",
@@ -336,6 +687,19 @@
   "lead": "\u2014",
   "badges": [],
   "notes": "Legal services and document review \u2014 high-volume records and intake work."
+ },
+ {
+  "id": "five9",
+  "name": "Five9",
+  "ats": "greenhouse",
+  "slug": "five9",
+  "vertical": "saas",
+  "sub": "Five9",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Customer-support software; its own support and operations queues hire at entry level."
  },
  {
   "id": "fleetio",
@@ -377,6 +741,19 @@
   "notes": "Software company; back-office and support roles surface here periodically."
  },
  {
+  "id": "generalassembly",
+  "name": "General Assembly",
+  "ats": "greenhouse",
+  "slug": "generalassembly",
+  "vertical": "marketplace",
+  "sub": "General Assembly",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "E-commerce aggregators; listing, catalogue and inventory data work."
+ },
+ {
   "id": "geotab",
   "name": "Geotab",
   "ats": "greenhouse",
@@ -390,6 +767,32 @@
   "notes": "Logistics operations \u2014 order, shipment and exception data entered all day."
  },
  {
+  "id": "gitlab",
+  "name": "GitLab",
+  "ats": "greenhouse",
+  "slug": "gitlab",
+  "vertical": "saas",
+  "sub": "GitLab",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Remote-first software company; support and operations roles are fully distributed."
+ },
+ {
+  "id": "gorgias",
+  "name": "Gorgias",
+  "ats": "ashby",
+  "slug": "gorgias",
+  "vertical": "saas",
+  "sub": "Gorgias",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Customer-support software; its own support and operations queues hire at entry level."
+ },
+ {
   "id": "greatquestion",
   "name": "Great Question",
   "ats": "ashby",
@@ -401,6 +804,71 @@
   "lead": "\u2014",
   "badges": [],
   "notes": "Market and user research \u2014 survey operations and panel data work."
+ },
+ {
+  "id": "gynger",
+  "name": "Gynger",
+  "ats": "lever",
+  "slug": "gynger",
+  "vertical": "accounting",
+  "sub": "Gynger",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Spend and invoice software; AP and billing operations roles."
+ },
+ {
+  "id": "happymoney",
+  "name": "Happy Money",
+  "ats": "greenhouse",
+  "slug": "happymoney",
+  "vertical": "fintech",
+  "sub": "Happy Money",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Consumer lending and banking; loan processing and support queues."
+ },
+ {
+  "id": "hayeslocums",
+  "name": "Hayes Locums",
+  "ats": "lever",
+  "slug": "hayeslocums",
+  "vertical": "staffing",
+  "sub": "Hayes Locums",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Healthcare staffing; credentialing and scheduling coordination roles."
+ },
+ {
+  "id": "helpscout",
+  "name": "Help Scout",
+  "ats": "ashby",
+  "slug": "helpscout",
+  "vertical": "saas",
+  "sub": "Help Scout",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Customer-support software; its own support and operations queues hire at entry level."
+ },
+ {
+  "id": "hhaexchange",
+  "name": "HHAeXchange",
+  "ats": "lever",
+  "slug": "hhaexchange",
+  "vertical": "health",
+  "sub": "HHAeXchange",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Health software; records, intake and billing queues are entry-level work."
  },
  {
   "id": "highnote",
@@ -455,6 +923,19 @@
   "notes": "Insurance operations \u2014 claims intake, policy servicing and document processing."
  },
  {
+  "id": "infinitus",
+  "name": "Infinitus",
+  "ats": "ashby",
+  "slug": "infinitus",
+  "vertical": "health",
+  "sub": "Infinitus",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Health software; records, intake and billing queues are entry-level work."
+ },
+ {
   "id": "inovalon",
   "name": "Inovalon",
   "ats": "greenhouse",
@@ -468,6 +949,19 @@
   "notes": "Healthcare revenue-cycle work \u2014 claims, coding and records processing at volume."
  },
  {
+  "id": "instructure",
+  "name": "Instructure",
+  "ats": "ashby",
+  "slug": "instructure",
+  "vertical": "research",
+  "sub": "Instructure",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Education platforms and training nonprofits; enrolment and records roles."
+ },
+ {
   "id": "insurify",
   "name": "Insurify",
   "ats": "greenhouse",
@@ -479,6 +973,32 @@
   "lead": "\u2014",
   "badges": [],
   "notes": "Insurance operations \u2014 claims intake, policy servicing and document processing."
+ },
+ {
+  "id": "invoca",
+  "name": "Invoca",
+  "ats": "greenhouse",
+  "slug": "invoca",
+  "vertical": "saas",
+  "sub": "Invoca",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Customer-support software; its own support and operations queues hire at entry level."
+ },
+ {
+  "id": "ivalua",
+  "name": "Ivalua",
+  "ats": "greenhouse",
+  "slug": "ivalua",
+  "vertical": "accounting",
+  "sub": "Ivalua",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Spend and invoice software; AP and billing operations roles."
  },
  {
   "id": "jumio",
@@ -520,6 +1040,19 @@
   "notes": "AI training data \u2014 annotation and review work, usually hourly and remote."
  },
  {
+  "id": "klara",
+  "name": "Klara",
+  "ats": "teamtailor",
+  "slug": "klara",
+  "vertical": "health",
+  "sub": "Klara",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Health software; records, intake and billing queues are entry-level work."
+ },
+ {
   "id": "labelbox",
   "name": "Labelbox",
   "ats": "greenhouse",
@@ -546,6 +1079,19 @@
   "notes": "Legal services and document review \u2014 high-volume records and intake work."
  },
  {
+  "id": "levelai",
+  "name": "Level AI",
+  "ats": "lever",
+  "slug": "levelai",
+  "vertical": "saas",
+  "sub": "Level AI",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Customer-support software; its own support and operations queues hire at entry level."
+ },
+ {
   "id": "litify",
   "name": "Litify",
   "ats": "greenhouse",
@@ -557,6 +1103,19 @@
   "lead": "\u2014",
   "badges": [],
   "notes": "Legal services and document review \u2014 high-volume records and intake work."
+ },
+ {
+  "id": "litmus",
+  "name": "Litmus",
+  "ats": "ashby",
+  "slug": "litmus",
+  "vertical": "saas",
+  "sub": "Litmus",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Remote-first software company; support and operations roles are fully distributed."
  },
  {
   "id": "loadsmart",
@@ -585,6 +1144,32 @@
   "notes": "Logistics operations \u2014 order, shipment and exception data entered all day."
  },
  {
+  "id": "lumahealth",
+  "name": "Luma Health",
+  "ats": "greenhouse",
+  "slug": "lumahealth",
+  "vertical": "health",
+  "sub": "Luma Health",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Health software; records, intake and billing queues are entry-level work."
+ },
+ {
+  "id": "melio",
+  "name": "Melio",
+  "ats": "greenhouse",
+  "slug": "melio",
+  "vertical": "accounting",
+  "sub": "Melio",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Spend and invoice software; AP and billing operations roles."
+ },
+ {
   "id": "mercor",
   "name": "Mercor",
   "ats": "ashby",
@@ -596,6 +1181,32 @@
   "lead": "\u2014",
   "badges": [],
   "notes": "AI training data \u2014 annotation and review work, usually hourly and remote."
+ },
+ {
+  "id": "meritamerica",
+  "name": "Merit America",
+  "ats": "greenhouse",
+  "slug": "meritamerica",
+  "vertical": "research",
+  "sub": "Merit America",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Education platforms and training nonprofits; enrolment and records roles."
+ },
+ {
+  "id": "metriport",
+  "name": "Metriport",
+  "ats": "ashby",
+  "slug": "metriport",
+  "vertical": "health",
+  "sub": "Metriport",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Health software; records, intake and billing queues are entry-level work."
  },
  {
   "id": "narvar",
@@ -622,6 +1233,58 @@
   "lead": "\u2014",
   "badges": [],
   "notes": "Logistics operations \u2014 order, shipment and exception data entered all day."
+ },
+ {
+  "id": "notable",
+  "name": "Notable",
+  "ats": "ashby",
+  "slug": "notable",
+  "vertical": "health",
+  "sub": "Notable",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Health software; records, intake and billing queues are entry-level work."
+ },
+ {
+  "id": "nursa",
+  "name": "Nursa",
+  "ats": "ashby",
+  "slug": "nursa",
+  "vertical": "staffing",
+  "sub": "Nursa",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Healthcare staffing; credentialing and scheduling coordination roles."
+ },
+ {
+  "id": "observeai",
+  "name": "Observe AI",
+  "ats": "greenhouse",
+  "slug": "observeai",
+  "vertical": "saas",
+  "sub": "Observe AI",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Customer-support software; its own support and operations queues hire at entry level."
+ },
+ {
+  "id": "oportun",
+  "name": "Oportun",
+  "ats": "greenhouse",
+  "slug": "oportun",
+  "vertical": "fintech",
+  "sub": "Oportun",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Consumer lending and banking; loan processing and support queues."
  },
  {
   "id": "otterai",
@@ -702,6 +1365,19 @@
   "notes": "Insurance operations \u2014 claims intake, policy servicing and document processing."
  },
  {
+  "id": "pipetechnologies",
+  "name": "Pipe Technologies",
+  "ats": "greenhouse",
+  "slug": "pipetechnologies",
+  "vertical": "saas",
+  "sub": "Pipe Technologies",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Software company; back-office and support roles surface here periodically."
+ },
+ {
   "id": "platformscience",
   "name": "Platform Science",
   "ats": "greenhouse",
@@ -713,6 +1389,32 @@
   "lead": "\u2014",
   "badges": [],
   "notes": "Logistics operations \u2014 order, shipment and exception data entered all day."
+ },
+ {
+  "id": "pointclickcare",
+  "name": "PointClickCare",
+  "ats": "lever",
+  "slug": "pointclickcare",
+  "vertical": "health",
+  "sub": "PointClickCare",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Health software; records, intake and billing queues are entry-level work."
+ },
+ {
+  "id": "possible-finance",
+  "name": "Possible Finance",
+  "ats": "ashby",
+  "slug": "possible-finance",
+  "vertical": "fintech",
+  "sub": "Possible Finance",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Consumer lending and banking; loan processing and support queues."
  },
  {
   "id": "posthog",
@@ -780,6 +1482,19 @@
   "notes": "Software company; back-office and support roles surface here periodically."
  },
  {
+  "id": "raintree-systems",
+  "name": "Raintree Systems",
+  "ats": "ashby",
+  "slug": "raintree-systems",
+  "vertical": "health",
+  "sub": "Raintree Systems",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Health software; records, intake and billing queues are entry-level work."
+ },
+ {
   "id": "relativity",
   "name": "Relativity",
   "ats": "greenhouse",
@@ -832,6 +1547,19 @@
   "notes": "Real-estate operations \u2014 title, escrow and listing data processing."
  },
  {
+  "id": "shiftkey",
+  "name": "ShiftKey",
+  "ats": "ashby",
+  "slug": "shiftkey",
+  "vertical": "staffing",
+  "sub": "ShiftKey",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Healthcare staffing; credentialing and scheduling coordination roles."
+ },
+ {
   "id": "shifttechnology",
   "name": "Shift Technology",
   "ats": "greenhouse",
@@ -843,6 +1571,19 @@
   "lead": "\u2014",
   "badges": [],
   "notes": "Insurance operations \u2014 claims intake, policy servicing and document processing."
+ },
+ {
+  "id": "skillsoft",
+  "name": "Skillsoft",
+  "ats": "greenhouse",
+  "slug": "skillsoft",
+  "vertical": "research",
+  "sub": "Skillsoft",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Education platforms and training nonprofits; enrolment and records roles."
  },
  {
   "id": "smarterdx",
@@ -871,6 +1612,19 @@
   "notes": "AI training data \u2014 annotation and review work, usually hourly and remote."
  },
  {
+  "id": "spoton",
+  "name": "SpotOn",
+  "ats": "ashby",
+  "slug": "spoton",
+  "vertical": "consumer",
+  "sub": "SpotOn",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Commerce and restaurant platforms; order and catalogue operations."
+ },
+ {
   "id": "sprig",
   "name": "Sprig",
   "ats": "ashby",
@@ -882,6 +1636,19 @@
   "lead": "\u2014",
   "badges": [],
   "notes": "Market and user research \u2014 survey operations and panel data work."
+ },
+ {
+  "id": "springboard",
+  "name": "Springboard",
+  "ats": "greenhouse",
+  "slug": "springboard",
+  "vertical": "research",
+  "sub": "Springboard",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Education platforms and training nonprofits; enrolment and records roles."
  },
  {
   "id": "sumsub",
@@ -949,6 +1716,45 @@
   "notes": "Market and user research \u2014 survey operations and panel data work."
  },
  {
+  "id": "tebra",
+  "name": "Tebra",
+  "ats": "greenhouse",
+  "slug": "tebra",
+  "vertical": "health",
+  "sub": "Tebra",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Health software; records, intake and billing queues are entry-level work."
+ },
+ {
+  "id": "threecolts",
+  "name": "Threecolts",
+  "ats": "greenhouse",
+  "slug": "threecolts",
+  "vertical": "marketplace",
+  "sub": "Threecolts",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "E-commerce aggregators; listing, catalogue and inventory data work."
+ },
+ {
+  "id": "toast",
+  "name": "Toast",
+  "ats": "greenhouse",
+  "slug": "toast",
+  "vertical": "consumer",
+  "sub": "Toast",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Commerce and restaurant platforms; order and catalogue operations."
+ },
+ {
   "id": "toloka",
   "name": "Toloka",
   "ats": "greenhouse",
@@ -986,6 +1792,19 @@
   "lead": "\u2014",
   "badges": [],
   "notes": "Fintech and verification operations \u2014 document review and KYC queues."
+ },
+ {
+  "id": "trustedhealth",
+  "name": "Trusted Health",
+  "ats": "greenhouse",
+  "slug": "trustedhealth",
+  "vertical": "staffing",
+  "sub": "Trusted Health",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Healthcare staffing; credentialing and scheduling coordination roles."
  },
  {
   "id": "turbotenant",
@@ -1027,6 +1846,45 @@
   "notes": "Logistics operations \u2014 order, shipment and exception data entered all day."
  },
  {
+  "id": "udemy",
+  "name": "Udemy",
+  "ats": "greenhouse",
+  "slug": "udemy",
+  "vertical": "research",
+  "sub": "Udemy",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Education platforms and training nonprofits; enrolment and records roles."
+ },
+ {
+  "id": "unybrands",
+  "name": "Unybrands",
+  "ats": "greenhouse",
+  "slug": "unybrands",
+  "vertical": "marketplace",
+  "sub": "Unybrands",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "E-commerce aggregators; listing, catalogue and inventory data work."
+ },
+ {
+  "id": "upstart",
+  "name": "Upstart",
+  "ats": "greenhouse",
+  "slug": "upstart",
+  "vertical": "fintech",
+  "sub": "Upstart",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Consumer lending and banking; loan processing and support queues."
+ },
+ {
   "id": "vaco",
   "name": "Vaco",
   "ats": "greenhouse",
@@ -1051,5 +1909,83 @@
   "lead": "\u2014",
   "badges": [],
   "notes": "Fintech and verification operations \u2014 document review and KYC queues."
+ },
+ {
+  "id": "vonage",
+  "name": "Vonage",
+  "ats": "greenhouse",
+  "slug": "vonage",
+  "vertical": "saas",
+  "sub": "Vonage",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Customer-support software; its own support and operations queues hire at entry level."
+ },
+ {
+  "id": "wayflyer",
+  "name": "Wayflyer",
+  "ats": "ashby",
+  "slug": "wayflyer",
+  "vertical": "saas",
+  "sub": "Wayflyer",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Software company; back-office and support roles surface here periodically."
+ },
+ {
+  "id": "weave",
+  "name": "Weave",
+  "ats": "ashby",
+  "slug": "weave",
+  "vertical": "saas",
+  "sub": "Weave",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Customer-support software; its own support and operations queues hire at entry level."
+ },
+ {
+  "id": "zapier",
+  "name": "Zapier",
+  "ats": "ashby",
+  "slug": "zapier",
+  "vertical": "saas",
+  "sub": "Zapier",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Remote-first software company; support and operations roles are fully distributed."
+ },
+ {
+  "id": "zestai",
+  "name": "Zest AI",
+  "ats": "greenhouse",
+  "slug": "zestai",
+  "vertical": "fintech",
+  "sub": "Zest AI",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Consumer lending and banking; loan processing and support queues."
+ },
+ {
+  "id": "zushealth",
+  "name": "Zus Health",
+  "ats": "lever",
+  "slug": "zushealth",
+  "vertical": "health",
+  "sub": "Zus Health",
+  "stage": "Private",
+  "raised": "\u2014",
+  "lead": "\u2014",
+  "badges": [],
+  "notes": "Health software; records, intake and billing queues are entry-level work."
  }
 ]
