@@ -1,0 +1,414 @@
+{
+  "id": "cody",
+  "person": "Cody",
+  "boardTitle": "Cody's Data Entry Board",
+  "docTitle": "cody \u2014 remote data entry + admin jobs, little experience needed",
+  "headline": "Employers",
+  "blurb": "live remote postings for data entry, admin and back-office work. Anything stating more than two years of required experience is filtered out, and every listing comes from the employer's own applicant-tracking system \u2014 no aggregators.",
+  "page": "cody.html",
+  "dataFile": "js/cody-data.js",
+  "dataGlobal": "CODY_DATA",
+  "profileScript": "js/cody-profile.js",
+  "storageKey": "cody_applied",
+  "companies": [
+    "profiles/cody.companies.json",
+    "profiles/thien.companies.json",
+    "profiles/sean.companies.json"
+  ],
+  "levelOrder": [
+    "entry",
+    "mid"
+  ],
+  "defaultLevel": "entry",
+  "fetchGreenhousePay": true,
+  "filters": {
+    "geoInclude": "\\bremote\\b|\\bwork\\s+from\\s+home\\b|\\banywhere\\b|\\bvirtual\\b|\\bdistributed\\b|\\bhome[\\s-]based\\b",
+    "geoRemote": "\\bremote\\b|\\bwork\\s+from\\s+home\\b|\\banywhere\\b|\\bvirtual\\b|\\bhome[\\s-]based\\b",
+    "geoRemoteHome": "\\b(u\\.?s\\.?a?|united\\s+states|north\\s+america|americas|nationwide)\\b",
+    "geoRemoteForeign": "\\b(canada|canadian|ontario|quebec|british\\s+columbia|toronto|vancouver|montr[e\u00e9]al|uk|united\\s+kingdom|england|scotland|ireland|london|emea|apac|latam|europe|european|germany|france|spain|portugal|italy|netherlands|belgium|switzerland|austria|sweden|norway|denmark|finland|poland|czech|romania|bulgaria|serbia|ukraine|india|bangalore|hyderabad|noida|gurgaon|chennai|pune|china|japan|korea|singapore|malaysia|indonesia|vietnam|philippines|manila|cebu|thailand|australia|new\\s+zealand|brazil|mexico|argentina|colombia|bogot[a\u00e1]|chile|peru|israel|turkey|t[u\u00fc]rkiye|uae|dubai|egypt|south\\s+africa|nigeria|kenya|morocco|costa\\s+rica|guatemala|honduras|el\\s+salvador|nicaragua|panama|dominican\\s+republic|uruguay|paraguay|bolivia|ecuador|venezuela|jamaica|armenia|georgia|kazakhstan|uzbekistan|pakistan|sri\\s+lanka|nepal|bangladesh|ghana|uganda|tanzania|rwanda|tunisia|algeria|jordan|lebanon|saudi|qatar|kuwait|bahrain|oman|cyprus|malta|greece|slovenia|croatia|bosnia|albania|moldova|belarus|russia|hong\\s+kong|taiwan|macau|myanmar|cambodia|laos|mongolia|fiji|latin\\s+america|apj|anz)\\b",
+    "titleInclude": "(\\bdata\\s+entry\\b|\\bdata\\s+entry\\s+(?:clerk|specialist|operator|associate|technician|processor|assistant)\\b|\\bdata\\s+(?:clerk|processor|processing|capture|input|collection)\\b|\\bdata\\s+annotat\\w*\\b|\\bdata\\s+label\\w*\\b|\\bdata\\s+technician\\b|\\bdata\\s+coordinator\\b|\\bdata\\s+operations\\s+associate\\b|\\bdata\\s+quality\\s+(?:analyst|associate|specialist)\\b|\\b(?:administrative|admin|office|executive|virtual|program|project|operations|ops)\\s+assistant\\b|\\badministrative\\s+(?:coordinator|associate|specialist)\\b|\\boffice\\s+coordinator\\b|\\b(?:records|filing|billing|claims|order|accounts|payroll|document|scanning|intake|enrollment|verification|title|escrow|loan|mortgage|invoice)\\s+(?:clerk|processor|specialist|associate|coordinator|technician|analyst)\\b|\\b(?:document|content|catalog|listing|product|inventory|master\\s+data)\\s+(?:specialist|associate|coordinator|technician)\\b|\\bdata\\s+steward\\b|\\btranscription\\w*\\b|\\btranscriptionist\\b|\\bcaptioner\\b|\\bscopist\\b|\\bmedical\\s+scribe\\b|\\bscribe\\b|\\bcoding\\s+specialist\\b|\\bmedical\\s+(?:coder|records)\\b|\\bback[\\s-]?office\\s+(?:associate|specialist|coordinator)\\b|\\boperations\\s+(?:associate|coordinator|specialist)\\b|\\bfulfillment\\s+(?:associate|coordinator|specialist)\\b|\\bclient\\s+services\\s+(?:associate|coordinator)\\b|\\bcustomer\\s+(?:support|service)\\s+(?:associate|representative|specialist)\\b|\\bsupport\\s+(?:associate|specialist)\\b|\\bcontent\\s+moderat\\w*\\b|\\bcontent\\s+review\\w*\\b|\\bquality\\s+(?:assurance|control)\\s+(?:associate|specialist|reviewer)\\b|\\breviewer\\b|\\bannotator\\b|\\blabeler\\b|\\bdigitiz\\w*\\b|\\bindexer\\b|\\bcataloger\\b|\\bproofreader\\b)",
+    "titleExclude": "(\\bsenior\\b|\\bsr[.\\s]|\\bstaff\\b|\\bprincipal\\b|\\blead\\b|\\bhead\\s+of\\b|\\bmanager\\b|\\bdirector\\b|\\bvp\\b|\\bvice\\s+president\\b|\\bchief\\b|\\bsupervisor\\b|\\barchitect\\b|\\bengineer\\b|\\bdeveloper\\b|\\bscientist\\b|\\bresearcher\\b|\\bcounsel\\b|\\battorney\\b|\\blawyer\\b|\\bparalegal\\b|\\bnurse\\b|\\bphysician\\b|\\bpharmacist\\b|\\btherapist\\b|\\bclinician\\b|\\bsurgeon\\b|\\baccount\\s+executive\\b|\\bsales\\s+(?:rep|representative|manager|director)\\b|\\bbusiness\\s+development\\b|\\brecruiter\\b|\\btalent\\s+acquisition\\b|\\bintern\\b|\\binternship\\b|\\bcontroller\\b|\\bcpa\\b|\\bdata\\s+scientist\\b|\\bdata\\s+engineer\\b|\\bdata\\s+analyst\\b|\\bmachine\\s+learning\\b|\\bml\\s+\\w+\\b|\\bsecurity\\s+\\w+\\b|\\bdevops\\b|\\bfield\\s+\\w+\\b|\\bwarehouse\\b|\\bdriver\\b|\\bforklift\\b|\\btechnician,\\s*field\\b|\\bin[\\s-]office\\b|\\bon[\\s-]site\\s+only\\b|\\bhybrid\\b)",
+    "levelRules": [
+      {
+        "key": "mid",
+        "match": "\\bii\\b|\\biii\\b|\\b(?:2|3)\\b|\\bexperienced\\b|\\bspecialist\\s+ii\\b"
+      },
+      {
+        "key": "entry",
+        "match": "\\b(entry[\\s-]level|junior|jr\\.?|associate|assistant|trainee|apprentice|clerk|i\\b|new\\s+grad|no\\s+experience)\\b"
+      }
+    ],
+    "levelDefault": "entry",
+    "maxYearsExperience": 2
+  },
+  "payEstimate": {
+    "interval": "hour",
+    "note": "US market midpoint for the role family, not the employer's figure.",
+    "titleBands": [
+      {
+        "match": "medical\\s+(?:coder|records)|coding\\s+specialist",
+        "min": 20,
+        "max": 30
+      },
+      {
+        "match": "medical\\s+scribe|\\bscribe\\b",
+        "min": 15,
+        "max": 22
+      },
+      {
+        "match": "claims|billing|insurance|underwrit",
+        "min": 18,
+        "max": 26
+      },
+      {
+        "match": "title|escrow|loan|mortgage",
+        "min": 19,
+        "max": 28
+      },
+      {
+        "match": "payroll|accounts\\s+(?:payable|receivable)|invoice|bookkeep",
+        "min": 19,
+        "max": 27
+      },
+      {
+        "match": "transcription|captioner|scopist|proofread",
+        "min": 15,
+        "max": 25
+      },
+      {
+        "match": "annotat|label|content\\s+moderat|content\\s+review|reviewer",
+        "min": 16,
+        "max": 24
+      },
+      {
+        "match": "executive\\s+assistant",
+        "min": 22,
+        "max": 34
+      },
+      {
+        "match": "administrative|admin|office\\s+(?:assistant|coordinator)|virtual\\s+assistant",
+        "min": 18,
+        "max": 26
+      },
+      {
+        "match": "operations\\s+(?:associate|coordinator|specialist)|fulfillment",
+        "min": 19,
+        "max": 28
+      },
+      {
+        "match": "customer\\s+(?:support|service)|support\\s+(?:associate|specialist)|client\\s+services",
+        "min": 17,
+        "max": 25
+      },
+      {
+        "match": "data\\s+entry|data\\s+clerk|data\\s+processor|data\\s+capture|data\\s+input",
+        "min": 17,
+        "max": 24
+      },
+      {
+        "match": "quality\\s+(?:assurance|control)|indexer|cataloger|digitiz",
+        "min": 17,
+        "max": 25
+      }
+    ],
+    "default": {
+      "min": 17,
+      "max": 25
+    },
+    "levelMultiplier": {
+      "entry": 1.0,
+      "mid": 1.15
+    }
+  },
+  "categories": [
+    {
+      "key": "all",
+      "label": "All"
+    },
+    {
+      "key": "dataentry",
+      "label": "Data Entry",
+      "match": "data\\s+entry|data\\s+clerk|data\\s+processor|data\\s+capture|data\\s+input|digitiz|indexer|cataloger|data\\s+technician"
+    },
+    {
+      "key": "admin",
+      "label": "Admin / EA",
+      "match": "administrative|admin|office\\s+(?:assistant|coordinator)|executive\\s+assistant|virtual\\s+assistant|program\\s+assistant|project\\s+assistant"
+    },
+    {
+      "key": "records",
+      "label": "Claims / Records",
+      "match": "claims|billing|invoice|payroll|accounts|records|filing|intake|enrollment|verification|title|escrow|loan|mortgage|medical\\s+(?:coder|records)|coding"
+    },
+    {
+      "key": "annotation",
+      "label": "Annotation / Review",
+      "match": "annotat|label|content\\s+moderat|content\\s+review|reviewer|quality\\s+(?:assurance|control)|proofread|transcription|captioner|scopist|scribe"
+    },
+    {
+      "key": "ops",
+      "label": "Back Office",
+      "match": "operations|fulfillment|order|document|catalog|listing|inventory|master\\s+data|back[\\s-]?office|support|client\\s+services|customer"
+    }
+  ],
+  "categoryFallback": "ops",
+  "levels": [
+    {
+      "key": "all",
+      "label": "All levels"
+    },
+    {
+      "key": "entry",
+      "label": "Entry"
+    },
+    {
+      "key": "mid",
+      "label": "Some experience"
+    }
+  ],
+  "levelPills": {
+    "entry": "pill-both",
+    "mid": "pill-dev"
+  },
+  "locations": [
+    {
+      "key": "all",
+      "label": "All"
+    },
+    {
+      "key": "remote",
+      "label": "Remote (US)"
+    }
+  ],
+  "verticals": {
+    "labels": {
+      "bpo": "BPO / Outsourcing",
+      "health": "Health",
+      "insurance": "Insurance",
+      "legal": "Legal Services",
+      "logistics": "Logistics",
+      "staffing": "Staffing",
+      "annotation": "AI Data",
+      "research": "Research",
+      "fintech": "Fintech",
+      "proptech": "Real Estate",
+      "accounting": "Accounting",
+      "consumer": "Consumer",
+      "saas": "SaaS",
+      "marketplace": "Marketplace",
+      "media": "Media",
+      "ai": "AI",
+      "gaming": "Gaming",
+      "devtools": "Dev Tools",
+      "infra": "Infra",
+      "adtech": "AdTech",
+      "hospitality": "Hospitality",
+      "climate": "Climate",
+      "sports": "Sports",
+      "fitness": "Fitness",
+      "security": "Security",
+      "cpg": "CPG",
+      "immersive": "Immersive",
+      "animation": "Animation",
+      "vfx": "VFX",
+      "igaming": "iGaming",
+      "gametech": "Game Tech",
+      "simulation": "Simulation",
+      "archviz": "Archviz"
+    },
+    "pills": {
+      "bpo": "pill-dev",
+      "health": "pill-hosp",
+      "insurance": "pill-both",
+      "legal": "pill-mkt",
+      "logistics": "pill-dev",
+      "staffing": "pill-mkt",
+      "annotation": "pill-ai",
+      "research": "pill-ai",
+      "fintech": "pill-both",
+      "proptech": "pill-hosp",
+      "accounting": "pill-both",
+      "consumer": "pill-mkt",
+      "saas": "pill-dev",
+      "marketplace": "pill-mkt",
+      "media": "pill-mkt",
+      "ai": "pill-ai",
+      "gaming": "pill-ai",
+      "devtools": "pill-dev",
+      "infra": "pill-dev",
+      "adtech": "pill-dev",
+      "hospitality": "pill-hosp",
+      "climate": "pill-hosp",
+      "sports": "pill-ai",
+      "fitness": "pill-hosp",
+      "security": "pill-dev",
+      "cpg": "pill-mkt",
+      "immersive": "pill-ai",
+      "animation": "pill-mkt",
+      "vfx": "pill-mkt",
+      "igaming": "pill-both",
+      "gametech": "pill-dev",
+      "simulation": "pill-dev",
+      "archviz": "pill-hosp"
+    }
+  },
+  "scoring": {
+    "coolness": {
+      "map": {},
+      "byVertical": {
+        "annotation": 7,
+        "bpo": 6,
+        "staffing": 6,
+        "health": 6,
+        "insurance": 6,
+        "accounting": 6,
+        "legal": 5,
+        "logistics": 6,
+        "proptech": 5,
+        "research": 6,
+        "fintech": 5,
+        "consumer": 5,
+        "marketplace": 5,
+        "media": 5,
+        "saas": 5,
+        "ai": 5,
+        "gaming": 5
+      },
+      "default": 5
+    },
+    "candidateMult": {
+      "stageBoost": [
+        [
+          "seed|series a\\b",
+          1.05
+        ]
+      ],
+      "groupMult": {},
+      "clamp": [
+        0.5,
+        1.3
+      ]
+    },
+    "replyProb": {
+      "base": 0.2,
+      "stageTable": [
+        [
+          "seed",
+          0.3
+        ],
+        [
+          "series a\\b",
+          0.28
+        ],
+        [
+          "series b\\b",
+          0.26
+        ],
+        [
+          "series c\\b",
+          0.24
+        ],
+        [
+          "series d\\b",
+          0.22
+        ],
+        [
+          "series e\\b",
+          0.2
+        ],
+        [
+          "series [fghij]\\b|public|late|acquired|private equity",
+          0.18
+        ]
+      ],
+      "groupMult": {},
+      "roleCountPenalty": [
+        [
+          40,
+          0.85
+        ],
+        [
+          15,
+          0.95
+        ]
+      ],
+      "clamp": [
+        0.08,
+        0.5
+      ]
+    },
+    "passProb": {
+      "base": 0.45,
+      "titleRules": [
+        [
+          "\\bdata\\s+entry\\b",
+          0.2
+        ],
+        [
+          "\\bclerk\\b|\\bprocessor\\b|\\bdata\\s+capture\\b|\\bdata\\s+input\\b",
+          0.15
+        ],
+        [
+          "\\bannotat\\w*|\\blabel\\w*|\\breviewer\\b|\\bcontent\\s+moderat",
+          0.12
+        ],
+        [
+          "\\badministrative\\b|\\badmin\\b|\\boffice\\s+assistant\\b|\\bvirtual\\s+assistant\\b",
+          0.1
+        ],
+        [
+          "\\btranscription\\w*|\\bcaptioner\\b|\\bproofread",
+          0.1
+        ],
+        [
+          "\\bentry[\\s-]level\\b|\\bno\\s+experience\\b|\\btrainee\\b|\\bapprentice\\b",
+          0.15
+        ],
+        [
+          "\\bmedical\\s+(?:coder|records)\\b|\\bcoding\\s+specialist\\b",
+          -0.15
+        ],
+        [
+          "\\bexecutive\\s+assistant\\b",
+          -0.1
+        ],
+        [
+          "\\bii\\b|\\biii\\b|\\bexperienced\\b",
+          -0.12
+        ]
+      ],
+      "levelBonus": {
+        "entry": 0.12,
+        "mid": 0.0
+      },
+      "clamp": [
+        0.1,
+        0.85
+      ]
+    },
+    "groups": {},
+    "penalties": [],
+    "tiers": [
+      {
+        "min": 8,
+        "label": "Strong fit",
+        "cls": "fit-strong"
+      },
+      {
+        "min": 5,
+        "label": "Worth trying",
+        "cls": "fit-worth"
+      },
+      {
+        "min": 2,
+        "label": "Long shot",
+        "cls": "fit-long"
+      },
+      {
+        "min": -1,
+        "label": "Tough bar",
+        "cls": "fit-tough"
+      }
+    ]
+  }
+}

@@ -31,7 +31,13 @@ sys.argv = _argv
 
 # A title that each profile's filters accept, so a geography case fails on
 # geography rather than on the title.
-GEO_PROBE_TITLE = {"sean": "Environment Artist", "thien": "Operations Analyst"}
+GEO_PROBE_TITLE = {"sean": "Environment Artist", "thien": "Operations Analyst",
+                   "cody": "Data Entry Clerk"}
+
+# A location each profile accepts, so a title case fails on the title
+# rather than on geography.
+TITLE_PROBE_LOC = {"sean": "New York, NY", "thien": "New York, NY",
+                   "cody": "Remote, US"}
 
 # (location, expected lane) — "out" means the role should not appear at all.
 # A profile with no geoRemote never produces "remote".
@@ -58,6 +64,19 @@ GEO_CASES = {
     ("New York, NY",                                    "nyc"),
     ("Remote - US",                                     "out"),   # no remote lane
     ("Austin, TX",                                      "out"),
+  ],
+  # Cody's board is remote-only: geoInclude is itself the remote pattern, so a
+  # match lands in the primary lane rather than being tagged remote.
+  "cody": [
+    ("Remote, US",                                      "nyc"),
+    ("Remote - United States",                          "nyc"),
+    ("Work from home (USA)",                            "nyc"),
+    ("Remote - Philippines",                            "out"),
+    ("Remote, India",                                   "out"),
+    ("Remote - Costa Rica",                             "out"),
+    ("Remote (Latin America)",                          "out"),
+    ("Austin, TX",                                      "out"),
+    ("New York, NY",                                    "out"),
   ],
 }
 
@@ -110,6 +129,28 @@ CASES = {
     ("Graphics Engineer",                       "gaming",   False),
     ("Senior Product Designer",                 "gaming",   False),
   ],
+  "cody": [
+    ("Data Entry Clerk",                        "bpo",      True),
+    ("Data Entry Specialist",                   "health",   True),
+    ("Administrative Assistant",                "saas",     True),
+    ("Claims Processor",                        "insurance", True),
+    ("Transcriptionist",                        "media",    True),
+    ("Content Moderator",                       "ai",       True),
+    ("Medical Records Clerk",                   "health",   True),
+    ("Virtual Assistant",                       "staffing", True),
+    # Little experience required is the whole point of this board.
+    ("Senior Data Entry Specialist",            "bpo",      False),
+    ("Data Entry Manager",                      "bpo",      False),
+    ("Lead Claims Processor",                   "insurance", False),
+    # Same words, wrong job.
+    ("Data Scientist",                          "ai",       False),
+    ("Data Engineer",                           "saas",     False),
+    ("Data Analyst",                            "saas",     False),
+    ("Software Engineer",                       "saas",     False),
+    ("Account Executive",                       "saas",     False),
+    ("Registered Nurse",                        "health",   False),
+    ("Paralegal",                               "legal",    False),
+  ],
   "thien": [
     ("Operations Analyst",                      "saas",     True),
     ("Data Analyst, Growth",                    "consumer", True),
@@ -121,6 +162,43 @@ CASES = {
     ("Data Engineer",                           "saas",     False),
   ],
 }
+
+
+PAY_CASES = {
+  "cody": [
+    # (title, level, expected hourly midpoint band) — the estimate must land in
+    # the right family, and must never be presented as the employer's figure.
+    ("Data Entry Clerk",      "entry", 17, 24),
+    ("Medical Coder",         "entry", 20, 30),
+    ("Executive Assistant",   "entry", 22, 34),
+    ("Claims Processor",      "entry", 18, 26),
+    ("Something Unmapped",    "entry", 17, 25),   # falls back to default
+  ],
+}
+
+
+def run_pay(pid: str) -> int:
+  profile = rc.Profile(pid)
+  cases = PAY_CASES.get(pid)
+  if not cases:
+    return 0
+  bad = 0
+  for title, lvl, lo, hi in cases:
+    est = profile.estimate_pay(title, lvl)
+    if not est or est["min"] != lo or est["max"] != hi:
+      bad += 1
+      print(f"  \u2717 [pay] {title!r} ({lvl}): expected {lo}-{hi}, got {est}", file=sys.stderr)
+  # An estimate is only ever attached when the posting states nothing, and it
+  # must be labelled as such.
+  raw = [{"title": "Data Entry Clerk", "location": {"name": "Remote, US"},
+          "absolute_url": "https://example.com/job", "updated_at": "2026-01-01"}]
+  got = rc.filter_jobs(profile, "greenhouse", raw, "slug", "bpo")
+  if got and got[0].get("pay") and got[0].get("paySource") != "estimate":
+    bad += 1
+    print(f"  \u2717 [pay] unposted pay was not labelled an estimate", file=sys.stderr)
+  if not bad:
+    print(f"   \u2713 {pid}: {len(cases)} pay case(s) pass")
+  return bad
 
 
 def run_geo(pid: str) -> int:
@@ -150,7 +228,7 @@ def run(pid: str) -> int:
     return 0
   bad = 0
   for title, vertical, want in cases:
-    raw = [{"title": title, "location": {"name": "New York, NY"},
+    raw = [{"title": title, "location": {"name": TITLE_PROBE_LOC[pid]},
             "absolute_url": "https://example.com/job", "updated_at": "2026-01-01"}]
     got = bool(rc.filter_jobs(profile, "greenhouse", raw, "slug", vertical))
     if got != want:
@@ -167,7 +245,7 @@ def run(pid: str) -> int:
 def main():
   ids = sys.argv[1:] or sorted(
     p.stem for p in (ROOT / "profiles").glob("*.json") if not p.name.endswith(".companies.json"))
-  sys.exit(1 if sum(run(i) + run_geo(i) for i in ids) else 0)
+  sys.exit(1 if sum(run(i) + run_geo(i) + run_pay(i) for i in ids) else 0)
 
 
 if __name__ == "__main__":

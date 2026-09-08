@@ -3036,3 +3036,34 @@ blockquote {
   color: var(--accent);
   background: color-mix(in srgb, var(--accent) 12%, transparent);
 }
+
+/* ---------- Pay ----------
+ * Two kinds of fact, deliberately not styled alike: a figure the employer
+ * published reads as solid, an estimate reads as an aside. The tooltip on
+ * each says which it is. */
+.pay-tag {
+  flex-shrink: 0; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px; font-weight: 600; letter-spacing: -.02em;
+  padding: 3px 7px; border-radius: 7px; white-space: nowrap;
+  color: #0EA371; background: color-mix(in srgb, #0EA371 10%, transparent);
+  border: 1px solid color-mix(in srgb, #0EA371 26%, transparent);
+}
+.pay-tag.pay-est {
+  color: var(--muted); background: transparent;
+  border-color: var(--hairline); border-style: dashed; font-weight: 500;
+}
+.pay-mini {
+  flex-shrink: 0; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px; color: #0EA371;
+}
+.pay-mini.pay-est { color: var(--muted); }
+
+/* ---------- Experience bar ----------
+ * Only shown when the posting actually stated one. Absence of a badge means
+ * the posting was silent, which is not a claim that none is needed. */
+.exp-tag {
+  flex-shrink: 0; font-size: 10px; font-weight: 600; white-space: nowrap;
+  padding: 2px 6px; border-radius: 6px;
+  color: var(--muted); border: 1px solid var(--hairline);
+}
+.exp-tag.exp-none { color: #0EA371; border-color: color-mix(in srgb, #0EA371 30%, transparent); }

@@ -76,6 +76,9 @@ class Profile:
       re.compile(f["titleIncludeBroad"], re.I) if f.get("titleIncludeBroad") else None
     )
     self.broad_verticals = set(f.get("broadVerticals", []))
+    # Drop postings that state a requirement above this many years.
+    # None disables the check entirely.
+    self.max_years = f.get("maxYearsExperience")
     self.title_exclude = (
       re.compile(f["titleExclude"], re.I) if f.get("titleExclude") else None
     )
@@ -105,6 +108,31 @@ class Profile:
   def domains(self):
     return {c["id"]: c["domain"] for c in self.companies if c.get("domain")}
 
+  def estimate_pay(self, title: str, level: str):
+    """A market estimate for a title the posting left blank.
+
+    Returns None unless the profile supplies payEstimate. The result is tagged
+    source='estimate' downstream and rendered differently, because a guess
+    shown as an employer's number is worse than no number at all."""
+    cfg = self.raw.get("payEstimate")
+    if not cfg:
+      return None
+    t = title.lower()
+    band = None
+    for rule in cfg.get("titleBands", []):
+      if re.search(rule["match"], t, re.I):
+        band = rule
+        break
+    band = band or cfg.get("default")
+    if not band:
+      return None
+    lo, hi = float(band["min"]), float(band["max"])
+    mult = (cfg.get("levelMultiplier") or {}).get(level)
+    if mult:
+      lo, hi = lo * mult, hi * mult
+    return {"min": round(lo, 2), "max": round(hi, 2),
+            "interval": band.get("interval", cfg.get("interval", "hour"))}
+
   def level(self, title: str) -> str:
     """First matching levelRule wins; else the profile's default level."""
     for key, pat in self.level_rules:
@@ -132,7 +160,7 @@ def curl_json(url, timeout=15, method="GET", body=None, referer=None):
 
 def fetch(ats, slug):
   if ats == "ashby":
-    d = curl_json(f"https://api.ashbyhq.com/posting-api/job-board/{slug}?includeCompensation=false")
+    d = curl_json(f"https://api.ashbyhq.com/posting-api/job-board/{slug}?includeCompensation=true")
     return d.get("jobs", []) if d else []
   if ats == "greenhouse":
     d = curl_json(f"https://boards-api.greenhouse.io/v1/boards/{slug}/jobs")
@@ -238,6 +266,175 @@ def _date10(v):
       return ""
   s = str(v)
   return s[:10] if len(s) >= 10 and s[4] == "-" and s[7] == "-" else ""
+
+
+# ── Compensation ─────────────────────────────────────────────────────────
+# Some ATSs publish a real range; most do not. Everything below only reports
+# what a posting actually states. Estimating is a separate, clearly-labelled
+# step in the profile — the two must never be confused on a card, because a
+# guess presented as an employer's number is the kind of wrong that costs
+# somebody an afternoon.
+_MONEY = re.compile(r"\$\s?([\d,]+(?:\.\d+)?)\s*([KkMm])?")
+_HOURLY_HINT = re.compile(r"\b(?:per\s+hour|/\s?hour|/\s?hr|hourly|an\s+hour)\b", re.I)
+_PAY_WORD = re.compile(r"\b(?:salary|compensation|pay|base|rate|wage|hiring\s+range|"
+                       r"pay\s+range|salary\s+range)\b", re.I)
+# An explicit "$A to $B" range — the only shape trusted from free text.
+_RANGE = re.compile(r"\$\s?([\d,]+(?:\.\d+)?)\s*([KkMm])?\s*(?:-|–|—|to|through)\s*"
+                    r"\$?\s?([\d,]+(?:\.\d+)?)\s*([KkMm])?")
+
+
+def _money(tok, suffix):
+  try:
+    v = float(tok.replace(",", ""))
+  except ValueError:
+    return None
+  if suffix and suffix.lower() == "k":
+    v *= 1_000
+  elif suffix and suffix.lower() == "m":
+    v *= 1_000_000
+  return v
+
+
+def _interval_for(lo, hi, hint=""):
+  """hour or year. A stated interval wins; otherwise magnitude decides, since
+  nobody is paid $37/year and nobody is paid $55,000/hour. Greenhouse's
+  structured ranges often omit the interval, which is how two hourly rates
+  once shipped labelled as salaries."""
+  h = (hint or "").lower()
+  if "hour" in h or "hr" in h:
+    return "hour"
+  if "year" in h or "annual" in h or "salary" in h:
+    return "year"
+  return "hour" if max(lo, hi or lo) < 400 else "year"
+
+
+def _pay_from_text(text):
+  """Pull a pay range out of free text — conservatively.
+
+  Job descriptions are full of dollar amounts that are not pay: funding
+  raised, revenue, customer savings, discounts. Taking min and max across all
+  of them produced ranges like "$1.30/yr" and "$425,000,000". So this only
+  accepts an *explicit two-number range* whose endpoints agree on magnitude,
+  and returns None otherwise — a missing figure falls through to a labelled
+  estimate, which is far better than a confident wrong one.
+  """
+  if not text:
+    return None
+  flat = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", text))
+  best = None
+  for m in _RANGE.finditer(flat):
+    lo = _money(m.group(1), m.group(2))
+    hi = _money(m.group(3), m.group(4))
+    if not lo or not hi or hi < lo:
+      continue
+    window = flat[max(0, m.start() - 90):m.end() + 90]
+    hourly = bool(_HOURLY_HINT.search(window))
+    # Endpoints must describe the same kind of number. A "$20 - $150,000"
+    # match is two unrelated figures that happen to sit near a dash.
+    if hourly or (lo < 400 and hi < 400):
+      if not (5 <= lo <= 400 and 5 <= hi <= 400):
+        continue
+      cand = {"min": round(lo, 2), "max": round(hi, 2), "interval": "hour"}
+    else:
+      if not (10_000 <= lo <= 2_000_000 and 10_000 <= hi <= 2_000_000):
+        continue
+      cand = {"min": round(lo, 2), "max": round(hi, 2), "interval": "year"}
+    # A range stated next to explicit pay wording beats one that merely looks
+    # like a range, so prefer the first that has it.
+    if _PAY_WORD.search(window):
+      return cand
+    best = best or cand
+  return best
+
+
+def pay_of(ats, j):
+  """The compensation a posting states, or None. Never an estimate."""
+  if ats == "ashby":
+    c = j.get("compensation") or {}
+    txt = c.get("scrapeableCompensationSalarySummary") or c.get("compensationTierSummary")
+    # Prefer the structured components when present — they carry the interval.
+    for tier in (c.get("compensationTiers") or []):
+      for comp in (tier.get("components") or []):
+        if comp.get("compensationType") == "Salary" and comp.get("minValue"):
+          lo = float(comp["minValue"])
+          hi = float(comp.get("maxValue") or comp["minValue"])
+          return {"min": lo, "max": hi,
+                  "interval": _interval_for(lo, hi, comp.get("interval"))}
+    return _pay_from_text(txt)
+  if ats == "lever":
+    r = j.get("salaryRange") or {}
+    if r.get("min"):
+      lo, hi = float(r["min"]), float(r.get("max") or r["min"])
+      return {"min": lo, "max": hi, "interval": _interval_for(lo, hi, r.get("interval"))}
+    return None
+  if ats == "smartrecruiters":
+    r = (j.get("typicalRange") or {})
+    if r.get("minValue"):
+      lo, hi = float(r["minValue"]), float(r.get("maxValue") or r["minValue"])
+      return {"min": lo, "max": hi, "interval": _interval_for(lo, hi, str(r.get("interval", "")))}
+    return None
+  return None
+
+
+def _pay_from_greenhouse_detail(d):
+  """Pay out of an already-fetched Greenhouse job body."""
+  if not d:
+    return None
+  for r in (d.get("pay_input_ranges") or []):
+    lo, hi = r.get("min_cents"), r.get("max_cents")
+    if lo:
+      lo_d, hi_d = round(lo / 100, 2), round((hi or lo) / 100, 2)
+      return {"min": lo_d, "max": hi_d,
+              "interval": _interval_for(lo_d, hi_d, r.get("title"))}
+  # Failing that, many boards state the range in the posting body.
+  return _pay_from_text(re.sub(r"<[^>]+>", " ", d.get("content") or "")[:4000])
+
+
+# ── Experience requirement ───────────────────────────────────────────────
+# "Entry level" is a claim a title cannot make on its own: plenty of postings
+# titled "Data Entry Clerk" ask for five years. Where the ATS gives us the
+# description cheaply, read the requirement out of it rather than guessing.
+_YEARS = re.compile(
+  r"(\d{1,2})\s*(?:\+|plus)?\s*(?:-|–|to)?\s*(\d{1,2})?\s*\+?\s*"
+  r"(?:years?|yrs?)[\s\w]{0,24}?(?:experience|exp\b)", re.I)
+_NO_EXP = re.compile(
+  r"no\s+(?:prior\s+|previous\s+|work\s+)?experience\s+(?:is\s+)?"
+  r"(?:required|necessary|needed)|entry[\s-]level|no\s+experience\s+necessary",
+  re.I)
+
+
+def years_required(text):
+  """Smallest number of years the posting asks for, or 0 when it says none.
+  None means the posting did not say — which is not the same as zero."""
+  if not text:
+    return None
+  t = re.sub(r"<[^>]+>", " ", text)
+  t = re.sub(r"\s+", " ", t)[:6000]
+  if _NO_EXP.search(t):
+    return 0
+  hits = []
+  for m in _YEARS.finditer(t):
+    lo = int(m.group(1))
+    if 0 <= lo <= 20:
+      hits.append(lo)
+  # The lowest figure is the real bar: a posting saying "2+ years, 5 preferred"
+  # will interview someone with two.
+  return min(hits) if hits else None
+
+
+def description_of(ats, j):
+  """Description text already present in the list payload, if any. Backends
+  that withhold it return None rather than costing an extra request."""
+  if ats == "lever":
+    return " ".join(filter(None, [j.get("descriptionPlain"), j.get("additionalPlain")]))
+  if ats in ("workable", "recruitee", "breezy", "pinpoint"):
+    return j.get("description") or j.get("full_description") or ""
+  if ats == "personio":
+    return " ".join(str(x) for x in (j.get("jobDescriptions") or {}).values()) \
+      if isinstance(j.get("jobDescriptions"), dict) else ""
+  if ats == "smartrecruiters":
+    return json.dumps(j.get("jobAd") or "")
+  return None
 
 
 def normalize(ats, j, slug=""):
@@ -367,7 +564,9 @@ def normalize(ats, j, slug=""):
   # board full of http links is a board full of mixed-content warnings.
   if url and url.startswith("http://"):
     url = "https://" + url[len("http://"):]
-  return {"title": title, "url": url, "loc": loc, "posted": posted}
+  return {"title": title, "url": url, "loc": loc, "posted": posted,
+          "pay": pay_of(ats, j), "id": j.get("id"),
+          "years": years_required(description_of(ats, j))}
 
 
 def filter_jobs(profile: Profile, ats, raw, slug="", vertical=""):
@@ -378,6 +577,12 @@ def filter_jobs(profile: Profile, ats, raw, slug="", vertical=""):
       continue
     title, loc = n["title"], n["loc"]
     remote = False
+    # Foreign screening applies to whichever lane matched. A board whose
+    # primary geography is itself "remote" still has to reject Manila and
+    # Bengaluru, and that check used to live only in the secondary lane.
+    if profile.geo_remote_foreign and profile.geo_remote_foreign.search(loc) \
+       and not (profile.geo_remote_home and profile.geo_remote_home.search(loc)):
+      continue
     if not profile.geo.search(loc):
       # Remote lane: "Remote - US" is takeable from the target city; "Remote -
       # Canada" is not. A listing naming any home-country location counts even
@@ -401,8 +606,39 @@ def filter_jobs(profile: Profile, ats, raw, slug="", vertical=""):
               and vertical in profile.broad_verticals
               and profile.title_include_broad.search(title)):
         continue
-    job = {"title": title, "url": n["url"], "level": profile.level(title),
-           "posted": n["posted"]}
+    level = profile.level(title)
+    years = n.get("years")
+    # A posting that states a requirement above the bar is out, however
+    # entry-level its title sounds. A posting that says nothing stays in —
+    # silence is not a requirement.
+    if profile.max_years is not None and years is not None and years > profile.max_years:
+      continue
+    job = {"title": title, "url": n["url"], "level": level, "posted": n["posted"]}
+    if years is not None:
+      job["years"] = years
+    pay = n.get("pay")
+    # Greenhouse keeps pay one endpoint deeper. Only spend that request on a
+    # posting that already survived the filters — a handful per run, not
+    # thousands.
+    if not pay and ats == "greenhouse" and profile.raw.get("fetchGreenhousePay") and n.get("id"):
+      detail = curl_json(f"https://boards-api.greenhouse.io/v1/boards/{slug}/jobs/{n['id']}?pay_transparency=true")
+      if detail:
+        pay = _pay_from_greenhouse_detail(detail)
+        # One request, two answers: the same body carries the experience bar.
+        if "years" not in job:
+          y = years_required(detail.get("content"))
+          if y is not None:
+            if profile.max_years is not None and y > profile.max_years:
+              continue
+            job["years"] = y
+    if pay:
+      job["pay"] = pay
+      job["paySource"] = "posted"
+    else:
+      est = profile.estimate_pay(title, level)
+      if est:
+        job["pay"] = est
+        job["paySource"] = "estimate"
     if remote:
       job["remote"] = True
       job["loc"] = n["loc"].strip()[:60]
@@ -441,7 +677,10 @@ def emit_companies_block(profile: Profile, rows, today):
       "{ title:" + json.dumps(j["title"]) + ", url:" + json.dumps(j["url"]) +
       ", level:" + json.dumps(j["level"]) +
       (", remote:true" if j.get("remote") else "") +
-      (", loc:" + json.dumps(j["loc"]) if j.get("loc") else "") + " }"
+      (", loc:" + json.dumps(j["loc"]) if j.get("loc") else "") +
+      (", pay:" + json.dumps(j["pay"], separators=(",", ":")) if j.get("pay") else "") +
+      (", paySource:" + json.dumps(j["paySource"]) if j.get("paySource") else "") +
+      (", years:" + str(j["years"]) if j.get("years") is not None else "") + " }"
       for j in c["jobs"]
     )
     badges_inner = ", ".join(json.dumps(b) for b in c["badges"])

@@ -192,6 +192,26 @@ def verify(pid: str) -> int:
       urls.add(u)
       if j.get("level") and j["level"] not in level_keys:
         errs.append(f"{c['id']}: job level '{j['level']}' has no tab in levels[]")
+      # Pay must always declare where it came from — an estimate rendered as
+      # an employer's figure is the one error on this board that could cost
+      # somebody real time.
+      pay = j.get("pay")
+      if pay:
+        if j.get("paySource") not in ("posted", "estimate"):
+          errs.append(f"{c['id']}: pay without a valid paySource ({j.get('paySource')!r})")
+        if pay.get("interval") not in ("hour", "year"):
+          errs.append(f"{c['id']}: pay interval {pay.get('interval')!r} is neither hour nor year")
+        lo, hi = pay.get("min"), pay.get("max")
+        if lo is None or hi is None or lo > hi:
+          errs.append(f"{c['id']}: pay range is inverted or incomplete ({lo}-{hi})")
+        # A sanity band per interval: these catch a units mix-up, which would
+        # otherwise render as a plausible-looking wrong number.
+        if pay.get("interval") == "hour" and not (5 <= lo <= 400):
+          errs.append(f"{c['id']}: hourly pay {lo} outside a believable range")
+        if pay.get("interval") == "year" and not (10_000 <= lo <= 2_000_000):
+          errs.append(f"{c['id']}: yearly pay {lo} outside a believable range")
+      elif j.get("paySource"):
+        errs.append(f"{c['id']}: paySource without pay")
   if not data.get("COMPANIES_VERIFIED_AT"):
     errs.append("COMPANIES_VERIFIED_AT is empty")
   # The data file is generated and must hold nothing else. js/data.js had

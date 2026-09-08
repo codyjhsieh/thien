@@ -216,7 +216,54 @@ const CATEGORIES = P.categories || [{ key: 'all', label: 'All' }];
 // Location tabs only appear when a profile actually has a second geography;
 // on a single-geography board they would be three tabs that all mean "all".
 const LOCATIONS = P.locations || [];
+// Only offer a pay sort on a board that actually carries pay.
+const HAS_PAY = COMPANIES.some(c => (c.jobs || []).some(j => j.pay));
+// Compare on a common footing: a yearly figure against an hourly one is
+// meaningless otherwise. 2080 = 40h x 52w.
+function payKey(j) {
+  if (!j || !j.pay) return -1;
+  const mid = (j.pay.min + (j.pay.max || j.pay.min)) / 2;
+  return j.pay.interval === 'hour' ? mid : mid / 2080;
+}
 function roleLocation(j) { return j && j.remote ? 'remote' : 'nyc'; }
+
+/* --------------------------------------------------------------------
+ * Pay
+ *
+ * A posting's own figure and a market estimate are different kinds of
+ * fact, so they never render the same. Posted pay is shown plainly;
+ * an estimate is muted, prefixed with ~, and says so on hover. Nobody
+ * should have to guess which one they are looking at.
+ * ------------------------------------------------------------------ */
+function fmtMoney(v, interval) {
+  if (interval === 'hour') return '$' + (Number.isInteger(v) ? v : v.toFixed(2));
+  if (v >= 1000) return '$' + Math.round(v / 1000) + 'k';
+  return '$' + Math.round(v);
+}
+function payLabel(pay) {
+  if (!pay) return '';
+  const lo = fmtMoney(pay.min, pay.interval);
+  const hi = pay.max && pay.max !== pay.min ? fmtMoney(pay.max, pay.interval) : '';
+  const suffix = pay.interval === 'hour' ? '/hr' : '';
+  return hi ? `${lo}–${hi}${suffix}` : `${lo}${suffix}`;
+}
+// A posting that states its experience bar is worth surfacing; one that says
+// nothing gets no badge, because "not stated" is not the same as "none".
+function expHTML(j) {
+  if (!j || j.years === undefined || j.years === null) return '';
+  const none = j.years === 0;
+  return `<span class="exp-tag${none ? ' exp-none' : ''}" title="${none
+    ? 'The posting says no prior experience is required.'
+    : `The posting asks for ${j.years}+ year(s) of experience.`}">${none ? 'No exp' : j.years + '+ yr'}</span>`;
+}
+function payHTML(j) {
+  if (!j || !j.pay) return '';
+  const est = j.paySource === 'estimate';
+  const note = est
+    ? (P.payEstimate && P.payEstimate.note) || 'Estimated from market rates, not stated by the employer.'
+    : 'Stated in the posting.';
+  return `<span class="pay-tag${est ? ' pay-est' : ''}" title="${esc(note)}">${est ? '~' : ''}${esc(payLabel(j.pay))}</span>`;
+}
 // First matching category wins; anything unmatched lands in the fallback so a
 // role can never disappear from every filtered view.
 function roleCategory(title) {
@@ -331,6 +378,7 @@ function renderCompanies(hub) {
         <div class="tabs" id="co-sort">
           <div class="tab active" data-co-sort="fit">Top fit</div>
           <div class="tab" data-co-sort="new">Newest</div>
+          ${HAS_PAY ? '<div class="tab" data-co-sort="pay">Top pay</div>' : ''}
         </div>
       </div>
     </div>
@@ -388,6 +436,7 @@ function renderCompanies(hub) {
     (b._rec || '').localeCompare(a._rec || '') || b._fit - a._fit);
   const recRoles = [...scoredRoles].sort((a, b) =>
     (b._rec || '').localeCompare(a._rec || '') || b._fit - a._fit);
+  const payRoles = [...scoredRoles].sort((a, b) => payKey(b) - payKey(a) || b._fit - a._fit);
   let coOrder = scoredCos;
 
   function _buildCompanyCard(c) {
@@ -415,6 +464,7 @@ function renderCompanies(hub) {
            class="role-pill flex items-center gap-2 text-[12px]" title="${esc(j.title)}">
           ${lvlDot}<span class="truncate flex-1 min-w-0">${esc(j.title)}</span>
           ${j.remote ? '<span class="role-remote-dot" title="Remote">R</span>' : ''}
+          ${j.pay ? `<span class="pay-mini${j.paySource === 'estimate' ? ' pay-est' : ''}">${j.paySource === 'estimate' ? '~' : ''}${esc(payLabel(j.pay))}</span>` : ''}
           <span class="role-arrow muted">↗</span>
         </a>`;
     }).join('');
@@ -508,7 +558,7 @@ function renderCompanies(hub) {
   function paintRoles() {
     rolelist.innerHTML = '';
     const q = curQuery.trim().toLowerCase();
-    const base = curSort === 'new' ? recRoles : scoredRoles;
+    const base = curSort === 'new' ? recRoles : curSort === 'pay' ? payRoles : scoredRoles;
     const filtered = base.filter(r => {
       if (curVFilter !== 'all' && r._company.vertical !== curVFilter) return false;
       if (curLFilter !== 'all' && r.level !== curLFilter) return false;
@@ -535,7 +585,7 @@ function renderCompanies(hub) {
     }
     const cap = Math.min(rolesShown, filtered.length);
     const remaining = Math.max(0, filtered.length - cap);
-    const head = `<div class="text-[11px] muted">${filtered.length} role${filtered.length===1?'':'s'} matched, sorted by ${curSort === 'new' ? 'newest' : 'fit'}${remaining>0?` · showing top ${cap}`:''}</div>`;
+    const head = `<div class="text-[11px] muted">${filtered.length} role${filtered.length===1?'':'s'} matched, sorted by ${curSort === 'new' ? 'newest' : curSort === 'pay' ? 'pay' : 'fit'}${remaining>0?` · showing top ${cap}`:''}</div>`;
     const rows = filtered.slice(0, cap).map(r => {
       const c = r._company;
       const roleKey = makeRoleKey(c, r);
@@ -574,6 +624,8 @@ function renderCompanies(hub) {
               ${dateStr ? `<span class="dim mx-1">·</span><span class="muted">${esc(dateStr)}</span>` : ''}
             </div>
           </div>
+          ${expHTML(r)}
+          ${payHTML(r)}
           <span class="pill ${lvlClass}" style="font-size:10px">${lvlLabel}</span>
           ${fitBadgeHTML(r._fit)}
           <a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer"

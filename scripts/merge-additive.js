@@ -174,6 +174,8 @@ function emitJob(j) {
   if (j.posted) s += `, posted:"${esc(j.posted)}"`;
   if (j.remote) s += ', remote:true';
   if (j.loc) s += `, loc:"${esc(j.loc)}"`;
+  if (j.pay) s += `, pay:${JSON.stringify(j.pay)}`;
+  if (j.paySource) s += `, paySource:"${esc(j.paySource)}"`;
   return s + ' }';
 }
 function emitCompany(c) {
