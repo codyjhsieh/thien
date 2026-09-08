@@ -47,4 +47,19 @@ function emitCompaniesBlock(companies) {
   return 'const COMPANIES = [\n' + companies.map(emitCompany).join(',\n') + '\n];';
 }
 
-module.exports = { esc, emitJob, emitCompany, emitCompaniesBlock };
+/* Swap the COMPANIES block in a data file for a new one.
+ *
+ * Both pruners rewrite the same statement, and both got the index arithmetic
+ * wrong once: emitCompaniesBlock returns "const COMPANIES = [ … ];" including
+ * the declaration, so splicing it in at the opening bracket writes
+ * "const COMPANIES = const COMPANIES = [" and the file stops parsing. One
+ * implementation, one test. */
+function replaceCompaniesBlock(src, companies) {
+  const a = src.indexOf('const COMPANIES = [');
+  if (a < 0) throw new Error('no `const COMPANIES = [` in the data file');
+  const e = src.indexOf('\n];', a);
+  if (e < 0) throw new Error('COMPANIES block is not terminated by `\\n];`');
+  return src.slice(0, a) + emitCompaniesBlock(companies) + src.slice(e + 3);
+}
+
+module.exports = { esc, emitJob, emitCompany, emitCompaniesBlock, replaceCompaniesBlock };

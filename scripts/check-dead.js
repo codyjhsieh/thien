@@ -13,7 +13,7 @@
 'use strict';
 const fs = require('fs');
 const { execFileSync } = require('child_process');
-const { emitCompaniesBlock } = require('./lib-emit');
+const { replaceCompaniesBlock } = require('./lib-emit');
 
 // --profile <id> picks the board to check (default: thien). Explicit
 // `--data <path>` still works for one-off checks.
@@ -314,10 +314,7 @@ function boardTokens(ats, slug) {
       c.jobs = (c.jobs || []).filter(j => !deadUrls.has(j.url));
       if (c.jobs.length !== before) c.totalRoles = c.jobs.length;
     }
-    const block = emitCompaniesBlock(kept);
-    const a = src.indexOf('const COMPANIES = [');
-    const e = src.indexOf('\n];', src.indexOf('[', a)) + 3;
-    fs.writeFileSync(DATA, src.slice(0, a) + block + src.slice(e));
+    fs.writeFileSync(DATA, replaceCompaniesBlock(src, kept));
     console.log(`\n--prune: removed ${dead.length} confirmed-dead links from ${DATA}.`);
   }
 })();

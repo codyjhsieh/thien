@@ -6,6 +6,7 @@
  * copies of the serializer. Thirteen remote roles shipped labelled New York
  * that way. Any new field must survive a write/read cycle here. */
 'use strict';
+const fs = require('fs');
 const { emitCompaniesBlock } = require('./lib-emit');
 
 const company = {
@@ -47,3 +48,45 @@ if (errs.length) {
   process.exit(1);
 }
 console.log(`   ✓ serializer: every field round-trips (${Object.keys(a).length} job fields)`);
+
+/* Both pruners rewrite the COMPANIES statement in place, and the arithmetic is
+ * easy to get subtly wrong — splicing at the opening bracket instead of at the
+ * declaration produces "const COMPANIES = const COMPANIES = [", which parses
+ * fine as text and breaks the board on load. Prove the rewritten file still
+ * evaluates and still exposes what the renderer reads. */
+const { replaceCompaniesBlock } = require('./lib-emit');
+const file =
+  `const COMPANIES_VERIFIED_AT = '2026-01-01';\n` +
+  emitCompaniesBlock([company]) +
+  `\nconst COMPANY_DOMAINS = {};\n` +
+  `window.DEMO = { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT };\n`;
+
+const spliceErrs = [];
+const pruned = replaceCompaniesBlock(file, [{ ...company, jobs: [company.jobs[0]], totalRoles: 1 }]);
+if ((pruned.match(/const COMPANIES = \[/g) || []).length !== 1) {
+  spliceErrs.push('rewritten file declares COMPANIES more than once');
+}
+const tmp = require('path').join(require('os').tmpdir(), `emit-splice-${process.pid}.js`);
+fs.writeFileSync(tmp, pruned);
+try {
+  global.window = {};
+  require(tmp);
+  const got = global.window.DEMO;
+  if (!got) spliceErrs.push('rewritten file did not set its global');
+  else if (got.COMPANIES.length !== 1 || got.COMPANIES[0].jobs.length !== 1) {
+    spliceErrs.push(`rewritten file holds ${got.COMPANIES.length} companies / ` +
+                    `${got.COMPANIES[0] ? got.COMPANIES[0].jobs.length : '?'} jobs, wanted 1/1`);
+  } else if (got.COMPANIES_VERIFIED_AT !== '2026-01-01') {
+    spliceErrs.push('the rewrite clobbered a constant outside the COMPANIES block');
+  }
+} catch (e) {
+  spliceErrs.push(`rewritten file does not parse: ${e.message.split('\n')[0]}`);
+} finally {
+  fs.unlinkSync(tmp);
+}
+
+if (spliceErrs.length) {
+  spliceErrs.forEach((e) => console.error('  ✗ ' + e));
+  process.exit(1);
+}
+console.log('   ✓ prune rewrite: file still parses and keeps its other constants');

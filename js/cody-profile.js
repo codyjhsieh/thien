@@ -402,5 +402,5 @@ window.BOARD_PROFILE = {
     ]
   },
   "captureSummary": true,
-  "poolSize": 913
+  "poolSize": 1438
 };

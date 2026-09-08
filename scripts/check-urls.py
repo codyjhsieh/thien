@@ -113,23 +113,22 @@ def run(pid: str, prune: bool, jobs: int) -> int:
 
   if dead and prune:
     gone = {u for _, u, _, _ in dead}
-    src = dpath.read_text()
     kept = []
     for c in data["COMPANIES"]:
       c["jobs"] = [j for j in c["jobs"] if j["url"] not in gone]
       c["totalRoles"] = len(c["jobs"])
       if c["jobs"]:
         kept.append(c)
+    # The serializer and the splice both live in lib-emit.js, so this pruner
+    # and check-dead.js cannot drift apart on either.
     emit = subprocess.run(
       ["node", "-e",
-       "const {emitCompaniesBlock}=require('./scripts/lib-emit');"
-       "process.stdout.write(emitCompaniesBlock(JSON.parse(process.argv[1])));",
-       json.dumps(kept)], capture_output=True, text=True, cwd=ROOT)
+       "const fs=require('fs'), {replaceCompaniesBlock}=require('./scripts/lib-emit');"
+       "fs.writeFileSync(process.argv[1], replaceCompaniesBlock("
+       "fs.readFileSync(process.argv[1],'utf8'), JSON.parse(process.argv[2])));",
+       str(dpath), json.dumps(kept)], capture_output=True, text=True, cwd=ROOT)
     if emit.returncode != 0:
-      raise SystemExit(f"emit failed: {emit.stderr.strip()}")
-    a = src.index("[", src.index("const COMPANIES = ["))
-    e = src.index("\n];", a)
-    dpath.write_text(src[:a] + emit.stdout.strip() + src[e + 2:])
+      raise SystemExit(f"rewrite failed: {emit.stderr.strip()}")
     print(f"      pruned {len(dead)} dead posting(s) from {prof['dataFile']}")
   return len(dead)
 
