@@ -58,32 +58,37 @@ language — Sean's board wants studios and shops whose *output is visual work*,
 because `filters.titleIncludeBroad` only widens the net at the verticals listed
 in `filters.broadVerticals`.
 
-Then, per company, resolve the slug by trying the obvious forms against the
-live API. Most slugs are the name lowercased with spaces removed, or
-hyphenated, or with "studios"/"games" dropped or added.
+Then hand the names to `scripts/scout.py`, which does the whole resolve-and-
+verify loop in parallel:
 
 ```bash
-# Try several (ats, slug) guesses at once and keep the ones that return jobs.
-python3 - <<'PY'
-import importlib.util, sys
-spec = importlib.util.spec_from_file_location("rc", "scripts/refresh-companies.py")
-rc = importlib.util.module_from_spec(spec); sys.argv = ["rc"]; spec.loader.exec_module(rc)
-from concurrent.futures import ThreadPoolExecutor
-
-ATS = ["greenhouse", "ashby", "lever", "workable", "teamtailor",
-       "recruitee", "personio", "bamboohr", "breezy", "pinpoint"]
-GUESSES = [(a, s) for a in ATS for s in ("arkadium", "arkadium-games")]
-with ThreadPoolExecutor(max_workers=16) as p:
-    for g, n in p.map(lambda g: (g, len(rc.fetch(*g))), GUESSES):
-        print(f"{g[0]:16s} {g[1]:24s} {n} posting(s)")
-PY
+# One sector at a time — the vertical and note apply to every name in the file.
+python3 scripts/scout.py names.txt --profile cody \
+    --vertical health --note "Health system — records and intake work." \
+    -o /tmp/health.json
 ```
 
-`0 posting(s)` means the slug is wrong or the board is empty — either way, do
-not add it. A slug is confirmed only when the call returns postings.
+It expands each name into plausible slugs, probes all ten public backends,
+keeps the board with the most postings, and then **proves the board belongs to
+that company** before keeping it. That last step is the one that matters: about
+40% of slugs that return postings belong to somebody else. `greenhouse/bethesda`
+is a physical-therapy practice, `greenhouse/peak` is Peak Physical Therapy,
+`ashby/phantom` is a crypto wallet. Every one of them looks like a healthy
+board.
+
+Rejections are printed with a reason, so read them — the script is deliberately
+conservative and will refuse real companies that rebranded (`greenhouse/gradle`
+declares "Develocity"). Adding those back by hand is fine; loosening the rule
+to catch them is not.
+
+Add `--append` to write straight into the profile's candidates file. It refuses
+anything already reachable from that profile — Cody's board reads all three
+pools, and two entries on one ATS board render as two cards for one company
+with every posting doubled.
 
 If a company's careers page is custom, open it and look at where the "Apply"
-links point: `job-boards.greenhouse.io/<slug>`, `jobs.ashbyhq.com/<slug>`,
+links point:
+`job-boards.greenhouse.io/<slug>`, `jobs.ashbyhq.com/<slug>`,
 `jobs.lever.co/<slug>`, `apply.workable.com/<slug>`, `<slug>.teamtailor.com`,
 `jobs.smartrecruiters.com/<slug>`, `<tenant>.wdN.myworkdayjobs.com/…/<site>`,
 `<slug>.recruitee.com`, `<slug>.jobs.personio.de`, `<slug>.bamboohr.com`,
@@ -108,16 +113,26 @@ these roles in this city — the pool is a standing watchlist, not a snapshot.
 
 ## Fan out for a large sweep
 
-Resolving slugs for more than ~30 companies is worth splitting. Give each
-subagent a disjoint slice of the name list and this instruction:
+`scout.py` is already parallel inside one file, so a sweep of a few hundred
+names is one invocation. Past that, the win is *sector breadth*, not more
+threads: split the names into one file per sector and run the files
+concurrently, each with its own `--vertical`, `--note` and `-o`.
 
-> For each company below, find its public ATS and slug by probing candidate
-> (ats, slug) pairs with the snippet in `.claude/skills/job-scout/SKILL.md`.
-> Report one line per company: `name | ats | slug | posting count`, or
-> `name | NONE` if nothing resolved. Do not edit any file.
+```bash
+for f in health.txt logistics.txt legal.txt; do
+  python3 scripts/scout.py "$f" --profile cody --vertical "${f%.txt}" \
+      --note "…" -o "/tmp/${f%.txt}.json" &
+done
+wait
+```
 
-Collect their reports and do all the JSON writing yourself, in one edit. Two
-agents appending to the same array will clobber each other.
+Expect roughly one live board per five names, and about 95% of those to survive
+identity checking — so a 500-company target is a ~3,000-name list, not a
+500-name one. Most employers publish no machine-readable board at all; that is
+the real ceiling, not the script.
+
+Do every `--append` yourself, one at a time, after reading the rejects. Two
+processes appending to the same array will clobber each other.
 
 ## Before you finish
 
