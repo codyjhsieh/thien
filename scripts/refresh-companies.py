@@ -81,6 +81,9 @@ class Profile:
     self.max_years = f.get("maxYearsExperience")
     self.screen_fraud = bool(f.get("screenFraud"))
     self.screen_credentials = bool(f.get("screenCredentials"))
+    # Refuse a posting whose description cannot be read at all: unread is
+    # unscreened, and this board's promise is about what the posting requires.
+    self.require_description = bool(f.get("requireDescription"))
     self.title_exclude = (
       re.compile(f["titleExclude"], re.I) if f.get("titleExclude") else None
     )
@@ -396,32 +399,43 @@ def _pay_from_greenhouse_detail(d):
 # "Entry level" is a claim a title cannot make on its own: plenty of postings
 # titled "Data Entry Clerk" ask for five years. Where the ATS gives us the
 # description cheaply, read the requirement out of it rather than guessing.
+# "3-5 years of relevant administrative experience" — the gap between the
+# number and the word "experience" is prose, so it needs room and has to allow
+# punctuation. A 24-character word-only window missed most real postings.
 _YEARS = re.compile(
-  r"(\d{1,2})\s*(?:\+|plus)?\s*(?:-|–|to)?\s*(\d{1,2})?\s*\+?\s*"
-  r"(?:years?|yrs?)[\s\w]{0,24}?(?:experience|exp\b)", re.I)
+  r"\b(\d{1,2})\s*(?:\+|plus)?\s*(?:[-–—]|to)?\s*(\d{1,2})?\s*\+?\s*"
+  r"(?:years?|yrs?)\b[\s\w,()/&+.'’-]{0,60}?(?:experience|exp\b|background|"
+  r"working|hands[\s-]on)", re.I)
 _NO_EXP = re.compile(
-  r"no\s+(?:prior\s+|previous\s+|work\s+)?experience\s+(?:is\s+)?"
-  r"(?:required|necessary|needed)|entry[\s-]level|no\s+experience\s+necessary",
+  r"no\s+(?:prior\s+|previous\s+|work\s+|relevant\s+)?experience\s+(?:is\s+)?"
+  r"(?:required|necessary|needed)|no\s+experience\s+necessary|"
+  r"experience\s+is\s+not\s+required|entry[\s-]level\s+(?:role|position|opportunity)",
   re.I)
 
 
 def years_required(text):
-  """Smallest number of years the posting asks for, or 0 when it says none.
-  None means the posting did not say — which is not the same as zero."""
+  """Smallest number of years the posting asks for.
+
+  0 means it says none is needed; None means it did not say, which is not the
+  same thing. A stated requirement always wins over an "entry-level" phrase
+  elsewhere in the text: postings routinely describe themselves as entry-level
+  in one paragraph and ask for five years in the next, and taking the friendly
+  sentence at face value put exactly those roles on an no-experience board."""
   if not text:
     return None
-  t = re.sub(r"<[^>]+>", " ", text)
-  t = re.sub(r"\s+", " ", t)[:6000]
-  if _NO_EXP.search(t):
-    return 0
+  t = re.sub(r"<[^>]+>", " ", _unescape(text))
+  t = re.sub(r"\s+", " ", t)[:20000]     # requirements often sit far down
   hits = []
   for m in _YEARS.finditer(t):
     lo = int(m.group(1))
     if 0 <= lo <= 20:
       hits.append(lo)
-  # The lowest figure is the real bar: a posting saying "2+ years, 5 preferred"
-  # will interview someone with two.
-  return min(hits) if hits else None
+  if hits:
+    # The lowest figure is the real bar: "2+ years, 5 preferred" will
+    # interview someone with two.
+    return min(hits)
+  return 0 if _NO_EXP.search(t) else None
+
 
 
 def _unescape(t):
@@ -436,7 +450,6 @@ _ROLE_SECTION = re.compile(
   r"day[\s-]to[\s-]day|what\s+the\s+job\s+(?:is|involves)|about\s+the\s+role|"
   r"position\s+overview|job\s+summary)\b[:\s-]*", re.I)
 
-
 _BOILER = re.compile(
   r"^(about\s+(?:us|the\s+(?:role|team|company|job|position))|who\s+we\s+are|"
   r"the\s+(?:role|opportunity|position)|job\s+(?:description|summary)|overview|"
@@ -447,9 +460,10 @@ def summary_of(text, limit=190):
   """A short, readable opener for the posting.
 
   On a phone the title alone does not say what the job is, and the full
-  description is far too long, so keep the first couple of sentences. Leading
-  boilerplate headers ("About the role:") carry no information and are dropped,
-  and the cut lands on a sentence or word boundary rather than mid-word."""
+  description is far too long, so keep the first couple of sentences. Entities
+  are decoded BEFORE tags are stripped — the other order leaves "<div>" in
+  every summary. Leading boilerplate headers are dropped, and the cut lands on
+  a sentence or word boundary rather than mid-word."""
   if not text:
     return None
   t = _unescape(text)
@@ -482,18 +496,71 @@ def summary_of(text, limit=190):
   return (cut[:sp] if sp > 0 else cut).rstrip(" ,;:-") + "…"
 
 
+
 def description_of(ats, j):
-  """Description text already present in the list payload, if any. Backends
-  that withhold it return None rather than costing an extra request."""
+  """Description text carried in the board listing itself, or None.
+
+  This was quietly wrong for most backends: Ashby, Teamtailor and Personio all
+  publish the full description in the list payload and none of them were read,
+  so on those boards every requirement screen silently passed. Anything that
+  returns None here falls through to fetch_description() below."""
+  def first(*keys):
+    for k in keys:
+      v = j.get(k)
+      if isinstance(v, str) and len(v) > 120:
+        return v
+      if isinstance(v, dict):                       # Personio: {lang: html}
+        joined = " ".join(str(x) for x in v.values())
+        if len(joined) > 120:
+          return joined
+      if isinstance(v, list):                       # Personio: [{name, value}]
+        joined = " ".join(str(x.get("value", x)) for x in v if x)
+        if len(joined) > 120:
+          return joined
+    return None
+
+  if ats == "ashby":
+    return first("descriptionPlain", "descriptionHtml")
   if ats == "lever":
-    return " ".join(filter(None, [j.get("descriptionPlain"), j.get("additionalPlain")]))
-  if ats in ("workable", "recruitee", "breezy", "pinpoint"):
-    return j.get("description") or j.get("full_description") or ""
+    return " ".join(filter(None, [j.get("descriptionPlain"), j.get("additionalPlain")])) or None
+  if ats == "teamtailor":
+    return first("content_html", "content_text", "content", "summary")
   if ats == "personio":
-    return " ".join(str(x) for x in (j.get("jobDescriptions") or {}).values()) \
-      if isinstance(j.get("jobDescriptions"), dict) else ""
+    return first("description", "jobDescriptions", "job_descriptions")
+  if ats == "recruitee":
+    return first("description", "requirements", "full_description")
+  if ats in ("workable", "breezy", "pinpoint"):
+    return first("description", "full_description", "body")
   if ats == "smartrecruiters":
-    return json.dumps(j.get("jobAd") or "")
+    ad = j.get("jobAd")
+    return json.dumps(ad) if ad else None
+  return None
+
+
+def fetch_description(ats, slug, j):
+  """One request for a posting whose listing carried no description.
+
+  Only ever called for a posting that already passed the title and location
+  filters, so this is a handful of requests per run rather than thousands."""
+  jid = j.get("id") or j.get("shortcode")
+  if not jid:
+    return None
+  if ats == "greenhouse":
+    d = curl_json(f"https://boards-api.greenhouse.io/v1/boards/{slug}/jobs/{jid}?pay_transparency=true")
+    return (d or {}).get("content")
+  if ats == "bamboohr":
+    d = curl_json(f"https://{slug}.bamboohr.com/careers/{jid}/detail")
+    r = (d or {}).get("result") or {}
+    return r.get("jobOpeningShareUrlDescription") or r.get("description")
+  if ats == "breezy":
+    d = curl_json(f"https://{slug}.breezy.hr/json/position/{jid}")
+    return (d or {}).get("description")
+  if ats == "smartrecruiters":
+    d = curl_json(f"https://api.smartrecruiters.com/v1/companies/{slug}/postings/{jid}")
+    return json.dumps((d or {}).get("jobAd") or "") if d else None
+  if ats == "workable":
+    d = curl_json(f"https://apply.workable.com/api/v3/accounts/{slug}/jobs/{jid}")
+    return (d or {}).get("description")
   return None
 
 
@@ -501,12 +568,13 @@ def description_of(ats, j):
 # Remote data entry is the single most impersonated job category there is. The
 # structural protection is already in place — every posting here comes from a
 # company's own ATS, never an aggregator — but a compromised or careless
-# posting can still carry the classic markers, so screen for them and drop the
-# posting rather than showing it. A false positive costs one listing; a false
-# negative costs somebody their bank details.
-# Off-platform contact only counts near hiring context. Aircall and Twilio
+# posting can still carry the classic markers, so refuse rather than display.
+# A false positive costs one listing; a false negative costs somebody their
+# bank details.
+
+# Off-platform contact only counts near hiring language. Aircall and Twilio
 # integrate with WhatsApp for a living; "interview over WhatsApp" is the tell,
-# not the word itself. This distinction cost two legitimate Aircall listings
+# the word alone is not. This distinction cost two legitimate Aircall listings
 # before it existed.
 OFF_PLATFORM = re.compile(
   r"(?:\b(?:interview|screening|onboard\w*|hiring|recruit\w*|contact\s+(?:us|me)|"
@@ -521,7 +589,7 @@ SCAM_MARKERS = re.compile(
   r"(?:"
   r"\bgift\s+cards?\b|\bwire\s+transfer\b|\bmoneygram\b|\bwestern\s+union\b|"
   r"\bcashier(?:'|’)?s\s+check\b|\bcheck\s+will\s+be\s+(?:mailed|sent)\b|"
-  r"\bzelle\b|\bcash\s?app\b|\bvenmo\b|\bbitcoin\b|\bcrypto\s+payment\b|"
+  r"\bzelle\b|\bcash\s?app\b|\bvenmo\b|"
   r"(?:purchase|buy|pay\s+for)\s+(?:your\s+own\s+)?(?:equipment|software|laptop|starter\s+kit)|"
   r"\bequipment\s+fee\b|\btraining\s+fee\b|\bregistration\s+fee\b|\bapplication\s+fee\b|"
   r"\bstartup\s+cost\b|\bupfront\s+(?:payment|cost|fee)\b|"
@@ -530,11 +598,12 @@ SCAM_MARKERS = re.compile(
   r"\b(?:process|receive|forward|deposit)\s+(?:payments?|funds?|checks?)\b.{0,50}"
   r"\bpersonal\s+(?:bank\s+)?account\b|"
   r"\bmoney\s+mule\b|\bpackage\s+(?:reshipping|forwarding)\b)", re.I)
+
 # Pay that is not plausible for this kind of work is itself a marker.
 IMPLAUSIBLE_HOURLY = 150.0
 
 
-def fraud_flags(title, text, pay):
+def fraud_flags(title, text, pay=None):
   """Reasons to refuse a posting. Empty list means nothing tripped."""
   flags = []
   blob = f"{title} {_unescape(text or '')}"
@@ -552,7 +621,7 @@ def fraud_flags(title, text, pay):
 # degree buried in the requirements. A candidate coming from an unrelated
 # field cannot get past those, so a board built for them should not list them.
 CREDENTIALS = re.compile(
-  r"\b(?:cpc|ccs|rhia|rhit|cca|cpb|cpma|ahima|aapc)\b|"                     # medical coding
+  r"\b(?:cpc|ccs|rhia|rhit|cca|cpb|cpma|ahima|aapc)\b|"
   r"\b(?:notary\s+public|notary\s+commission)\b|"
   r"\b(?:insurance|adjuster|producer|real\s+estate|title|escrow|"
   r"mortgage\s+loan\s+originator|nmls|series\s+(?:6|7|63|65|66)|finra)\s*"
@@ -571,6 +640,7 @@ CREDENTIALS = re.compile(
 def credential_flags(title, text):
   blob = f"{title} {_unescape(text or '')}"
   return sorted({m.group(0).strip().lower()[:40] for m in CREDENTIALS.finditer(blob)})
+
 
 
 def normalize(ats, j, slug=""):
@@ -743,62 +813,59 @@ def filter_jobs(profile: Profile, ats, raw, slug="", vertical=""):
               and vertical in profile.broad_verticals
               and profile.title_include_broad.search(title)):
         continue
+    # ── The posting itself ────────────────────────────────────────────
+    # Everything above judged a title and a location string. The requirements
+    # live in the description, so read it — from the listing where the ATS
+    # includes it, otherwise with one request now that this posting has
+    # actually matched. Screening a title alone is how roles demanding five
+    # years and a CPC certification ended up on an entry-level board.
     level = profile.level(title)
-    years = n.get("years")
-    # A posting that states a requirement above the bar is out, however
-    # entry-level its title sounds. A posting that says nothing stays in —
-    # silence is not a requirement.
+    desc = n.get("_desc")
+    detail = None
+    if not desc or len(desc) < 120:
+      if ats == "greenhouse" and n.get("id"):
+        detail = curl_json(f"https://boards-api.greenhouse.io/v1/boards/{slug}/jobs/{n['id']}?pay_transparency=true")
+        desc = (detail or {}).get("content") or desc
+      else:
+        desc = fetch_description(ats, slug, j) or desc
+
+    readable = bool(desc and len(desc) >= 120)
+    if profile.require_description and not readable:
+      # Unread is unscreened. On a board whose whole promise is "no
+      # requirements", showing a posting nobody checked is worse than showing
+      # one fewer posting.
+      _refused.append((slug, title, "unreadable", ["no description available"]))
+      continue
+
+    pay = n.get("pay")
+    if not pay and detail:
+      pay = _pay_from_greenhouse_detail(detail)
+
+    years = years_required(desc)
     if profile.max_years is not None and years is not None and years > profile.max_years:
+      _refused.append((slug, title, "experience", [f"{years} years required"]))
       continue
     # Paranoid by design: refuse rather than display. Every posting here comes
     # from a company's own ATS, but that is a reason to be careful, not a
     # reason to stop checking.
     if profile.screen_fraud:
-      ff = fraud_flags(title, n.get("_desc"), n.get("pay"))
+      ff = fraud_flags(title, desc, pay)
       if ff:
         _refused.append((slug, title, "fraud", ff))
         continue
     if profile.screen_credentials:
-      cf = credential_flags(title, n.get("_desc"))
+      cf = credential_flags(title, desc)
       if cf:
         _refused.append((slug, title, "credential", cf))
         continue
+
     job = {"title": title, "url": n["url"], "level": level, "posted": n["posted"]}
     if years is not None:
       job["years"] = years
-    # Only boards that ask for it pay the file-size cost.
-    if profile.raw.get("captureSummary") and n.get("summary"):
-      job["summary"] = n["summary"]
-    pay = n.get("pay")
-    # Greenhouse keeps pay one endpoint deeper. Only spend that request on a
-    # posting that already survived the filters — a handful per run, not
-    # thousands.
-    if not pay and ats == "greenhouse" and profile.raw.get("fetchGreenhousePay") and n.get("id"):
-      detail = curl_json(f"https://boards-api.greenhouse.io/v1/boards/{slug}/jobs/{n['id']}?pay_transparency=true")
-      if detail:
-        pay = _pay_from_greenhouse_detail(detail)
-        # One request, two answers: the same body carries the experience bar.
-        body = detail.get("content")
-        if profile.screen_fraud:
-          ff = fraud_flags(title, body, pay)
-          if ff:
-            _refused.append((slug, title, "fraud", ff))
-            continue
-        if profile.screen_credentials:
-          cf = credential_flags(title, body)
-          if cf:
-            _refused.append((slug, title, "credential", cf))
-            continue
-        if profile.raw.get("captureSummary") and "summary" not in job:
-          sm = summary_of(detail.get("content"))
-          if sm:
-            job["summary"] = sm
-        if "years" not in job:
-          y = years_required(detail.get("content"))
-          if y is not None:
-            if profile.max_years is not None and y > profile.max_years:
-              continue
-            job["years"] = y
+    if profile.raw.get("captureSummary"):
+      sm = summary_of(desc)
+      if sm:
+        job["summary"] = sm
     if pay:
       job["pay"] = pay
       job["paySource"] = "posted"

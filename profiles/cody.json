@@ -20,7 +20,6 @@
     "mid"
   ],
   "defaultLevel": "entry",
-  "fetchGreenhousePay": true,
   "filters": {
     "geoInclude": "\\bremote\\b|\\bwork\\s+from\\s+home\\b|\\banywhere\\b|\\bvirtual\\b|\\bdistributed\\b|\\bhome[\\s-]based\\b",
     "geoRemote": "\\bremote\\b|\\bwork\\s+from\\s+home\\b|\\banywhere\\b|\\bvirtual\\b|\\bhome[\\s-]based\\b",
@@ -41,7 +40,8 @@
     "levelDefault": "entry",
     "maxYearsExperience": 1,
     "screenFraud": true,
-    "screenCredentials": true
+    "screenCredentials": true,
+    "requireDescription": true
   },
   "payEstimate": {
     "interval": "hour",

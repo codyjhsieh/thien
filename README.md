@@ -189,12 +189,32 @@ buried in the requirements. Twenty screening cases in `test-filters.py` pin
 both directions, and every refusal is printed at the end of a run with its
 reason, so a screen that is too eager can be seen and corrected.
 
-### Experience
+### Reading the posting, not the title
 
-`filters.maxYearsExperience` drops a posting that *states* a requirement above
-the bar, read out of the description where the ATS provides one. A posting that
-says nothing stays in — silence is not a requirement — and the row shows a
-badge only when the posting actually stated one.
+Everything about geography and role family is judged from a title and a
+location string. The *requirements* live in the description, so the pipeline
+reads it: from the listing where the ATS includes one (Ashby, Lever,
+Teamtailor, Personio, Recruitee, Workable, Pinpoint), otherwise with a single
+request made only after the posting has already matched — a handful per run.
+
+`filters.requireDescription` then refuses a posting whose description cannot be
+read at all. Unread is unscreened, and on a board whose promise is about what a
+job requires, showing an unchecked posting is worse than showing one fewer.
+
+`filters.maxYearsExperience` drops a posting stating a requirement above the
+bar. A posting that says nothing stays in — silence is not a requirement — and
+the row shows a badge only when one was actually stated.
+
+Two things this got wrong, both now pinned by cases:
+
+- Only Lever and Pinpoint were ever read. Ashby, Teamtailor and Personio all
+  publish the description in the list payload and none was parsed, so on those
+  boards every requirement screen silently passed.
+- The year parser wanted "experience" within 24 word-characters of the number,
+  which misses "2-4 years of relevant administrative experience"; and an
+  "entry-level" phrase anywhere short-circuited it to zero, so a posting
+  calling itself entry-level in one paragraph and asking for five years in the
+  next came through. A stated figure now always wins.
 
 ### Fit scoring
 

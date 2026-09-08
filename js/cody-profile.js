@@ -13,7 +13,6 @@ window.BOARD_PROFILE = {
   "profileScript": "js/cody-profile.js",
   "storageKey": "cody_applied",
   "defaultLevel": "entry",
-  "fetchGreenhousePay": true,
   "payEstimate": {
     "interval": "hour",
     "note": "US market midpoint for the role family, not the employer's figure.",

@@ -31,6 +31,32 @@ sys.argv = _argv
 
 # A title that each profile's filters accept, so a geography case fails on
 # geography rather than on the title.
+# A description with nothing objectionable in it. Cases that are about titles
+# or geography need one, because a profile with requireDescription refuses a
+# posting it cannot read — which is itself covered by run_require_description.
+BENIGN_DESCRIPTION = (
+    "You will enter and verify records in our internal systems, keep files "
+    "current, and support the operations team with day-to-day requests. "
+    "Full training is provided and no prior experience is required. "
+    "We are looking for someone reliable, organised and comfortable with "
+    "spreadsheets and email.")
+
+# Which ATS shape to synthesise. A profile that requires a description must be
+# probed with a backend that carries one in its listing (Lever), or every case
+# would fail on "no description" rather than on the thing it tests.
+PROBE_ATS = {"cody": "lever", "sean": "greenhouse", "thien": "greenhouse"}
+
+
+def probe_row(pid, title, loc):
+  """One synthetic posting in the shape the profile's probe backend uses."""
+  if PROBE_ATS.get(pid) == "lever":
+    return {"text": title, "categories": {"location": loc},
+            "hostedUrl": "https://example.com/job", "createdAt": 0,
+            "descriptionPlain": BENIGN_DESCRIPTION}
+  return {"title": title, "location": {"name": loc},
+          "absolute_url": "https://example.com/job", "updated_at": "2026-01-01"}
+
+
 GEO_PROBE_TITLE = {"sean": "Environment Artist", "thien": "Operations Analyst",
                    "cody": "Data Entry Clerk"}
 
@@ -190,9 +216,8 @@ def run_pay(pid: str) -> int:
       print(f"  \u2717 [pay] {title!r} ({lvl}): expected {lo}-{hi}, got {est}", file=sys.stderr)
   # An estimate is only ever attached when the posting states nothing, and it
   # must be labelled as such.
-  raw = [{"title": "Data Entry Clerk", "location": {"name": "Remote, US"},
-          "absolute_url": "https://example.com/job", "updated_at": "2026-01-01"}]
-  got = rc.filter_jobs(profile, "greenhouse", raw, "slug", "bpo")
+  raw = [probe_row(pid, "Data Entry Clerk", "Remote, US")]
+  got = rc.filter_jobs(profile, PROBE_ATS.get(pid, "greenhouse"), raw, "slug", "bpo")
   if got and got[0].get("pay") and got[0].get("paySource") != "estimate":
     bad += 1
     print(f"  \u2717 [pay] unposted pay was not labelled an estimate", file=sys.stderr)
@@ -262,6 +287,59 @@ def run_summary() -> int:
   return bad
 
 
+# Every one of these came off a real posting that reached the board because
+# the parser missed it. The gap between the number and "experience" is prose,
+# so it needs room; and a posting calling itself entry-level in one paragraph
+# while asking for five years in the next is asking for five years.
+YEARS_CASES = [
+  ("2-4 years of relevant administrative experience supporting executives.", 2),
+  ("7+ years of experience in an administrative role.",                      7),
+  ("5+ years of relevant professional experience.",                          5),
+  ("1+ years customer-facing experience.",                                   1),
+  ("This is an entry-level position. Requires 5+ years of experience.",      5),
+  ("Minimum 3 years hands-on background with spreadsheets.",                 3),
+  ("We welcome applicants of all levels. No experience is required.",        0),
+  ("Great communication skills required.",                                None),
+]
+
+
+def run_years() -> int:
+  bad = 0
+  for text, want in YEARS_CASES:
+    got = rc.years_required(text)
+    if got != want:
+      bad += 1
+      print(f"  \u2717 [years] {text[:52]!r}: expected {want}, got {got}", file=sys.stderr)
+  if not bad:
+    print(f"   \u2713 years: {len(YEARS_CASES)} case(s) pass")
+  return bad
+
+
+def run_require_description(pid: str) -> int:
+  """A profile with requireDescription must refuse a posting it cannot read.
+  Unread is unscreened, which on this board is the whole point."""
+  profile = rc.Profile(pid)
+  if not profile.require_description:
+    return 0
+  base = {"title": "Data Entry Clerk", "location": {"name": "Remote, US"},
+          "absolute_url": "https://example.com/job", "updated_at": "2026-01-01"}
+  bad = 0
+  # Lever is used because its description comes from the listing, so no
+  # network request is attempted when the field is missing or too short.
+  lever_row = {"text": "Data Entry Clerk", "categories": {"location": "Remote, US"},
+               "hostedUrl": "https://example.com/job", "createdAt": 0}
+  if rc.filter_jobs(profile, "lever", [dict(lever_row)], "slug", "bpo"):
+    bad += 1
+    print("  \u2717 [require-description] a posting with no description was kept", file=sys.stderr)
+  lever_row["descriptionPlain"] = BENIGN_DESCRIPTION
+  if not rc.filter_jobs(profile, "lever", [dict(lever_row)], "slug", "bpo"):
+    bad += 1
+    print("  \u2717 [require-description] a readable posting was refused", file=sys.stderr)
+  if not bad:
+    print(f"   \u2713 {pid}: unreadable postings are refused, readable ones kept")
+  return bad
+
+
 def run_screens(pid: str) -> int:
   cases = SCREEN_CASES.get(pid)
   if not cases:
@@ -287,9 +365,8 @@ def run_geo(pid: str) -> int:
     return 0
   bad = 0
   for loc, want in cases:
-    raw = [{"title": GEO_PROBE_TITLE[pid], "location": {"name": loc},
-            "absolute_url": "https://example.com/job", "updated_at": "2026-01-01"}]
-    got = rc.filter_jobs(profile, "greenhouse", raw, "slug", "gaming")
+    raw = [probe_row(pid, GEO_PROBE_TITLE[pid], loc)]
+    got = rc.filter_jobs(profile, PROBE_ATS.get(pid, "greenhouse"), raw, "slug", "gaming")
     lane = "out" if not got else ("remote" if got[0].get("remote") else "nyc")
     if lane != want:
       bad += 1
@@ -307,9 +384,8 @@ def run(pid: str) -> int:
     return 0
   bad = 0
   for title, vertical, want in cases:
-    raw = [{"title": title, "location": {"name": TITLE_PROBE_LOC[pid]},
-            "absolute_url": "https://example.com/job", "updated_at": "2026-01-01"}]
-    got = bool(rc.filter_jobs(profile, "greenhouse", raw, "slug", vertical))
+    raw = [probe_row(pid, title, TITLE_PROBE_LOC[pid])]
+    got = bool(rc.filter_jobs(profile, PROBE_ATS.get(pid, "greenhouse"), raw, "slug", vertical))
     if got != want:
       bad += 1
       print(f"  ✗ [{vertical}] {title!r}: expected {'in' if want else 'out'}, got "
@@ -324,7 +400,7 @@ def run(pid: str) -> int:
 def main():
   ids = sys.argv[1:] or sorted(
     p.stem for p in (ROOT / "profiles").glob("*.json") if not p.name.endswith(".companies.json"))
-  sys.exit(1 if sum(run(i) + run_geo(i) + run_pay(i) + run_screens(i) for i in ids) + run_summary() else 0)
+  sys.exit(1 if sum(run(i) + run_geo(i) + run_pay(i) + run_screens(i) + run_require_description(i) for i in ids) + run_summary() + run_years() else 0)
 
 
 if __name__ == "__main__":
