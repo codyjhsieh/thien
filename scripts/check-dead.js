@@ -13,6 +13,7 @@
 'use strict';
 const fs = require('fs');
 const { execFileSync } = require('child_process');
+const { emitCompaniesBlock } = require('./lib-emit');
 
 // --profile <id> picks the board to check (default: thien). Explicit
 // `--data <path>` still works for one-off checks.
@@ -313,43 +314,7 @@ function boardTokens(ats, slug) {
       c.jobs = (c.jobs || []).filter(j => !deadUrls.has(j.url));
       if (c.jobs.length !== before) c.totalRoles = c.jobs.length;
     }
-    // Re-serialize the COMPANIES block in data.js's hand-written style
-    // (identical to scripts/merge-additive.js).
-    const esc = (s) => JSON.stringify(s).slice(1, -1).replace(/—/g, '\\u2014');
-    const emitJob = (j) => {
-      let s = `      { title:"${esc(j.title)}", url:"${esc(j.url)}"`;
-      if (j.level) s += `, level:"${esc(j.level)}"`;
-      if (j.added) s += `, added:"${esc(j.added)}"`;
-      if (j.posted) s += `, posted:"${esc(j.posted)}"`;
-      return s + ' }';
-    };
-    const emitCompany = (c) => {
-      const L = [];
-      L.push(`  { id:${JSON.stringify(c.id)}, name:"${esc(c.name)}", vertical:${JSON.stringify(c.vertical)},`);
-      if (c.sub !== undefined) L.push(`    sub:"${esc(c.sub)}",`);
-      const meta = [];
-      if (c.stage !== undefined) meta.push(`stage:"${esc(c.stage)}"`);
-      if (c.raised !== undefined) meta.push(`raised:"${esc(c.raised)}"`);
-      if (c.lead !== undefined) meta.push(`lead:"${esc(c.lead)}"`);
-      if (meta.length) L.push('    ' + meta.join(', ') + ',');
-      if (c.badges !== undefined) L.push(`    badges:${JSON.stringify(c.badges)},`);
-      if (c.totalRoles !== undefined) L.push(`    totalRoles:${c.totalRoles},`);
-      if (c.notes !== undefined) L.push(`    notes:"${esc(c.notes)}",`);
-      L.push('    jobs:[');
-      L.push((c.jobs || []).map(emitJob).join(',\n'));
-      L.push('    ] }');
-      return L.join('\n');
-    };
-    // A company whose every posting just died has nothing left to render — the
-    // board filters it out anyway. Drop it rather than accumulating empty
-    // shells run after run; it comes back on its own the next time it posts,
-    // because the candidate pool still lists it.
-    const emptied = companies.filter(c => !(c.jobs || []).length).map(c => c.id);
-    const kept = companies.filter(c => (c.jobs || []).length);
-    if (emptied.length) {
-      console.log(`--prune: dropped ${emptied.length} company/companies left with no live roles: ${emptied.join(', ')}`);
-    }
-    const block = 'const COMPANIES = [\n' + kept.map(emitCompany).join(',\n') + '\n];';
+    const block = emitCompaniesBlock(kept);
     const a = src.indexOf('const COMPANIES = [');
     const e = src.indexOf('\n];', src.indexOf('[', a)) + 3;
     fs.writeFileSync(DATA, src.slice(0, a) + block + src.slice(e));

@@ -3,7 +3,7 @@
 
 /* ---------- COMPANIES ----------
  * NYC board for profile 'sean'. Every posting below was live on
- * the company's public ATS JSON when verified (2026-08-27) and matched the
+ * the company's public ATS JSON when verified (2026-09-08) and matched the
  * profile's title + location filters (profiles/sean.json).
  * URLs link directly to the posting (not aggregators).
  *
@@ -21,11 +21,11 @@ const COMPANIES = [
   { id:"believer", name:"Believer Entertainment", vertical:"gaming",
     sub:"The Prodigal \u2014 new IP",
     stage:"Series B", raised:"$55M", lead:"Lightspeed",
-    badges:["Lightspeed","Griffin Gaming"],
+    badges:["Lightspeed", "Griffin Gaming"],
     totalRoles:1,
     notes:"New AAA studio; the VFX and UX art seats are on the game itself.",
     jobs:[
-      { title:"Staff VFX Artist", url:"https://jobs.ashbyhq.com/believer/fadae54c-240b-428f-a51f-c31a0fe28126", level:"senior", added:"2026-08-27", posted:"2026-08-26" }
+      { title:"Staff VFX Artist", url:"https://jobs.ashbyhq.com/believer/fadae54c-240b-428f-a51f-c31a0fe28126", level:"senior", remote:true, loc:"Remote" }
     ] },
   { id:"insomniac", name:"Insomniac Games", vertical:"gaming",
     sub:"Marvel's Spider-Man / Ratchet & Clank",
@@ -34,11 +34,11 @@ const COMPANIES = [
     totalRoles:5,
     notes:"Sony first-party with a large in-house art org and a fast shipping cadence.",
     jobs:[
-      { title:"Senior Facial Character TD (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6143980004", level:"senior", added:"2026-08-27", posted:"2026-08-27" },
-      { title:"Senior Gameplay Animator (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6138863004", level:"senior", added:"2026-08-27", posted:"2026-08-27" },
-      { title:"Senior Gameplay Programmer (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6173051004", level:"senior", added:"2026-08-29", posted:"2026-08-28" },
-      { title:"Senior Cinematic Animator (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6164402004", level:"senior", added:"2026-09-02", posted:"2026-09-01" },
-      { title:"Senior Cinematic Facial Animator (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6164736004", level:"senior", added:"2026-09-02", posted:"2026-09-01" }
+      { title:"Senior Cinematic Animator (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6164402004", level:"senior", remote:true, loc:"United States, Remote" },
+      { title:"Senior Cinematic Facial Animator (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6164736004", level:"senior", remote:true, loc:"United States, Remote" },
+      { title:"Senior Facial Character TD (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6143980004", level:"senior", remote:true, loc:"United States, Remote" },
+      { title:"Senior Gameplay Animator (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6138863004", level:"senior", remote:true, loc:"United States, Remote" },
+      { title:"Senior Gameplay Programmer (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6173051004", level:"senior", remote:true, loc:"United States, Remote" }
     ] },
   { id:"neteasegames", name:"NetEase Games", vertical:"gaming",
     sub:"Marvel Rivals / Naraka",
@@ -47,18 +47,8 @@ const COMPANIES = [
     totalRoles:2,
     notes:"Global studios under one board; character and performance animation roles surface regularly.",
     jobs:[
-      { title:"Character Performance Animator", url:"https://job-boards.greenhouse.io/neteasegames/jobs/5166671007", level:"mid", added:"2026-08-27", posted:"2026-08-24" },
-      { title:"FPS 1P View Gameplay Animator", url:"https://job-boards.greenhouse.io/neteasegames/jobs/5166658007", level:"mid", added:"2026-08-27", posted:"2026-08-24" }
-    ] },
-  { id:"thatgamecompany", name:"thatgamecompany", vertical:"gaming",
-    sub:"Journey / Sky: Children of the Light",
-    stage:"Series B", raised:"$160M", lead:"Sequoia China",
-    badges:["Sequoia","TPG"],
-    totalRoles:2,
-    notes:"Small art-led team; character and environment craft is the whole product.",
-    jobs:[
-      { title:"Technical Game Designer", url:"https://jobs.ashbyhq.com/thatgamecompany/22deed1d-6098-45eb-a04d-41634b23ec30", level:"mid", added:"2026-08-27", posted:"2026-07-07" },
-      { title:"3D Character Artist (Mid-Senior)", url:"https://jobs.ashbyhq.com/thatgamecompany/36e101a4-c7ba-4884-8999-cd04abb979ee", level:"senior", added:"2026-08-27", posted:"2026-05-08" }
+      { title:"Character Performance Animator", url:"https://job-boards.greenhouse.io/neteasegames/jobs/5166671007", level:"mid", remote:true, loc:"Canada-Remote; United Kingdom - Guildford Onsite; United Sta" },
+      { title:"FPS 1P View Gameplay Animator", url:"https://job-boards.greenhouse.io/neteasegames/jobs/5166658007", level:"mid", remote:true, loc:"Canada-Remote; Spain-Remote; United Kingdom - Guildford Onsi" }
     ] },
   { id:"playstation", name:"PlayStation", vertical:"gaming",
     sub:"Sony Interactive Entertainment",
@@ -67,24 +57,25 @@ const COMPANIES = [
     totalRoles:2,
     notes:"Global first-party art org. Big board, so worth scanning even though NYC reqs are occasional.",
     jobs:[
-      { title:"Senior Cinematic Animator (CONTRACT)", url:"https://job-boards.greenhouse.io/sonyinteractiveentertainmentglobal/jobs/6164400004", level:"senior", added:"2026-09-02", posted:"2026-09-01" },
-      { title:"Senior Cinematic Facial Animator (CONTRACT)", url:"https://job-boards.greenhouse.io/sonyinteractiveentertainmentglobal/jobs/6164734004", level:"senior", added:"2026-09-02", posted:"2026-09-01" }
+      { title:"Senior Cinematic Animator (CONTRACT)", url:"https://job-boards.greenhouse.io/sonyinteractiveentertainmentglobal/jobs/6164400004", level:"senior", remote:true, loc:"United States, Remote" },
+      { title:"Senior Cinematic Facial Animator (CONTRACT)", url:"https://job-boards.greenhouse.io/sonyinteractiveentertainmentglobal/jobs/6164734004", level:"senior", remote:true, loc:"United States, Remote" }
     ] },
-  { id:"tripledot", name:"Tripledot Studios", vertical:"gaming",
-    sub:"Mobile puzzle + casual games",
-    stage:"Series B", raised:"$116M", lead:"Access Industries",
-    badges:["Access Industries","Eldridge"],
-    totalRoles:1,
-    notes:"Mobile casual at scale \u2014 2D/UI art and ad-creative motion work.",
+  { id:"thatgamecompany", name:"thatgamecompany", vertical:"gaming",
+    sub:"Journey / Sky: Children of the Light",
+    stage:"Series B", raised:"$160M", lead:"Sequoia China",
+    badges:["Sequoia", "TPG"],
+    totalRoles:2,
+    notes:"Small art-led team; character and environment craft is the whole product.",
     jobs:[
-      { title:"Game Designer - Lion Studios", url:"https://job-boards.eu.greenhouse.io/tripledotstudios/jobs/4965778101", level:"mid", added:"2026-09-02", posted:"2026-09-01" }
-    ] }
+      { title:"Technical Game Designer", url:"https://jobs.ashbyhq.com/thatgamecompany/22deed1d-6098-45eb-a04d-41634b23ec30", level:"mid", remote:true, loc:"Remote - US" },
+      { title:"3D Character Artist (Mid-Senior)", url:"https://jobs.ashbyhq.com/thatgamecompany/36e101a4-c7ba-4884-8999-cd04abb979ee", level:"senior", remote:true, loc:"Remote - US" }
+    ] },
 ];
 
 /* ---------- COMPANY DOMAINS (favicon CDN lookup) ---------- */
 const COMPANY_DOMAINS = {
-  believer:"believer.com", insomniac:"insomniacgames.com", neteasegames:"neteasegames.com",
-  playstation:"playstation.com", thatgamecompany:"thatgamecompany.com", tripledot:"tripledotstudios.com",
+  believer:'believer.com', insomniac:'insomniacgames.com', neteasegames:'neteasegames.com',
+  playstation:'playstation.com', thatgamecompany:'thatgamecompany.com',
 };
 
 window.SEAN_DATA = { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT };

@@ -47,6 +47,7 @@ for id in "${PROFILES[@]}"; do
   echo "══ $id ══════════════════════════════════════════════"
   echo "── 0/5 filter cases"
   python3 scripts/test-filters.py "$id"
+  node scripts/test-emit.js
 
   echo "── 1/5 fetch (${SHARDS} shards × ${JOBS} probes)"
   rm -f "$TMP/$id".[0-9]*.json

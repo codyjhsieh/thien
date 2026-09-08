@@ -21,6 +21,7 @@
  * JSON source's `verified`), and prints what changed. */
 'use strict';
 const fs = require('fs');
+const { esc, emitCompaniesBlock } = require('./lib-emit');
 
 const argv = process.argv.slice(2);
 const flags = {};
@@ -165,38 +166,9 @@ for (const c of orig) {
   c.totalRoles = Math.max(c.totalRoles || 0, (c.jobs || []).length);
 }
 
-// ── Serialize one company in the file's hand-written style ────────────────
-const esc = (s) => JSON.stringify(s).slice(1, -1).replace(/—/g, '\\u2014');
-function emitJob(j) {
-  let s = `      { title:"${esc(j.title)}", url:"${esc(j.url)}"`;
-  if (j.level) s += `, level:"${esc(j.level)}"`;
-  if (j.added) s += `, added:"${esc(j.added)}"`;
-  if (j.posted) s += `, posted:"${esc(j.posted)}"`;
-  if (j.remote) s += ', remote:true';
-  if (j.loc) s += `, loc:"${esc(j.loc)}"`;
-  if (j.pay) s += `, pay:${JSON.stringify(j.pay)}`;
-  if (j.paySource) s += `, paySource:"${esc(j.paySource)}"`;
-  return s + ' }';
-}
-function emitCompany(c) {
-  const L = [];
-  L.push(`  { id:${JSON.stringify(c.id)}, name:"${esc(c.name)}", vertical:${JSON.stringify(c.vertical)},`);
-  if (c.sub !== undefined) L.push(`    sub:"${esc(c.sub)}",`);
-  const meta = [];
-  if (c.stage !== undefined) meta.push(`stage:"${esc(c.stage)}"`);
-  if (c.raised !== undefined) meta.push(`raised:"${esc(c.raised)}"`);
-  if (c.lead !== undefined) meta.push(`lead:"${esc(c.lead)}"`);
-  if (meta.length) L.push('    ' + meta.join(', ') + ',');
-  if (c.badges !== undefined) L.push(`    badges:${JSON.stringify(c.badges)},`);
-  if (c.totalRoles !== undefined) L.push(`    totalRoles:${c.totalRoles},`);
-  if (c.notes !== undefined) L.push(`    notes:"${esc(c.notes)}",`);
-  L.push('    jobs:[');
-  L.push((c.jobs || []).map(emitJob).join(',\n'));
-  L.push('    ] }');
-  return L.join('\n');
-}
-
-const block = 'const COMPANIES = [\n' + orig.map(emitCompany).join(',\n') + '\n];';
+// Serialization lives in scripts/lib-emit.js — one copy, so a new job
+// field cannot be understood by the merge and silently dropped by the prune.
+const block = emitCompaniesBlock(orig);
 const start = origSrc.indexOf('const COMPANIES = [');
 const end = origSrc.indexOf('\n];', origSrc.indexOf('[', start)) + 3;
 let out = origSrc.slice(0, start) + block + origSrc.slice(end);

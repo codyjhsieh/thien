@@ -62,6 +62,7 @@ jobs:
       - name: Verify
         run: |
           python3 scripts/test-filters.py
+          node scripts/test-emit.js
           python3 scripts/verify-board.py --all
 
       - name: Commit refreshed data
