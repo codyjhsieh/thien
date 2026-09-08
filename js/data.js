@@ -20,19 +20,18 @@
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  *  - jobs are sorted: founding > senior > mid.
  */
-const COMPANIES_VERIFIED_AT = '2026-09-07';
+const COMPANIES_VERIFIED_AT = '2026-09-08';
 const COMPANIES = [
   { id:"anthropic", name:"Anthropic", vertical:"ai",
     sub:"Claude \u2014 AI safety lab",
     stage:"Series F", raised:"$18B+", lead:"Amazon",
     badges:["Amazon","Google","Spark"],
-    totalRoles:18,
+    totalRoles:17,
     notes:"Heavy values screen; expect ethical-dilemma and downside-risk questions. Applied-AI eng roles are FDE-flavored.",
     jobs:[
       { title:"Safeguards Enforcement Analyst, Access Controls & Identity", url:"https://job-boards.greenhouse.io/anthropic/jobs/5319626008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Safeguards Enforcement Analyst, Account Takeover & Credential Abuse", url:"https://job-boards.greenhouse.io/anthropic/jobs/5319624008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Safeguards Enforcement Analyst, Age-Appropriate Design", url:"https://job-boards.greenhouse.io/anthropic/jobs/5311234008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
-      { title:"Safeguards Enforcement Analyst, Ban Evasion & Recidivism", url:"https://job-boards.greenhouse.io/anthropic/jobs/5319592008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Safeguards Enforcement Analyst, Bio Harms", url:"https://job-boards.greenhouse.io/anthropic/jobs/5319696008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Safeguards Enforcement Analyst, Chem & Explosives Harms", url:"https://job-boards.greenhouse.io/anthropic/jobs/5319700008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Safeguards Enforcement Analyst, Child Safety", url:"https://job-boards.greenhouse.io/anthropic/jobs/5311237008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
