@@ -201,6 +201,21 @@ request made only after the posting has already matched — a handful per run.
 read at all. Unread is unscreened, and on a board whose promise is about what a
 job requires, showing an unchecked posting is worse than showing one fewer.
 
+`filters.screenExperienceLanguage` handles the larger half of the problem:
+most postings state their bar in prose, not in years. "Requirements: Previous
+experience transacting cryptocurrency" carries no digit at all, and a
+year-counting screen waves it through.
+
+Reading for the phrasing alone does not work either — descriptions are full of
+"experience preferred", "nice to have", and salary boilerplate that mentions
+relevant experience in passing. What decides it is whether the demand sits
+under a heading the employer marked as required, in a bullet carrying no
+softener. The unit is the bullet, delimited by the ATS's own block markup
+rather than by sentence punctuation, because job descriptions are full of
+"e.g." and bare initials. Scoping matters in both directions: a window wide
+enough to catch "is a plus" three bullets away excuses real requirements, and
+one that misses the softener on its own bullet invents them.
+
 `filters.maxYearsExperience` drops a posting stating a requirement above the
 bar. A posting that says nothing stays in — silence is not a requirement — and
 the row shows a badge only when one was actually stated.

@@ -315,6 +315,42 @@ def run_years() -> int:
   return bad
 
 
+# Experience demanded in prose rather than in years. Each of these came off a
+# real posting: the screen has to catch a requirement, ignore a preference,
+# and keep the two straight when they sit in the same list.
+DEMAND_CASES = [
+  ("<h3>Requirements</h3><ul><li>Experience resolving billing disputes.</li></ul>", True),
+  ("<h3>Requirements</h3><ul><li>Previous experience transacting cryptocurrency</li></ul>", True),
+  ("<h3>What we look for</h3><ul><li>Minimum 1 year relevant call center experience</li></ul>", True),
+  ("<h3>Requirements</h3><ul><li>Bachelor's degree</li></ul>", True),
+  ("<h3>Who you are</h3><ul><li>Experience in Customer Support via phone</li></ul>", True),
+  # A preference is not a barrier, even inside a requirements list.
+  ("<h3>Requirements</h3><ul><li>Experience with Excel preferred but not required.</li></ul>", False),
+  ("<h3>Requirements</h3><ul><li>Experience with billing software (e.g., Stripe) is a plus.</li></ul>", False),
+  ("<h3>Nice to have</h3><ul><li>Experience with Looker</li></ul>", False),
+  ("<h3>What we look for</h3><ul><li>Full training provided, no experience required.</li></ul>", False),
+  # Salary boilerplate mentions experience without demanding any.
+  ("<h3>Requirements</h3><ul><li>Pay is determined by factors including relevant experience.</li></ul>", False),
+  # A demand and its softener in the same list must not contaminate each other.
+  ("<h3>Requirements</h3><ul><li>Experience resolving disputes.</li>"
+   "<li>Experience with Stripe is a plus.</li></ul>", True),
+  # No requirements section at all: nothing to judge.
+  ("<p>We are a friendly team looking for someone reliable.</p>", False),
+]
+
+
+def run_demands() -> int:
+  bad = 0
+  for text, want in DEMAND_CASES:
+    got = bool(rc.experience_demands(text))
+    if got != want:
+      bad += 1
+      print(f"  \u2717 [demand] {text[:58]!r}: expected {'refused' if want else 'kept'}", file=sys.stderr)
+  if not bad:
+    print(f"   \u2713 demands: {len(DEMAND_CASES)} prose-experience case(s) pass")
+  return bad
+
+
 def run_require_description(pid: str) -> int:
   """A profile with requireDescription must refuse a posting it cannot read.
   Unread is unscreened, which on this board is the whole point."""
@@ -400,7 +436,7 @@ def run(pid: str) -> int:
 def main():
   ids = sys.argv[1:] or sorted(
     p.stem for p in (ROOT / "profiles").glob("*.json") if not p.name.endswith(".companies.json"))
-  sys.exit(1 if sum(run(i) + run_geo(i) + run_pay(i) + run_screens(i) + run_require_description(i) for i in ids) + run_summary() + run_years() else 0)
+  sys.exit(1 if sum(run(i) + run_geo(i) + run_pay(i) + run_screens(i) + run_require_description(i) for i in ids) + run_summary() + run_years() + run_demands() else 0)
 
 
 if __name__ == "__main__":

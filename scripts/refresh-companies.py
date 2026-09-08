@@ -84,6 +84,8 @@ class Profile:
     # Refuse a posting whose description cannot be read at all: unread is
     # unscreened, and this board's promise is about what the posting requires.
     self.require_description = bool(f.get("requireDescription"))
+    # Refuse a posting that demands experience in prose rather than in years.
+    self.screen_experience_language = bool(f.get("screenExperienceLanguage"))
     self.title_exclude = (
       re.compile(f["titleExclude"], re.I) if f.get("titleExclude") else None
     )
@@ -439,8 +441,14 @@ def years_required(text):
 
 
 def _unescape(t):
+  """Decode HTML entities, twice.
+
+  Some ATSs double-escape: the body arrives with "&amp;nbsp;", which one pass
+  turns into "&nbsp;" and leaves as literal text. That is enough to hide a
+  requirement from a word-boundary regex — Databento's "Experience&nbsp;working
+  at a B2B SaaS" slipped a screen for exactly this reason."""
   import html as _html
-  return _html.unescape(t or "")
+  return _html.unescape(_html.unescape(t or ""))
 
 
 # Where a posting stops describing itself and starts describing the work.
@@ -562,6 +570,101 @@ def fetch_description(ats, slug, j):
     d = curl_json(f"https://apply.workable.com/api/v3/accounts/{slug}/jobs/{jid}")
     return (d or {}).get("description")
   return None
+
+
+
+# ── Experience stated without a number ───────────────────────────────────
+# "Requirements: Previous experience transacting cryptocurrency" carries no
+# digit, so a year-counting screen waves it through. Reading for the phrasing
+# alone is no good either — postings are full of "experience preferred",
+# "nice to have", and salary boilerplate that mentions relevant experience in
+# passing. What matters is whether the demand sits in a section the employer
+# marked as required.
+_REQUIRED_HEAD = re.compile(
+  r"\b(?:requirements?|qualifications?|what\s+you(?:'|’)?ll\s+need|"
+  r"what\s+you\s+will\s+need|what\s+we(?:'|’)?re?\s+looking\s+for|"
+  r"what\s+we\s+look\s+for|must\s+have[s]?|minimum\s+qualifications?|"
+  r"basic\s+qualifications?|who\s+you\s+are|you\s+have|your\s+background|"
+  r"skills\s+(?:and|&)\s+experience|what\s+you(?:'|’)?ll\s+bring)\b[:\s-]*", re.I)
+# Headings only. An inline softener like "is a plus" must NOT appear here:
+# treating it as a heading truncated the required section right before the
+# softener, leaving the demand it applied to looking mandatory.
+_OPTIONAL_HEAD = re.compile(
+  r"\b(?:nice[\s-]to[\s-]haves?|preferred\s+qualifications?|preferred\s+skills|"
+  r"bonus\s+points?|good\s+to\s+have|desired\s+(?:qualifications?|skills|experience)|"
+  r"nice\s+if|even\s+better|icing\s+on\s+the\s+cake|"
+  r"benefits|perks\b|compensation|salary|equal\s+opportunity|"
+  r"about\s+(?:us|the\s+company)|why\s+join|our\s+values|what\s+we\s+offer)"
+  r"\b[:\s-]*", re.I)
+# A demand for experience, with or without a number.
+_DEMAND = re.compile(
+  r"\b(?:(?:prior|previous|proven|demonstrated|relevant|professional|extensive|"
+  r"significant|solid|strong|hands[\s-]on)\s+(?:\w+\s+){0,3}?experience"
+  # "Experience resolving billing disputes" is a requirement too — an
+  # enumerated verb list missed it, so take any gerund or preposition.
+  r"|experience\s+(?:\w+ing|in|with|as|at|of|across|supporting|leading)\b"
+  r"|background\s+(?:in|with)"
+  r"|track\s+record\s+(?:of|in|with)"
+  # A bare "Bachelor's degree" bullet under Requirements is a requirement,
+  # even without the word "required" next to it.
+  r"|(?:bachelor|master|associate)(?:'|’)?s?\s+degree"
+  r"|\d{1,2}\+?\s*(?:years?|yrs?)\b)", re.I)
+# Softeners that turn a demand into a preference, wherever they sit in the
+# sentence. "Experience with Looker preferred" is not a barrier.
+_SOFTENED = re.compile(
+  r"\b(?:preferred|preferable|a\s+plus|plus\b|nice\s+to\s+have|bonus|"
+  r"desirable|desired|not\s+required|helpful|advantageous|ideally|"
+  r"or\s+equivalent|equivalent\s+(?:experience|combination)|willing\s+to\s+train|"
+  r"we(?:'|’)?ll\s+train|training\s+(?:is\s+)?provided|no\s+experience)\b", re.I)
+# Sentences that merely mention experience while talking about something else.
+_NOT_A_DEMAND = re.compile(
+  r"\b(?:salary|compensation|pay\s+range|pay\s+is\s+determined|"
+  r"determined\s+by|factors\s+including|base\s+pay|total\s+rewards|"
+  r"gain\s+hands[\s-]on|opportunity\s+to\s+(?:gain|learn|build)|"
+  r"founders|leadership\s+team|our\s+team\s+has|candidate(?:'|’)?s\s+relevant)\b", re.I)
+
+
+def experience_demands(text, limit=6):
+  """Experience the posting requires, stated without necessarily giving years.
+
+  Only counts a demand under a heading the employer marked as required, and
+  only when that same bullet carries no softener. Scoping matters in both
+  directions: a window wide enough to catch "is a plus" three bullets later
+  excuses real requirements, and one narrow enough to miss the softener on its
+  own bullet invents them. So the unit is the bullet, delimited by the block
+  tags the ATS already gives us rather than by sentence punctuation — job
+  descriptions are full of "e.g." and bare initials."""
+  if not text:
+    return []
+  raw = _unescape(text)
+  # Block-level markup is the real bullet boundary. Use a sentinel that cannot
+  # occur in prose so internal periods are irrelevant.
+  marked = re.sub(r"<(?:/?(?:li|p|div|br|tr|h[1-6]|ul|ol)\b[^>]*)>", " \u00a6 ", raw, flags=re.I)
+  marked = re.sub(r"<[^>]+>", " ", marked)
+  marked = re.sub(r"[\r\n]+", " \u00a6 ", marked)
+  marked = re.sub(r"[•·]", " \u00a6 ", marked)
+  t = re.sub(r"[ \t]+", " ", marked)
+
+  marks = [(m.start(), True) for m in _REQUIRED_HEAD.finditer(t)]
+  marks += [(m.start(), False) for m in _OPTIONAL_HEAD.finditer(t)]
+  if not marks:
+    return []                              # no requirements section to read
+  marks.sort()
+  out = []
+  for i, (pos, required) in enumerate(marks):
+    if not required:
+      continue
+    stop = marks[i + 1][0] if i + 1 < len(marks) else len(t)
+    for bullet in t[pos:stop].split("\u00a6"):
+      bullet = bullet.strip()
+      if len(bullet) < 12 or not _DEMAND.search(bullet):
+        continue
+      if _SOFTENED.search(bullet) or _NOT_A_DEMAND.search(bullet):
+        continue
+      out.append(re.sub(r"\s+", " ", bullet)[:90])
+      if len(out) >= limit:
+        return out
+  return out
 
 
 # ── Fraud screening ──────────────────────────────────────────────────────
@@ -857,6 +960,11 @@ def filter_jobs(profile: Profile, ats, raw, slug="", vertical=""):
       cf = credential_flags(title, desc)
       if cf:
         _refused.append((slug, title, "credential", cf))
+        continue
+    if profile.screen_experience_language:
+      xf = experience_demands(desc)
+      if xf:
+        _refused.append((slug, title, "experience-stated", xf))
         continue
 
     job = {"title": title, "url": n["url"], "level": level, "posted": n["posted"]}
