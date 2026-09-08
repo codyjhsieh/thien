@@ -186,7 +186,16 @@ window.BOARD_PROFILE = {
       "igaming": "iGaming",
       "gametech": "Game Tech",
       "simulation": "Simulation",
-      "archviz": "Archviz"
+      "archviz": "Archviz",
+      "education": "Education",
+      "travel": "Travel",
+      "energy": "Energy",
+      "retail": "Retail",
+      "telecom": "Telecom",
+      "pharma": "Pharma",
+      "consulting": "Consulting",
+      "nonprofit": "Nonprofit",
+      "industrial": "Industrial"
     },
     "pills": {
       "bpo": "pill-dev",
@@ -221,7 +230,16 @@ window.BOARD_PROFILE = {
       "igaming": "pill-both",
       "gametech": "pill-dev",
       "simulation": "pill-dev",
-      "archviz": "pill-hosp"
+      "archviz": "pill-hosp",
+      "education": "pill-ai",
+      "travel": "pill-hosp",
+      "energy": "pill-hosp",
+      "retail": "pill-mkt",
+      "telecom": "pill-dev",
+      "pharma": "pill-both",
+      "consulting": "pill-both",
+      "nonprofit": "pill-mkt",
+      "industrial": "pill-dev"
     }
   },
   "scoring": {

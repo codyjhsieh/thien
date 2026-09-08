@@ -183,7 +183,12 @@ def main():
   ap.add_argument("--profile", default="cody", help="profile whose pool to dedupe against")
   ap.add_argument("--vertical", required=True, help="vertical key for every entry")
   ap.add_argument("--note", default="", help="the one-sentence note shown on each card")
-  ap.add_argument("--stage", default="Private")
+  # Default to unknown, not "Private". stage is rendered on the card and feeds
+  # replyProb.stageTable, and a bulk sweep has no idea whether Marriott is
+  # venture-backed. An unmatched stage falls through to the table's base rate,
+  # which is the right answer for "nobody looked this up".
+  ap.add_argument("--stage", default="—",
+                  help='funding stage if you actually know it (default: unknown)')
   ap.add_argument("-o", "--out", default="", help="write candidate JSON here")
   ap.add_argument("--append", action="store_true",
                   help="append to the profile's own candidates file")
