@@ -4,7 +4,7 @@
 #   scripts/pipeline.sh sean            # fetch -> merge -> prune -> build
 #   scripts/pipeline.sh sean thien      # several profiles, in sequence
 #   SHARDS=8 JOBS=16 scripts/pipeline.sh sean
-#   SKIP_DEAD=1 scripts/pipeline.sh sean          # skip the dead-link pass
+#   SKIP_DEAD=1 scripts/pipeline.sh sean          # skip both link passes
 #
 # Stages, in order:
 #   1. fetch   — SHARDS parallel `refresh-companies.py --shard i/n` processes,
@@ -12,8 +12,9 @@
 #   2. merge   — union the shard JSON, then additively merge into the data file
 #                (existing postings are never dropped by this step)
 #   3. prune   — remove postings the ATS no longer lists at all
-#   4. build   — recompile profiles/<id>.json into js/<id>-profile.js
-#   5. verify  — assert the data file parses and every invariant holds
+#   4. links   — fetch every remaining posting url and drop confirmed 404s
+#   5. build   — recompile profiles/<id>.json into js/<id>-profile.js
+#   6. verify  — assert the data file parses and every invariant holds
 #
 # Stage 0 runs the offline filter cases first: a regex that is slightly too
 # greedy or too tight both read as "the market is quiet" once the data lands,
@@ -45,11 +46,11 @@ for id in "${PROFILES[@]}"; do
   fi
 
   echo "══ $id ══════════════════════════════════════════════"
-  echo "── 0/5 filter cases"
+  echo "── 0/6 filter cases"
   python3 scripts/test-filters.py "$id"
   node scripts/test-emit.js
 
-  echo "── 1/5 fetch (${SHARDS} shards × ${JOBS} probes)"
+  echo "── 1/6 fetch (${SHARDS} shards × ${JOBS} probes)"
   rm -f "$TMP/$id".[0-9]*.json
   pids=()
   for i in $(seq 1 "$SHARDS"); do
@@ -71,7 +72,7 @@ for id in "${PROFILES[@]}"; do
   { grep -h '^\[ok\]' "$TMP/$id".[0-9]*.log || true; } | wc -l \
     | xargs printf '   %s companies with matches\n'
 
-  echo "── 2/5 merge"
+  echo "── 2/6 merge"
   python3 scripts/merge-shards.py "$TMP/$id".[0-9]*.json -o "$TMP/$id.json"
   data_file=$(python3 -c "import json;print(json.load(open('profiles/$id.json'))['dataFile'])")
   if [ -f "$data_file" ]; then
@@ -81,17 +82,28 @@ for id in "${PROFILES[@]}"; do
     python3 scripts/refresh-companies.py --profile "$id" --from-json "$TMP/$id.json"
   fi
 
-  echo "── 3/5 prune dead links"
+  echo "── 3/6 prune dead links"
   if [ "${SKIP_DEAD:-0}" = "1" ]; then
     echo "   skipped (SKIP_DEAD=1)"
   else
     node scripts/check-dead.js --profile "$id" --prune
   fi
 
-  echo "── 4/5 build profile script"
+  echo "── 4/6 check every posting url resolves"
+  if [ "${SKIP_DEAD:-0}" = "1" ]; then
+    echo "   skipped (SKIP_DEAD=1)"
+  else
+    # Stage 3 asks whether the ATS still lists the job; this asks whether the
+    # link we ship actually opens. They are not the same question — a Lever
+    # board can serve 77 postings over its API while every public page under
+    # it 404s.
+    python3 scripts/check-urls.py "$id" --prune
+  fi
+
+  echo "── 5/6 build profile script"
   node scripts/build-profile.js "$id"
 
-  echo "── 5/5 verify"
+  echo "── 6/6 verify"
   python3 scripts/verify-board.py "$id"
 done
 

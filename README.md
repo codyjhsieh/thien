@@ -45,6 +45,8 @@ profiles/<id>.json ─┬─→ refresh-companies.py ──→ shard JSON ─┐
                     │                                         │       ↓
                     │                                         │  check-dead.js --prune
                     │                                         │       ↓
+                    │                                         │  check-urls.py --prune
+                    │                                         │       ↓
                     │                                         └→ js/<id>-data.js
                     └─→ build-profile.js ────────────────────────→ js/<id>-profile.js
                                                                        ↓
@@ -61,8 +63,9 @@ SHARDS=8 JOBS=16 scripts/pipeline.sh sean
 
 Stages: fetch (N parallel shards × M concurrent ATS probes) → merge shards →
 additive merge into the data file → prune postings the ATS no longer lists →
-rebuild the browser profile → verify. Nothing but the fetch stage touches the
-network, so a failure anywhere else is a real bug.
+open every remaining link and drop the ones that 404 → rebuild the browser
+profile → verify. Only the fetch and link stages touch the network, so a
+failure anywhere else is a real bug.
 
 `.github/workflows/refresh-boards.yml` runs the same script every morning and
 commits the diff.
@@ -305,6 +308,24 @@ list of titles that must land and must not. A regex that is slightly too greedy
 fills a board with the wrong job; slightly too tight empties it; both read as
 "the market is quiet" from the outside. Add a case whenever you touch a filter.
 
+
+### Links are checked twice, for two different failures
+
+`check-dead.js` asks whether a posting's id is still on its company's ATS
+board. `check-urls.py` asks whether the link we ship actually opens. They sound
+like the same question and are not: Aircall's Lever API served 77 postings for
+a board whose every public page — the board index included — returned 404. Two
+of those reached Cody's board looking perfectly healthy and 404'd on click,
+which is the worst failure this board has, because it costs somebody a click
+and their trust in every other card.
+
+So the fetch stage now opens one real posting page per company and drops the
+company for that run if it 404s, and the link stage opens all of them. Both
+believe a 404 only when a second request reproduces it, and neither ever prunes
+on a timeout, a 403 or a 5xx: a bot wall is indistinguishable from a missing
+page, and guessing wrong there would quietly empty a board. A 200 whose body
+says "this position is no longer accepting applications" counts as a 404 —
+several ATSs answer that way.
 
 `verify-board.py` checks that every profile regex compiles in both Python and V8, that
 `categoryFallback` and every emitted level name a real tab, that the generated

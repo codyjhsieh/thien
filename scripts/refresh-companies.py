@@ -31,7 +31,7 @@ endpoint; none needs a key.
 """
 
 from __future__ import annotations
-import argparse, datetime, json, re, subprocess, sys, threading
+import argparse, datetime, json, re, subprocess, sys, threading, time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
@@ -149,6 +149,10 @@ class Profile:
 
 
 # ── HTTP ─────────────────────────────────────────────────────────────────
+UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+      "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
+
+
 def curl_json(url, timeout=15, method="GET", body=None, referer=None):
   args = ["curl", "-sS", "-L", "--max-time", str(timeout)]
   if method == "POST":
@@ -163,6 +167,35 @@ def curl_json(url, timeout=15, method="GET", body=None, referer=None):
     return json.loads(r.stdout) if r.returncode == 0 and r.stdout else None
   except Exception:
     return None
+
+
+def http_status(url, timeout=15):
+  """HTTP status of a URL, or None if we could not reach a verdict."""
+  r = subprocess.run(["curl", "-sS", "-o", "/dev/null", "-w", "%{http_code}",
+                      "-A", UA, "--max-time", str(timeout), "-L", url],
+                     capture_output=True, timeout=timeout + 5, text=True)
+  try:
+    return int(r.stdout.strip())
+  except ValueError:
+    return None
+
+
+def links_live(url):
+  """Does this posting's public page actually resolve?
+
+  An ATS API can outlive the front end it points at: Aircall's Lever API served
+  77 postings for a board whose every public page, the board index included,
+  returned 404. Those postings looked healthy at every other stage and shipped
+  as cards that 404 on click. So one posting per company is checked for real,
+  and a confirmed 404 disqualifies the company for this run. Anything short of
+  a reproduced 404 — a timeout, a bot wall, a 5xx — passes: we cannot tell a
+  blocked request from a missing page, and guessing would empty the board.
+  """
+  c = http_status(url)
+  if c not in (404, 410):
+    return True
+  time.sleep(1.5)
+  return http_status(url) not in (404, 410)
 
 
 def fetch(ats, slug):
@@ -1111,6 +1144,11 @@ def probe(profile: Profile, cand, verbose=False):
       with _print_lock:
         print(f"[no-match] {cand['name']} ({cand['ats']}:{cand['slug']}) "
               f"— {len(raw)} posting(s) on board", file=sys.stderr)
+    return None
+  if not links_live(matches[0]["url"]):
+    with _print_lock:
+      print(f"[dead-board] {cand['name']} ({cand['ats']}:{cand['slug']}) — API serves "
+            f"{len(matches)} match(es) but the public page 404s", file=sys.stderr)
     return None
   with _print_lock:
     print(f"[ok] {cand['name'][:26]:26s} {len(matches):3d} role(s)", file=sys.stderr)

@@ -433,10 +433,46 @@ def run(pid: str) -> int:
   return bad
 
 
+# ── the dead-link detector ────────────────────────────────────────────────
+# Several ATSs answer 200 with a "no longer accepting applications" shell. The
+# link checker treats that as a 404, so the pattern has to be tight: too loose
+# and it prunes live postings whose text happens to contain "no longer".
+GONE_CASES = [
+  ("This job is no longer available", True),
+  ("No longer accepting applications for this role", True),
+  ("The position has been filled", True),
+  ("Sorry, this posting does not exist", True),
+  ("Job not found", True),
+  ("This requisition has been closed", True),
+  ("You will no longer need to chase invoices manually", False),
+  ("We are hiring a Data Entry Clerk", False),
+  ("Position: Administrative Assistant. Apply now.", False),
+  ("This role is open to remote candidates", False),
+]
+
+
+def run_gone() -> int:
+  spec = importlib.util.spec_from_file_location("cu", ROOT / "scripts" / "check-urls.py")
+  cu = importlib.util.module_from_spec(spec)
+  argv, sys.argv = sys.argv, ["cu"]
+  try:
+    spec.loader.exec_module(cu)
+  finally:
+    sys.argv = argv
+  bad = 0
+  for body, want in GONE_CASES:
+    if bool(cu.GONE.search(body)) != want:
+      bad += 1
+      print(f"  ✗ gone: {body!r} expected {'gone' if want else 'live'}", file=sys.stderr)
+  if not bad:
+    print(f"   ✓ gone-page: {len(GONE_CASES)} case(s) pass")
+  return bad
+
+
 def main():
   ids = sys.argv[1:] or sorted(
     p.stem for p in (ROOT / "profiles").glob("*.json") if not p.name.endswith(".companies.json"))
-  sys.exit(1 if sum(run(i) + run_geo(i) + run_pay(i) + run_screens(i) + run_require_description(i) for i in ids) + run_summary() + run_years() + run_demands() else 0)
+  sys.exit(1 if sum(run(i) + run_geo(i) + run_pay(i) + run_screens(i) + run_require_description(i) for i in ids) + run_summary() + run_years() + run_demands() + run_gone() else 0)
 
 
 if __name__ == "__main__":
