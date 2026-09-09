@@ -54,7 +54,7 @@ console.log(`   ✓ serializer: every field round-trips (${Object.keys(a).length
  * declaration produces "const COMPANIES = const COMPANIES = [", which parses
  * fine as text and breaks the board on load. Prove the rewritten file still
  * evaluates and still exposes what the renderer reads. */
-const { replaceCompaniesBlock } = require('./lib-emit');
+const { pruneDeadUrls } = require('./lib-emit');
 const file =
   `const COMPANIES_VERIFIED_AT = '2026-01-01';\n` +
   emitCompaniesBlock([company]) +
@@ -62,12 +62,16 @@ const file =
   `window.DEMO = { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT };\n`;
 
 const spliceErrs = [];
-const pruned = replaceCompaniesBlock(file, [{ ...company, jobs: [company.jobs[0]], totalRoles: 1 }]);
-if ((pruned.match(/const COMPANIES = \[/g) || []).length !== 1) {
+// Prune the second job. The first survives, so the company stays.
+const one = pruneDeadUrls(file, [JSON.parse(JSON.stringify(company))],
+                          [company.jobs[1].url]);
+if ((one.src.match(/const COMPANIES = \[/g) || []).length !== 1) {
   spliceErrs.push('rewritten file declares COMPANIES more than once');
 }
+if (one.emptied !== 0) spliceErrs.push(`pruning one of two jobs emptied ${one.emptied} companies`);
+
 const tmp = require('path').join(require('os').tmpdir(), `emit-splice-${process.pid}.js`);
-fs.writeFileSync(tmp, pruned);
+fs.writeFileSync(tmp, one.src);
 try {
   global.window = {};
   require(tmp);
@@ -76,6 +80,8 @@ try {
   else if (got.COMPANIES.length !== 1 || got.COMPANIES[0].jobs.length !== 1) {
     spliceErrs.push(`rewritten file holds ${got.COMPANIES.length} companies / ` +
                     `${got.COMPANIES[0] ? got.COMPANIES[0].jobs.length : '?'} jobs, wanted 1/1`);
+  } else if (got.COMPANIES[0].totalRoles !== 1) {
+    spliceErrs.push(`totalRoles is ${got.COMPANIES[0].totalRoles} after pruning, wanted 1`);
   } else if (got.COMPANIES_VERIFIED_AT !== '2026-01-01') {
     spliceErrs.push('the rewrite clobbered a constant outside the COMPANIES block');
   }
@@ -85,8 +91,15 @@ try {
   fs.unlinkSync(tmp);
 }
 
+// Prune every job. The company has nothing left to render, so it must go —
+// verify-board.py rejects an empty shell.
+const all = pruneDeadUrls(file, [JSON.parse(JSON.stringify(company))],
+                          company.jobs.map((j) => j.url));
+if (all.kept.length !== 0) spliceErrs.push('a company with every posting dead was kept');
+if (all.emptied !== 1) spliceErrs.push(`emptied count is ${all.emptied}, wanted 1`);
+
 if (spliceErrs.length) {
   spliceErrs.forEach((e) => console.error('  ✗ ' + e));
   process.exit(1);
 }
-console.log('   ✓ prune rewrite: file still parses and keeps its other constants');
+console.log('   ✓ prune: file still parses, totalRoles follows, emptied companies drop');

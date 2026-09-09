@@ -13,7 +13,7 @@
 'use strict';
 const fs = require('fs');
 const { execFileSync } = require('child_process');
-const { replaceCompaniesBlock } = require('./lib-emit');
+const { pruneDeadUrls } = require('./lib-emit');
 
 // --profile <id> picks the board to check (default: thien). Explicit
 // `--data <path>` still works for one-off checks.
@@ -162,7 +162,13 @@ function boardTokens(ats, slug) {
   if (ats === 'recruitee') {
     const d = curl(`https://${slug}.recruitee.com/api/offers/`);
     if (!d || !d.offers) return R(false);
-    d.offers.forEach(j => { toks.add(String(j.id)); addT(j.title); });
+    // A Recruitee posting url is /o/{slug}, not /o/{id} — collecting only the
+    // numeric id made every Recruitee posting look dead. Collect both.
+    d.offers.forEach(j => {
+      toks.add(String(j.id));
+      if (j.slug) toks.add(String(j.slug));
+      addT(j.title);
+    });
     return R(true);
   }
   if (ats === 'personio') {
@@ -191,7 +197,14 @@ function boardTokens(ats, slug) {
     const d = curl(`https://${slug}.pinpointhq.com/postings.json`);
     const rows = Array.isArray(d) ? d : (d && d.data);
     if (!rows) return R(false);
-    rows.forEach(j => { toks.add(String(j.id)); addT(j.title); });
+    // Same shape problem: a Pinpoint posting url carries a uuid while the API
+    // reports a numeric id. The uuid is only in the row's own url field.
+    rows.forEach(j => {
+      toks.add(String(j.id));
+      const m = String(j.url || '').match(UUID);
+      if (m) toks.add(m[0].toLowerCase());
+      addT(j.title);
+    });
     return R(true);
   }
   if (ats === 'rippling') {
@@ -293,6 +306,37 @@ function boardTokens(ats, slug) {
     }
   }
 
+  // Safety net for a token-shape mismatch. If EVERY posting we hold for a
+  // company comes out dead while its board is serving other postings happily,
+  // the likely explanation is that our url token and the board's id are
+  // different shapes — not that the employer closed every req at once. That is
+  // exactly what happened to Recruitee (url carries /o/{slug}, API reports a
+  // numeric id) and Pinpoint (url carries a uuid, API reports a numeric id):
+  // both silently pruned live postings for as long as they were wired up.
+  // Downgrade those to unverifiable so a future mismatch costs a warning
+  // instead of a board.
+  const deadByCo = {};
+  for (const d of dead) (deadByCo[d.co] ||= []).push(d);
+  const suspect = new Set();
+  for (const { c } of targets) {
+    const held = (c.jobs || []).length;
+    const b = boards[c.id];
+    if (held && (deadByCo[c.id] || []).length === held && b.ok && b.tokens.size > held) {
+      suspect.add(c.id);
+    }
+  }
+  if (suspect.size) {
+    for (const d of dead.filter(d => suspect.has(d.co))) {
+      unverifiable.push({ co: d.co, url: d.url, why: 'every-posting-dead: likely id-shape mismatch' });
+    }
+    const before = dead.length;
+    dead.splice(0, dead.length, ...dead.filter(d => !suspect.has(d.co)));
+    console.log(`  held back ${before - dead.length} "dead" posting(s) at ` +
+                `${[...suspect].join(', ')} — the whole company came out dead ` +
+                `against a board still serving other roles, which reads as an ` +
+                `id-shape mismatch, not a closed req`);
+  }
+
   console.log(`Checked ${total} postings across ${companies.length} companies`);
   console.log(`  live: ${liveCount}   dead: ${dead.length}   unverifiable: ${unverifiable.length}`);
   const badBoards = targets.filter(t => !boards[t.c.id].ok).map(t => t.c.id);
@@ -308,13 +352,9 @@ function boardTokens(ats, slug) {
   fs.writeFileSync('/tmp/dead_links.json', JSON.stringify({ dead, unverifiable }, null, 2));
 
   if (prune && dead.length) {
-    const deadUrls = new Set(dead.map(d => d.url));
-    for (const c of companies) {
-      const before = (c.jobs || []).length;
-      c.jobs = (c.jobs || []).filter(j => !deadUrls.has(j.url));
-      if (c.jobs.length !== before) c.totalRoles = c.jobs.length;
-    }
-    fs.writeFileSync(DATA, replaceCompaniesBlock(src, kept));
-    console.log(`\n--prune: removed ${dead.length} confirmed-dead links from ${DATA}.`);
+    const out = pruneDeadUrls(src, companies, dead.map(d => d.url));
+    fs.writeFileSync(DATA, out.src);
+    console.log(`\n--prune: removed ${dead.length} confirmed-dead link(s) and ` +
+                `${out.emptied} emptied compan(ies) from ${DATA}.`);
   }
 })();

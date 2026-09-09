@@ -112,24 +112,21 @@ def run(pid: str, prune: bool, jobs: int) -> int:
     print(f"      ?    {code or 'err'} {cid} — {title} ({note})")
 
   if dead and prune:
-    gone = {u for _, u, _, _ in dead}
-    kept = []
-    for c in data["COMPANIES"]:
-      c["jobs"] = [j for j in c["jobs"] if j["url"] not in gone]
-      c["totalRoles"] = len(c["jobs"])
-      if c["jobs"]:
-        kept.append(c)
-    # The serializer and the splice both live in lib-emit.js, so this pruner
-    # and check-dead.js cannot drift apart on either.
-    emit = subprocess.run(
+    # The prune itself lives in lib-emit.js so this and check-dead.js cannot
+    # drift apart on either the serializer or the splice.
+    r = subprocess.run(
       ["node", "-e",
-       "const fs=require('fs'), {replaceCompaniesBlock}=require('./scripts/lib-emit');"
-       "fs.writeFileSync(process.argv[1], replaceCompaniesBlock("
-       "fs.readFileSync(process.argv[1],'utf8'), JSON.parse(process.argv[2])));",
-       str(dpath), json.dumps(kept)], capture_output=True, text=True, cwd=ROOT)
-    if emit.returncode != 0:
-      raise SystemExit(f"rewrite failed: {emit.stderr.strip()}")
-    print(f"      pruned {len(dead)} dead posting(s) from {prof['dataFile']}")
+       "const fs=require('fs'), {pruneDeadUrls}=require('./scripts/lib-emit');"
+       "const out=pruneDeadUrls(fs.readFileSync(process.argv[1],'utf8'),"
+       "JSON.parse(process.argv[2]), JSON.parse(process.argv[3]));"
+       "fs.writeFileSync(process.argv[1], out.src);"
+       "process.stdout.write(String(out.emptied));",
+       str(dpath), json.dumps(data["COMPANIES"]), json.dumps(sorted(u for _, u, _, _ in dead))],
+      capture_output=True, text=True, cwd=ROOT)
+    if r.returncode != 0:
+      raise SystemExit(f"prune failed: {r.stderr.strip()}")
+    print(f"      pruned {len(dead)} dead posting(s) and {r.stdout.strip()} "
+          f"emptied compan(ies) from {prof['dataFile']}")
   return len(dead)
 
 

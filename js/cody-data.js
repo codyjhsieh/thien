@@ -16,7 +16,7 @@
  *           totalRoles, notes, jobs[{ title, url, level, posted, added }] }
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  */
-const COMPANIES_VERIFIED_AT = '2026-09-08';
+const COMPANIES_VERIFIED_AT = '2026-09-09';
 const COMPANIES = [
   { id:"camber", name:"Camber", vertical:"ai",
     sub:"AI medical billing + RCM",
@@ -62,6 +62,34 @@ const COMPANIES = [
     notes:"HR, payroll or employer-of-record platform \u2014 onboarding and payroll data entry.",
     jobs:[
       { title:"Claims Processor", url:"https://jobs.lever.co/sanabenefits/4ed6f9b2-a118-4413-a8e1-b9b202838730", level:"entry", added:"2026-09-08", posted:"2026-08-21", pay:{"min":43000,"max":59000,"interval":"year"}, paySource:"posted", summary:"Sana’s vision is to make healthcare easy. All of us can agree healthcare is simply too hard in the US. And our members feel that pain day in and day out." }
+    ] },
+  { id:"alcumusgroup", name:"Alcumus Group", vertical:"climate",
+    sub:"Alcumus Group",
+    stage:"\u2014", raised:"\u2014", lead:"\u2014",
+    badges:[],
+    totalRoles:1,
+    notes:"Carbon accounting, EHS or commodity-data company \u2014 emissions, audit and supplier records.",
+    jobs:[
+      { title:"Customer Support Representative", url:"https://alcumus.pinpointhq.com/en/postings/c9054b4f-8b53-4b6f-9743-5929980a3e62", level:"entry", added:"2026-09-09", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", summary:"At Veriforce, we help companies in high-risk industries keep their people, worksites, and supply chains safe and compliant." }
+    ] },
+  { id:"greatminds", name:"Great Minds", vertical:"education",
+    sub:"Great Minds",
+    stage:"\u2014", raised:"\u2014", lead:"\u2014",
+    badges:[],
+    totalRoles:2,
+    notes:"Language, tutoring or classroom-software company \u2014 roster, lesson and content administration.",
+    jobs:[
+      { title:"IT Product Support Specialist", url:"https://greatminds.recruitee.com/o/it-product-support-specialist", level:"entry", added:"2026-09-09", posted:"2026-09-01", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", summary:"Application Support and Incident Management: Provide first- and second-level support for business systems such as Salesforce, NetSuite, Dayforce, and others." },
+      { title:"Technical Support Specialist", url:"https://greatminds.recruitee.com/o/technical-support-specialist-1", level:"entry", added:"2026-09-09", posted:"2026-08-19", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", years:0, summary:"Great Minds is a high-growth, mission-driven organization founded by educators in 2007. As a for-profit, Public Benefit Corporation, we believe all students deserve access to meaningful…" }
+    ] },
+  { id:"osano", name:"Osano", vertical:"security",
+    sub:"Osano",
+    stage:"\u2014", raised:"\u2014", lead:"\u2014",
+    badges:[],
+    totalRoles:1,
+    notes:"Israeli security, privacy or analytics company \u2014 alert triage and account administration.",
+    jobs:[
+      { title:"Customer Experience Operations Specialist", url:"https://job-boards.greenhouse.io/osano/jobs/5418379008", level:"entry", added:"2026-09-09", posted:"2026-09-08", pay:{"min":19,"max":28,"interval":"hour"}, paySource:"estimate", summary:"As a Customer Experience Operations Specialist, you'll help improve and scale Osano's self-service customer experience by understanding how customers engage with our product, identifying…" }
     ] }
 ];
 

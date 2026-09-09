@@ -62,4 +62,23 @@ function replaceCompaniesBlock(src, companies) {
   return src.slice(0, a) + emitCompaniesBlock(companies) + src.slice(e + 3);
 }
 
-module.exports = { esc, emitJob, emitCompany, emitCompaniesBlock, replaceCompaniesBlock };
+/* Drop a set of posting urls from a data file and hand back the new source.
+ *
+ * Both pruners had their own copy of this and neither was exercised: the branch
+ * only runs when something is actually dead, so check-dead.js shipped a
+ * `ReferenceError: kept is not defined` for as long as the branch existed and
+ * nobody saw it until a Recruitee board finally retired a posting. One
+ * function, one test that runs on every pipeline invocation. */
+function pruneDeadUrls(src, companies, deadUrls) {
+  const gone = deadUrls instanceof Set ? deadUrls : new Set(deadUrls);
+  for (const c of companies) {
+    c.jobs = (c.jobs || []).filter((j) => !gone.has(j.url));
+    c.totalRoles = c.jobs.length;
+  }
+  // A company whose last posting just died is dropped rather than left as an
+  // empty card: verify-board.py rejects those and the board cannot render one.
+  const kept = companies.filter((c) => c.jobs.length);
+  return { src: replaceCompaniesBlock(src, kept), kept, emptied: companies.length - kept.length };
+}
+
+module.exports = { esc, emitJob, emitCompany, emitCompaniesBlock, replaceCompaniesBlock, pruneDeadUrls };
