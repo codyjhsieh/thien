@@ -20,13 +20,13 @@
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  *  - jobs are sorted: founding > senior > mid.
  */
-const COMPANIES_VERIFIED_AT = '2026-09-21';
+const COMPANIES_VERIFIED_AT = '2026-09-22';
 const COMPANIES = [
   { id:"anthropic", name:"Anthropic", vertical:"ai",
     sub:"Claude \u2014 AI safety lab",
     stage:"Series F", raised:"$18B+", lead:"Amazon",
     badges:["Amazon","Google","Spark"],
-    totalRoles:18,
+    totalRoles:17,
     notes:"Heavy values screen; expect ethical-dilemma and downside-risk questions. Applied-AI eng roles are FDE-flavored.",
     jobs:[
       { title:"Safeguards Enforcement Analyst, Access Controls & Identity", url:"https://job-boards.greenhouse.io/anthropic/jobs/5319626008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
@@ -38,7 +38,6 @@ const COMPANIES = [
       { title:"Safeguards Enforcement Analyst, Cyber Harm", url:"https://job-boards.greenhouse.io/anthropic/jobs/5311159008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Safeguards Enforcement Analyst, Integrity & Authenticity", url:"https://job-boards.greenhouse.io/anthropic/jobs/5311149008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Safeguards Enforcement Analyst, Safety Evaluations", url:"https://job-boards.greenhouse.io/anthropic/jobs/5137183008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
-      { title:"Safeguards Enforcement Analyst, Violence & Extremism", url:"https://job-boards.greenhouse.io/anthropic/jobs/5343907008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Business Systems Analyst", url:"https://job-boards.greenhouse.io/anthropic/jobs/5394958008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Safeguards Enforcement Analyst, User Well-being", url:"https://job-boards.greenhouse.io/anthropic/jobs/5374778008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Strategy & Operations, Applied AI - AMER", url:"https://job-boards.greenhouse.io/anthropic/jobs/5284500008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
@@ -126,11 +125,12 @@ const COMPANIES = [
     sub:"Cloud monitoring (NASDAQ)",
     stage:"Public", raised:"$148M pre-IPO", lead:"Index",
     badges:["NASDAQ","Index","OpenView"],
-    totalRoles:2,
+    totalRoles:3,
     notes:"Public co. Time-series infra, alerting, observability depth.",
     jobs:[
       { title:"GTM Strategy and Operations Associate", url:"https://careers.datadoghq.com/detail/7843331/?gh_jid=7843331", level:"entry", added:"2026-08-28", posted:"2026-08-27" },
-      { title:"Sales Revenue Analyst - NYC", url:"https://careers.datadoghq.com/detail/8132294/?gh_jid=8132294", level:"mid", added:"2026-09-19", posted:"2026-09-18", pay:{"min":79000,"max":105000,"interval":"year"}, paySource:"posted", years:2 }
+      { title:"Sales Revenue Analyst - NYC", url:"https://careers.datadoghq.com/detail/8132294/?gh_jid=8132294", level:"mid", added:"2026-09-19", posted:"2026-09-18", pay:{"min":79000,"max":105000,"interval":"year"}, paySource:"posted", years:2 },
+      { title:"Legal Operations Analyst", url:"https://careers.datadoghq.com/detail/8202086/?gh_jid=8202086", level:"mid", added:"2026-09-22", posted:"2026-09-21", pay:{"min":70000,"max":93000,"interval":"year"}, paySource:"posted", years:2 }
     ] },
   { id:"oscar", name:"Oscar Health", vertical:"health",
     sub:"Tech-driven health insurance (NYSE)",
@@ -386,7 +386,7 @@ const COMPANIES = [
     sub:"Public sector (dept of tech)",
     stage:"Public sector", raised:"$110B budget", lead:"\u2014",
     badges:["Public sector"],
-    totalRoles:72,
+    totalRoles:74,
     notes:"NYC gov. Sr SWE GeoSupport, .NET, City Environmental Quality Review roles.",
     jobs:[
       { title:"Analyst, Procurement Operations", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014264196", level:"mid", added:"2026-08-26", posted:"2026-07-24" },
@@ -439,7 +439,6 @@ const COMPANIES = [
       { title:"Analyst - Department of Citywide Administrative Services (DCAS)", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015258191", level:"mid", added:"2026-09-19", posted:"2026-09-15" },
       { title:"Analyst - FEMA Revenue Accountability and Reporting", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015224321", level:"mid", added:"2026-09-19", posted:"2026-09-12" },
       { title:"Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015429366", level:"mid", added:"2026-09-19", posted:"2026-09-19" },
-      { title:"Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015371196", level:"mid", added:"2026-09-19", posted:"2026-09-18" },
       { title:"Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015168342", level:"mid", added:"2026-09-19", posted:"2026-09-10" },
       { title:"Business Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015133276", level:"mid", added:"2026-09-19", posted:"2026-09-09" },
       { title:"Business Intelligence Developer", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015335572", level:"mid", added:"2026-09-19", posted:"2026-09-17" },
@@ -457,10 +456,13 @@ const COMPANIES = [
       { title:"HOME-ARP Adjustment Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015296036", level:"mid", added:"2026-09-19", posted:"2026-09-16" },
       { title:"Investigative Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015199906", level:"mid", added:"2026-09-19", posted:"2026-09-11", years:4 },
       { title:"LOGISTICS - COLLEGE AIDE", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015132841", level:"mid", added:"2026-09-19", posted:"2026-09-09" },
-      { title:"Procurement Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015335341", level:"mid", added:"2026-09-19", posted:"2026-09-17" },
       { title:"Procurement Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015168477", level:"mid", added:"2026-09-19", posted:"2026-09-10" },
       { title:"Supervising Major Case Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015133196", level:"mid", added:"2026-09-19", posted:"2026-09-09" },
-      { title:"Capital Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015429691", level:"mid", added:"2026-09-20", posted:"2026-09-19" }
+      { title:"Capital Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015429691", level:"mid", added:"2026-09-20", posted:"2026-09-19" },
+      { title:"Analyst, Procurement Operations", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015552076", level:"mid", added:"2026-09-22", posted:"2026-09-22" },
+      { title:"Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015552196", level:"mid", added:"2026-09-22", posted:"2026-09-22" },
+      { title:"Ideation Business Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015551886", level:"mid", added:"2026-09-22", posted:"2026-09-22" },
+      { title:"Procurement Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015552406", level:"mid", added:"2026-09-22", posted:"2026-09-22" }
     ] },
   { id:"palantir", name:"Palantir", vertical:"saas",
     sub:"Elite FDE consultancy (NYSE: PLTR)",
@@ -672,7 +674,7 @@ const COMPANIES = [
     totalRoles:1,
     notes:"NYC HQ. T-bill yield for startups.",
     jobs:[
-      { title:"Compliance Operations Analyst", url:"https://jobs.ashbyhq.com/meow/5bfc8626-5533-4911-8202-4a8e10ab019c", level:"mid", added:"2026-09-19", posted:"2026-09-14" }
+      { title:"Compliance Operations Analyst", url:"https://jobs.ashbyhq.com/meow/2b4b7b81-ade5-4e46-8b75-1faab789e104", level:"mid", added:"2026-09-22", posted:"2026-09-21" }
     ] },
   { id:"mongodb", name:"MongoDB", vertical:"devtools",
     sub:"Document database (NASDAQ)",
@@ -709,6 +711,15 @@ const COMPANIES = [
     notes:"NYC telehealth. Care plans + fulfillment + identity.",
     jobs:[
       { title:"Inventory Allocation Analyst", url:"https://jobs.lever.co/ro/ba3037b9-9e7a-4381-8cb9-7ea866609ada", level:"mid", added:"2026-09-19", posted:"2026-09-17" }
+    ] },
+  { id:"mastercard", name:"Mastercard", vertical:"fintech",
+    sub:"Card network (NYSE: MA)",
+    stage:"Public", raised:"(NYSE: MA)", lead:"NYSE",
+    badges:["NYSE"],
+    totalRoles:1,
+    notes:"Purchase NY HQ.",
+    jobs:[
+      { title:"Analyst, Media Planning", url:"https://mastercard.wd1.myworkdayjobs.com/en-US/CorporateCareers/job/Purchase-New-York/Analyst--Media-Planning_R-291052", level:"mid", added:"2026-09-22" }
     ] }
 ];
 

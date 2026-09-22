@@ -16,7 +16,7 @@
  *           totalRoles, notes, jobs[{ title, url, level, posted, added }] }
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  */
-const COMPANIES_VERIFIED_AT = '2026-09-21';
+const COMPANIES_VERIFIED_AT = '2026-09-22';
 const COMPANIES = [
   { id:"camber", name:"Camber", vertical:"ai",
     sub:"AI medical billing + RCM",
@@ -76,12 +76,13 @@ const COMPANIES = [
     sub:"Great Minds",
     stage:"\u2014", raised:"\u2014", lead:"\u2014",
     badges:[],
-    totalRoles:3,
+    totalRoles:4,
     notes:"Language, tutoring or classroom-software company \u2014 roster, lesson and content administration.",
     jobs:[
       { title:"Technical Support Specialist", url:"https://greatminds.recruitee.com/o/technical-support-specialist-1", level:"entry", added:"2026-09-09", posted:"2026-08-19", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", years:0, summary:"Great Minds is a high-growth, mission-driven organization founded by educators in 2007. As a for-profit, Public Benefit Corporation, we believe all students deserve access to meaningful…" },
       { title:"Customer Support Representative (PST Hours)", url:"https://greatminds.recruitee.com/o/customer-support-representative-pst-hours", level:"entry", added:"2026-09-19", posted:"2026-09-10", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", summary:"Serve as the primary point of contact for customer inquiries related to orders, shipments, and product information." },
-      { title:"IT Product Support Specialist (Salesforce)", url:"https://greatminds.recruitee.com/o/it-product-support-specialist-salesforce", level:"entry", added:"2026-09-19", posted:"2026-09-01", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", summary:"Application Support and Incident Management: Provide first- and second-level support for business systems such as Salesforce, NetSuite, Dayforce, and others." }
+      { title:"IT Product Support Specialist (Salesforce)", url:"https://greatminds.recruitee.com/o/it-product-support-specialist-salesforce", level:"entry", added:"2026-09-19", posted:"2026-09-01", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", summary:"Application Support and Incident Management: Provide first- and second-level support for business systems such as Salesforce, NetSuite, Dayforce, and others." },
+      { title:"Pre-Sales Product Specialist - West", url:"https://greatminds.recruitee.com/o/pre-sales-product-specialist-west-4", level:"entry", added:"2026-09-22", posted:"2026-09-21", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", summary:"Deliver compelling, market-driven sales presentations that effectively communicate the value of Great Minds' curricula." }
     ] },
   { id:"osano", name:"Osano", vertical:"security",
     sub:"Osano",
