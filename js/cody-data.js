@@ -16,7 +16,7 @@
  *           totalRoles, notes, jobs[{ title, url, level, posted, added }] }
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  */
-const COMPANIES_VERIFIED_AT = '2026-09-22';
+const COMPANIES_VERIFIED_AT = '2026-09-23';
 const COMPANIES = [
   { id:"camber", name:"Camber", vertical:"ai",
     sub:"AI medical billing + RCM",
@@ -92,6 +92,15 @@ const COMPANIES = [
     notes:"Israeli security, privacy or analytics company \u2014 alert triage and account administration.",
     jobs:[
       { title:"Customer Experience Operations Specialist", url:"https://job-boards.greenhouse.io/osano/jobs/5418379008", level:"entry", added:"2026-09-09", posted:"2026-09-08", pay:{"min":19,"max":28,"interval":"hour"}, paySource:"estimate", summary:"As a Customer Experience Operations Specialist, you'll help improve and scale Osano's self-service customer experience by understanding how customers engage with our product, identifying…" }
+    ] },
+  { id:"midihealth", name:"Midi Health", vertical:"health",
+    sub:"Midi Health",
+    stage:"\u2014", raised:"\u2014", lead:"\u2014",
+    badges:[],
+    totalRoles:1,
+    notes:"Digital health or diagnostics operator \u2014 intake, records and claims work.",
+    jobs:[
+      { title:"Operations & Customer Support Associate, Pharmacy", url:"https://job-boards.greenhouse.io/midihealth/jobs/4668052005", level:"entry", added:"2026-09-23", posted:"2026-09-22", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", years:1, summary:"Operations & Customer Support Associate, Pharmacy: 💊📋 📍 Remote, US-Based Reports to: Operations Manager, E-Commerce The Operations & Customer Support Associate, Pharmacy will play a key…" }
     ] }
 ];
 

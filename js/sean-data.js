@@ -16,39 +16,42 @@
  *           totalRoles, notes, jobs[{ title, url, level, posted, added }] }
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  */
-const COMPANIES_VERIFIED_AT = '2026-09-22';
+const COMPANIES_VERIFIED_AT = '2026-09-23';
 const COMPANIES = [
   { id:"believer", name:"Believer Entertainment", vertical:"gaming",
     sub:"The Prodigal \u2014 new IP",
     stage:"Series B", raised:"$55M", lead:"Lightspeed",
     badges:["Lightspeed","Griffin Gaming"],
-    totalRoles:1,
+    totalRoles:2,
     notes:"New AAA studio; the VFX and UX art seats are on the game itself.",
     jobs:[
-      { title:"Staff VFX Artist", url:"https://jobs.ashbyhq.com/believer/fadae54c-240b-428f-a51f-c31a0fe28126", level:"senior", added:"2026-09-19", posted:"2026-08-26", remote:true, loc:"Remote" }
+      { title:"Staff VFX Artist", url:"https://jobs.ashbyhq.com/believer/fadae54c-240b-428f-a51f-c31a0fe28126", level:"senior", added:"2026-09-19", posted:"2026-08-26", remote:true, loc:"Remote" },
+      { title:"Environment Art Lead", url:"https://jobs.ashbyhq.com/believer/f031cf45-a4dd-40c5-8c00-b26c1c431dd8", level:"senior", added:"2026-09-23", posted:"2026-09-22", remote:true, loc:"Remote", years:6 }
     ] },
   { id:"insomniac", name:"Insomniac Games", vertical:"gaming",
     sub:"Marvel's Spider-Man / Ratchet & Clank",
     stage:"Public (Sony)", raised:"NYSE: SONY", lead:"\u2014",
     badges:["Sony"],
-    totalRoles:5,
+    totalRoles:6,
     notes:"Sony first-party with a large in-house art org and a fast shipping cadence.",
     jobs:[
       { title:"Senior Cinematic Animator (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6164402004", level:"senior", added:"2026-09-19", posted:"2026-09-11", remote:true, loc:"United States, Remote" },
       { title:"Senior Cinematic Facial Animator (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6164736004", level:"senior", added:"2026-09-19", posted:"2026-09-10", remote:true, loc:"United States, Remote" },
       { title:"Senior Facial Character TD (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6143980004", level:"senior", added:"2026-09-19", posted:"2026-09-10", remote:true, loc:"United States, Remote" },
       { title:"Senior Gameplay Animator (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6138863004", level:"senior", added:"2026-09-19", posted:"2026-09-10", remote:true, loc:"United States, Remote" },
-      { title:"Senior Gameplay Programmer (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6173051004", level:"senior", added:"2026-09-19", posted:"2026-09-10", remote:true, loc:"United States, Remote" }
+      { title:"Senior Gameplay Programmer (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6173051004", level:"senior", added:"2026-09-19", posted:"2026-09-10", remote:true, loc:"United States, Remote" },
+      { title:"VFX Artist", url:"https://job-boards.greenhouse.io/insomniac/jobs/6192046004", level:"mid", added:"2026-09-23", posted:"2026-09-22", remote:true, loc:"United States, Remote", pay:{"min":75,"max":85,"interval":"hour"}, paySource:"posted" }
     ] },
   { id:"neteasegames", name:"NetEase Games", vertical:"gaming",
     sub:"Marvel Rivals / Naraka",
     stage:"Public", raised:"NASDAQ: NTES", lead:"\u2014",
     badges:["NASDAQ: NTES"],
-    totalRoles:2,
+    totalRoles:3,
     notes:"Global studios under one board; character and performance animation roles surface regularly.",
     jobs:[
       { title:"Character Performance Animator", url:"https://job-boards.greenhouse.io/neteasegames/jobs/5166671007", level:"mid", added:"2026-09-19", posted:"2026-09-15", remote:true, loc:"Canada-Remote; United Kingdom - Guildford Onsite; United Sta" },
-      { title:"FPS 1P View Gameplay Animator", url:"https://job-boards.greenhouse.io/neteasegames/jobs/5166658007", level:"mid", added:"2026-09-19", posted:"2026-09-15", remote:true, loc:"Canada-Remote; Spain-Remote; United Kingdom - Guildford Onsi" }
+      { title:"FPS 1P View Gameplay Animator", url:"https://job-boards.greenhouse.io/neteasegames/jobs/5166658007", level:"mid", added:"2026-09-19", posted:"2026-09-15", remote:true, loc:"Canada-Remote; Spain-Remote; United Kingdom - Guildford Onsi" },
+      { title:"Senior/Lead Gameplay Animator - 3C & FPS", url:"https://job-boards.greenhouse.io/neteasegames/jobs/5241774007", level:"senior", added:"2026-09-23", posted:"2026-09-23", remote:true, loc:"Canada-Remote; France-Remote; Guangzhou Office; Hangzhou Off" }
     ] },
   { id:"playstation", name:"PlayStation", vertical:"gaming",
     sub:"Sony Interactive Entertainment",
