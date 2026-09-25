@@ -16,7 +16,7 @@
  *           totalRoles, notes, jobs[{ title, url, level, posted, added }] }
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  */
-const COMPANIES_VERIFIED_AT = '2026-09-24';
+const COMPANIES_VERIFIED_AT = '2026-09-25';
 const COMPANIES = [
   { id:"camber", name:"Camber", vertical:"ai",
     sub:"AI medical billing + RCM",
@@ -110,6 +110,15 @@ const COMPANIES = [
     notes:"Health system, payer or digital-health operator \u2014 high-volume records, intake and claims work.",
     jobs:[
       { title:"Customer Support Specialist (CST/MST/PST)", url:"https://job-boards.greenhouse.io/bloomerang/jobs/4640022005", level:"entry", added:"2026-09-24", posted:"2026-09-23", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", summary:"As a Customer Support Specialist, you will provide excellent customer service and day-to-day support for all of Bloomerang’s customers by answering their Bloomerang questions via email…" }
+    ] },
+  { id:"smiledigitalhealth", name:"Smile Digital Health", vertical:"health",
+    sub:"Smile Digital Health",
+    stage:"\u2014", raised:"\u2014", lead:"\u2014",
+    badges:[],
+    totalRoles:1,
+    notes:"Payer, CRO or health-data company \u2014 claims, trial and patient-record administration.",
+    jobs:[
+      { title:"Delivery Operations Specialist ( Remote US)", url:"https://jobs.lever.co/smiledigitalhealth/42224f40-5f23-4168-bbab-4cedce3ec2a3", level:"entry", added:"2026-09-25", posted:"2026-09-24", pay:{"min":19,"max":28,"interval":"hour"}, paySource:"estimate", summary:"Working for a company like Smile Digital Health means supporting our mandate for #BetterGlobalHealth." }
     ] }
 ];
 
