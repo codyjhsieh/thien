@@ -2,9 +2,9 @@
  "id": "alan",
  "person": "Alan",
  "boardTitle": "Alan's Real Estate PE Board",
- "docTitle": "alan — real estate private equity & acquisitions jobs, New York",
+ "docTitle": "alan — NYC commercial real estate: acquisitions, credit, asset management, CMBS and proptech",
  "headline": "Firms",
- "blurb": "live New York postings on the investment side of real estate — acquisitions, underwriting, asset management, development and capital markets.",
+ "blurb": "live New York postings across commercial real-estate investing and credit — acquisitions, underwriting and originations, asset and portfolio management, CMBS and structured credit, and the proptech product roles built on those workflows.",
  "page": "alan.html",
  "dataFile": "js/alan-data.js",
  "dataGlobal": "ALAN_DATA",
@@ -23,8 +23,8 @@
  "filters": {
   "geoInclude": "\\b(new[\\s-]?york|nyc|brooklyn|manhattan|queens, ny|long island city)\\b",
   "titleCityExclude": "\\b(san francisco|los angeles|san diego|chicago|austin|dallas|fort worth|houston|san antonio|denver|phoenix|scottsdale|las vegas|salt lake city|boise|portland|seattle|bellevue|atlanta|charlotte|raleigh|nashville|memphis|tampa|orlando|jacksonville|miami|fort lauderdale|west palm beach|boca raton|naples, fl|boston|cambridge, ma|philadelphia|pittsburgh|baltimore|washington, dc|arlington, va|bethesda|richmond|columbus|cleveland|cincinnati|detroit|minneapolis|milwaukee|st\\. louis|kansas city|omaha|indianapolis|toronto|vancouver|montr[eé]al|calgary|london|dublin|frankfurt|munich|berlin|paris|madrid|milan|amsterdam|luxembourg|zurich|geneva|stockholm|copenhagen|dubai|abu dhabi|riyadh|singapore|hong kong|tokyo|sydney|melbourne|mumbai|bengaluru|bangalore|gurgaon|mexico city|s[aã]o paulo)\\b",
-  "titleInclude": "(\\breal\\s*estate\\s+private\\s+equity\\b|\\brepe\\b|\\breal\\s*estate\\b[^,|]{0,40}\\b(?:acquisitions?|investments?|private\\s+equity|asset\\s+management|portfolio\\s+management|development|capital\\s+markets|underwrit\\w*|debt|credit|equity|transactions?|dispositions?|valuations?)\\b|\\b(?:acquisitions?|investments?|asset\\s+management|portfolio\\s+management|development|capital\\s+markets|underwrit\\w*|dispositions?|valuations?)\\b[^,|]{0,40}\\breal\\s*estate\\b|\\b(?:cre|commercial\\s+real\\s*estate)\\b[^,|]{0,40}\\b(?:acquisitions?|investments?|underwrit\\w*|debt|credit|asset\\s+management)\\b|\\b(?:multifamily|industrial|office|retail|hospitality|self[\\s-]?storage|data\\s*cent(?:er|re)|life\\s+science|net\\s+lease|single[\\s-]family\\s+rental|sfr)\\b[^,|]{0,30}\\b(?:acquisitions?|investments?|underwrit\\w*|asset\\s+management)\\b)",
-  "titleIncludeBroad": "(\\b(?:investments?|acquisitions?|asset\\s+management|portfolio\\s+management|capital\\s+markets|underwriting|originations?|transactions?|development|debt|equity|fund\\s+management)\\b[^,|]{0,24}\\b(?:associate|analyst)\\b|\\b(?:associate|analyst)\\b[^,|]{0,24}\\b(?:investments?|acquisitions?|asset\\s+management|portfolio\\s+management|capital\\s+markets|underwriting|originations?|transactions?|development|debt|equity|fund\\s+management)\\b|\\binvestment\\s+(?:associate|analyst|professional)\\b|\\bacquisitions?\\s+(?:associate|analyst|manager|director|officer|lead|principal|vice\\s+president|vp)\\b|\\b(?:associate|analyst|manager|director|officer|principal|vice\\s+president|vp)[\\s,\\-–—]+(?:of\\s+)?acquisitions?\\b|\\basset\\s+manager\\b)",
+  "titleInclude": "(\\breal\\s*estate\\s+private\\s+equity\\b|\\brepe\\b|\\breal\\s*estate\\b[^,|]{0,40}\\b(?:acquisitions?|investments?|private\\s+equity|asset\\s+management|asset\\s+manager|portfolio\\s+management|development|capital\\s+markets|underwrit\\w*|credit|debt|lending|loans?|originations?|servicing|equity|transactions?|dispositions?|valuations?|structured|securitiz\\w*|product)\\b|\\b(?:acquisitions?|investments?|asset\\s+manage\\w*|portfolio\\s+manage\\w*|development|capital\\s+markets|underwrit\\w*|credit|debt|lending|originations?|servicing|dispositions?|valuations?|structured\\s+finance|product)\\b[^|]{0,40}\\breal\\s*estate\\b|\\b(?:cre|commercial\\s+real\\s*estate)\\b[^,|]{0,40}\\b(?:acquisitions?|investments?|underwrit\\w*|credit|debt|lending|loans?|originations?|servicing|asset\\s+management|portfolio|capital\\s+markets|product|risk)\\b|\\b(?:acquisitions?|investments?|underwrit\\w*|credit|debt|lending|loans?|originations?|servicing|asset\\s+manage\\w*|portfolio\\s+manage\\w*|product)\\b[^|]{0,40}\\b(?:cre|commercial\\s+real\\s*estate)\\b|\\bcmbs\\b|\\bcommercial\\s+mortgage[\\s-]?backed\\b|\\bcommercial\\s+mortgage\\b|\\b(?:agency|multifamily)\\s+(?:lending|loans?|underwrit\\w*|credit|originations?|production|asset\\s+manage\\w*|servicing)\\b|\\b(?:freddie\\s*mac|fannie\\s*mae|ginnie\\s*mae|gse)\\b|\\b(?:hud|fha)\\s+(?:lending|loans?|underwrit\\w*|originations?)\\b|\\b(?:multifamily|industrial|office|retail|hospitality|self[\\s-]?storage|data\\s*cent(?:er|re)|life\\s+science|net\\s+lease|single[\\s-]family\\s+rental|sfr)\\b[^,|]{0,30}\\b(?:acquisitions?|investments?|underwrit\\w*|asset\\s+manage\\w*|credit|debt|lending|originations?)\\b|\\bproduct\\s+(?:manager|management|specialist|strategist|owner|lead|analyst)\\b[^|]{0,40}\\b(?:real\\s*estate|cre\\b|property|mortgage|lending|loans?|underwrit\\w*|credit|valuations?|appraisal)\\b|\\b(?:real\\s*estate|cre|property|mortgage|lending|underwriting|credit)\\b[^,|]{0,30}\\bproduct\\s+(?:manager|management|specialist|strategist|owner|lead)\\b)",
+  "titleIncludeBroad": "(\\b(?:investments?|acquisitions?|asset\\s+management|portfolio\\s+management|capital\\s+markets|underwrit\\w*|originations?|transactions?|development|debt|credit|equity|fund\\s+management|servicing|structured\\s+finance)\\b[^,|]{0,24}\\b(?:associate|analyst|manager|specialist)\\b|\\b(?:associate|analyst|manager|specialist)\\b[^,|]{0,24}\\b(?:investments?|acquisitions?|asset\\s+management|portfolio\\s+management|capital\\s+markets|underwrit\\w*|originations?|transactions?|development|debt|credit|equity|fund\\s+management|servicing|structured\\s+finance)\\b|\\binvestment\\s+(?:associate|analyst|professional)\\b|\\bacquisitions?\\s+(?:associate|analyst|manager|director|officer|lead|principal|vice\\s+president|vp)\\b|\\b(?:associate|analyst|manager|director|officer|principal|vice\\s+president|vp)[\\s,\\-–—]+(?:of\\s+)?acquisitions?\\b|\\basset\\s+manage\\w*\\b|\\bunderwrit\\w*\\b|\\bportfolio\\s+manage\\w*\\b|\\bproduct\\s+(?:manager|management|specialist|strategist|owner|lead|analyst)\\b|\\bsolutions?\\s+(?:consultant|specialist|architect|engineer)\\b|\\bimplementation\\s+(?:consultant|manager|specialist)\\b)",
   "broadVerticals": [
    "repe",
    "reit",
@@ -35,7 +35,7 @@
    "lender",
    "proptech"
   ],
-  "titleExclude": "(\\b(?:talent|customer|user|client|member|patient|growth|demand|traffic|audience|subscriber|lead|guest|donor|merchant|supply|driver|creator|partner|data)\\s+acquisitions?\\b|\\bacquisitions?\\s+(?:marketing|recruit\\w*|sourcer)\\b|\\b(?:business|corporate|partnership|product|software|web|frontend|front[\\s-]end|backend|back[\\s-]end|full[\\s-]?stack|game|program|fund\\s?rais\\w*|donor|membership|grants?)\\s+development\\b|\\bdevelopment\\s+(?:engineer|operations?|manager\\b[^,|]{0,20}\\bsoftware)\\b|\\b(?:software|senior\\s+software|staff\\s+software)\\s+(?:engineer|developer)\\b|\\b(?:engineer|developer|scientist|programmer|architect\\b(?!\\w))\\b|\\breal\\s*estate\\s+(?:agent|broker|salesperson|showing|photographer|coordinator\\b[^,|]{0,20}\\bmarketing)\\b|\\bleasing\\s+(?:agent|consultant|specialist|professional)\\b|\\bproperty\\s+(?:manager|management)\\b|\\b(?:maintenance|janitor\\w*|porter|groundskeeper|concierge|doorman|housekeep\\w*|security\\s+guard|technician)\\b|\\b(?:recruit\\w*|talent\\b|human\\s+resources|\\bhr\\b|payroll|benefits)\\b|\\b(?:intern|internship|co[\\s-]?op)\\b|\\bsummer\\s+(?:analyst|associate|programme?)\\b|\\b(?:undergraduate|campus|off[\\s-]cycle)\\s+(?:analyst|associate|program)\\b|\\b(?:teacher|professor|faculty|adjunct|instructor)\\b|\\b(?:nurse|physician|clinical|pharmac\\w*)\\b|\\binvestment\\s+bank\\w*\\b|\\bequity\\s+research\\b|\\bm\\s*&\\s*a\\b|\\bcapital\\s+structure\\s+advisory\\b|\\bcorporate\\s+advisory\\b|\\bunderwrit\\w*\\b[^,|]{0,30}\\b(?:casualty|liability|property\\s*&\\s*casualty|financial\\s+lines|political|environmental|cyber|marine|aviation|surety|workers|professional\\s+lines|specialty\\s+lines|reinsurance|c\\s*&\\s*i)\\b|\\b(?:casualty|financial\\s+lines|political\\s+violence|surety|reinsurance)\\b|\\bproduct\\s+manager\\b[^|]{0,30}\\bacquisition\\b|\\bacquisition\\b[^,|]{0,20}\\b(?:marketing|enablement|funnel|channel|performance|paid|lifecycle|retention)\\b|\\bratings?\\s+(?:associate|analyst)\\b|\\bdistressed\\s+debt\\b|\\bprivate\\s+credit\\b|\\bspecial\\s+situations\\b|\\basset\\s+based\\s+finance\\b|\\b(?:accountant|accounting|controller|bookkeep\\w*|payroll|accounts\\s+(?:payable|receivable)|\\bap\\b|\\bar\\b|treasury|fund\\s+(?:accountant|accounting|administrat\\w*)|finance\\s*(?:&|and)\\s*operations|financial\\s+reporting|audit\\w*|\\btax\\b|compliance)\\b)",
+  "titleExclude": "(\\b(?:talent|customer|user|client|member|patient|growth|demand|traffic|audience|subscriber|lead|guest|donor|merchant|supply|driver|creator|partner|data)\\s+acquisitions?\\b|\\bacquisitions?\\s+(?:marketing|recruit\\w*|sourcer)\\b|\\bacquisition\\b[^,|]{0,20}\\b(?:marketing|enablement|funnel|channel|performance|paid|lifecycle|retention)\\b|\\bproduct\\s+manager\\b[^|]{0,30}\\bacquisition\\b|\\b(?:business|corporate|partnership|fund\\s?rais\\w*|donor|membership|grants?)\\s+development\\b|\\b(?:software|web|frontend|front[\\s-]end|backend|back[\\s-]end|full[\\s-]?stack|game|program)\\s+develop\\w*\\b|\\bdevelopment\\s+(?:engineer|operations?)\\b|\\b(?:engineer|developer|scientist|programmer|architect\\b(?!\\w))\\b|\\breal\\s*estate\\s+(?:agent|broker|salesperson|showing|photographer)\\b|\\bleasing\\s+(?:agent|consultant|specialist|professional)\\b|\\bproperty\\s+(?:manager|management)\\b|\\b(?:maintenance|janitor\\w*|porter|groundskeeper|concierge|doorman|housekeep\\w*|security\\s+guard|technician)\\b|\\b(?:recruit\\w*|talent\\b|human\\s+resources|\\bhr\\b|payroll|benefits)\\b|\\b(?:intern|internship|co[\\s-]?op)\\b|\\bsummer\\s+(?:analyst|associate|programme?)\\b|\\b(?:undergraduate|campus|off[\\s-]cycle)\\s+(?:analyst|associate|program)\\b|\\b(?:teacher|professor|faculty|adjunct|instructor)\\b|\\b(?:nurse|physician|clinical|pharmac\\w*)\\b|\\binvestment\\s+bank\\w*\\b|\\bequity\\s+research\\b|\\bm\\s*&\\s*a\\b|\\bcapital\\s+structure\\s+advisory\\b|\\bcorporate\\s+advisory\\b|\\bunderwrit\\w*\\b[^,|]{0,30}\\b(?:casualty|liability|property\\s*&\\s*casualty|financial\\s+lines|political|environmental|cyber|marine|aviation|surety|workers|professional\\s+lines|specialty\\s+lines|reinsurance)\\b|\\b(?:casualty|financial\\s+lines|political\\s+violence|surety|reinsurance)\\b|\\b(?:c\\s*&\\s*i|commercial\\s+and\\s+industrial)\\b|\\b(?:auto|consumer|student|personal|card|small\\s+business)\\s+(?:loan|lending|credit)\\b|\\b(?:accountant|accounting|controller|bookkeep\\w*|accounts\\s+(?:payable|receivable)|treasury|fund\\s+(?:accountant|accounting|administrat\\w*)|finance\\s*(?:&|and)\\s*operations|financial\\s+reporting|audit\\w*|\\btax\\b|compliance)\\b|\\b(?:learning|professional|partner|sales|ecosystem|leadership|talent)\\s*(?:&|and)?\\s*development\\b|\\b(?:it|technology|project|program|product)\\s*(?:&|and)?\\s*portfolio\\b|\\bnew\\s+grad\\w*\\b|\\bentry[\\s-]level\\s+program\\b|\\b20\\d\\d\\b[^|]{0,24}\\b(?:analyst|associate)\\s+(?:program|programme)\\b|\\b20\\d\\d\\s+(?:[a-z]+\\s+){0,3}(?:analyst|associate)\\b)",
   "levelRules": [
    {
     "key": "senior",
@@ -56,22 +56,27 @@
   {
    "key": "acquisitions",
    "label": "Acquisitions",
-   "match": "acquisi|underwrit|transaction|disposition|investment|deal"
+   "match": "acquisi|investment|transaction|disposition|deal|equity"
+  },
+  {
+   "key": "credit",
+   "label": "Credit / Debt",
+   "match": "credit|debt|underwrit|origination|lending|loan|cmbs|mortgage|structured|securitiz|servicing|agency|freddie|fannie"
   },
   {
    "key": "assetmgmt",
    "label": "Asset Mgmt",
-   "match": "asset\\s+manage|portfolio|valuation|business\\s+plan"
+   "match": "asset\\s+manage|portfolio|valuation|business\\s+plan|dispositions?"
+  },
+  {
+   "key": "product",
+   "label": "Product / Tech",
+   "match": "product|solutions?|implementation|platform|data|analytics|\\bai\\b"
   },
   {
    "key": "development",
    "label": "Development",
-   "match": "development|construction|entitlement|pre[\\s-]?development"
-  },
-  {
-   "key": "capital",
-   "label": "Capital Markets",
-   "match": "capital\\s+markets|debt|credit|financing|origination|lending|structured|mortgage"
+   "match": "development|construction|entitlement"
   }
  ],
  "categoryFallback": "acquisitions",
@@ -150,7 +155,8 @@
    "assetmgr": "Asset Manager",
    "operator": "Operator",
    "famoffice": "Family Office",
-   "bank": "Bank"
+   "bank": "Bank",
+   "lending": "Lending"
   },
   "pills": {
    "bpo": "pill-dev",
@@ -203,11 +209,12 @@
    "assetmgr": "pill-both",
    "operator": "pill-dev",
    "famoffice": "pill-mkt",
-   "bank": "pill-sde"
+   "bank": "pill-sde",
+   "lending": "pill-sde"
   }
  },
  "defaultLevel": "associate",
- "emptyNote": "The bar is an investment-side real-estate role — acquisitions, underwriting, asset management, development or capital markets — sitting in New York.",
+ "emptyNote": "The bar is a commercial real-estate investing or credit role — acquisitions, underwriting, originations, asset or portfolio management, structured credit, or a proptech product role built on them — sitting in New York.",
  "captureSummary": true,
  "scoring": {
   "coolness": {
@@ -215,17 +222,19 @@
    "byVertical": {
     "repe": 9,
     "assetmgr": 8,
-    "famoffice": 8,
-    "reit": 7,
+    "famoffice": 7,
+    "reit": 8,
     "developer": 7,
-    "lender": 7,
+    "lender": 9,
     "operator": 6,
-    "brokerage": 5,
-    "proptech": 6,
-    "fintech": 5,
+    "brokerage": 7,
+    "proptech": 8,
+    "fintech": 7,
     "saas": 4,
     "insurance": 5,
-    "consulting": 5
+    "consulting": 5,
+    "bank": 6,
+    "lending": 5
    },
    "default": 4
   },
@@ -290,28 +299,52 @@
    "base": 0.35,
    "titleRules": [
     [
-     "\\breal\\s*estate\\s+private\\s+equity\\b|\\brepe\\b",
-     0.15
+     "\\bcmbs\\b|\\bcommercial\\s+mortgage\\b|\\bstructured\\s+(?:finance|credit)\\b",
+     0.2
     ],
     [
-     "\\bacquisitions?\\b",
-     0.12
+     "\\b(?:cre|commercial\\s+real\\s*estate)\\b[^|]{0,40}\\b(?:credit|underwrit|originat)",
+     0.2
     ],
     [
      "\\bunderwrit\\w*",
-     0.08
+     0.18
     ],
     [
-     "\\basset\\s+manage\\w*",
-     0.05
+     "\\b(?:agency|multifamily)\\b[^|]{0,30}\\b(?:lending|credit|underwrit|originat)",
+     0.18
     ],
     [
-     "\\bcapital\\s+markets\\b|\\bdebt\\b|\\bcredit\\b",
-     0.02
+     "\\bfreddie\\s*mac\\b|\\bfannie\\s*mae\\b",
+     0.18
+    ],
+    [
+     "\\breal\\s*estate\\b[^|]{0,40}\\b(?:credit|debt|lending)\\b",
+     0.16
+    ],
+    [
+     "\\basset\\s+manage\\w*|\\bportfolio\\s+manage\\w*",
+     0.12
+    ],
+    [
+     "\\breal\\s*estate\\s+private\\s+equity\\b|\\brepe\\b",
+     0.1
+    ],
+    [
+     "\\bacquisitions?\\b",
+     0.1
+    ],
+    [
+     "\\bproduct\\s+(?:manager|management|specialist|strategist|owner|lead)\\b",
+     -0.05
+    ],
+    [
+     "\\bsolutions?\\s+(?:consultant|specialist)\\b|\\bimplementation\\b",
+     -0.08
     ],
     [
      "\\bvice\\s+president\\b|\\bvp\\b|\\bdirector\\b|\\bprincipal\\b",
-     -0.18
+     -0.15
     ],
     [
      "\\bhead\\s+of\\b|\\bmanaging\\b|\\bpartner\\b",
@@ -319,15 +352,15 @@
     ]
    ],
    "levelBonus": {
-    "analyst": 0.08,
+    "analyst": 0.05,
     "associate": 0.1,
-    "senior": -0.1
+    "senior": -0.08
    },
    "clamp": [
     0.05,
-    0.7
+    0.75
    ]
   }
  },
- "poolSize": 1911
+ "poolSize": 1926
 }

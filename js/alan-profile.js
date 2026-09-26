@@ -4,9 +4,9 @@ window.BOARD_PROFILE = {
   "id": "alan",
   "person": "Alan",
   "boardTitle": "Alan's Real Estate PE Board",
-  "docTitle": "alan — real estate private equity & acquisitions jobs, New York",
+  "docTitle": "alan — NYC commercial real estate: acquisitions, credit, asset management, CMBS and proptech",
   "headline": "Firms",
-  "blurb": "live New York postings on the investment side of real estate — acquisitions, underwriting, asset management, development and capital markets.",
+  "blurb": "live New York postings across commercial real-estate investing and credit — acquisitions, underwriting and originations, asset and portfolio management, CMBS and structured credit, and the proptech product roles built on those workflows.",
   "page": "alan.html",
   "dataFile": "js/alan-data.js",
   "dataGlobal": "ALAN_DATA",
@@ -20,22 +20,27 @@ window.BOARD_PROFILE = {
     {
       "key": "acquisitions",
       "label": "Acquisitions",
-      "match": "acquisi|underwrit|transaction|disposition|investment|deal"
+      "match": "acquisi|investment|transaction|disposition|deal|equity"
+    },
+    {
+      "key": "credit",
+      "label": "Credit / Debt",
+      "match": "credit|debt|underwrit|origination|lending|loan|cmbs|mortgage|structured|securitiz|servicing|agency|freddie|fannie"
     },
     {
       "key": "assetmgmt",
       "label": "Asset Mgmt",
-      "match": "asset\\s+manage|portfolio|valuation|business\\s+plan"
+      "match": "asset\\s+manage|portfolio|valuation|business\\s+plan|dispositions?"
+    },
+    {
+      "key": "product",
+      "label": "Product / Tech",
+      "match": "product|solutions?|implementation|platform|data|analytics|\\bai\\b"
     },
     {
       "key": "development",
       "label": "Development",
-      "match": "development|construction|entitlement|pre[\\s-]?development"
-    },
-    {
-      "key": "capital",
-      "label": "Capital Markets",
-      "match": "capital\\s+markets|debt|credit|financing|origination|lending|structured|mortgage"
+      "match": "development|construction|entitlement"
     }
   ],
   "categoryFallback": "acquisitions",
@@ -114,7 +119,8 @@ window.BOARD_PROFILE = {
       "assetmgr": "Asset Manager",
       "operator": "Operator",
       "famoffice": "Family Office",
-      "bank": "Bank"
+      "bank": "Bank",
+      "lending": "Lending"
     },
     "pills": {
       "bpo": "pill-dev",
@@ -167,11 +173,12 @@ window.BOARD_PROFILE = {
       "assetmgr": "pill-both",
       "operator": "pill-dev",
       "famoffice": "pill-mkt",
-      "bank": "pill-sde"
+      "bank": "pill-sde",
+      "lending": "pill-sde"
     }
   },
   "defaultLevel": "associate",
-  "emptyNote": "The bar is an investment-side real-estate role — acquisitions, underwriting, asset management, development or capital markets — sitting in New York.",
+  "emptyNote": "The bar is a commercial real-estate investing or credit role — acquisitions, underwriting, originations, asset or portfolio management, structured credit, or a proptech product role built on them — sitting in New York.",
   "captureSummary": true,
   "scoring": {
     "coolness": {
@@ -179,17 +186,19 @@ window.BOARD_PROFILE = {
       "byVertical": {
         "repe": 9,
         "assetmgr": 8,
-        "famoffice": 8,
-        "reit": 7,
+        "famoffice": 7,
+        "reit": 8,
         "developer": 7,
-        "lender": 7,
+        "lender": 9,
         "operator": 6,
-        "brokerage": 5,
-        "proptech": 6,
-        "fintech": 5,
+        "brokerage": 7,
+        "proptech": 8,
+        "fintech": 7,
         "saas": 4,
         "insurance": 5,
-        "consulting": 5
+        "consulting": 5,
+        "bank": 6,
+        "lending": 5
       },
       "default": 4
     },
@@ -254,28 +263,52 @@ window.BOARD_PROFILE = {
       "base": 0.35,
       "titleRules": [
         [
-          "\\breal\\s*estate\\s+private\\s+equity\\b|\\brepe\\b",
-          0.15
+          "\\bcmbs\\b|\\bcommercial\\s+mortgage\\b|\\bstructured\\s+(?:finance|credit)\\b",
+          0.2
         ],
         [
-          "\\bacquisitions?\\b",
-          0.12
+          "\\b(?:cre|commercial\\s+real\\s*estate)\\b[^|]{0,40}\\b(?:credit|underwrit|originat)",
+          0.2
         ],
         [
           "\\bunderwrit\\w*",
-          0.08
+          0.18
         ],
         [
-          "\\basset\\s+manage\\w*",
-          0.05
+          "\\b(?:agency|multifamily)\\b[^|]{0,30}\\b(?:lending|credit|underwrit|originat)",
+          0.18
         ],
         [
-          "\\bcapital\\s+markets\\b|\\bdebt\\b|\\bcredit\\b",
-          0.02
+          "\\bfreddie\\s*mac\\b|\\bfannie\\s*mae\\b",
+          0.18
+        ],
+        [
+          "\\breal\\s*estate\\b[^|]{0,40}\\b(?:credit|debt|lending)\\b",
+          0.16
+        ],
+        [
+          "\\basset\\s+manage\\w*|\\bportfolio\\s+manage\\w*",
+          0.12
+        ],
+        [
+          "\\breal\\s*estate\\s+private\\s+equity\\b|\\brepe\\b",
+          0.1
+        ],
+        [
+          "\\bacquisitions?\\b",
+          0.1
+        ],
+        [
+          "\\bproduct\\s+(?:manager|management|specialist|strategist|owner|lead)\\b",
+          -0.05
+        ],
+        [
+          "\\bsolutions?\\s+(?:consultant|specialist)\\b|\\bimplementation\\b",
+          -0.08
         ],
         [
           "\\bvice\\s+president\\b|\\bvp\\b|\\bdirector\\b|\\bprincipal\\b",
-          -0.18
+          -0.15
         ],
         [
           "\\bhead\\s+of\\b|\\bmanaging\\b|\\bpartner\\b",
@@ -283,15 +316,15 @@ window.BOARD_PROFILE = {
         ]
       ],
       "levelBonus": {
-        "analyst": 0.08,
+        "analyst": 0.05,
         "associate": 0.1,
-        "senior": -0.1
+        "senior": -0.08
       },
       "clamp": [
         0.05,
-        0.7
+        0.75
       ]
     }
   },
-  "poolSize": 1911
+  "poolSize": 1926
 };

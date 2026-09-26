@@ -136,7 +136,7 @@ CASES = {
     ("Acquisitions Associate",                 "repe",      True),
     ("Acquisitions Associate",                 "saas",      False),
     ("Acquisitions Analyst",                   "lender",    True),
-    ("Acquisitions Analyst",                   "fintech",   False),
+    ("Acquisitions Analyst",                   "media",     False),
     ("Associate - Acquisitions",               "reit",      True),
     ("Associate - Acquisitions",               "media",     False),
     ("Acquisition Manager, Enablement",        "consumer",  False),
@@ -147,6 +147,9 @@ CASES = {
     ("Investment Associate",                   "repe",      True),
     ("Investment Associate",                   "saas",      False),
     ("Asset Management Analyst",               "reit",      True),
+    ("Asset Management Analyst",               "media",     False),
+    # Fintech is NOT in broadVerticals: his fintech targets are product and
+    # credit roles, and those name the workflow in the title.
     ("Asset Management Analyst",               "fintech",   False),
     ("Development Associate",                  "developer", True),
     ("Underwriting Analyst",                   "lender",    True),
@@ -157,9 +160,6 @@ CASES = {
     ("Investment Banking Analyst",             "assetmgr",  False),
     ("Equity Research Associate",              "assetmgr",  False),
     ("Ratings Associate, Investment Products", "assetmgr",  False),
-    ("Underwriter II, Financial Lines",        "insurance", False),
-    ("Senior Underwriter, Political Violence", "insurance", False),
-    ("Senior Credit Underwriter (C&I)",        "bank",      False),
     ("Real Estate Acquisitions Associate",     "assetmgr",  True),
     # Fund accounting and finance operations live inside real-estate groups and
     # carry every real-estate word, but they are not the job Alan asked for.
@@ -181,6 +181,50 @@ CASES = {
     ("Maintenance Technician",                 "operator",  False),
     ("Recruiting Coordinator",                 "repe",      False),
     ("Acquisitions Intern",                    "repe",      False),
+
+    # ── the credit side he already works on ──────────────────────────────
+    ("Commercial Real Estate Underwriter",     "bank",      True),
+    ("CRE Credit Analyst",                     "bank",      True),
+    ("Real Estate Debt Originations Associate", "assetmgr", True),
+    ("CMBS Analyst",                           "assetmgr",  True),
+    ("Commercial Mortgage Backed Securities Associate", "saas", True),
+    ("Agency Multifamily Underwriter",         "lender",    True),
+    ("Freddie Mac Loan Servicing Analyst",     "lender",    True),
+    ("Structured Finance Associate, Real Estate", "assetmgr", True),
+    ("Real Estate Private Credit Associate",   "assetmgr",  True),
+    ("Multifamily Credit Underwriting Manager", "lender",   True),
+    ("Portfolio Manager, Commercial Real Estate", "bank",   True),
+    ("Underwriting Analyst",                   "lender",    True),
+    ("Asset Manager",                          "reit",      True),
+    # Credit that is not real-estate credit stays out.
+    ("Senior Credit Underwriter (C&I)",        "bank",      False),
+    ("Consumer Lending Analyst",               "bank",      False),
+    ("Auto Loan Underwriter",                  "bank",      False),
+    ("Underwriter II, Financial Lines",        "insurance", False),
+    ("Senior Underwriter, Political Violence", "insurance", False),
+
+    # ── product and proptech built on those workflows ────────────────────
+    ("Product Manager, CRE Lending",           "saas",      True),
+    ("Product Specialist, Real Estate Valuations", "saas",  True),
+    ("Real Estate Product Strategist",         "media",     True),
+    ("Product Manager",                        "proptech",  True),
+    ("Solutions Consultant",                   "proptech",  True),
+    ("Product Manager",                        "consumer",  False),
+    ("Product Manager, Acquisition",           "saas",      False),
+    # A fintech's product roles count only when the title names the workflow
+    # Alan knows. A payments PM is not a CRE underwriting PM.
+    ("Senior Product Manager - Business Lending", "fintech", True),
+    ("Staff Product Manager, Credit",          "fintech",   True),
+    ("Staff Product Manager, Payments",        "fintech",   False),
+    ("Product Manager, Mobile",                "fintech",   False),
+    ("Senior Product Manager, Crypto Wallet",  "fintech",   False),
+    ("Portfolio Manager ECM US",               "fintech",   False),
+    # Shapes that reached the board and should not have.
+    ("Learning and Development Specialist",    "fintech",   False),
+    ("Partner Development Manager",            "proptech",  False),
+    ("IT Program & Portfolio Manager",         "operator",  False),
+    ("Associate Product Manager (New Grad)",   "proptech",  False),
+    ("2027 Private Equity Analyst",            "fintech",   False),
     # Summer analyst is the internship by another name, and this board is for
     # associates. QuadReal posted a three-month one and it landed.
     ("Summer Analyst, U.S. Real Estate Debt",  "repe",      False),
