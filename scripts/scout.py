@@ -308,6 +308,17 @@ def main():
 
   names = [n.strip() for n in Path(args.names).read_text().splitlines()
            if n.strip() and not n.startswith("#")]
+  # scout-research.py proves some companies are on an ATS with no public board.
+  # Re-probing 30 slug shapes for them every sweep is pure waste, and worse, a
+  # miss looks identical to "we have not looked yet".
+  known = ROOT / "data" / "unfetchable.json"
+  if known.exists():
+    skip = json.loads(known.read_text())
+    before = len(names)
+    names = [n for n in names if n not in skip]
+    if before != len(names):
+      print(f"── skipping {before - len(names)} name(s) already proven to be on "
+            f"an ATS with no public board", file=sys.stderr)
   print(f"── probing {len(names)} name(s) across {len(ATS)} backends", file=sys.stderr)
   with ThreadPoolExecutor(max_workers=max(1, args.jobs // 4)) as p:
     hits = [h for h in p.map(lambda n: probe(n, 4), names) if h]

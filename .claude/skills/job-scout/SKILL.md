@@ -14,6 +14,11 @@ Never guess a slug into the JSON. A wrong slug is silent: the board fetches an
 empty list forever and nothing ever reports an error. Every entry you add must
 have returned real postings from a real API call in this session.
 
+Slugs are published, so **research them rather than guessing**: a company on a
+hosted ATS links to its board from its own careers page. `scripts/scout-research.py`
+follows that link. The guessing tools still exist for triaging a long list, and
+what they cost is measured below.
+
 ## What a candidate looks like
 
 `profiles/<id>.companies.json` is a flat array. One entry:
@@ -58,45 +63,92 @@ language — Sean's board wants studios and shops whose *output is visual work*,
 because `filters.titleIncludeBroad` only widens the net at the verticals listed
 in `filters.broadVerticals`.
 
-Then hand the names to `scripts/scout.py`, which does the whole resolve-and-
-verify loop in parallel:
+### Research the slug; do not guess it
+
+A slug is published. Every company on a hosted ATS links to it from its own
+careers page, so the answer exists — it just is not the company's name. Look it
+up:
 
 ```bash
-# One sector at a time — the vertical and note apply to every name in the file.
+# From names: derives the website, verifies it belongs to the company, then
+# follows careers links (across hosts) until it finds the ATS.
+python3 scripts/scout-research.py names.txt --profile alan --vertical repe \
+    --note "…" -o /tmp/found.json --report /tmp/report.json
+
+# From URLs you researched yourself — one per line, Name<TAB>url. Use this
+# whenever you have web search: it is the difference between a 25% miss rate
+# and none.
+python3 scripts/scout-research.py sites.tsv --urls --profile alan --vertical repe
+```
+
+This returns one of three things per company, and two of them are answers:
+
+- **found** — the exact slug, including the bespoke Workday triples that
+  guessing cannot reach
+- **unsupported-ats** — the company is on iCIMS, Taleo, ADP, Paycom or JazzHR,
+  which publish no machine-readable board. There is no slug to find. This is
+  recorded in `data/unfetchable.json` and `scout.py` skips those names
+  from then on.
+- **not-found / no-site** — still unknown, and left that way rather than turned
+  into a wrong guess. `no-site` means the crawler could not identify the
+  company's website; that is the case to re-run with `--urls`.
+
+**Your job when the verdict is `no-site` or `not-found`:** search the web for
+"<company> careers", open the page, and feed the URL back through `--urls`.
+That is the one step the script cannot do for itself, and it is where an agent
+is worth more than a crawler.
+
+### The guessing tools, and why they are second choice
+
+`scripts/scout.py` expands a name into plausible slugs and probes all ten
+guessable backends. It is fast and it is right often enough to be useful for a
+first pass over a large list:
+
+```bash
 python3 scripts/scout.py names.txt --profile cody \
     --vertical health --note "Health system — records and intake work." \
     -o /tmp/health.json
 ```
 
-It expands each name into plausible slugs, probes all ten public backends,
-keeps the board with the most postings, and then **proves the board belongs to
-that company** before keeping it. That last step is the one that matters: about
-40% of slugs that return postings belong to somebody else. `greenhouse/bethesda`
-is a physical-therapy practice, `greenhouse/peak` is Peak Physical Therapy,
-`ashby/phantom` is a crypto wallet. Every one of them looks like a healthy
-board.
+`scripts/scout-workday.py` does the same for Workday, whose slug is a
+three-part tuple: it finds the tenant's datacenter from a public error message
+and then tries the site-name shapes customers use.
 
-Rejections are printed with a reason, so read them — the script is deliberately
-conservative and will refuse real companies that rebranded (`greenhouse/gradle`
-declares "Develocity"). Adding those back by hand is fine; loosening the rule
-to catch them is not.
+Know what they cost. **A wrong guess is silent and a missed guess is silent**,
+and the two look identical from outside. Auditing this repo's pools with the
+research tool found 58 of 66 Workday entries returning zero postings —
+Goldman Sachs, JPMorgan, Google, Meta, the NBA — guesses that had never
+resolved and that nothing ever reported. Blackstone's dead slug sat in Thien's
+pool while `Blackstone_Careers` served 172 postings.
+
+So: research first for anything you care about getting right, guess only to
+triage a long list, and re-check guessed entries with
+
+```bash
+python3 scripts/scout-research.py <names> --report /tmp/r.json
+```
+
+### Identity is checked either way
+
+Both paths end at the same validator, because a live board is not proof it is
+the right company's board. About 40% of slugs that return postings belong to
+somebody else: `greenhouse/bethesda` is a physical-therapy practice,
+`ashby/phantom` is a crypto wallet, a Workday tenant guessed as `western` is
+Western Colorado University. It compares the name the board declares
+(Greenhouse, Teamtailor and Workday all publish one) or, failing that, requires
+the slug to match the company name exactly.
+
+Read the rejections — the validator is deliberately conservative and will
+refuse real companies that rebranded (`greenhouse/gradle` declares
+"Develocity"). Adding those back by hand is fine; loosening the rule is not.
 
 Add `--append` to write straight into the profile's candidates file. It refuses
-anything already reachable from that profile — Cody's board reads all three
+anything already reachable from that profile — several boards read several
 pools, and two entries on one ATS board render as two cards for one company
 with every posting doubled.
 
-If a company's careers page is custom, open it and look at where the "Apply"
-links point:
-`job-boards.greenhouse.io/<slug>`, `jobs.ashbyhq.com/<slug>`,
-`jobs.lever.co/<slug>`, `apply.workable.com/<slug>`, `<slug>.teamtailor.com`,
-`jobs.smartrecruiters.com/<slug>`, `<tenant>.wdN.myworkdayjobs.com/…/<site>`,
-`<slug>.recruitee.com`, `<slug>.jobs.personio.de`, `<slug>.bamboohr.com`,
-`<slug>.breezy.hr`, `<slug>.pinpointhq.com`, `ats.rippling.com/<slug>`.
-That link contains the slug, exactly. Companies on iCIMS, Taleo, Jobvite,
-Paylocity or a bespoke board have no public JSON here — skip them rather than
-inventing an entry.
-
+If a careers page is custom and the tooling cannot see through it, open it and
+look at where the "Apply" links point:
 ## Check the yield before committing to the entry
 
 A live board is not the same as a board with roles for this profile. Confirm
