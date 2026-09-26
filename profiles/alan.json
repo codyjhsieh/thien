@@ -1,0 +1,333 @@
+{
+ "id": "alan",
+ "person": "Alan",
+ "boardTitle": "Alan's Real Estate PE Board",
+ "docTitle": "alan — real estate private equity & acquisitions jobs, New York",
+ "headline": "Firms",
+ "blurb": "live New York postings on the investment side of real estate — acquisitions, underwriting, asset management, development and capital markets.",
+ "page": "alan.html",
+ "dataFile": "js/alan-data.js",
+ "dataGlobal": "ALAN_DATA",
+ "profileScript": "js/alan-profile.js",
+ "storageKey": "alan_applied",
+ "companies": [
+  "profiles/alan.companies.json",
+  "profiles/thien.companies.json",
+  "profiles/cody.companies.json"
+ ],
+ "levelOrder": [
+  "analyst",
+  "associate",
+  "senior"
+ ],
+ "filters": {
+  "geoInclude": "\\b(new[\\s-]?york|nyc|brooklyn|manhattan|queens, ny|long island city)\\b",
+  "titleCityExclude": "\\b(san francisco|los angeles|san diego|chicago|austin|dallas|fort worth|houston|san antonio|denver|phoenix|scottsdale|las vegas|salt lake city|boise|portland|seattle|bellevue|atlanta|charlotte|raleigh|nashville|memphis|tampa|orlando|jacksonville|miami|fort lauderdale|west palm beach|boca raton|naples, fl|boston|cambridge, ma|philadelphia|pittsburgh|baltimore|washington, dc|arlington, va|bethesda|richmond|columbus|cleveland|cincinnati|detroit|minneapolis|milwaukee|st\\. louis|kansas city|omaha|indianapolis|toronto|vancouver|montr[eé]al|calgary|london|dublin|frankfurt|munich|berlin|paris|madrid|milan|amsterdam|luxembourg|zurich|geneva|stockholm|copenhagen|dubai|abu dhabi|riyadh|singapore|hong kong|tokyo|sydney|melbourne|mumbai|bengaluru|bangalore|gurgaon|mexico city|s[aã]o paulo)\\b",
+  "titleInclude": "(\\breal\\s*estate\\s+private\\s+equity\\b|\\brepe\\b|\\breal\\s*estate\\b[^,|]{0,40}\\b(?:acquisitions?|investments?|private\\s+equity|asset\\s+management|portfolio\\s+management|development|capital\\s+markets|underwrit\\w*|debt|credit|equity|transactions?|dispositions?|valuations?)\\b|\\b(?:acquisitions?|investments?|asset\\s+management|portfolio\\s+management|development|capital\\s+markets|underwrit\\w*|dispositions?|valuations?)\\b[^,|]{0,40}\\breal\\s*estate\\b|\\b(?:cre|commercial\\s+real\\s*estate)\\b[^,|]{0,40}\\b(?:acquisitions?|investments?|underwrit\\w*|debt|credit|asset\\s+management)\\b|\\b(?:multifamily|industrial|office|retail|hospitality|self[\\s-]?storage|data\\s*cent(?:er|re)|life\\s+science|net\\s+lease|single[\\s-]family\\s+rental|sfr)\\b[^,|]{0,30}\\b(?:acquisitions?|investments?|underwrit\\w*|asset\\s+management)\\b)",
+  "titleIncludeBroad": "(\\b(?:investments?|acquisitions?|asset\\s+management|portfolio\\s+management|capital\\s+markets|underwriting|originations?|transactions?|development|debt|equity|fund\\s+management)\\b[^,|]{0,24}\\b(?:associate|analyst)\\b|\\b(?:associate|analyst)\\b[^,|]{0,24}\\b(?:investments?|acquisitions?|asset\\s+management|portfolio\\s+management|capital\\s+markets|underwriting|originations?|transactions?|development|debt|equity|fund\\s+management)\\b|\\binvestment\\s+(?:associate|analyst|professional)\\b|\\bacquisitions?\\s+(?:associate|analyst|manager|director|officer|lead|principal|vice\\s+president|vp)\\b|\\b(?:associate|analyst|manager|director|officer|principal|vice\\s+president|vp)[\\s,\\-–—]+(?:of\\s+)?acquisitions?\\b|\\basset\\s+manager\\b)",
+  "broadVerticals": [
+   "repe",
+   "reit",
+   "developer",
+   "operator",
+   "famoffice",
+   "brokerage",
+   "lender",
+   "proptech"
+  ],
+  "titleExclude": "(\\b(?:talent|customer|user|client|member|patient|growth|demand|traffic|audience|subscriber|lead|guest|donor|merchant|supply|driver|creator|partner|data)\\s+acquisitions?\\b|\\bacquisitions?\\s+(?:marketing|recruit\\w*|sourcer)\\b|\\b(?:business|corporate|partnership|product|software|web|frontend|front[\\s-]end|backend|back[\\s-]end|full[\\s-]?stack|game|program|fund\\s?rais\\w*|donor|membership|grants?)\\s+development\\b|\\bdevelopment\\s+(?:engineer|operations?|manager\\b[^,|]{0,20}\\bsoftware)\\b|\\b(?:software|senior\\s+software|staff\\s+software)\\s+(?:engineer|developer)\\b|\\b(?:engineer|developer|scientist|programmer|architect\\b(?!\\w))\\b|\\breal\\s*estate\\s+(?:agent|broker|salesperson|showing|photographer|coordinator\\b[^,|]{0,20}\\bmarketing)\\b|\\bleasing\\s+(?:agent|consultant|specialist|professional)\\b|\\bproperty\\s+(?:manager|management)\\b|\\b(?:maintenance|janitor\\w*|porter|groundskeeper|concierge|doorman|housekeep\\w*|security\\s+guard|technician)\\b|\\b(?:recruit\\w*|talent\\b|human\\s+resources|\\bhr\\b|payroll|benefits)\\b|\\b(?:intern|internship|co[\\s-]?op)\\b|\\b(?:teacher|professor|faculty|adjunct|instructor)\\b|\\b(?:nurse|physician|clinical|pharmac\\w*)\\b|\\binvestment\\s+bank\\w*\\b|\\bequity\\s+research\\b|\\bm\\s*&\\s*a\\b|\\bcapital\\s+structure\\s+advisory\\b|\\bcorporate\\s+advisory\\b|\\bunderwrit\\w*\\b[^,|]{0,30}\\b(?:casualty|liability|property\\s*&\\s*casualty|financial\\s+lines|political|environmental|cyber|marine|aviation|surety|workers|professional\\s+lines|specialty\\s+lines|reinsurance|c\\s*&\\s*i)\\b|\\b(?:casualty|financial\\s+lines|political\\s+violence|surety|reinsurance)\\b|\\bproduct\\s+manager\\b[^|]{0,30}\\bacquisition\\b|\\bacquisition\\b[^,|]{0,20}\\b(?:marketing|enablement|funnel|channel|performance|paid|lifecycle|retention)\\b|\\bratings?\\s+(?:associate|analyst)\\b|\\bdistressed\\s+debt\\b|\\bprivate\\s+credit\\b|\\bspecial\\s+situations\\b|\\basset\\s+based\\s+finance\\b)",
+  "levelRules": [
+   {
+    "key": "senior",
+    "match": "\\b(senior|sr\\.?|vice\\s+president|vp|principal|director|head\\s+of|managing|partner|lead|executive)\\b"
+   },
+   {
+    "key": "analyst",
+    "match": "\\b(analyst|junior|jr\\.?|entry[\\s-]level|graduate|rotational)\\b"
+   }
+  ],
+  "levelDefault": "associate"
+ },
+ "categories": [
+  {
+   "key": "all",
+   "label": "All"
+  },
+  {
+   "key": "acquisitions",
+   "label": "Acquisitions",
+   "match": "acquisi|underwrit|transaction|disposition|investment|deal"
+  },
+  {
+   "key": "assetmgmt",
+   "label": "Asset Mgmt",
+   "match": "asset\\s+manage|portfolio|valuation|business\\s+plan"
+  },
+  {
+   "key": "development",
+   "label": "Development",
+   "match": "development|construction|entitlement|pre[\\s-]?development"
+  },
+  {
+   "key": "capital",
+   "label": "Capital Markets",
+   "match": "capital\\s+markets|debt|credit|financing|origination|lending|structured|mortgage"
+  }
+ ],
+ "categoryFallback": "acquisitions",
+ "levels": [
+  {
+   "key": "all",
+   "label": "All levels"
+  },
+  {
+   "key": "analyst",
+   "label": "Analyst"
+  },
+  {
+   "key": "associate",
+   "label": "Associate"
+  },
+  {
+   "key": "senior",
+   "label": "VP+"
+  }
+ ],
+ "levelPills": {
+  "analyst": "pill-both",
+  "associate": "pill-dev",
+  "senior": "pill-ai"
+ },
+ "verticals": {
+  "labels": {
+   "bpo": "BPO / Outsourcing",
+   "health": "Health",
+   "insurance": "Insurance",
+   "legal": "Legal Services",
+   "logistics": "Logistics",
+   "staffing": "Staffing",
+   "annotation": "AI Data",
+   "research": "Research",
+   "fintech": "Fintech",
+   "proptech": "Real Estate",
+   "accounting": "Accounting",
+   "consumer": "Consumer",
+   "saas": "SaaS",
+   "marketplace": "Marketplace",
+   "media": "Media",
+   "ai": "AI",
+   "gaming": "Gaming",
+   "devtools": "Dev Tools",
+   "infra": "Infra",
+   "adtech": "AdTech",
+   "hospitality": "Hospitality",
+   "climate": "Climate",
+   "sports": "Sports",
+   "fitness": "Fitness",
+   "security": "Security",
+   "cpg": "CPG",
+   "immersive": "Immersive",
+   "animation": "Animation",
+   "vfx": "VFX",
+   "igaming": "iGaming",
+   "gametech": "Game Tech",
+   "simulation": "Simulation",
+   "archviz": "Archviz",
+   "education": "Education",
+   "travel": "Travel",
+   "energy": "Energy",
+   "retail": "Retail",
+   "telecom": "Telecom",
+   "pharma": "Pharma",
+   "consulting": "Consulting",
+   "nonprofit": "Nonprofit",
+   "industrial": "Industrial",
+   "repe": "RE Private Equity",
+   "reit": "REIT",
+   "developer": "Developer",
+   "lender": "RE Credit",
+   "brokerage": "Brokerage",
+   "assetmgr": "Asset Manager",
+   "operator": "Operator",
+   "famoffice": "Family Office",
+   "bank": "Bank"
+  },
+  "pills": {
+   "bpo": "pill-dev",
+   "health": "pill-hosp",
+   "insurance": "pill-both",
+   "legal": "pill-mkt",
+   "logistics": "pill-dev",
+   "staffing": "pill-mkt",
+   "annotation": "pill-ai",
+   "research": "pill-ai",
+   "fintech": "pill-both",
+   "proptech": "pill-hosp",
+   "accounting": "pill-both",
+   "consumer": "pill-mkt",
+   "saas": "pill-dev",
+   "marketplace": "pill-mkt",
+   "media": "pill-mkt",
+   "ai": "pill-ai",
+   "gaming": "pill-ai",
+   "devtools": "pill-dev",
+   "infra": "pill-dev",
+   "adtech": "pill-dev",
+   "hospitality": "pill-hosp",
+   "climate": "pill-hosp",
+   "sports": "pill-ai",
+   "fitness": "pill-hosp",
+   "security": "pill-dev",
+   "cpg": "pill-mkt",
+   "immersive": "pill-ai",
+   "animation": "pill-mkt",
+   "vfx": "pill-mkt",
+   "igaming": "pill-both",
+   "gametech": "pill-dev",
+   "simulation": "pill-dev",
+   "archviz": "pill-hosp",
+   "education": "pill-ai",
+   "travel": "pill-hosp",
+   "energy": "pill-hosp",
+   "retail": "pill-mkt",
+   "telecom": "pill-dev",
+   "pharma": "pill-both",
+   "consulting": "pill-both",
+   "nonprofit": "pill-mkt",
+   "industrial": "pill-dev",
+   "repe": "pill-both",
+   "reit": "pill-dev",
+   "developer": "pill-mkt",
+   "lender": "pill-ai",
+   "brokerage": "pill-hosp",
+   "assetmgr": "pill-both",
+   "operator": "pill-dev",
+   "famoffice": "pill-mkt",
+   "bank": "pill-sde"
+  }
+ },
+ "defaultLevel": "associate",
+ "emptyNote": "The bar is an investment-side real-estate role — acquisitions, underwriting, asset management, development or capital markets — sitting in New York.",
+ "captureSummary": true,
+ "scoring": {
+  "coolness": {
+   "map": {},
+   "byVertical": {
+    "repe": 9,
+    "assetmgr": 8,
+    "famoffice": 8,
+    "reit": 7,
+    "developer": 7,
+    "lender": 7,
+    "operator": 6,
+    "brokerage": 5,
+    "proptech": 6,
+    "fintech": 5,
+    "saas": 4,
+    "insurance": 5,
+    "consulting": 5
+   },
+   "default": 4
+  },
+  "candidateMult": {
+   "stageBoost": [
+    [
+     "seed|series a\\b",
+     1.05
+    ]
+   ],
+   "groupMult": {},
+   "clamp": [
+    0.5,
+    1.3
+   ]
+  },
+  "replyProb": {
+   "base": 0.18,
+   "stageTable": [
+    [
+     "seed",
+     0.28
+    ],
+    [
+     "series a\\b",
+     0.26
+    ],
+    [
+     "series b\\b",
+     0.24
+    ],
+    [
+     "series c\\b",
+     0.22
+    ],
+    [
+     "series d\\b",
+     0.2
+    ],
+    [
+     "series [efghij]\\b|public|late|acquired|private equity",
+     0.16
+    ]
+   ],
+   "groupMult": {},
+   "roleCountPenalty": [
+    [
+     40,
+     0.85
+    ],
+    [
+     15,
+     0.95
+    ]
+   ],
+   "clamp": [
+    0.06,
+    0.45
+   ]
+  },
+  "passProb": {
+   "base": 0.35,
+   "titleRules": [
+    [
+     "\\breal\\s*estate\\s+private\\s+equity\\b|\\brepe\\b",
+     0.15
+    ],
+    [
+     "\\bacquisitions?\\b",
+     0.12
+    ],
+    [
+     "\\bunderwrit\\w*",
+     0.08
+    ],
+    [
+     "\\basset\\s+manage\\w*",
+     0.05
+    ],
+    [
+     "\\bcapital\\s+markets\\b|\\bdebt\\b|\\bcredit\\b",
+     0.02
+    ],
+    [
+     "\\bvice\\s+president\\b|\\bvp\\b|\\bdirector\\b|\\bprincipal\\b",
+     -0.18
+    ],
+    [
+     "\\bhead\\s+of\\b|\\bmanaging\\b|\\bpartner\\b",
+     -0.25
+    ]
+   ],
+   "levelBonus": {
+    "analyst": 0.08,
+    "associate": 0.1,
+    "senior": -0.1
+   },
+   "clamp": [
+    0.05,
+    0.7
+   ]
+  }
+ },
+ "poolSize": 1830
+}
