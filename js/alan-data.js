@@ -45,15 +45,6 @@ const COMPANIES = [
     jobs:[
       { title:"Analyst Program - Real Estate Debt", url:"https://barings.wd1.myworkdayjobs.com/en-US/Barings/job/New-York-NY-United-States/Analyst-Program---Real-Estate-Debt_JR_006669-1", level:"analyst" }
     ] },
-  { id:"blackstone", name:"Blackstone", vertical:"assetmgr",
-    sub:"BREP / BREIT / BREDS",
-    stage:"Public", raised:"\u2014", lead:"\u2014",
-    badges:["NYSE"],
-    totalRoles:1,
-    notes:"The largest owner of commercial real estate in the world; the real-estate groups hire associates in New York.",
-    jobs:[
-      { title:"Blackstone Real Estate Debt Strategies (BREDS) Finance & Operations, Associate", url:"https://blackstone.wd1.myworkdayjobs.com/en-US/Blackstone_Careers/job/New-York/Blackstone-Real-Estate-Debt-Strategies--BREDS--Finance---Operations--Associate_42298-1", level:"associate" }
-    ] },
   { id:"stepstonegroup", name:"StepStone Group", vertical:"fintech",
     sub:"StepStone Group",
     stage:"\u2014", raised:"\u2014", lead:"\u2014",

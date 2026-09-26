@@ -293,5 +293,5 @@ window.BOARD_PROFILE = {
       ]
     }
   },
-  "poolSize": 1838
+  "poolSize": 1911
 };

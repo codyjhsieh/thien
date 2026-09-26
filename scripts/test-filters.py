@@ -161,6 +161,12 @@ CASES = {
     ("Senior Underwriter, Political Violence", "insurance", False),
     ("Senior Credit Underwriter (C&I)",        "bank",      False),
     ("Real Estate Acquisitions Associate",     "assetmgr",  True),
+    # Fund accounting and finance operations live inside real-estate groups and
+    # carry every real-estate word, but they are not the job Alan asked for.
+    ("Real Estate Development Accountant",      "brokerage", False),
+    ("Real Estate Fund Accountant",             "repe",      False),
+    ("Real Estate Debt Finance & Operations, Associate", "assetmgr", False),
+    ("Real Estate Financial Reporting Analyst", "reit",      False),
     # "Acquisition" belongs to recruiting and marketing at least as often as it
     # belongs to real estate, and "development" belongs to sales and software.
     ("Talent Acquisition Partner",             "repe",      False),
