@@ -16,7 +16,7 @@
  *           totalRoles, notes, jobs[{ title, url, level, posted, added }] }
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  */
-const COMPANIES_VERIFIED_AT = '2026-09-09';
+const COMPANIES_VERIFIED_AT = '2026-09-25';
 const COMPANIES = [
   { id:"camber", name:"Camber", vertical:"ai",
     sub:"AI medical billing + RCM",
@@ -76,11 +76,13 @@ const COMPANIES = [
     sub:"Great Minds",
     stage:"\u2014", raised:"\u2014", lead:"\u2014",
     badges:[],
-    totalRoles:2,
+    totalRoles:4,
     notes:"Language, tutoring or classroom-software company \u2014 roster, lesson and content administration.",
     jobs:[
-      { title:"IT Product Support Specialist", url:"https://greatminds.recruitee.com/o/it-product-support-specialist", level:"entry", added:"2026-09-09", posted:"2026-09-01", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", summary:"Application Support and Incident Management: Provide first- and second-level support for business systems such as Salesforce, NetSuite, Dayforce, and others." },
-      { title:"Technical Support Specialist", url:"https://greatminds.recruitee.com/o/technical-support-specialist-1", level:"entry", added:"2026-09-09", posted:"2026-08-19", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", years:0, summary:"Great Minds is a high-growth, mission-driven organization founded by educators in 2007. As a for-profit, Public Benefit Corporation, we believe all students deserve access to meaningful…" }
+      { title:"Technical Support Specialist", url:"https://greatminds.recruitee.com/o/technical-support-specialist-1", level:"entry", added:"2026-09-09", posted:"2026-08-19", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", years:0, summary:"Great Minds is a high-growth, mission-driven organization founded by educators in 2007. As a for-profit, Public Benefit Corporation, we believe all students deserve access to meaningful…" },
+      { title:"Customer Support Representative (PST Hours)", url:"https://greatminds.recruitee.com/o/customer-support-representative-pst-hours", level:"entry", added:"2026-09-19", posted:"2026-09-10", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", summary:"Serve as the primary point of contact for customer inquiries related to orders, shipments, and product information." },
+      { title:"IT Product Support Specialist (Salesforce)", url:"https://greatminds.recruitee.com/o/it-product-support-specialist-salesforce", level:"entry", added:"2026-09-19", posted:"2026-09-01", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", summary:"Application Support and Incident Management: Provide first- and second-level support for business systems such as Salesforce, NetSuite, Dayforce, and others." },
+      { title:"Pre-Sales Product Specialist - West", url:"https://greatminds.recruitee.com/o/pre-sales-product-specialist-west-4", level:"entry", added:"2026-09-22", posted:"2026-09-21", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", summary:"Deliver compelling, market-driven sales presentations that effectively communicate the value of Great Minds' curricula." }
     ] },
   { id:"osano", name:"Osano", vertical:"security",
     sub:"Osano",
@@ -90,6 +92,33 @@ const COMPANIES = [
     notes:"Israeli security, privacy or analytics company \u2014 alert triage and account administration.",
     jobs:[
       { title:"Customer Experience Operations Specialist", url:"https://job-boards.greenhouse.io/osano/jobs/5418379008", level:"entry", added:"2026-09-09", posted:"2026-09-08", pay:{"min":19,"max":28,"interval":"hour"}, paySource:"estimate", summary:"As a Customer Experience Operations Specialist, you'll help improve and scale Osano's self-service customer experience by understanding how customers engage with our product, identifying…" }
+    ] },
+  { id:"midihealth", name:"Midi Health", vertical:"health",
+    sub:"Midi Health",
+    stage:"\u2014", raised:"\u2014", lead:"\u2014",
+    badges:[],
+    totalRoles:1,
+    notes:"Digital health or diagnostics operator \u2014 intake, records and claims work.",
+    jobs:[
+      { title:"Operations & Customer Support Associate, Pharmacy", url:"https://job-boards.greenhouse.io/midihealth/jobs/4668052005", level:"entry", added:"2026-09-23", posted:"2026-09-22", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", years:1, summary:"Operations & Customer Support Associate, Pharmacy: 💊📋 📍 Remote, US-Based Reports to: Operations Manager, E-Commerce The Operations & Customer Support Associate, Pharmacy will play a key…" }
+    ] },
+  { id:"bloomerang", name:"Bloomerang", vertical:"health",
+    sub:"Bloomerang",
+    stage:"\u2014", raised:"\u2014", lead:"\u2014",
+    badges:[],
+    totalRoles:1,
+    notes:"Health system, payer or digital-health operator \u2014 high-volume records, intake and claims work.",
+    jobs:[
+      { title:"Customer Support Specialist (CST/MST/PST)", url:"https://job-boards.greenhouse.io/bloomerang/jobs/4640022005", level:"entry", added:"2026-09-24", posted:"2026-09-23", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", summary:"As a Customer Support Specialist, you will provide excellent customer service and day-to-day support for all of Bloomerang’s customers by answering their Bloomerang questions via email…" }
+    ] },
+  { id:"smiledigitalhealth", name:"Smile Digital Health", vertical:"health",
+    sub:"Smile Digital Health",
+    stage:"\u2014", raised:"\u2014", lead:"\u2014",
+    badges:[],
+    totalRoles:1,
+    notes:"Payer, CRO or health-data company \u2014 claims, trial and patient-record administration.",
+    jobs:[
+      { title:"Delivery Operations Specialist ( Remote US)", url:"https://jobs.lever.co/smiledigitalhealth/42224f40-5f23-4168-bbab-4cedce3ec2a3", level:"entry", added:"2026-09-25", posted:"2026-09-24", pay:{"min":19,"max":28,"interval":"hour"}, paySource:"estimate", summary:"Working for a company like Smile Digital Health means supporting our mandate for #BetterGlobalHealth." }
     ] }
 ];
 
