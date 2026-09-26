@@ -175,6 +175,11 @@ CASES = {
     ("Maintenance Technician",                 "operator",  False),
     ("Recruiting Coordinator",                 "repe",      False),
     ("Acquisitions Intern",                    "repe",      False),
+    # Summer analyst is the internship by another name, and this board is for
+    # associates. QuadReal posted a three-month one and it landed.
+    ("Summer Analyst, U.S. Real Estate Debt",  "repe",      False),
+    ("Real Estate Summer Associate",           "repe",      False),
+    ("Analyst Program - Real Estate Debt",     "assetmgr",  True),
   ],
   "sean": [
     # The title names the game/real-time pipeline — counts anywhere.

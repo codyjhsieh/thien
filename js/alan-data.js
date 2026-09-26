@@ -36,12 +36,21 @@ const COMPANIES = [
     jobs:[
       { title:"Senior Special Servicing Asset Manager", url:"https://arbor.com/jobs?gh_jid=7850005003", level:"senior", years:5, summary:"The Senior Special Servicing Asset Manager is responsible for managing the Special Servicing of a portfolio of Agency (Freddie Mac and/or Fannie Mae) loans, which are in default or\u2026" }
     ] },
-  { id:"blackstone", name:"Blackstone", vertical:"fintech",
-    sub:"Alt asset manager (NYSE: BX)",
-    stage:"Public", raised:"(NYSE: BX)", lead:"NYSE",
+  { id:"barings", name:"Barings", vertical:"assetmgr",
+    sub:"Barings",
+    stage:"\u2014", raised:"\u2014", lead:"\u2014",
+    badges:[],
+    totalRoles:1,
+    notes:"Real-estate investment manager, NYC owner-developer or real-estate credit shop \u2014 acquisitions, asset management and development.",
+    jobs:[
+      { title:"Analyst Program - Real Estate Debt", url:"https://barings.wd1.myworkdayjobs.com/en-US/Barings/job/New-York-NY-United-States/Analyst-Program---Real-Estate-Debt_JR_006669-1", level:"analyst" }
+    ] },
+  { id:"blackstone", name:"Blackstone", vertical:"assetmgr",
+    sub:"BREP / BREIT / BREDS",
+    stage:"Public", raised:"\u2014", lead:"\u2014",
     badges:["NYSE"],
     totalRoles:1,
-    notes:"NYC HQ.",
+    notes:"The largest owner of commercial real estate in the world; the real-estate groups hire associates in New York.",
     jobs:[
       { title:"Blackstone Real Estate Debt Strategies (BREDS) Finance & Operations, Associate", url:"https://blackstone.wd1.myworkdayjobs.com/en-US/Blackstone_Careers/job/New-York/Blackstone-Real-Estate-Debt-Strategies--BREDS--Finance---Operations--Associate_42298-1", level:"associate" }
     ] },

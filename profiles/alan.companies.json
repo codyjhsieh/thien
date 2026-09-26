@@ -923,5 +923,96 @@
    "NYSE"
   ],
   "notes": "The largest owner of commercial real estate in the world; the real-estate groups hire associates in New York."
+ },
+ {
+  "id": "rxr",
+  "name": "RXR",
+  "ats": "greenhouse",
+  "slug": "rxr",
+  "vertical": "repe",
+  "sub": "RXR",
+  "stage": "—",
+  "raised": "—",
+  "lead": "—",
+  "badges": [],
+  "notes": "Real-estate investment manager, NYC owner-developer or real-estate credit shop — acquisitions, asset management and development."
+ },
+ {
+  "id": "arrived",
+  "name": "Arrived",
+  "ats": "breezy",
+  "slug": "arrived",
+  "vertical": "repe",
+  "sub": "Arrived",
+  "stage": "—",
+  "raised": "—",
+  "lead": "—",
+  "badges": [],
+  "notes": "Real-estate investment manager, NYC owner-developer or real-estate credit shop — acquisitions, asset management and development."
+ },
+ {
+  "id": "enterprisecommunitypartners",
+  "name": "Enterprise Community Partners",
+  "ats": "workday",
+  "slug": "enterprisecommunity/wd5/EnterpriseCareers",
+  "vertical": "operator",
+  "sub": "Enterprise Community Partners",
+  "stage": "—",
+  "raised": "—",
+  "lead": "—",
+  "badges": [],
+  "notes": "Real-estate investment manager, NYC owner-developer or real-estate credit shop — acquisitions, asset management and development."
+ },
+ {
+  "id": "barings",
+  "name": "Barings",
+  "ats": "workday",
+  "slug": "barings/wd1/Barings",
+  "vertical": "assetmgr",
+  "sub": "Barings",
+  "stage": "—",
+  "raised": "—",
+  "lead": "—",
+  "badges": [],
+  "notes": "Real-estate investment manager, NYC owner-developer or real-estate credit shop — acquisitions, asset management and development."
+ },
+ {
+  "id": "oxfordpropertiesgroup",
+  "name": "Oxford Properties Group",
+  "ats": "workday",
+  "slug": "oxford/wd5/Oxford",
+  "vertical": "repe",
+  "sub": "Oxford Properties Group",
+  "stage": "—",
+  "raised": "—",
+  "lead": "—",
+  "badges": [],
+  "notes": "Real-estate investment manager, NYC owner-developer or real-estate credit shop — acquisitions, asset management and development."
+ },
+ {
+  "id": "quadrealpropertygroup",
+  "name": "QuadReal Property Group",
+  "ats": "workday",
+  "slug": "quadreal/wd10/Quadreal",
+  "vertical": "repe",
+  "sub": "QuadReal Property Group",
+  "stage": "—",
+  "raised": "—",
+  "lead": "—",
+  "badges": [],
+  "notes": "Real-estate investment manager, NYC owner-developer or real-estate credit shop — acquisitions, asset management and development."
+ },
+ {
+  "id": "lendlease",
+  "name": "Lendlease",
+  "ats": "workday",
+  "slug": "lendlease/wd3/LendleaseCareers",
+  "vertical": "developer",
+  "sub": "Lendlease",
+  "stage": "—",
+  "raised": "—",
+  "lead": "—",
+  "badges": [],
+  "notes": "Real-estate investment manager, NYC owner-developer or real-estate credit shop — acquisitions, asset management and development."
  }
 ]
