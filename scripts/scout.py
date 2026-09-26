@@ -24,12 +24,14 @@ slug and the name reduce to the same string. Everything else is reported and
 dropped — a rejected real company costs one line in a name file next time, a
 kept wrong one costs the board's credibility.
 
-The weak spot that remains is a *sandbox* tenant: pinpoint/zendesk declares
-itself "Zendesk Inc" and serves four plausible-looking postings that the real
-Zendesk never wrote. A demo board that claims a matching name is not
-distinguishable from a small real employer by anything cheap, so slug-only
-matches (Lever and Pinpoint publish no board name) are the least trustworthy
-entries here. Spot-check those before a large append.
+The weak spot that remains is a company whose board is on an ATS that declares
+no name, under a slug that matches exactly, and whose content belongs to
+somebody else with the same name — personio/kettler is exactly "Kettler", and
+serves German bicycle-mechanic roles for the sports brand, not the Virginia
+multifamily developer. Nothing cheap separates those. Slug-only matches (Lever,
+Ashby, Personio, BambooHR, Breezy and Pinpoint publish no board name) stay the
+least trustworthy entries here, so read a sample of their postings before a
+large append.
 
 Nothing is written to profiles/ unless --append is passed.
 """
@@ -60,12 +62,55 @@ FILLER = ("inc", "llc", "ltd", "limited", "corp", "corporation", "company",
 PLACEHOLDER = re.compile(r"^(test job|sample|example|employee\s*#|open position|"
                          r"position title|screening call|job title|your job|new job)", re.I)
 
+# Demo tenants do not announce themselves — pinpoint/zendesk and
+# pinpoint/greystone both declare a matching company name and serve four
+# plausible-looking postings. What gives them away is that they serve the SAME
+# four, and so do bamboohr/whalerockcapital and bamboohr/beachpointcapital: one
+# sample dataset seeded into every sales sandbox on that ATS.
+#
+# Matched as whole sets, not as a pooled vocabulary. "Software Engineer" and
+# "General Application" are ordinary titles, so a board is only a sandbox when
+# everything on it sits inside ONE of these known sets — a real three-person
+# board that happens to share two titles with a demo is not evidence of
+# anything. Add a set whenever another shared corpus turns up.
+DEMO_CORPORA = [
+  # Pinpoint
+  {"customer service rep", "head of dei - uk", "marketing manager",
+   "marketing executive"},
+  {"senior data engineer, embedded"},
+  # BambooHR
+  {"financial analyst", "general application", "it security engineer",
+   "marketing manager", "software engineer"},
+]
+# A sandbox is small; a real employer sharing a title set with one by chance is
+# likelier the bigger the board, so the check only applies below this.
+DEMO_MAX_POSTINGS = 8
+
+
 # Ignored when comparing a company name to a board's declared name: they carry
 # no identifying information, so matching on them alone means nothing.
-STOP = {"inc", "llc", "ltd", "corp", "corporation", "company", "co", "group",
-        "global", "the", "of", "and", "services", "solutions", "technologies",
-        "technology", "systems", "holdings", "international", "com", "io",
-        "ai", "labs"}
+STOP = {"inc", "llc", "ltd", "limited", "lp", "plc", "corp", "corporation", "company",
+        "companies", "co", "group", "global", "the", "of", "and", "services",
+        "solutions", "technologies", "technology", "systems", "holdings",
+        "holdco", "international", "com", "io", "ai", "labs",
+        # Industry suffixes. A declared name is usually the legal entity doing
+        # the hiring, and it swaps one of these for another: Regions Financial
+        # hires as "Regions Bank", PNC Financial Services as "PNC Bank", Truist
+        # Securities as "Truist Bank". Treating them as filler recovers those
+        # without letting a different industry through — "Western Alliance
+        # Bancorporation" still will not match "Western Colorado University",
+        # because "university" is not on this list and "alliance" is not in it.
+        "financial", "finance", "bank", "banking", "bancorp", "bancorporation",
+        "bancshares", "securities", "capital", "management", "mgmt", "advisors",
+        "advisers", "associates", "partners", "asset", "assets", "investment",
+        "investments", "insurance", "assurance", "mortgage", "trust", "realty",
+        "properties", "property", "estate", "real"}
+
+# Acronyms are how a lot of finance identifies itself, and a three-letter core
+# is too short to match by containment: "JLL" hires as "*US AMR-JLL", CIBC as
+# "Canadian Imperial Bank of Commerce". Below this length the comparison changes
+# shape rather than getting looser.
+ACRONYM_MAX = 4
 
 
 def norm(x: str) -> str:
@@ -73,8 +118,43 @@ def norm(x: str) -> str:
   return re.sub(r"[^a-z0-9]", "", x.lower())
 
 
-def core(name: str) -> set[str]:
-  return {w for w in re.sub(r"[^a-z0-9 ]", " ", name.lower()).split() if w not in STOP}
+def core(name: str) -> str:
+  """The distinctive part of a name, normalised: filler words dropped."""
+  return "".join(w for w in re.sub(r"[^a-z0-9 ]", " ", name.lower()).split()
+                 if w not in STOP)
+
+
+def same_company(name: str, declared: str) -> bool:
+  """Does the board's declared name describe the company we asked for?
+
+  Containment either way on the distinctive core, with two escapes for the ways
+  finance names itself. The word-overlap test this replaces accepted any single
+  shared word, which is not identification: a Workday tenant guessed as
+  "western" declares "Western Colorado University" and shares the word
+  "Western" with Western Alliance Bancorporation.
+  """
+  # What this cannot do: separate two real companies whose names differ only by
+  # an industry suffix. "Heartland Financial" (Iowa) and "Heartland Bank
+  # Limited" (New Zealand) both reduce to "Heartland", as do Prudential
+  # Financial and Prudential Assurance. Those pass, and the geography filter is
+  # what stops them reaching a board — a pool entry that never yields a posting
+  # is noise, where a wrong company on the board is a lie.
+  a, b = core(name), core(declared)
+  if not a or not b:
+    return False
+  # Short core: treat it as an acronym. It counts if it appears as its own token
+  # in the declared name, or if the declared name's initials spell it.
+  if len(a) <= ACRONYM_MAX or len(b) <= ACRONYM_MAX:
+    short, long_raw = (a, declared) if len(a) <= len(b) else (b, name)
+    tokens = re.sub(r"[^a-z0-9]+", " ", long_raw.lower()).split()
+    if short in tokens:
+      return True
+    # Initials the way people actually abbreviate: every word counts except the
+    # joining ones. CIBC is Canadian Imperial Bank of Commerce, so "bank" has to
+    # contribute its B even though it is filler for containment.
+    initials = "".join(t[0] for t in tokens if t not in {"of", "and", "the", "for"})
+    return short == initials or norm(name) == norm(declared)
+  return a in b or b in a
 
 
 def variants(name: str, limit=7) -> list[str]:
@@ -110,6 +190,25 @@ def declared_name(ats: str, slug: str) -> str:
   if ats == "teamtailor":
     host = slug if "." in slug else f"{slug}.teamtailor.com"
     return (rc.curl_json(f"https://{host}/jobs.json") or {}).get("title") or ""
+  if ats == "workday":
+    # Workday publishes no board name, but every job detail carries
+    # hiringOrganization — the legal entity doing the hiring. It costs one
+    # extra request and it is the only thing standing between a guessed tenant
+    # and somebody else's board, so it is worth the request.
+    try:
+      tenant, wdn, site = slug.split("/", 2)
+    except ValueError:
+      return ""
+    base = f"https://{tenant}.{wdn}.myworkdayjobs.com/wday/cxs/{tenant}/{site}"
+    listing = rc.curl_json(f"{base}/jobs", method="POST",
+                           body=json.dumps({"appliedFacets": {}, "limit": 1,
+                                            "offset": 0, "searchText": ""}),
+                           referer=f"https://{tenant}.{wdn}.myworkdayjobs.com/en-US/{site}")
+    posts = (listing or {}).get("jobPostings") or []
+    if not posts:
+      return ""
+    d = rc.curl_json(f"{base}{posts[0].get('externalPath', '')}")
+    return ((d or {}).get("hiringOrganization") or {}).get("name") or ""
   return ""
 
 
@@ -129,21 +228,33 @@ def validate(hit) -> tuple[str, str, str, int, str, str]:
   # whole board is one title.
   if 1 < len(titles) <= 3 and len(set(titles)) == 1:
     return name, ats, slug, n, "REJECT-sandbox", f"{len(titles)}x {titles[0]!r} and nothing else"
+  lowered = {t.strip().lower() for t in titles}
+  if lowered and len(titles) <= DEMO_MAX_POSTINGS:
+    for corpus in DEMO_CORPORA:
+      if lowered <= corpus:
+        return name, ats, slug, n, "REJECT-sandbox", \
+               "whole board is shared demo content: " + " / ".join(sorted(lowered))
 
   d = declared_name(ats, slug)
   if d:
-    ok = norm(d) == norm(name) or bool(core(name) & core(d))
+    ok = norm(d) == norm(name) or same_company(name, d)
     return name, ats, slug, n, ("OK-name" if ok else "REJECT-wrongco"), f"declared {d!r}"
 
-  # No declared name to go on, so the slug has to carry the identity. An exact
-  # match is strong at any length (ashby/miro is Miro); a prefix match needs
-  # length, or a common word could claim somebody else's board.
-  a, b = norm(name), norm(slug)
+  # No declared name to go on, so the slug has to carry the identity alone, and
+  # it has to carry all of it: exact match after normalising. The prefix rule
+  # this replaces is where every wrong-company error clustered — ashby/level
+  # for "Level Group" is a game studio in Austin, pinpoint/continuum for
+  # "Continuum Company" is a firm in Jersey. Dropping a word off the end of a
+  # company name and calling the remainder a match is not identification.
+  # Workday's slug is "tenant/wdN/site"; only the tenant carries identity, so
+  # comparing the whole triple to a company name always fails. This path is the
+  # fallback for when the hiringOrganization lookup came back empty.
+  ident = slug.split("/", 1)[0] if ats == "workday" else slug
+  a, b = norm(name), norm(ident)
   if a == b and len(b) >= 3:
     return name, ats, slug, n, "OK-slug", f"slug == name ({b})"
-  if (a.startswith(b) or b.startswith(a)) and len(b) >= 5:
-    return name, ats, slug, n, "OK-slug", f"slug ~ name ({b})"
-  return name, ats, slug, n, "REJECT-weakslug", f"slug {slug!r} does not track {name!r}"
+  return name, ats, slug, n, "REJECT-weakslug", \
+         f"{ident!r} is not exactly {name!r} and this board declares no name"
 
 
 def append_to_pool(entries, profile_id, pool_path: Path):

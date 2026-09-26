@@ -44,7 +44,8 @@ BENIGN_DESCRIPTION = (
 # Which ATS shape to synthesise. A profile that requires a description must be
 # probed with a backend that carries one in its listing (Lever), or every case
 # would fail on "no description" rather than on the thing it tests.
-PROBE_ATS = {"cody": "lever", "sean": "greenhouse", "thien": "greenhouse"}
+PROBE_ATS = {"cody": "lever", "sean": "greenhouse", "thien": "greenhouse",
+             "alan": "greenhouse"}
 
 
 def probe_row(pid, title, loc):
@@ -58,16 +59,28 @@ def probe_row(pid, title, loc):
 
 
 GEO_PROBE_TITLE = {"sean": "Environment Artist", "thien": "Operations Analyst",
-                   "cody": "Data Entry Clerk"}
+                   "cody": "Data Entry Clerk",
+                   "alan": "Real Estate Acquisitions Associate"}
 
 # A location each profile accepts, so a title case fails on the title
 # rather than on geography.
 TITLE_PROBE_LOC = {"sean": "New York, NY", "thien": "New York, NY",
-                   "cody": "Remote, US"}
+                   "cody": "Remote, US", "alan": "New York, NY"}
 
 # (location, expected lane) — "out" means the role should not appear at all.
 # A profile with no geoRemote never produces "remote".
 GEO_CASES = {
+  # Alan's board is New York or nothing: no remote lane, so a remote posting is
+  # simply out rather than tagged.
+  "alan": [
+    ("New York, NY",                "nyc"),
+    ("Manhattan, New York",         "nyc"),
+    ("New York, NY / Stamford, CT", "nyc"),
+    ("Remote - US",                 "out"),
+    ("Dallas, TX",                  "out"),
+    ("London, United Kingdom",      "out"),
+    ("Newark, NJ",                  "out"),
+  ],
   "sean": [
     ("New York, NY",                                    "nyc"),
     ("Brooklyn, New York",                              "nyc"),
@@ -107,6 +120,62 @@ GEO_CASES = {
 }
 
 CASES = {
+  "alan": [
+    # The title itself says real-estate investment — counts at any employer,
+    # including a bank, an insurer or a company buying its own buildings.
+    ("Real Estate Private Equity Associate",   "saas",      True),
+    ("Associate, Real Estate Acquisitions",    "consumer",  True),
+    ("Real Estate Investments Associate",      "insurance", True),
+    ("Analyst, Real Estate Capital Markets",   "fintech",   True),
+    ("Multifamily Acquisitions Associate",     "saas",      True),
+    ("Real Estate Asset Management Associate", "saas",      True),
+    # "Acquisitions Associate" with no property word in it is a real-estate job
+    # at a real-estate firm and a corp-dev or growth job anywhere else, so it
+    # sits in the broad lane rather than the strict one. The Farmer's Dog posts
+    # an "Acquisition Manager" and Figma a "Product Manager, Acquisition".
+    ("Acquisitions Associate",                 "repe",      True),
+    ("Acquisitions Associate",                 "saas",      False),
+    ("Acquisitions Analyst",                   "lender",    True),
+    ("Acquisitions Analyst",                   "fintech",   False),
+    ("Associate - Acquisitions",               "reit",      True),
+    ("Associate - Acquisitions",               "media",     False),
+    ("Acquisition Manager, Enablement",        "consumer",  False),
+    ("Product Manager, Acquisition",           "saas",      False),
+    # The broad lane widens the net only where the firm's business IS real
+    # estate. "Investment Associate" at a venture fund is a different job with
+    # the same words in it.
+    ("Investment Associate",                   "repe",      True),
+    ("Investment Associate",                   "saas",      False),
+    ("Asset Management Analyst",               "reit",      True),
+    ("Asset Management Analyst",               "fintech",   False),
+    ("Development Associate",                  "developer", True),
+    ("Underwriting Analyst",                   "lender",    True),
+    # A diversified manager, a bank and an insurer all have a real-estate desk,
+    # but almost everything they post is something else. Their verticals are
+    # outside broadVerticals, so only a title that names real estate counts.
+    ("Investment Associate, Private Credit",   "assetmgr",  False),
+    ("Investment Banking Analyst",             "assetmgr",  False),
+    ("Equity Research Associate",              "assetmgr",  False),
+    ("Ratings Associate, Investment Products", "assetmgr",  False),
+    ("Underwriter II, Financial Lines",        "insurance", False),
+    ("Senior Underwriter, Political Violence", "insurance", False),
+    ("Senior Credit Underwriter (C&I)",        "bank",      False),
+    ("Real Estate Acquisitions Associate",     "assetmgr",  True),
+    # "Acquisition" belongs to recruiting and marketing at least as often as it
+    # belongs to real estate, and "development" belongs to sales and software.
+    ("Talent Acquisition Partner",             "repe",      False),
+    ("Customer Acquisition Manager",           "repe",      False),
+    ("User Acquisition Associate",             "saas",      False),
+    ("Business Development Associate",         "repe",      False),
+    ("Software Engineer, Real Estate Platform", "proptech", False),
+    # Property-side work at a real-estate firm is not the investment side.
+    ("Leasing Consultant",                     "reit",      False),
+    ("Property Manager",                       "operator",  False),
+    ("Real Estate Agent",                      "brokerage", False),
+    ("Maintenance Technician",                 "operator",  False),
+    ("Recruiting Coordinator",                 "repe",      False),
+    ("Acquisitions Intern",                    "repe",      False),
+  ],
   "sean": [
     # The title names the game/real-time pipeline — counts anywhere.
     ("Environment Artist",                      "gaming",   True),
@@ -469,10 +538,61 @@ def run_gone() -> int:
   return bad
 
 
+# ── company identity ──────────────────────────────────────────────────────
+# scout.py decides whether a board belongs to the company we named. Every case
+# below is a real board it got wrong at some point. This runs offline: it tests
+# the comparison, not the network.
+IDENTITY_CASES = [
+  # The declared name is the legal entity doing the hiring, so it routinely
+  # swaps one industry suffix for another, or names a subsidiary.
+  ("Blackstone", "64012 Blackstone Real Estate Advisors LP", True),
+  ("Carlyle Group", "1P284 THE CARLYLE GROUP EMPLOYEE CO., LLC", True),
+  ("Brookfield Asset Management", "Brookfield", True),
+  ("Regions Financial", "Regions Bank", True),
+  ("PNC Financial Services", "PNC Bank, National Association", True),
+  ("Truist Securities", "Truist Bank", True),
+  ("Simon Property Group", "Simon Management Associates II, LLC", True),
+  ("Savills", "Savills plc", True),
+  # Finance abbreviates itself, so a short core is compared as an acronym.
+  ("JLL", "*US AMR-JLL Corporate Headquarters", True),
+  ("CIBC", "Canadian Imperial Bank of Commerce", True),
+  ("AIG", "AIG MEXICO SEGUROS INTERAMERICANA", True),
+  # Sharing one word is not identification. A Workday tenant guessed as
+  # "western" for Western Alliance Bancorporation is a Colorado university.
+  ("Western Alliance Bancorporation", "Western Colorado University", False),
+  ("Wunderman Thompson", "VML", False),
+  ("Gradle", "Develocity", False),
+  ("Zendesk", "Acme Widgets", False),
+  # Known limitation, asserted rather than hidden: two real companies separated
+  # only by an industry suffix cannot be told apart by name. Geography is what
+  # keeps Heartland Bank of New Zealand off a New York board.
+  ("Heartland Financial", "C200 Heartland Bank Limited", True),
+]
+
+
+def run_identity() -> int:
+  spec = importlib.util.spec_from_file_location("scout", ROOT / "scripts" / "scout.py")
+  sc = importlib.util.module_from_spec(spec)
+  argv, sys.argv = sys.argv, ["scout"]
+  try:
+    spec.loader.exec_module(sc)
+  finally:
+    sys.argv = argv
+  bad = 0
+  for name, declared, want in IDENTITY_CASES:
+    if sc.same_company(name, declared) != want:
+      bad += 1
+      print(f"  ✗ identity: {name!r} vs {declared!r} expected "
+            f"{'same' if want else 'different'}", file=sys.stderr)
+  if not bad:
+    print(f"   ✓ identity: {len(IDENTITY_CASES)} company-name case(s) pass")
+  return bad
+
+
 def main():
   ids = sys.argv[1:] or sorted(
     p.stem for p in (ROOT / "profiles").glob("*.json") if not p.name.endswith(".companies.json"))
-  sys.exit(1 if sum(run(i) + run_geo(i) + run_pay(i) + run_screens(i) + run_require_description(i) for i in ids) + run_summary() + run_years() + run_demands() + run_gone() else 0)
+  sys.exit(1 if sum(run(i) + run_geo(i) + run_pay(i) + run_screens(i) + run_require_description(i) for i in ids) + run_summary() + run_years() + run_demands() + run_gone() + run_identity() else 0)
 
 
 if __name__ == "__main__":

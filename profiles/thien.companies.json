@@ -23,7 +23,7 @@
   "ats": "greenhouse",
   "slug": "anthropic",
   "vertical": "ai",
-  "sub": "Claude \u2014 AI safety lab",
+  "sub": "Claude — AI safety lab",
   "stage": "Series F",
   "raised": "$18B+",
   "lead": "Amazon",
@@ -230,7 +230,7 @@
   "ats": "ashby",
   "slug": "cognition",
   "vertical": "ai",
-  "sub": "Devin \u2014 autonomous SWE agent",
+  "sub": "Devin — autonomous SWE agent",
   "stage": "Series A",
   "raised": "$196M",
   "lead": "Founders Fund",
@@ -1050,7 +1050,7 @@
    "NASDAQ",
    "Norwest"
   ],
-  "notes": "Telehealth platform \u2014 therapy networks, intake, claims.",
+  "notes": "Telehealth platform — therapy networks, intake, claims.",
   "domain": "talkspace.com"
  },
  {
@@ -1331,7 +1331,7 @@
    "First Round",
    "Benchmark"
   ],
-  "notes": "Spreadsheet \u2192 app builder. Real-time sync + visual programming.",
+  "notes": "Spreadsheet → app builder. Real-time sync + visual programming.",
   "domain": "glideapps.com"
  },
  {
@@ -1384,7 +1384,7 @@
    "a16z",
    "Founders Fund"
   ],
-  "notes": "Public co. Mobility platform \u2014 matching, payments, mapping.",
+  "notes": "Public co. Mobility platform — matching, payments, mapping.",
   "domain": "lyft.com"
  },
  {
@@ -1435,7 +1435,7 @@
    "Founders Fund",
    "Y Combinator"
   ],
-  "notes": "Strategic finance \u2014 budgeting + forecasting. Now part of HiBob HR platform; still has standalone product team.",
+  "notes": "Strategic finance — budgeting + forecasting. Now part of HiBob HR platform; still has standalone product team.",
   "domain": "mosaic.tech"
  },
  {
@@ -2044,7 +2044,7 @@
   "badges": [
    "YC W24"
   ],
-  "notes": "Enterprise AI compliance platform \u2014 legal/compliance review of marketing content in regulated industries (fintech, healthcare, pharma). LLMs + workflow + integrations.",
+  "notes": "Enterprise AI compliance platform — legal/compliance review of marketing content in regulated industries (fintech, healthcare, pharma). LLMs + workflow + integrations.",
   "domain": "blee.com"
  },
  {
@@ -2094,7 +2094,7 @@
   "badges": [
    "a16z"
   ],
-  "notes": "AI-native creative platform \u2014 boards / sketches / prompts. Multimodal + design-tool depth.",
+  "notes": "AI-native creative platform — boards / sketches / prompts. Multimodal + design-tool depth.",
   "domain": "florafauna.ai"
  },
  {
@@ -2180,7 +2180,7 @@
    "Tiger",
    "Avenir"
   ],
-  "notes": "Hourly-worker training SaaS \u2014 built for restaurants + hospitality. Mobile-first.",
+  "notes": "Hourly-worker training SaaS — built for restaurants + hospitality. Mobile-first.",
   "domain": "opus.so"
  },
  {
@@ -2420,7 +2420,7 @@
    "NFDG",
    "Spark"
   ],
-  "notes": "AI note-taking \u2192 enterprise AI workspace; $1.5B valuation (Mar 2026). ASR, summarization, LLM eval."
+  "notes": "AI note-taking → enterprise AI workspace; $1.5B valuation (Mar 2026). ASR, summarization, LLM eval."
  },
  {
   "id": "huggingface",
@@ -2590,7 +2590,7 @@
    "General Catalyst",
    "Eldridge"
   ],
-  "notes": "NYC rewards network \u2014 points on rent. Loyalty + payments.",
+  "notes": "NYC rewards network — points on rent. Loyalty + payments.",
   "domain": "biltrewards.com"
  },
  {
@@ -2624,7 +2624,7 @@
    "a16z",
    "Khosla"
   ],
-  "notes": "Reactive backend \u2014 DB + functions + real-time. TS-first DX."
+  "notes": "Reactive backend — DB + functions + real-time. TS-first DX."
  },
  {
   "id": "ro",
@@ -2757,7 +2757,7 @@
    "NYSE",
    "S&P 500"
   ],
-  "notes": "NYC HQ. Aladdin platform \u2014 risk + portfolio mgmt. Heavy systems / data eng."
+  "notes": "NYC HQ. Aladdin platform — risk + portfolio mgmt. Heavy systems / data eng."
  },
  {
   "id": "etsy",
@@ -2773,7 +2773,7 @@
    "NASDAQ",
    "S&P MidCap"
   ],
-  "notes": "Brooklyn HQ. Recommendations, search, payments, ML \u2014 strong Python culture.",
+  "notes": "Brooklyn HQ. Recommendations, search, payments, ML — strong Python culture.",
   "domain": "etsy.com"
  },
  {
@@ -2939,11 +2939,11 @@
   "sub": "Principal trading firm",
   "stage": "Private",
   "raised": "Self-funded",
-  "lead": "\u2014",
+  "lead": "—",
   "badges": [
    "Privately held"
   ],
-  "notes": "NYC/Chicago quant trading. Low-latency systems, market data, analytics \u2014 C++/Python heavy.",
+  "notes": "NYC/Chicago quant trading. Low-latency systems, market data, analytics — C++/Python heavy.",
   "domain": "drw.com"
  },
  {
@@ -2955,7 +2955,7 @@
   "sub": "Global market maker",
   "stage": "Private",
   "raised": "Self-funded",
-  "lead": "\u2014",
+  "lead": "—",
   "badges": [
    "Privately held"
   ],
@@ -2987,7 +2987,7 @@
   "sub": "Proprietary trading firm",
   "stage": "Private",
   "raised": "Self-funded",
-  "lead": "\u2014",
+  "lead": "—",
   "badges": [
    "Privately held"
   ],
@@ -3139,8 +3139,8 @@
   "vertical": "media",
   "sub": "Worker-owned sports + culture",
   "stage": "Bootstrapped",
-  "raised": "\u2014",
-  "lead": "\u2014",
+  "raised": "—",
+  "lead": "—",
   "badges": [
    "Worker-owned"
   ],
@@ -3230,7 +3230,7 @@
    "Lightspeed",
    "Nyca"
   ],
-  "notes": "NYC fintech infra \u2014 programmatic card management across merchants. APIs + integrations.",
+  "notes": "NYC fintech infra — programmatic card management across merchants. APIs + integrations.",
   "domain": "knotapi.com"
  },
  {
@@ -3247,7 +3247,7 @@
    "Accel",
    "Bain Capital Ventures"
   ],
-  "notes": "NYC payments infra \u2014 RTP, FedNow, ACH. Money movement + reliability.",
+  "notes": "NYC payments infra — RTP, FedNow, ACH. Money movement + reliability.",
   "domain": "orum.io"
  },
  {
@@ -3620,7 +3620,7 @@
    "ICONIQ",
    "Y Combinator"
   ],
-  "notes": "Reverse-ETL \u2014 sync warehouse data to SaaS. Strong analytics-eng DX.",
+  "notes": "Reverse-ETL — sync warehouse data to SaaS. Strong analytics-eng DX.",
   "domain": "hightouch.com"
  },
  {
@@ -3638,7 +3638,7 @@
    "Insight",
    "a16z"
   ],
-  "notes": "Reverse-ETL platform \u2014 warehouse \u2192 ops tools.",
+  "notes": "Reverse-ETL platform — warehouse → ops tools.",
   "domain": "getcensus.com"
  },
  {
@@ -3654,7 +3654,7 @@
   "badges": [
    "NASDAQ"
   ],
-  "notes": "NYC video platform \u2014 creator hosting + enterprise video. Public co.",
+  "notes": "NYC video platform — creator hosting + enterprise video. Public co.",
   "domain": "vimeo.com"
  },
  {
@@ -3759,7 +3759,7 @@
    "GGV",
    "KKR"
   ],
-  "notes": "NYC-HQ platform powering 20K+ independent pizzerias \u2014 ordering, marketing, payments.",
+  "notes": "NYC-HQ platform powering 20K+ independent pizzerias — ordering, marketing, payments.",
   "domain": "slicelife.com"
  },
  {
@@ -3793,7 +3793,7 @@
    "a16z",
    "Union Square Ventures"
   ],
-  "notes": "Resy founder Ben Leventhal's next act \u2014 loyalty + payments network for restaurants (NYC dining darling).",
+  "notes": "Resy founder Ben Leventhal's next act — loyalty + payments network for restaurants (NYC dining darling).",
   "domain": "blackbird.xyz"
  },
  {
@@ -3809,7 +3809,7 @@
   "badges": [
    "Bessemer"
   ],
-  "notes": "NYC-native anti-DoorDash \u2014 direct online ordering + delivery for restaurants.",
+  "notes": "NYC-native anti-DoorDash — direct online ordering + delivery for restaurants.",
   "domain": "getsauce.com"
  },
  {
@@ -3827,7 +3827,7 @@
    "ICONIQ",
    "Serent"
   ],
-  "notes": "Category-leading restaurant back-office platform ($1B+ val) \u2014 accounting, inventory, scheduling.",
+  "notes": "Category-leading restaurant back-office platform ($1B+ val) — accounting, inventory, scheduling.",
   "domain": "restaurant365.com"
  },
  {
@@ -3896,7 +3896,7 @@
    "Tiger",
    "Bedrock"
   ],
-  "notes": "Restaurant marketing + AI menu SaaS \u2014 Atlanta HQ, real NYC eng presence.",
+  "notes": "Restaurant marketing + AI menu SaaS — Atlanta HQ, real NYC eng presence.",
   "domain": "popmenu.com"
  },
  {
@@ -3913,7 +3913,7 @@
    "USVP",
    "Homebrew"
   ],
-  "notes": "NYC-HQ voice AI answering restaurant calls \u2014 2K+ restaurants, 20M+ calls handled.",
+  "notes": "NYC-HQ voice AI answering restaurant calls — 2K+ restaurants, 20M+ calls handled.",
   "domain": "slang.ai"
  },
  {
@@ -3931,7 +3931,7 @@
    "Tiger",
    "Left Lane"
   ],
-  "notes": "NYC-native tech-forward coffee chain \u2014 mobile app, loyalty, hundreds of stores.",
+  "notes": "NYC-native tech-forward coffee chain — mobile app, loyalty, hundreds of stores.",
   "domain": "blankstreet.com"
  },
  {
@@ -4018,7 +4018,7 @@
    "D1",
    "Valor"
   ],
-  "notes": "NJ/NYC online grocery \u2014 merged with Imperfect Foods; large eng org, logistics-heavy.",
+  "notes": "NJ/NYC online grocery — merged with Imperfect Foods; large eng org, logistics-heavy.",
   "domain": "misfitsmarket.com"
  },
  {
@@ -4052,7 +4052,7 @@
    "L Catterton",
    "Shasta"
   ],
-  "notes": "NYC-HQ fresh pet-food juggernaut (~$2B val). Huge eng org \u2014 logistics, cold-chain, subscriptions.",
+  "notes": "NYC-HQ fresh pet-food juggernaut (~$2B val). Huge eng org — logistics, cold-chain, subscriptions.",
   "domain": "thefarmersdog.com"
  },
  {
@@ -4983,7 +4983,7 @@
   "raised": "$30M",
   "lead": "Profitable",
   "badges": [
-   "\u2014"
+   "—"
   ],
   "notes": "NYC HQ. Dev-tools style fintech API.",
   "domain": "tremendous.com"
@@ -5013,7 +5013,7 @@
   "sub": "Crowdfunding marketplace",
   "stage": "PBC",
   "raised": "Profitable",
-  "lead": "\u2014",
+  "lead": "—",
   "badges": [
    "Public Benefit Corp"
   ],
@@ -5412,7 +5412,7 @@
   "vertical": "consumer",
   "sub": "DTC nutrition / meal replacement",
   "stage": "Series A",
-  "raised": "\u00a320M + profitable",
+  "raised": "£20M + profitable",
   "lead": "Highland Europe",
   "badges": [
    "Highland Europe"
@@ -5433,7 +5433,7 @@
   "badges": [
    "NASDAQ"
   ],
-  "notes": "NYC-metro offices. 70+ software eng openings \u2014 infotainment + cloud.",
+  "notes": "NYC-metro offices. 70+ software eng openings — infotainment + cloud.",
   "domain": "polestar.com"
  },
  {
@@ -5493,9 +5493,9 @@
   "sub": "Swedish clean makeup",
   "stage": "Growth equity",
   "raised": "undisclosed",
-  "lead": "\u2014",
+  "lead": "—",
   "badges": [
-   "\u2014"
+   "—"
   ],
   "notes": "Actively expanding NYC / US.",
   "domain": "sweedbeauty.com"
@@ -5529,7 +5529,7 @@
   "badges": [
    "LSE"
   ],
-  "notes": "UK-primary \u2014 weak NYC signal. Included for coverage; will drop naturally if no NYC eng.",
+  "notes": "UK-primary — weak NYC signal. Included for coverage; will drop naturally if no NYC eng.",
   "domain": "cazoo.co.uk"
  },
  {
@@ -5607,7 +5607,7 @@
   "sub": "Public sector (dept of tech)",
   "stage": "Public sector",
   "raised": "$110B budget",
-  "lead": "\u2014",
+  "lead": "—",
   "badges": [
    "Public sector"
   ],
@@ -5672,7 +5672,7 @@
   "sub": "Industrial / mobility / IoT",
   "stage": "Private",
   "raised": "$91B rev",
-  "lead": "\u2014",
+  "lead": "—",
   "badges": [
    "Privately held"
   ],
@@ -5803,9 +5803,9 @@
   "sub": "Elite React/Node consultancy (acq. Formidable 2023)",
   "stage": "Private",
   "raised": "undisclosed",
-  "lead": "\u2014",
+  "lead": "—",
   "badges": [
-   "\u2014"
+   "—"
   ],
   "notes": "US remote incl NYC. ~500 ppl. Clients: Netflix, HBO, Verizon, Twilio.",
   "domain": "nearform.com"
@@ -5835,9 +5835,9 @@
   "sub": "Elite remote product design agency",
   "stage": "Bootstrapped",
   "raised": "Profitable",
-  "lead": "\u2014",
+  "lead": "—",
   "badges": [
-   "\u2014"
+   "—"
   ],
   "notes": "Remote-first with NYC hires. Slack UI + Coinbase + Uber designers.",
   "domain": "metalab.com"
@@ -5851,9 +5851,9 @@
   "sub": "NYC-founded creative + product agency",
   "stage": "Bootstrapped",
   "raised": "Profitable",
-  "lead": "\u2014",
+  "lead": "—",
   "badges": [
-   "\u2014"
+   "—"
   ],
   "notes": "NYC roots, now remote-first. Clients: NatGeo, Google, MoMA.",
   "domain": "wearekettle.com"
@@ -5883,9 +5883,9 @@
   "sub": "Legendary design consultancy",
   "stage": "Private",
   "raised": "undisclosed",
-  "lead": "\u2014",
+  "lead": "—",
   "badges": [
-   "\u2014"
+   "—"
   ],
   "notes": "NYC office active. ~500 ppl. Historic clients: Apple mouse, Ford, Airbnb.",
   "domain": "ideo.com"
@@ -5915,9 +5915,9 @@
   "sub": "Chicago-based design + brand agency",
   "stage": "Private",
   "raised": "undisclosed",
-  "lead": "\u2014",
+  "lead": "—",
   "badges": [
-   "\u2014"
+   "—"
   ],
   "notes": "NYC office. ~250 ppl. Clients: Google, Nike, IBM.",
   "domain": "vsapartners.com"
@@ -5997,9 +5997,9 @@
   "sub": "Elite dev marketplace + staff",
   "stage": "Bootstrapped",
   "raised": "Profitable",
-  "lead": "\u2014",
+  "lead": "—",
   "badges": [
-   "\u2014"
+   "—"
   ],
   "notes": "NYC office. Vetted senior-eng network.",
   "domain": "toptal.com"
@@ -6031,7 +6031,7 @@
   "sub": "Elite management + dev consultancy",
   "stage": "Bootstrapped",
   "raised": "Profitable",
-  "lead": "\u2014",
+  "lead": "—",
   "badges": [
    "Employee-owned"
   ],
@@ -6166,7 +6166,7 @@
   "raised": "$10M+",
   "lead": "(undisclosed)",
   "badges": [
-   "\u2014"
+   "—"
   ],
   "notes": "YC S24. NYC HQ, KY manufacturing. Zero-integration robots.",
   "domain": "ultra.us"
@@ -6359,7 +6359,7 @@
   "raised": "$6M",
   "lead": "(undisclosed)",
   "badges": [
-   "\u2014"
+   "—"
   ],
   "notes": "YC W24. NYC. Deployed at NYU Langone.",
   "domain": "piramidal.ai"
@@ -6507,7 +6507,7 @@
   "badges": [
    "Stripes"
   ],
-  "notes": "NYC + LA. Cultural weight \u2014 Everything Everywhere, Uncut Gems, Moonlight. Small ops today, no NYC eng yet.",
+  "notes": "NYC + LA. Cultural weight — Everything Everywhere, Uncut Gems, Moonlight. Small ops today, no NYC eng yet.",
   "domain": "a24films.com"
  },
  {
@@ -6519,9 +6519,9 @@
   "sub": "NYC cult streetwear + menswear",
   "stage": "Bootstrapped",
   "raised": "Profitable",
-  "lead": "\u2014",
+  "lead": "—",
   "badges": [
-   "\u2014"
+   "—"
   ],
   "notes": "NYC HQ (SoHo). Teddy Santis' menswear cult brand; Porsche + New Balance collabs. 16 open roles today (retail/design).",
   "domain": "aimeleondore.com"
@@ -6607,7 +6607,7 @@
    "NASDAQ",
    "Raine"
   ],
-  "notes": "Boston HQ, big NYC office. Massive analyst pipeline \u2014 trading ops, marketing analytics, product analytics.",
+  "notes": "Boston HQ, big NYC office. Massive analyst pipeline — trading ops, marketing analytics, product analytics.",
   "domain": "draftkings.com"
  },
  {
@@ -6860,7 +6860,7 @@
    "Sequoia",
    "SoftBank"
   ],
-  "notes": "SF HQ, huge NYC eng + analyst office. Strategy & ops analyst pipeline is legendary \u2014 a top launching pad.",
+  "notes": "SF HQ, huge NYC eng + analyst office. Strategy & ops analyst pipeline is legendary — a top launching pad.",
   "domain": "doordash.com"
  },
  {
@@ -6966,7 +6966,7 @@
    "Tiger",
    "General Catalyst"
   ],
-  "notes": "NYC HQ (SoHo). Retail ops + supply chain + BI analyst hires \u2014 great fit for supply-chain background.",
+  "notes": "NYC HQ (SoHo). Retail ops + supply chain + BI analyst hires — great fit for supply-chain background.",
   "domain": "warbyparker.com"
  },
  {
@@ -6984,7 +6984,7 @@
    "Bain",
    "Kleiner"
   ],
-  "notes": "NYC HQ. Rental + inventory ops \u2014 supply chain + reverse logistics analyst pipeline.",
+  "notes": "NYC HQ. Rental + inventory ops — supply chain + reverse logistics analyst pipeline.",
   "domain": "renttherunway.com"
  },
  {
@@ -7340,7 +7340,7 @@
   "id": "nascar",
   "name": "NASCAR",
   "ats": "workday",
-  "slug": "nascar/wd1/NASCARJobs",
+  "slug": "nascar/wd1/Nascar",
   "vertical": "sports",
   "sub": "Auto racing league",
   "stage": "N/A",
@@ -7385,7 +7385,7 @@
   "id": "uspgatour",
   "name": "PGA Tour",
   "ats": "workday",
-  "slug": "pgatour/wd1/PGATOUR",
+  "slug": "pgatour/wd5/PgatourExternal",
   "vertical": "sports",
   "sub": "Pro golf tour",
   "stage": "N/A",
@@ -7847,7 +7847,7 @@
   "id": "blackstone",
   "name": "Blackstone",
   "ats": "workday",
-  "slug": "blackstone/wd1/Blackstone",
+  "slug": "blackstone/wd1/Blackstone_Careers",
   "vertical": "fintech",
   "sub": "Alt asset manager (NYSE: BX)",
   "stage": "Public",
@@ -7903,7 +7903,7 @@
    "Goldman",
    "Maersk"
   ],
-  "notes": "NYC HQ. Container logistics fintech \u2014 supply-chain fit."
+  "notes": "NYC HQ. Container logistics fintech — supply-chain fit."
  },
  {
   "id": "meow-analyst",
@@ -8063,7 +8063,7 @@
   "id": "chewy",
   "name": "Chewy",
   "ats": "workday",
-  "slug": "chewyinc/wd1/chewy",
+  "slug": "chewy/wd5/External",
   "vertical": "marketplace",
   "sub": "Pet ecommerce (NYSE: CHWY)",
   "stage": "Public",
@@ -8683,7 +8683,7 @@
   "ats": "greenhouse",
   "slug": "hashicorp",
   "vertical": "devtools",
-  "sub": "Cloud infra (NASDAQ: HCP \u2192 IBM)",
+  "sub": "Cloud infra (NASDAQ: HCP → IBM)",
   "stage": "Acquired",
   "raised": "$349M pre-IPO",
   "lead": "IBM",
@@ -9061,7 +9061,7 @@
  },
  {
   "id": "condenast",
-  "name": "Cond\u00e9 Nast",
+  "name": "Condé Nast",
   "ats": "workday",
   "slug": "condenast/wd1/ExternalCareerSite",
   "vertical": "media",
@@ -9204,7 +9204,7 @@
   "id": "thomson-reuters",
   "name": "Thomson Reuters",
   "ats": "workday",
-  "slug": "tr/wd3/thomsonreuters",
+  "slug": "thomsonreuters/wd5/External_Career_Site",
   "vertical": "media",
   "sub": "News + legal data (NYSE: TRI)",
   "stage": "Public",
@@ -9390,7 +9390,7 @@
   "id": "wework",
   "name": "WeWork",
   "ats": "workday",
-  "slug": "wework/wd1/Careers",
+  "slug": "wework/wd1/Wework",
   "vertical": "hospitality",
   "sub": "Flex-office",
   "stage": "Post-bankruptcy",
@@ -9563,7 +9563,7 @@
  },
  {
   "id": "estee-lauder",
-  "name": "Est\u00e9e Lauder",
+  "name": "Estée Lauder",
   "ats": "workday",
   "slug": "esteelauder/wd1/EL_External_Career_Site",
   "vertical": "consumer",
@@ -9578,7 +9578,7 @@
  },
  {
   "id": "loreal",
-  "name": "L'Or\u00e9al",
+  "name": "L'Oréal",
   "ats": "workday",
   "slug": "loreal/wd103/LOreal_Careers",
   "vertical": "consumer",
@@ -9700,7 +9700,7 @@
   "ats": "greenhouse",
   "slug": "google",
   "vertical": "devtools",
-  "sub": "BI (Google) \u2014 internal",
+  "sub": "BI (Google) — internal",
   "stage": "Acquired",
   "raised": "(GOOG subsidiary)",
   "lead": "GOOG",
