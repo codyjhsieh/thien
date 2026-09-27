@@ -2369,7 +2369,8 @@
    "Sequoia",
    "GIC"
   ],
-  "notes": "Legal AI for top law firms; $11B valuation (Mar 2026). FDE-style deploys, document workflows, reasoning eval."
+  "notes": "Legal AI for top law firms; $11B valuation (Mar 2026). FDE-style deploys, document workflows, reasoning eval.",
+  "domain": "harvey.ai"
  },
  {
   "id": "pinecone",
@@ -2386,7 +2387,8 @@
    "Menlo",
    "Wing"
   ],
-  "notes": "Production vector DB. Distributed indexing, latency, retrieval quality at scale."
+  "notes": "Production vector DB. Distributed indexing, latency, retrieval quality at scale.",
+  "domain": "pinecone.com"
  },
  {
   "id": "captions",
@@ -2403,7 +2405,8 @@
    "Sequoia",
    "Kleiner"
   ],
-  "notes": "NYC AI-first video editor. Real-time inference, mobile + web latency."
+  "notes": "NYC AI-first video editor. Real-time inference, mobile + web latency.",
+  "domain": "captions.com"
  },
  {
   "id": "granola",
@@ -2420,7 +2423,8 @@
    "NFDG",
    "Spark"
   ],
-  "notes": "AI note-taking → enterprise AI workspace; $1.5B valuation (Mar 2026). ASR, summarization, LLM eval."
+  "notes": "AI note-taking → enterprise AI workspace; $1.5B valuation (Mar 2026). ASR, summarization, LLM eval.",
+  "domain": "granola.io"
  },
  {
   "id": "huggingface",
@@ -2438,7 +2442,8 @@
    "Nvidia",
    "Sequoia"
   ],
-  "notes": "Open-source ML platform; $4.5B valuation. Inference, hosting, eval; OSS-heavy culture."
+  "notes": "Open-source ML platform; $4.5B valuation. Inference, hosting, eval; OSS-heavy culture.",
+  "domain": "huggingface.com"
  },
  {
   "id": "coreweave",
@@ -2456,7 +2461,8 @@
    "NVIDIA",
    "Blackstone"
   ],
-  "notes": "GPU cloud powering AI labs; IPO\\'d Mar 2025. Bare-metal infra + scheduling."
+  "notes": "GPU cloud powering AI labs; IPO\\'d Mar 2025. Bare-metal infra + scheduling.",
+  "domain": "coreweave.com"
  },
  {
   "id": "lithic",
@@ -2474,7 +2480,8 @@
    "Bessemer",
    "Tusk"
   ],
-  "notes": "NYC card-issuing platform (Privacy.com lineage). Payments + compliance + APIs."
+  "notes": "NYC card-issuing platform (Privacy.com lineage). Payments + compliance + APIs.",
+  "domain": "lithic.com"
  },
  {
   "id": "unit",
@@ -2491,7 +2498,8 @@
    "Accel",
    "Better Tomorrow"
   ],
-  "notes": "Banking-as-a-service. Ledger, KYC, money movement."
+  "notes": "Banking-as-a-service. Ledger, KYC, money movement.",
+  "domain": "unit.com"
  },
  {
   "id": "increase",
@@ -2508,7 +2516,8 @@
    "Susa",
    "Garry Tan"
   ],
-  "notes": "Payments API (ACH/RTP/Wire). Deep banking + reliability."
+  "notes": "Payments API (ACH/RTP/Wire). Deep banking + reliability.",
+  "domain": "increase.com"
  },
  {
   "id": "pagaya",
@@ -2525,7 +2534,8 @@
    "Aflac",
    "Viola"
   ],
-  "notes": "NYC AI-lending. ML credit + capital-markets plumbing."
+  "notes": "NYC AI-lending. ML credit + capital-markets plumbing.",
+  "domain": "pagaya.com"
  },
  {
   "id": "alphasense",
@@ -2542,7 +2552,8 @@
    "Viking",
    "Goldman"
   ],
-  "notes": "NYC enterprise AI search over financial docs. Retrieval + integrations."
+  "notes": "NYC enterprise AI search over financial docs. Retrieval + integrations.",
+  "domain": "alphasense.com"
  },
  {
   "id": "tegus",
@@ -2558,7 +2569,8 @@
    "Bain",
    "Battery"
   ],
-  "notes": "NYC investment research. Search, ML, audio-to-text."
+  "notes": "NYC investment research. Search, ML, audio-to-text.",
+  "domain": "tegus.com"
  },
  {
   "id": "yotta",
@@ -2574,7 +2586,8 @@
    "YC",
    "Base10"
   ],
-  "notes": "NYC consumer savings + lottery hybrid. Payments + ledger."
+  "notes": "NYC consumer savings + lottery hybrid. Payments + ledger.",
+  "domain": "yotta.com"
  },
  {
   "id": "bilt",
@@ -2608,7 +2621,8 @@
    "General Catalyst",
    "GGV"
   ],
-  "notes": "Branchable serverless Postgres. Now part of Databricks; product still runs standalone. Storage separation, autoscaling."
+  "notes": "Branchable serverless Postgres. Now part of Databricks; product still runs standalone. Storage separation, autoscaling.",
+  "domain": "neon.io"
  },
  {
   "id": "convex",
@@ -2624,7 +2638,8 @@
    "a16z",
    "Khosla"
   ],
-  "notes": "Reactive backend — DB + functions + real-time. TS-first DX."
+  "notes": "Reactive backend — DB + functions + real-time. TS-first DX.",
+  "domain": "convex.com"
  },
  {
   "id": "ro",
@@ -2658,7 +2673,8 @@
    "Mangrove",
    "Atreides"
   ],
-  "notes": "NYC AI-first primary care. Clinical NLP + EHR + telehealth."
+  "notes": "NYC AI-first primary care. Clinical NLP + EHR + telehealth.",
+  "domain": "khealth.com"
  },
  {
   "id": "cityblock",
@@ -2708,7 +2724,8 @@
    "Sequoia",
    "Lightspeed"
   ],
-  "notes": "Agentless cloud security. CSPM/CNAPP at scale; NYC eng presence."
+  "notes": "Agentless cloud security. CSPM/CNAPP at scale; NYC eng presence.",
+  "domain": "wiz.io"
  },
  {
   "id": "chainalysis",
@@ -2725,7 +2742,8 @@
    "Accel",
    "Benchmark"
   ],
-  "notes": "NYC blockchain analytics. Crypto compliance + investigations + APIs."
+  "notes": "NYC blockchain analytics. Crypto compliance + investigations + APIs.",
+  "domain": "chainalysis.com"
  },
  {
   "id": "disney",
@@ -2741,7 +2759,8 @@
    "NYSE",
    "S&P 500"
   ],
-  "notes": "NYC tech: ABC News, Hulu, ESPN+, Disney+. Streaming infra + content systems."
+  "notes": "NYC tech: ABC News, Hulu, ESPN+, Disney+. Streaming infra + content systems.",
+  "domain": "thewaltdisneycompany.com"
  },
  {
   "id": "blackrock",
@@ -2757,7 +2776,8 @@
    "NYSE",
    "S&P 500"
   ],
-  "notes": "NYC HQ. Aladdin platform — risk + portfolio mgmt. Heavy systems / data eng."
+  "notes": "NYC HQ. Aladdin platform — risk + portfolio mgmt. Heavy systems / data eng.",
+  "domain": "blackrock.com"
  },
  {
   "id": "etsy",
@@ -2806,7 +2826,8 @@
    "NYSE",
    "Dow 30"
   ],
-  "notes": "Hyperforce + Data Cloud + Einstein. NYC office for sales eng + applied AI."
+  "notes": "Hyperforce + Data Cloud + Einstein. NYC office for sales eng + applied AI.",
+  "domain": "salesforce.com"
  },
  {
   "id": "via",
@@ -7272,7 +7293,8 @@
   "badges": [
    "NASDAQ"
   ],
-  "notes": "NYC office. Casino + sports betting parent."
+  "notes": "NYC office. Casino + sports betting parent.",
+  "domain": "wynnbet.com"
  },
  {
   "id": "bet365",
@@ -7287,7 +7309,8 @@
   "badges": [
    "Private"
   ],
-  "notes": "UK HQ, NYC office."
+  "notes": "UK HQ, NYC office.",
+  "domain": "bet365.com"
  },
  {
   "id": "caesars-digital",
@@ -7318,7 +7341,8 @@
    "MGM",
    "Entain"
   ],
-  "notes": "MGM + Entain JV. NYC hires."
+  "notes": "MGM + Entain JV. NYC hires.",
+  "domain": "betmgm.com"
  },
  {
   "id": "fubotv",
@@ -7334,7 +7358,8 @@
    "NYSE",
    "Northzone"
   ],
-  "notes": "NYC HQ. Live sports + streaming."
+  "notes": "NYC HQ. Live sports + streaming.",
+  "domain": "careers.fubo.tv"
  },
  {
   "id": "nascar",
@@ -7349,7 +7374,8 @@
   "badges": [
    "NASCAR"
   ],
-  "notes": "Daytona HQ, NYC office."
+  "notes": "Daytona HQ, NYC office.",
+  "domain": "nascar.com"
  },
  {
   "id": "mls",
@@ -7394,7 +7420,8 @@
   "badges": [
    "PGA"
   ],
-  "notes": "Ponte Vedra HQ, NYC media office."
+  "notes": "Ponte Vedra HQ, NYC media office.",
+  "domain": "pgatour.com"
  },
  {
   "id": "usta",
@@ -7409,7 +7436,8 @@
   "badges": [
    "USTA"
   ],
-  "notes": "NYC-area HQ (White Plains). US Open. Analyst pipeline."
+  "notes": "NYC-area HQ (White Plains). US Open. Analyst pipeline.",
+  "domain": "usta.com"
  },
  {
   "id": "vividseats",
@@ -7425,7 +7453,8 @@
    "NASDAQ",
    "GTCR"
   ],
-  "notes": "Chicago HQ, NYC hires."
+  "notes": "Chicago HQ, NYC hires.",
+  "domain": "vividseats.ai"
  },
  {
   "id": "stubhub",
@@ -7441,7 +7470,8 @@
    "Madrone",
    "WestCap"
   ],
-  "notes": "NYC office. Ticketing marketplace."
+  "notes": "NYC office. Ticketing marketplace.",
+  "domain": "stubhub.com"
  },
  {
   "id": "bleacher-report",
@@ -7456,7 +7486,8 @@
   "badges": [
    "WBD"
   ],
-  "notes": "NYC HQ. Sports media."
+  "notes": "NYC HQ. Sports media.",
+  "domain": "bleacherreport.com"
  },
  {
   "id": "wsc-sports",
@@ -7504,7 +7535,8 @@
    "Imaginary",
    "Thrive"
   ],
-  "notes": "LA HQ, NYC hires. Growth + BI + ops."
+  "notes": "LA HQ, NYC hires. Growth + BI + ops.",
+  "domain": "skims.com"
  },
  {
   "id": "nike",
@@ -7519,7 +7551,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "Beaverton HQ, NYC hires."
+  "notes": "Beaverton HQ, NYC hires.",
+  "domain": "nike.com"
  },
  {
   "id": "on-running",
@@ -7579,7 +7612,8 @@
   "badges": [
    "Vista"
   ],
-  "notes": "CA HQ, NYC hires."
+  "notes": "CA HQ, NYC hires.",
+  "domain": "mindbody.io"
  },
  {
   "id": "f45",
@@ -7594,7 +7628,8 @@
   "badges": [
    "Kennedy Lewis"
   ],
-  "notes": "Austin HQ. Fitness franchise."
+  "notes": "Austin HQ. Fitness franchise.",
+  "domain": "f45training.com"
  },
  {
   "id": "rumble-boxing",
@@ -7609,7 +7644,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "NYC HQ. Boutique fitness."
+  "notes": "NYC HQ. Boutique fitness.",
+  "domain": "rumbleboxing.com"
  },
  {
   "id": "solidcore",
@@ -7624,7 +7660,8 @@
   "badges": [
    "Peterson"
   ],
-  "notes": "DC HQ, NYC hires."
+  "notes": "DC HQ, NYC hires.",
+  "domain": "solidcore.com"
  },
  {
   "id": "fabletics",
@@ -7646,7 +7683,8 @@
    "r",
    "t"
   ],
-  "notes": "LA HQ, NYC hires. Kate Hudson brand."
+  "notes": "LA HQ, NYC hires. Kate Hudson brand.",
+  "domain": "fabletics.com"
  },
  {
   "id": "outdoor-voices",
@@ -7661,7 +7699,8 @@
   "badges": [
    "Consortium"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "outdoorvoices.com"
  },
  {
   "id": "goldmansachs",
@@ -7676,7 +7715,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "NYC HQ. Analyst pipeline is the classic path."
+  "notes": "NYC HQ. Analyst pipeline is the classic path.",
+  "domain": "goldmansachs.com"
  },
  {
   "id": "morganstanley",
@@ -7691,7 +7731,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "NYC HQ. Analyst pipeline."
+  "notes": "NYC HQ. Analyst pipeline.",
+  "domain": "morganstanley.com"
  },
  {
   "id": "jpmorgan",
@@ -7706,7 +7747,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "NYC HQ. Analyst pipeline; enormous."
+  "notes": "NYC HQ. Analyst pipeline; enormous.",
+  "domain": "jpmorganchase.com"
  },
  {
   "id": "citi",
@@ -7721,7 +7763,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "citi.com"
  },
  {
   "id": "bofa",
@@ -7736,7 +7779,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "Charlotte HQ, NYC office."
+  "notes": "Charlotte HQ, NYC office.",
+  "domain": "bankofamerica.com"
  },
  {
   "id": "wellsfargo",
@@ -7751,7 +7795,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "SF HQ, NYC office."
+  "notes": "SF HQ, NYC office.",
+  "domain": "wellsfargo.com"
  },
  {
   "id": "capitalone",
@@ -7766,7 +7811,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "McLean HQ, NYC office. Analyst pipeline."
+  "notes": "McLean HQ, NYC office. Analyst pipeline.",
+  "domain": "capitalone.com"
  },
  {
   "id": "americanexpress",
@@ -7781,7 +7827,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "americanexpress.com"
  },
  {
   "id": "mastercard",
@@ -7811,7 +7858,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "bnymellon.com"
  },
  {
   "id": "statestreet",
@@ -7826,7 +7874,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "Boston HQ, NYC office."
+  "notes": "Boston HQ, NYC office.",
+  "domain": "statestreet.com"
  },
  {
   "id": "kkr",
@@ -7841,7 +7890,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "kkr.com"
  },
  {
   "id": "blackstone",
@@ -7856,7 +7906,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "blackstone.com"
  },
  {
   "id": "apollo",
@@ -7887,7 +7938,8 @@
    "Polychain",
    "Dragonfly"
   ],
-  "notes": "NYC office."
+  "notes": "NYC office.",
+  "domain": "axelar.com"
  },
  {
   "id": "nyshex",
@@ -7918,7 +7970,8 @@
   "badges": [
    "Tiger"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "meow.com"
  },
  {
   "id": "faire",
@@ -7934,7 +7987,8 @@
    "Sequoia",
    "Founders Fund"
   ],
-  "notes": "SF HQ, NYC hires. Marketplace ops + BI."
+  "notes": "SF HQ, NYC hires. Marketplace ops + BI.",
+  "domain": "faire.com"
  },
  {
   "id": "depop",
@@ -7949,7 +8003,8 @@
   "badges": [
    "Etsy"
   ],
-  "notes": "London HQ, NYC office."
+  "notes": "London HQ, NYC office.",
+  "domain": "depop.com"
  },
  {
   "id": "grailed",
@@ -7964,7 +8019,8 @@
   "badges": [
    "GOAT"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "grailed.com"
  },
  {
   "id": "goat",
@@ -7980,7 +8036,8 @@
    "D1 Capital",
    "Foot Locker"
   ],
-  "notes": "LA HQ, NYC hires."
+  "notes": "LA HQ, NYC hires.",
+  "domain": "goat.com"
  },
  {
   "id": "thredup",
@@ -7996,7 +8053,8 @@
    "NASDAQ",
    "Goldman"
   ],
-  "notes": "Oakland HQ, NYC hires."
+  "notes": "Oakland HQ, NYC hires.",
+  "domain": "thredup.com"
  },
  {
   "id": "poshmark",
@@ -8012,7 +8070,8 @@
    "Menlo",
    "Naver"
   ],
-  "notes": "SF HQ, NYC hires."
+  "notes": "SF HQ, NYC hires.",
+  "domain": "poshmark.com"
  },
  {
   "id": "ebay",
@@ -8027,7 +8086,8 @@
   "badges": [
    "NASDAQ"
   ],
-  "notes": "San Jose HQ, NYC office."
+  "notes": "San Jose HQ, NYC office.",
+  "domain": "ebay.com"
  },
  {
   "id": "shopify",
@@ -8042,7 +8102,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "Ottawa HQ, NYC hires."
+  "notes": "Ottawa HQ, NYC hires.",
+  "domain": "shopify.com"
  },
  {
   "id": "wayfair",
@@ -8087,7 +8148,8 @@
   "badges": [
    "FSE"
   ],
-  "notes": "NYC + Berlin offices."
+  "notes": "NYC + Berlin offices.",
+  "domain": "careers.hellofresh.com"
  },
  {
   "id": "blueapron",
@@ -8102,7 +8164,8 @@
   "badges": [
    "Wonder"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "blueapron.com"
  },
  {
   "id": "gopuff",
@@ -8118,7 +8181,8 @@
    "SoftBank",
    "Accel"
   ],
-  "notes": "Philadelphia HQ, NYC hires."
+  "notes": "Philadelphia HQ, NYC hires.",
+  "domain": "gopuff.com"
  },
  {
   "id": "swell",
@@ -8133,7 +8197,8 @@
   "badges": [
    "Benchmark"
   ],
-  "notes": "LA HQ, NYC hires."
+  "notes": "LA HQ, NYC hires.",
+  "domain": "swell.io"
  },
  {
   "id": "glossier",
@@ -8148,7 +8213,8 @@
   "badges": [
    "Sequoia"
   ],
-  "notes": "NYC HQ. Growth + BI + supply chain analyst."
+  "notes": "NYC HQ. Growth + BI + supply chain analyst.",
+  "domain": "glossier.com"
  },
  {
   "id": "olive-and-june",
@@ -8163,7 +8229,8 @@
   "badges": [
    "IVP"
   ],
-  "notes": "LA HQ, NYC hires."
+  "notes": "LA HQ, NYC hires.",
+  "domain": "olivejune.com"
  },
  {
   "id": "hu-kitchen",
@@ -8178,7 +8245,8 @@
   "badges": [
    "Mondelez"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "hukitchen.com"
  },
  {
   "id": "hydrow",
@@ -8193,7 +8261,8 @@
   "badges": [
    "L Catterton"
   ],
-  "notes": "Boston HQ, NYC hires."
+  "notes": "Boston HQ, NYC hires.",
+  "domain": "hydrow.co"
  },
  {
   "id": "tonal",
@@ -8209,7 +8278,8 @@
    "L Catterton",
    "Ross"
   ],
-  "notes": "SF HQ, NYC hires."
+  "notes": "SF HQ, NYC hires.",
+  "domain": "tonal.com"
  },
  {
   "id": "mirror",
@@ -8224,7 +8294,8 @@
   "badges": [
    "Lululemon"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "mirror.io"
  },
  {
   "id": "simulmedia",
@@ -8254,7 +8325,8 @@
   "badges": [
    "Goldman"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "persado.com"
  },
  {
   "id": "mediamath",
@@ -8299,7 +8371,8 @@
   "badges": [
    "NASDAQ"
   ],
-  "notes": "MTV HQ, NYC office."
+  "notes": "MTV HQ, NYC office.",
+  "domain": "google.com"
  },
  {
   "id": "meta",
@@ -8314,7 +8387,8 @@
   "badges": [
    "NASDAQ"
   ],
-  "notes": "Menlo HQ, NYC office."
+  "notes": "Menlo HQ, NYC office.",
+  "domain": "meta.com"
  },
  {
   "id": "amazon-nyc",
@@ -8329,7 +8403,8 @@
   "badges": [
    "NASDAQ"
   ],
-  "notes": "Seattle HQ, NYC office."
+  "notes": "Seattle HQ, NYC office.",
+  "domain": "amazon.io"
  },
  {
   "id": "microsoft-nyc",
@@ -8344,7 +8419,8 @@
   "badges": [
    "NASDAQ"
   ],
-  "notes": "Redmond HQ, NYC office."
+  "notes": "Redmond HQ, NYC office.",
+  "domain": "microsoft.ai"
  },
  {
   "id": "nurx",
@@ -8360,7 +8436,8 @@
    "Union Square",
    "Kleiner"
   ],
-  "notes": "SF HQ, NYC hires."
+  "notes": "SF HQ, NYC hires.",
+  "domain": "nurx.com"
  },
  {
   "id": "cedar-health",
@@ -8376,7 +8453,8 @@
    "Concord",
    "Andreessen Horowitz"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "cedar.com"
  },
  {
   "id": "smartsheet",
@@ -8391,7 +8469,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "Bellevue HQ, NYC hires."
+  "notes": "Bellevue HQ, NYC hires.",
+  "domain": "smartsheet.com"
  },
  {
   "id": "miro",
@@ -8406,7 +8485,8 @@
   "badges": [
    "ICONIQ"
   ],
-  "notes": "Amsterdam HQ, NYC hires."
+  "notes": "Amsterdam HQ, NYC hires.",
+  "domain": "miro.com"
  },
  {
   "id": "mural",
@@ -8422,7 +8502,8 @@
    "Insight",
    "Radical"
   ],
-  "notes": "Argentina HQ, NYC hires."
+  "notes": "Argentina HQ, NYC hires.",
+  "domain": "mural.com"
  },
  {
   "id": "clickup",
@@ -8438,7 +8519,8 @@
    "a16z",
    "Craft"
   ],
-  "notes": "SD HQ, NYC hires."
+  "notes": "SD HQ, NYC hires.",
+  "domain": "clickup.com"
  },
  {
   "id": "monday",
@@ -8453,7 +8535,8 @@
   "badges": [
    "NASDAQ"
   ],
-  "notes": "TLV HQ, NYC hires."
+  "notes": "TLV HQ, NYC hires.",
+  "domain": "mondaycom.com"
  },
  {
   "id": "gong",
@@ -8469,7 +8552,8 @@
    "Franklin",
    "Salesforce"
   ],
-  "notes": "SF HQ, NYC hires."
+  "notes": "SF HQ, NYC hires.",
+  "domain": "gong.com"
  },
  {
   "id": "outreach",
@@ -8484,7 +8568,8 @@
   "badges": [
    "Salesforce"
   ],
-  "notes": "Seattle HQ, NYC hires."
+  "notes": "Seattle HQ, NYC hires.",
+  "domain": "outreach.com"
  },
  {
   "id": "salesloft",
@@ -8499,7 +8584,8 @@
   "badges": [
    "Vista"
   ],
-  "notes": "Atlanta HQ, NYC hires."
+  "notes": "Atlanta HQ, NYC hires.",
+  "domain": "salesloft.com"
  },
  {
   "id": "apollo-io",
@@ -8517,7 +8603,8 @@
    "i",
    "n"
   ],
-  "notes": "SF HQ, NYC hires."
+  "notes": "SF HQ, NYC hires.",
+  "domain": "apolloio.com"
  },
  {
   "id": "6sense",
@@ -8533,7 +8620,8 @@
    "Softbank",
    "MMC"
   ],
-  "notes": "SF HQ, NYC hires."
+  "notes": "SF HQ, NYC hires.",
+  "domain": "6sense.com"
  },
  {
   "id": "clari",
@@ -8549,7 +8637,8 @@
    "Blackstone",
    "Sequoia"
   ],
-  "notes": "SF HQ, NYC hires."
+  "notes": "SF HQ, NYC hires.",
+  "domain": "clari.co"
  },
  {
   "id": "everlaw",
@@ -8564,7 +8653,8 @@
   "badges": [
    "CapitalG"
   ],
-  "notes": "Oakland HQ, NYC hires."
+  "notes": "Oakland HQ, NYC hires.",
+  "domain": "everlaw.com"
  },
  {
   "id": "gladly",
@@ -8579,7 +8669,8 @@
   "badges": [
    "Greylock"
   ],
-  "notes": "SF HQ, NYC hires."
+  "notes": "SF HQ, NYC hires.",
+  "domain": "gladly.com"
  },
  {
   "id": "intercom",
@@ -8595,7 +8686,8 @@
    "Kleiner",
    "GV"
   ],
-  "notes": "SF HQ, NYC hires."
+  "notes": "SF HQ, NYC hires.",
+  "domain": "intercom.com"
  },
  {
   "id": "front",
@@ -8611,7 +8703,8 @@
    "Sequoia",
    "Salesforce"
   ],
-  "notes": "SF HQ, NYC hires."
+  "notes": "SF HQ, NYC hires.",
+  "domain": "front.com"
  },
  {
   "id": "dropbox",
@@ -8627,7 +8720,8 @@
    "NASDAQ",
    "Sequoia"
   ],
-  "notes": "SF HQ, NYC hires."
+  "notes": "SF HQ, NYC hires.",
+  "domain": "jobs.dropbox.com"
  },
  {
   "id": "okta",
@@ -8643,7 +8737,8 @@
    "NASDAQ",
    "a16z"
   ],
-  "notes": "SF HQ, NYC hires."
+  "notes": "SF HQ, NYC hires.",
+  "domain": "okta.com"
  },
  {
   "id": "cloudflare",
@@ -8659,7 +8754,8 @@
    "NYSE",
    "Pelion"
   ],
-  "notes": "SF HQ, NYC hires."
+  "notes": "SF HQ, NYC hires.",
+  "domain": "cloudflare.com"
  },
  {
   "id": "elastic",
@@ -8675,7 +8771,8 @@
    "NYSE",
    "Benchmark"
   ],
-  "notes": "Amsterdam HQ, NYC hires."
+  "notes": "Amsterdam HQ, NYC hires.",
+  "domain": "jobs.elastic.co"
  },
  {
   "id": "hashicorp",
@@ -8705,7 +8802,8 @@
   "badges": [
    "NASDAQ"
   ],
-  "notes": "Minneapolis HQ."
+  "notes": "Minneapolis HQ.",
+  "domain": "jamf.com"
  },
  {
   "id": "confluent",
@@ -8720,7 +8818,8 @@
   "badges": [
    "NASDAQ"
   ],
-  "notes": "Mountain View HQ, NYC hires."
+  "notes": "Mountain View HQ, NYC hires.",
+  "domain": "confluent.io"
  },
  {
   "id": "mparticle",
@@ -8736,7 +8835,8 @@
    "Bain",
    "Harmony"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "mparticle.com"
  },
  {
   "id": "appcues",
@@ -8751,7 +8851,8 @@
   "badges": [
    "Sierra"
   ],
-  "notes": "Boston HQ, NYC hires."
+  "notes": "Boston HQ, NYC hires.",
+  "domain": "appcues.com"
  },
  {
   "id": "fullstory",
@@ -8772,7 +8873,8 @@
    "r",
    "a"
   ],
-  "notes": "Atlanta HQ, NYC hires."
+  "notes": "Atlanta HQ, NYC hires.",
+  "domain": "fullstory.com"
  },
  {
   "id": "hotjar",
@@ -8787,7 +8889,8 @@
   "badges": [
    "Contentsquare"
   ],
-  "notes": "Malta HQ."
+  "notes": "Malta HQ.",
+  "domain": "hotjar.com"
  },
  {
   "id": "mixpanel",
@@ -8802,7 +8905,8 @@
   "badges": [
    "a16z"
   ],
-  "notes": "SF HQ, NYC hires."
+  "notes": "SF HQ, NYC hires.",
+  "domain": "mixpanel.com"
  },
  {
   "id": "marriott",
@@ -8832,7 +8936,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "McLean HQ, NYC office."
+  "notes": "McLean HQ, NYC office.",
+  "domain": "hilton.com"
  },
  {
   "id": "hyatt",
@@ -8847,7 +8952,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "Chicago HQ, NYC office."
+  "notes": "Chicago HQ, NYC office.",
+  "domain": "hyatt.com"
  },
  {
   "id": "ihg",
@@ -8862,7 +8968,8 @@
   "badges": [
    "LSE"
   ],
-  "notes": "UK HQ, NYC office."
+  "notes": "UK HQ, NYC office.",
+  "domain": "ihg.io"
  },
  {
   "id": "delta",
@@ -8877,7 +8984,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "Atlanta HQ, NYC office."
+  "notes": "Atlanta HQ, NYC office.",
+  "domain": "deltaairlines.ai"
  },
  {
   "id": "jetblue",
@@ -8892,7 +9000,8 @@
   "badges": [
    "NASDAQ"
   ],
-  "notes": "NYC-area HQ."
+  "notes": "NYC-area HQ.",
+  "domain": "jetblue.com"
  },
  {
   "id": "united",
@@ -8907,7 +9016,8 @@
   "badges": [
    "NASDAQ"
   ],
-  "notes": "Chicago HQ, NYC office."
+  "notes": "Chicago HQ, NYC office.",
+  "domain": "unitedairlines.ai"
  },
  {
   "id": "aa-airlines",
@@ -8937,7 +9047,8 @@
   "badges": [
    "NASDAQ"
   ],
-  "notes": "Seattle HQ, NYC office."
+  "notes": "Seattle HQ, NYC office.",
+  "domain": "expedia.com"
  },
  {
   "id": "kayak",
@@ -8952,7 +9063,8 @@
   "badges": [
    "Booking"
   ],
-  "notes": "NYC office."
+  "notes": "NYC office.",
+  "domain": "kayak.com"
  },
  {
   "id": "todaytix",
@@ -8967,7 +9079,8 @@
   "badges": [
    "Great Hill"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "todaytix.com"
  },
  {
   "id": "resy-nyc",
@@ -8982,7 +9095,8 @@
   "badges": [
    "Amex"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "resy.com"
  },
  {
   "id": "opentable",
@@ -8997,7 +9111,8 @@
   "badges": [
    "Booking"
   ],
-  "notes": "SF HQ, NYC hires."
+  "notes": "SF HQ, NYC hires.",
+  "domain": "opentable.co"
  },
  {
   "id": "yelp",
@@ -9012,7 +9127,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "SF HQ, NYC office."
+  "notes": "SF HQ, NYC office.",
+  "domain": "yelp.com"
  },
  {
   "id": "nytco",
@@ -9027,7 +9143,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "newyorktimes.ai"
  },
  {
   "id": "dowjones",
@@ -9072,7 +9189,8 @@
   "badges": [
    "Advance"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "condenast.com"
  },
  {
   "id": "hearst",
@@ -9087,7 +9205,8 @@
   "badges": [
    "Private"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "hearst.com"
  },
  {
   "id": "meredith",
@@ -9117,7 +9236,8 @@
   "badges": [
    "NASDAQ"
   ],
-  "notes": "NYC HQ (Chelsea)."
+  "notes": "NYC HQ (Chelsea).",
+  "domain": "iac.io"
  },
  {
   "id": "nypublicradio",
@@ -9147,7 +9267,8 @@
   "badges": [
    "NASDAQ"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "buzzfeed.com"
  },
  {
   "id": "axel-springer",
@@ -9162,7 +9283,8 @@
   "badges": [
    "FSE"
   ],
-  "notes": "NYC office (Insider + Politico)."
+  "notes": "NYC office (Insider + Politico).",
+  "domain": "axelspringer.com"
  },
  {
   "id": "politico",
@@ -9177,7 +9299,8 @@
   "badges": [
    "AS"
   ],
-  "notes": "DC HQ, NYC hires."
+  "notes": "DC HQ, NYC hires.",
+  "domain": "politico.com"
  },
  {
   "id": "morning-consult",
@@ -9213,7 +9336,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "NYC office."
+  "notes": "NYC office.",
+  "domain": "thomsonreuters.com"
  },
  {
   "id": "taketwo",
@@ -9228,7 +9352,8 @@
   "badges": [
    "NASDAQ"
   ],
-  "notes": "NYC HQ. Owns Rockstar + 2K."
+  "notes": "NYC HQ. Owns Rockstar + 2K.",
+  "domain": "taketwo.com"
  },
  {
   "id": "epicgames",
@@ -9244,7 +9369,8 @@
    "Sony",
    "Tencent"
   ],
-  "notes": "NC HQ, NYC hires."
+  "notes": "NC HQ, NYC hires.",
+  "domain": "epicgames.com"
  },
  {
   "id": "blizzard",
@@ -9259,7 +9385,8 @@
   "badges": [
    "Microsoft"
   ],
-  "notes": "CA HQ, NYC hires."
+  "notes": "CA HQ, NYC hires.",
+  "domain": "activisionblizzard.com"
  },
  {
   "id": "roblox",
@@ -9274,7 +9401,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "SF HQ, NYC hires."
+  "notes": "SF HQ, NYC hires.",
+  "domain": "careers.roblox.com"
  },
  {
   "id": "unity",
@@ -9289,7 +9417,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "SF HQ, NYC hires."
+  "notes": "SF HQ, NYC hires.",
+  "domain": "unity.com"
  },
  {
   "id": "dream-games",
@@ -9304,7 +9433,8 @@
   "badges": [
    "IVP"
   ],
-  "notes": "TR HQ, NYC hires."
+  "notes": "TR HQ, NYC hires.",
+  "domain": "dreamgames.com"
  },
  {
   "id": "scopely",
@@ -9319,7 +9449,8 @@
   "badges": [
    "Savvy"
   ],
-  "notes": "LA HQ, NYC hires."
+  "notes": "LA HQ, NYC hires.",
+  "domain": "scopely.com"
  },
  {
   "id": "zillow",
@@ -9349,7 +9480,8 @@
   "badges": [
    "NASDAQ"
   ],
-  "notes": "Seattle HQ, NYC hires."
+  "notes": "Seattle HQ, NYC hires.",
+  "domain": "redfin.com"
  },
  {
   "id": "opendoor",
@@ -9364,7 +9496,8 @@
   "badges": [
    "NASDAQ"
   ],
-  "notes": "SF HQ, NYC hires."
+  "notes": "SF HQ, NYC hires.",
+  "domain": "opendoor.com"
  },
  {
   "id": "common",
@@ -9384,7 +9517,8 @@
    "n",
    "e"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "common.com"
  },
  {
   "id": "wework",
@@ -9399,7 +9533,8 @@
   "badges": [
    "(private)"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "wework.com"
  },
  {
   "id": "chobani",
@@ -9414,7 +9549,8 @@
   "badges": [
    "NASDAQ"
   ],
-  "notes": "NYC HQ. Growth + supply chain + ops analyst pipeline."
+  "notes": "NYC HQ. Growth + supply chain + ops analyst pipeline.",
+  "domain": "chobani.com"
  },
  {
   "id": "vita-coco",
@@ -9429,7 +9565,8 @@
   "badges": [
    "NASDAQ"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "vitacoco.com"
  },
  {
   "id": "poppi",
@@ -9447,7 +9584,8 @@
    "V",
    "U"
   ],
-  "notes": "Austin HQ, NYC hires."
+  "notes": "Austin HQ, NYC hires.",
+  "domain": "poppi.io"
  },
  {
   "id": "mateo",
@@ -9468,7 +9606,8 @@
    "d",
    "e"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "mateo.io"
  },
  {
   "id": "everlane",
@@ -9493,7 +9632,8 @@
    "o",
    "n"
   ],
-  "notes": "SF HQ, NYC hires."
+  "notes": "SF HQ, NYC hires.",
+  "domain": "everlane.com"
  },
  {
   "id": "reformation",
@@ -9514,7 +9654,8 @@
    "r",
    "a"
   ],
-  "notes": "LA HQ, NYC office."
+  "notes": "LA HQ, NYC office.",
+  "domain": "reformation.com"
  },
  {
   "id": "kate-spade",
@@ -9529,7 +9670,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "katespade.ai"
  },
  {
   "id": "michael-kors",
@@ -9544,7 +9686,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "michaelkors.ai"
  },
  {
   "id": "ralph-lauren",
@@ -9559,7 +9702,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "ralphlauren.io"
  },
  {
   "id": "estee-lauder",
@@ -9574,7 +9718,8 @@
   "badges": [
    "NYSE"
   ],
-  "notes": "NYC HQ."
+  "notes": "NYC HQ.",
+  "domain": "esteelauder.ai"
  },
  {
   "id": "loreal",
@@ -9589,7 +9734,8 @@
   "badges": [
    "Euronext"
   ],
-  "notes": "Paris HQ, NYC office."
+  "notes": "Paris HQ, NYC office.",
+  "domain": "loreal.com"
  },
  {
   "id": "dagster",
@@ -9609,7 +9755,8 @@
    "u",
    "e"
   ],
-  "notes": "SF HQ, NYC hires."
+  "notes": "SF HQ, NYC hires.",
+  "domain": "dagster.com"
  },
  {
   "id": "prefect",
@@ -9632,7 +9779,8 @@
    "n",
    "e"
   ],
-  "notes": "DC HQ, NYC hires."
+  "notes": "DC HQ, NYC hires.",
+  "domain": "prefect.com"
  },
  {
   "id": "weights-biases",
@@ -9674,7 +9822,8 @@
    "i",
    "a"
   ],
-  "notes": "SF HQ, NYC hires."
+  "notes": "SF HQ, NYC hires.",
+  "domain": "hex.com"
  },
  {
   "id": "hightouch-nyc",
@@ -9692,7 +9841,8 @@
    "i",
    "n"
   ],
-  "notes": "SF HQ, NYC hires."
+  "notes": "SF HQ, NYC hires.",
+  "domain": "hightouch.com"
  },
  {
   "id": "looker",
@@ -9707,7 +9857,8 @@
   "badges": [
    "GOOG"
   ],
-  "notes": "skip."
+  "notes": "skip.",
+  "domain": "looker.com"
  },
  {
   "id": "tableau",
@@ -9722,6 +9873,7 @@
   "badges": [
    "Salesforce"
   ],
-  "notes": "Seattle HQ."
+  "notes": "Seattle HQ.",
+  "domain": "tableau.co"
  }
 ]

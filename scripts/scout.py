@@ -37,7 +37,7 @@ Nothing is written to profiles/ unless --append is passed.
 """
 
 from __future__ import annotations
-import argparse, importlib.util, json, re, sys, unicodedata
+import argparse, importlib.util, json, re, subprocess, sys, unicodedata
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
@@ -51,6 +51,9 @@ sys.argv = _argv
 # Backends with a public, keyless, guessable-by-subdomain endpoint. Workday is
 # absent on purpose: its slug is a tenant/site triple, not a name, so guessing
 # it is hopeless and it has to be read off a careers page by hand.
+UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+      "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
+
 ATS = ["greenhouse", "ashby", "lever", "workable", "teamtailor",
        "recruitee", "personio", "bamboohr", "breezy", "pinpoint"]
 
@@ -155,6 +158,114 @@ def same_company(name: str, declared: str) -> bool:
     initials = "".join(t[0] for t in tokens if t not in {"of", "and", "the", "for"})
     return short == initials or norm(name) == norm(declared)
   return a in b or b in a
+
+
+# ── company website ───────────────────────────────────────────────────────
+# `domain` is what the board turns into a logo (COMPANY_DOMAINS -> favicon
+# service), and it is also the starting point for researching a careers page.
+# It is guessed and then VERIFIED: a site only counts when the page says it
+# belongs to the company we named, because a wrong domain renders somebody
+# else's logo on the card, which is a quieter kind of wrong than a bad slug but
+# the same kind.
+DOMAIN_DROP = {"the", "inc", "llc", "ltd", "limited", "corp", "corporation",
+               "company", "companies", "group", "holdings", "partners"}
+DOMAIN_TLDS = (".com", ".io", ".ai", ".co")
+
+
+def domain_candidates(name: str, limit: int = 6) -> list[str]:
+  words = re.sub(r"[^a-z0-9 ]", " ", unicodedata.normalize("NFKD", name)
+                 .encode("ascii", "ignore").decode().lower()).split()
+  core = [w for w in words if w not in DOMAIN_DROP] or words
+  bases = list(dict.fromkeys(["".join(words), "".join(core), "".join(core[:2])]))
+  out = []
+  for b in bases:
+    if len(b) < 3:
+      continue
+    for tld in DOMAIN_TLDS:
+      out.append(b + tld)
+  return out[:limit]
+
+
+def _page(url: str, timeout: int = 12) -> str:
+  try:
+    r = subprocess.run(["curl", "-sS", "-L", "--max-time", str(timeout),
+                        "-A", UA, url], capture_output=True,
+                       timeout=timeout + 4, text=True, errors="replace")
+    return r.stdout or ""
+  except Exception:
+    return ""
+
+
+# Cloudflare and friends answer a bot check instead of the page. That is not
+# evidence either way, so it falls through to the name test below rather than
+# counting as a refusal.
+CHALLENGE = re.compile(r"just a moment\.\.\.|attention required!|checking your "
+                       r"browser|enable javascript and cookies|cf-browser-verification",
+                       re.I)
+
+
+def domain_is_the_name(name: str, domain: str) -> bool:
+  """The domain spells the company out, with nothing else in it.
+
+  Same bar as an undeclared slug: exact, or it does not count. blackstone.com
+  is Blackstone; blackstone-capital-partners-llc.com would not qualify and
+  neither would bs.com.
+  """
+  base = domain.rsplit(".", 1)[0].replace("-", "")
+  return base in (core(name), norm(name)) and len(base) >= 3
+
+
+def site_belongs_to(name: str, domain: str) -> bool:
+  """Does https://<domain> say it is this company?"""
+  body = _page(f"https://{domain}")
+  # No response at all means the host may not exist, which is evidence against
+  # it — carlylegroup.com answers nothing and Carlyle is at carlyle.com. A
+  # response we cannot read is different: Blackstone, VTS and Carlyle all sit
+  # behind a bot check, and there the name test is the fallback.
+  if not body:
+    return False
+  title = re.search(r"<title[^>]*>(.*?)</title>", body, re.I | re.S)
+  og = re.search(r'property=["\']og:site_name["\'][^>]*content=["\']([^"\']+)',
+                 body, re.I)
+  declared = " ".join(filter(None, [title.group(1) if title else "",
+                                    og.group(1) if og else ""]))
+  declared = re.sub(r"<[^>]+>", " ", declared)
+  if not declared.strip() or CHALLENGE.search(body[:4000]):
+    return domain_is_the_name(name, domain)
+  return same_company(name, declared)
+
+
+# Hosts that belong to an ATS, not to the employer.
+ATS_HOSTS = re.compile(
+  r"(greenhouse\.io|ashbyhq\.com|lever\.co|workable\.com|teamtailor\.com|"
+  r"smartrecruiters\.com|recruitee\.com|personio\.|bamboohr\.com|breezy\.hr|"
+  r"pinpointhq\.com|rippling\.com|myworkdayjobs\.com|myworkdaysite\.com|"
+  r"icims\.com|taleo\.net|jobvite\.com|paylocity\.com)", re.I)
+
+
+def domain_from_urls(urls) -> str:
+  """A posting hosted on the employer's own domain names it exactly.
+
+  Greenhouse and Lever let a company serve its board from its own site — Arbor
+  Realty's postings live at arbor.com/jobs — so when a posting URL is not on an
+  ATS host, the host IS the company. That beats any guess.
+  """
+  for u in urls or []:
+    host = re.sub(r"^www\.", "", (u or "").split("/")[2] if "://" in (u or "") else "")
+    if host and not ATS_HOSTS.search(host):
+      return host
+  return ""
+
+
+def verified_domain(name: str, urls=None) -> str:
+  """The company's own domain, or "" — never a guess we could not confirm."""
+  from_url = domain_from_urls(urls)
+  if from_url:
+    return from_url
+  for d in domain_candidates(name):
+    if site_belongs_to(name, d):
+      return d
+  return ""
 
 
 def variants(name: str, limit=7) -> list[str]:
@@ -330,9 +441,13 @@ def main():
   kept = []
   for name, ats, slug, n, verdict, why in sorted(checked, key=lambda r: r[4]):
     if verdict.startswith("OK"):
-      kept.append({"id": norm(name)[:28], "name": name, "ats": ats, "slug": slug,
-                   "vertical": args.vertical, "sub": name, "stage": args.stage,
-                   "raised": "—", "lead": "—", "badges": [], "notes": args.note})
+      row = {"id": norm(name)[:28], "name": name, "ats": ats, "slug": slug,
+             "vertical": args.vertical, "sub": name, "stage": args.stage,
+             "raised": "—", "lead": "—", "badges": [], "notes": args.note}
+      d = verified_domain(name)
+      if d:
+        row["domain"] = d
+      kept.append(row)
     else:
       print(f"   {verdict:20s} {name[:28]:28s} {ats}:{slug} — {why}", file=sys.stderr)
   print(f"── kept {len(kept)} of {len(hits)}", file=sys.stderr)

@@ -76,6 +76,10 @@ class Profile:
       re.compile(f["titleIncludeBroad"], re.I) if f.get("titleIncludeBroad") else None
     )
     self.broad_verticals = set(f.get("broadVerticals", []))
+    self.title_include_broad2 = (
+      re.compile(f["titleIncludeBroad2"], re.I)
+      if f.get("titleIncludeBroad2") else None)
+    self.broad_verticals2 = set(f.get("broadVerticals2", []))
     # Drop postings that state a requirement above this many years.
     # None disables the check entirely.
     self.max_years = f.get("maxYearsExperience")
@@ -560,6 +564,12 @@ def description_of(ats, j):
           return joined
     return None
 
+  if ats == "greenhouse":
+    # The plain board listing carries no body, but ?content=true does and some
+    # callers pass one in. Reading it here saves a request and, more to the
+    # point, means a listing that already has the text is never treated as
+    # unreadable.
+    return first("content")
   if ats == "ashby":
     return first("descriptionPlain", "descriptionHtml")
   if ats == "lever":
@@ -603,6 +613,50 @@ def fetch_description(ats, slug, j):
     d = curl_json(f"https://apply.workable.com/api/v3/accounts/{slug}/jobs/{jid}")
     return (d or {}).get("description")
   return None
+
+
+# ── ATS sample postings that survived onboarding ──────────────────────────
+# A real company's board can still carry the sample postings its ATS seeded at
+# setup. Trimont's Pinpoint board has four postings: one genuine, and three
+# demo ones where somebody renamed the title and left the body alone — so
+# "Director-Credit and Asset Management" in New York opens a Customer Service
+# Representative job description.
+#
+# The sandbox check in scout.py compares TITLES, and renamed titles walk
+# straight past it. These are the body texts, which nobody bothers to rewrite.
+# Matched on the opening sentence, which is verbatim across tenants.
+DEMO_DESCRIPTIONS = re.compile(
+  r"we are seeking a passionate and strategic head of diversity,?\s*equity|"
+  r"we are looking for a dedicated customer service representative to join|"
+  r"we.{0,3}re seeking a marketing executive to propel our brand|"
+  r"we are seeking a results[\s-]driven marketing manager to lead", re.I)
+
+
+def is_demo_posting(desc: str) -> bool:
+  """True when the body is an ATS sample posting rather than a real job."""
+  if not desc:
+    return False
+  text = re.sub(r"<[^>]+>", " ", _unescape(desc))
+  return bool(DEMO_DESCRIPTIONS.search(re.sub(r"\s+", " ", text)[:600]))
+
+
+def fetch_workday_description(slug, j):
+  """Workday keeps the job text behind a second request, keyed by externalPath.
+
+  Its listing carries a title and a location and nothing else, so every Workday
+  posting reached the board with an empty summary and no text for the screens
+  to read — on Alan's board that was eleven of thirty roles, including every
+  SitusAMC CRE underwriting job. The id-based fetch_description above cannot
+  help: Workday has no numeric job id, only a path."""
+  path = j.get("externalPath") or ""
+  if not path:
+    return None
+  try:
+    tenant, wdn, site = slug.split("/", 2)
+  except ValueError:
+    return None
+  d = curl_json(f"https://{tenant}.{wdn}.myworkdayjobs.com/wday/cxs/{tenant}/{site}{path}")
+  return ((d or {}).get("jobPostingInfo") or {}).get("jobDescription")
 
 
 
@@ -945,9 +999,13 @@ def filter_jobs(profile: Profile, ats, raw, slug="", vertical=""):
       continue
     if profile.title_exclude and profile.title_exclude.search(title): continue
     if not profile.title_include.search(title):
-      if not (profile.title_include_broad
-              and vertical in profile.broad_verticals
-              and profile.title_include_broad.search(title)):
+      lane1 = (profile.title_include_broad
+               and vertical in profile.broad_verticals
+               and profile.title_include_broad.search(title))
+      lane2 = (profile.title_include_broad2
+               and vertical in profile.broad_verticals2
+               and profile.title_include_broad2.search(title))
+      if not (lane1 or lane2):
         continue
     # ── The posting itself ────────────────────────────────────────────
     # Everything above judged a title and a location string. The requirements
@@ -962,8 +1020,15 @@ def filter_jobs(profile: Profile, ats, raw, slug="", vertical=""):
       if ats == "greenhouse" and n.get("id"):
         detail = curl_json(f"https://boards-api.greenhouse.io/v1/boards/{slug}/jobs/{n['id']}?pay_transparency=true")
         desc = (detail or {}).get("content") or desc
+      elif ats == "workday":
+        desc = fetch_workday_description(slug, j) or desc
       else:
         desc = fetch_description(ats, slug, j) or desc
+
+    if is_demo_posting(desc):
+      _refused.append((slug, title, "ats-sample",
+                        ["the body is the ATS's seeded demo posting"]))
+      continue
 
     readable = bool(desc and len(desc) >= 120)
     if profile.require_description and not readable:

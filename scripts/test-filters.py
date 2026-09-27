@@ -48,14 +48,27 @@ PROBE_ATS = {"cody": "lever", "sean": "greenhouse", "thien": "greenhouse",
              "alan": "greenhouse"}
 
 
+# A benign body for profiles whose screens read the description; without one,
+# a title case would fail on "no description" rather than on the title.
+PROBE_DESCRIPTION = {
+  "alan": ("You will support underwriting and credit analysis for commercial "
+           "real estate acquisitions, review borrower and sponsor financials, "
+           "prepare approval packages, and assist with asset management and "
+           "portfolio reporting across the loan book."),
+}
+
+
 def probe_row(pid, title, loc):
   """One synthetic posting in the shape the profile's probe backend uses."""
   if PROBE_ATS.get(pid) == "lever":
     return {"text": title, "categories": {"location": loc},
             "hostedUrl": "https://example.com/job", "createdAt": 0,
             "descriptionPlain": BENIGN_DESCRIPTION}
-  return {"title": title, "location": {"name": loc},
-          "absolute_url": "https://example.com/job", "updated_at": "2026-01-01"}
+  row = {"title": title, "location": {"name": loc},
+         "absolute_url": "https://example.com/job", "updated_at": "2026-01-01"}
+  if pid in PROBE_DESCRIPTION:
+    row["content"] = PROBE_DESCRIPTION[pid]
+  return row
 
 
 GEO_PROBE_TITLE = {"sean": "Environment Artist", "thien": "Operations Analyst",
@@ -207,8 +220,20 @@ CASES = {
     ("Product Manager, CRE Lending",           "saas",      True),
     ("Product Specialist, Real Estate Valuations", "saas",  True),
     ("Real Estate Product Strategist",         "media",     True),
+    # Lane 2: product and delivery titles widen only at proptech, where the
+    # product IS the CRE workflow. At a REIT or a lender the same title is
+    # building something internal.
     ("Product Manager",                        "proptech",  True),
     ("Solutions Consultant",                   "proptech",  True),
+    ("Implementation Manager",                 "proptech",  True),
+    ("Product Manager",                        "reit",      False),
+    ("Solutions Consultant",                   "lender",    False),
+    ("Senior Product Manager, Leasing",        "proptech",  False),
+    ("Senior Customer Success Manager",         "proptech",  False),
+    ("Senior Product Marketing Manager",        "proptech",  False),
+    # "Credit Distribution" in CRE is loan syndication, not fund sales.
+    ("Senior Analyst, (CRE) Credit Distribution & Loan Syndication", "lender", True),
+    ("Head of Fund Distribution",               "assetmgr",  False),
     ("Product Manager",                        "consumer",  False),
     ("Product Manager, Acquisition",           "saas",      False),
     # A fintech's product roles count only when the title names the workflow
@@ -229,7 +254,18 @@ CASES = {
     # associates. QuadReal posted a three-month one and it landed.
     ("Summer Analyst, U.S. Real Estate Debt",  "repe",      False),
     ("Real Estate Summer Associate",           "repe",      False),
-    ("Analyst Program - Real Estate Debt",     "assetmgr",  True),
+    ("Summer Program, Real Estate Investments", "repe",     False),
+    # Barings' "Analyst Program - Real Estate Debt" reads well until you open
+    # it: a two-year programme that "offers recent graduates a hands-on
+    # introduction". Alan is an Asset Manager II.
+    ("Analyst Program - Real Estate Debt",     "assetmgr",  False),
+    ("Real Estate Debt Analyst",               "assetmgr",  True),
+    # SitusAMC's CRE Loan Closer sits on the legal business team.
+    ("CRE Loan Closer-JD Required",            "lender",    False),
+    ("Associate General Counsel, Real Estate", "repe",      False),
+    # Fundraising and distribution point away from investment decisions.
+    ("GIP Capital Formation - Associate, Product Specialist", "assetmgr", False),
+    ("Private Wealth - Product Specialist (Credit), Vice President", "assetmgr", False),
   ],
   "sean": [
     # The title names the game/real-time pipeline — counts anywhere.
@@ -644,10 +680,43 @@ def run_identity() -> int:
   return bad
 
 
+# ── ATS sample postings ───────────────────────────────────────────────────
+# A real company's board can carry the demo postings its ATS seeded at setup.
+# Trimont's Pinpoint board offers a "Director-Credit and Asset Management" in
+# New York whose body is a Customer Service Representative job. The title was
+# renamed; the body was not.
+DEMO_POSTING_CASES = [
+  ("We are looking for a dedicated Customer Service Representative to join our team.", True),
+  ("We are seeking a passionate and strategic Head of Diversity, Equity, and "
+   "Inclusion (DEI) to lead our UK DEI efforts.", True),
+  ("We're seeking a Marketing Executive to propel our brand's growth through "
+   "digital channels.", True),
+  ("Overview: Founded in 1988 and headquartered in Atlanta, Georgia, Trimont is "
+   "a specialized global commercial real estate loan services provider.", False),
+  ("The Senior Special Servicing Asset Manager is responsible for managing a "
+   "portfolio of Agency loans in default.", False),
+  ("We are looking for a dedicated Credit Analyst to join our commercial real "
+   "estate team.", False),
+  ("", False),
+]
+
+
+def run_demo_postings() -> int:
+  bad = 0
+  for body, want in DEMO_POSTING_CASES:
+    if rc.is_demo_posting(body) != want:
+      bad += 1
+      print(f"  ✗ demo posting: {body[:52]!r} expected "
+            f"{'demo' if want else 'real'}", file=sys.stderr)
+  if not bad:
+    print(f"   ✓ demo postings: {len(DEMO_POSTING_CASES)} case(s) pass")
+  return bad
+
+
 def main():
   ids = sys.argv[1:] or sorted(
     p.stem for p in (ROOT / "profiles").glob("*.json") if not p.name.endswith(".companies.json"))
-  sys.exit(1 if sum(run(i) + run_geo(i) + run_pay(i) + run_screens(i) + run_require_description(i) for i in ids) + run_summary() + run_years() + run_demands() + run_gone() + run_identity() else 0)
+  sys.exit(1 if sum(run(i) + run_geo(i) + run_pay(i) + run_screens(i) + run_require_description(i) for i in ids) + run_summary() + run_years() + run_demands() + run_gone() + run_identity() + run_demo_postings() else 0)
 
 
 if __name__ == "__main__":

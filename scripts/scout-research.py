@@ -267,10 +267,14 @@ def main():
   kept, by = [], {r["name"]: r for r in found}
   for name, ats, slug, n, verdict, why in checked:
     if verdict.startswith("OK"):
-      kept.append({"id": sc.norm(name)[:28], "name": name, "ats": ats,
-                   "slug": slug, "vertical": args.vertical, "sub": name,
-                   "stage": args.stage, "raised": "—", "lead": "—",
-                   "badges": [], "notes": args.note})
+      row = {"id": sc.norm(name)[:28], "name": name, "ats": ats,
+             "slug": slug, "vertical": args.vertical, "sub": name,
+             "stage": args.stage, "raised": "—", "lead": "—",
+             "badges": [], "notes": args.note}
+      dom = sc.verified_domain(name)
+      if dom:
+        row["domain"] = dom
+      kept.append(row)
       print(f"   found  {name[:28]:28s} {ats}:{slug}", file=sys.stderr)
       print(f"          via {by[name]['via'][:96]}", file=sys.stderr)
     else:

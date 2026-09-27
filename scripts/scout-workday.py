@@ -160,10 +160,14 @@ def main():
   kept = []
   for name, ats, slug, n, verdict, why in sorted(checked, key=lambda r: r[4]):
     if verdict.startswith("OK"):
-      kept.append({"id": sc.norm(name)[:28], "name": name, "ats": ats,
-                   "slug": slug, "vertical": args.vertical, "sub": name,
-                   "stage": args.stage, "raised": "—", "lead": "—",
-                   "badges": [], "notes": args.note})
+      row = {"id": sc.norm(name)[:28], "name": name, "ats": ats,
+             "slug": slug, "vertical": args.vertical, "sub": name,
+             "stage": args.stage, "raised": "—", "lead": "—",
+             "badges": [], "notes": args.note}
+      dom = sc.verified_domain(name)
+      if dom:
+        row["domain"] = dom
+      kept.append(row)
       print(f"   ok   {name[:30]:30s} {slug:48s} {n:5d}  {why}", file=sys.stderr)
     else:
       print(f"   {verdict:20s} {name[:30]:30s} {slug:48s} {why}", file=sys.stderr)
