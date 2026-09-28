@@ -120,7 +120,8 @@ window.BOARD_PROFILE = {
       "operator": "Operator",
       "famoffice": "Family Office",
       "bank": "Bank",
-      "lending": "Lending"
+      "lending": "Lending",
+      "retech": "RE Tech"
     },
     "pills": {
       "bpo": "pill-dev",
@@ -174,7 +175,8 @@ window.BOARD_PROFILE = {
       "operator": "pill-dev",
       "famoffice": "pill-mkt",
       "bank": "pill-sde",
-      "lending": "pill-sde"
+      "lending": "pill-sde",
+      "retech": "pill-dev"
     }
   },
   "defaultLevel": "associate",
@@ -198,7 +200,8 @@ window.BOARD_PROFILE = {
         "insurance": 5,
         "consulting": 5,
         "bank": 6,
-        "lending": 5
+        "lending": 5,
+        "retech": 6
       },
       "default": 4
     },
@@ -326,5 +329,5 @@ window.BOARD_PROFILE = {
       ]
     }
   },
-  "poolSize": 1926
+  "poolSize": 1962
 };

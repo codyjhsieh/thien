@@ -3,7 +3,7 @@
 
 /* ---------- COMPANIES ----------
  * NYC board for profile 'alan'. Every posting below was live on
- * the company's public ATS JSON when verified (2026-09-27) and matched the
+ * the company's public ATS JSON when verified (2026-09-28) and matched the
  * profile's title + location filters (profiles/alan.json).
  * URLs link directly to the posting (not aggregators).
  *
@@ -16,7 +16,7 @@
  *           totalRoles, notes, jobs[{ title, url, level, posted, added }] }
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  */
-const COMPANIES_VERIFIED_AT = '2026-09-27';
+const COMPANIES_VERIFIED_AT = '2026-09-28';
 const COMPANIES = [
   { id:"altusgroup", name:"Altus Group", vertical:"brokerage",
     sub:"Altus Group",
@@ -168,6 +168,15 @@ const COMPANIES = [
       { title:"Associate Implementation Manager", url:"https://job-boards.greenhouse.io/vts/jobs/4723555005", level:"associate", summary:"Drive Efficiency with AI - Approach every task with an AI-first mindset. Look for opportunities to leverage AI & Automation Tools to automate data collection, streamline workflows, and\u2026" },
       { title:"Senior Manager, Solutions Consultant - Activate", url:"https://job-boards.greenhouse.io/vts/jobs/4713181005", level:"senior", summary:"VTS is seeking a Senior Manager, Solutions Consultant - Activate to assist and translate new business opportunity into a successful deployment plan across VTS Activate - the platform that\u2026" },
       { title:"Senior Technical Solutions Consultant", url:"https://job-boards.greenhouse.io/vts/jobs/4704260005", level:"senior", years:3, summary:"As a Senior Technical Solutions Consultant , you will be the principal technical liaison between our product, sales, and customer success teams." }
+    ] },
+  { id:"wellingtonmanagement", name:"Wellington Management", vertical:"assetmgr",
+    sub:"Wellington Management",
+    stage:"\u2014", raised:"\u2014", lead:"\u2014",
+    badges:[],
+    totalRoles:1,
+    notes:"Alternative asset manager or private-credit fund \u2014 investment, portfolio and credit roles, real estate among them.",
+    jobs:[
+      { title:"Portfolio Manager, Commercial Real Estate Debt", url:"https://wellington.wd5.myworkdayjobs.com/en-US/External/job/New-York-NY-United-States/Portfolio-Manager--Commercial-Real-Estate-Debt_R94919-1", level:"associate", years:12, summary:"As part of the continued expansion of our Private Investing capabilities, we are seeking to recruit an experienced investor for our new Commercial Real Estate (CRE) Debt Team." }
     ] },
 ];
 

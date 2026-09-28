@@ -78,7 +78,7 @@ PLACEHOLDER = re.compile(r"^(test job|sample|example|employee\s*#|open position|
 # anything. Add a set whenever another shared corpus turns up.
 DEMO_CORPORA = [
   # Pinpoint
-  {"customer service rep", "head of dei - uk", "marketing manager",
+  {"customer service rep", "head of dei", "marketing manager",
    "marketing executive"},
   {"senior data engineer, embedded"},
   # BambooHR
@@ -339,7 +339,11 @@ def validate(hit) -> tuple[str, str, str, int, str, str]:
   # whole board is one title.
   if 1 < len(titles) <= 3 and len(set(titles)) == 1:
     return name, ats, slug, n, "REJECT-sandbox", f"{len(titles)}x {titles[0]!r} and nothing else"
-  lowered = {t.strip().lower() for t in titles}
+  # Strip a trailing " - <place>" before comparing: pinpoint/hollisglobal
+  # serves "Head of DEI - Belfast", "- US" and "- UK", which is the same demo
+  # posting three times and slipped past an exact set comparison.
+  lowered = {re.sub(r"\s*[-–—]\s*[a-z .,'()]+$", "", t.strip().lower())
+             for t in titles}
   if lowered and len(titles) <= DEMO_MAX_POSTINGS:
     for corpus in DEMO_CORPORA:
       if lowered <= corpus:

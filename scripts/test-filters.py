@@ -660,6 +660,46 @@ IDENTITY_CASES = [
   ("Heartland Financial", "C200 Heartland Bank Limited", True),
 ]
 
+# Demo boards, matched as whole title sets. A trailing location is stripped
+# first: pinpoint/hollisglobal serves "Head of DEI" three times, once per
+# office, which is one demo posting wearing three hats.
+SANDBOX_CASES = [
+  (["Head of DEI - Belfast", "Head of DEI - US", "Head of DEI - UK",
+    "Customer Service Rep", "Marketing Manager"], True),
+  (["Customer Service Rep", "Head of DEI - UK", "Marketing Manager"], True),
+  (["Financial Analyst", "General Application", "IT Security Engineer",
+    "Marketing Manager", "Software Engineer"], True),
+  (["Associate Transaction & Processing", "Director-Credit and Asset Management"], False),
+  (["Marketing Manager", "Senior Underwriter - New York"], False),
+]
+
+
+def _load_scout():
+  spec = importlib.util.spec_from_file_location("scout", ROOT / "scripts" / "scout.py")
+  sc = importlib.util.module_from_spec(spec)
+  argv, sys.argv = sys.argv, ["scout"]
+  try:
+    spec.loader.exec_module(sc)
+  finally:
+    sys.argv = argv
+  return sc
+
+
+def run_sandbox() -> int:
+  sc = _load_scout()
+  bad = 0
+  for titles, want in SANDBOX_CASES:
+    lowered = {__import__("re").sub(r"\s*[-–—]\s*[a-z .,\'()]+$", "", t.strip().lower())
+               for t in titles}
+    got = any(lowered <= corpus for corpus in sc.DEMO_CORPORA)
+    if got != want:
+      bad += 1
+      print(f"  ✗ sandbox: {titles} expected {'demo' if want else 'real'}",
+            file=sys.stderr)
+  if not bad:
+    print(f"   ✓ sandbox boards: {len(SANDBOX_CASES)} case(s) pass")
+  return bad
+
 
 def run_identity() -> int:
   spec = importlib.util.spec_from_file_location("scout", ROOT / "scripts" / "scout.py")
@@ -716,7 +756,7 @@ def run_demo_postings() -> int:
 def main():
   ids = sys.argv[1:] or sorted(
     p.stem for p in (ROOT / "profiles").glob("*.json") if not p.name.endswith(".companies.json"))
-  sys.exit(1 if sum(run(i) + run_geo(i) + run_pay(i) + run_screens(i) + run_require_description(i) for i in ids) + run_summary() + run_years() + run_demands() + run_gone() + run_identity() + run_demo_postings() else 0)
+  sys.exit(1 if sum(run(i) + run_geo(i) + run_pay(i) + run_screens(i) + run_require_description(i) for i in ids) + run_summary() + run_years() + run_demands() + run_gone() + run_identity() + run_demo_postings() + run_sandbox() else 0)
 
 
 if __name__ == "__main__":
