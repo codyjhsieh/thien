@@ -20,7 +20,7 @@
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  *  - jobs are sorted: founding > senior > mid.
  */
-const COMPANIES_VERIFIED_AT = '2026-09-27';
+const COMPANIES_VERIFIED_AT = '2026-09-28';
 const COMPANIES = [
   { id:"anthropic", name:"Anthropic", vertical:"ai",
     sub:"Claude \u2014 AI safety lab",
@@ -202,12 +202,11 @@ const COMPANIES = [
     sub:"Quant trading firm",
     stage:"Private", raised:"Self-funded", lead:"Private",
     badges:["Private"],
-    totalRoles:9,
+    totalRoles:8,
     notes:"Quant trading. Strong on functional programming (OCaml), CS fundamentals.",
     jobs:[
       { title:"Fundamental Research Analyst", url:"https://www.janestreet.com/join-jane-street/apply/8347286002?gh_jid=8347286002", level:"mid", added:"2026-08-26", posted:"2026-08-25" },
       { title:"Grains and Oilseeds Analyst", url:"https://www.janestreet.com/join-jane-street/apply/8180726002?gh_jid=8180726002", level:"mid", added:"2026-08-26", posted:"2026-07-30" },
-      { title:"Indirect Procurement Specialist", url:"https://www.janestreet.com/join-jane-street/apply/8442082002?gh_jid=8442082002", level:"mid", added:"2026-08-26", posted:"2026-07-30" },
       { title:"IT Logistics and Warehouse Specialist", url:"https://www.janestreet.com/join-jane-street/apply/8589762002?gh_jid=8589762002", level:"mid", added:"2026-08-26", posted:"2026-07-30" },
       { title:"Oil and Refined Products Analyst/Trader", url:"https://www.janestreet.com/join-jane-street/apply/8413554002?gh_jid=8413554002", level:"mid", added:"2026-08-26", posted:"2026-07-30" },
       { title:"Power Analyst/Trader", url:"https://www.janestreet.com/join-jane-street/apply/7950706002?gh_jid=7950706002", level:"mid", added:"2026-08-26", posted:"2026-07-30" },
@@ -710,10 +709,9 @@ const COMPANIES = [
     sub:"Card network (NYSE: MA)",
     stage:"Public", raised:"(NYSE: MA)", lead:"NYSE",
     badges:["NYSE"],
-    totalRoles:2,
+    totalRoles:1,
     notes:"Purchase NY HQ.",
     jobs:[
-      { title:"Analyst, Media Planning", url:"https://mastercard.wd1.myworkdayjobs.com/en-US/CorporateCareers/job/Purchase-New-York/Analyst--Media-Planning_R-291052", level:"mid", added:"2026-09-22" },
       { title:"Analyst, Account Management", url:"https://mastercard.wd1.myworkdayjobs.com/en-US/CorporateCareers/job/New-York-City-New-York/Analyst--Account-Management_R-291149", level:"mid", added:"2026-09-24" }
     ] },
   { id:"ridgeline", name:"Ridgeline", vertical:"saas",
@@ -758,29 +756,32 @@ const COMPANIES = [
 
 /* ---------- COMPANY DOMAINS (for Clearbit public logo CDN) ---------- */
 const COMPANY_DOMAINS = {
-  alchemy:"alchemy.com", anthropic:"anthropic.com", baseten:"baseten.co",
+  alchemy:"alchemy.com", alphasense:"alphasense.com", anthropic:"anthropic.com",
+  baseten:"baseten.co", blackrock:"blackrock.com", blackstone:"blackstone.com",
   box:"box.com", braze:"braze.com", brex:"brex.com",
   capco:"capco.com", "cockroach-labs":"cockroachlabs.com", "codes-health":"codeshealth.co",
-  cohere:"cohere.com", crusoe:"crusoe.ai", cursor:"cursor.com",
-  dashlane:"dashlane.com", datadog:"datadoghq.com", decagon:"decagon.ai",
-  elevenlabs:"elevenlabs.io", equinox:"equinox.com", etsy:"etsy.com",
-  fanduel:"fanduel.com", figma:"figma.com", flexport:"flexport.com",
-  "flow-traders":"flowtraders.com", garage:"garage.com", gemini:"gemini.com",
-  gusto:"gusto.com", hang:"hang.xyz", hopper:"hopper.com",
-  "jane-street":"janestreet.com", justworks:"justworks.com", kalshi:"kalshi.com",
-  linkedin:"linkedin.com", lovable:"lovable.dev", lyft:"lyft.com",
-  meow:"meow.com", metropolis:"metropolis.io", middesk:"middesk.com",
-  modal:"modal.com", mongodb:"mongodb.com", navan:"navan.com",
-  "nyc-gov":"nyc.gov", openai:"openai.com", oscar:"hioscar.com",
-  palantir:"palantir.com", partiful:"partiful.com", perplexity:"perplexity.ai",
-  pinterest:"pinterest.com", plaid:"plaid.com", point72:"point72.com",
-  polymarket:"polymarket.com", ramp:"ramp.com", reddit:"reddit.com",
-  rho:"rho.co", ridgeline:"ridgelineapps.com", rilla:"rillavoice.com",
-  scaleai:"scale.com", seatgeek:"seatgeek.com", sisense:"sisense.com",
-  sofi:"sofi.com", sonder:"sonder.com", sonymusic:"sonymusic.com",
-  spotify:"spotify.com", stripe:"stripe.com", taboola:"taboola.com",
-  "the-trade-desk":"thetradedesk.com", turing:"turing.com", vercel:"vercel.com",
-  vestwell:"vestwell.com", warp:"warp.dev", zocdoc:"zocdoc.com",
+  cohere:"cohere.com", coreweave:"coreweave.com", crusoe:"crusoe.ai",
+  cursor:"cursor.com", dashlane:"dashlane.com", datadog:"datadoghq.com",
+  decagon:"decagon.ai", elevenlabs:"elevenlabs.io", equinox:"equinox.com",
+  etsy:"etsy.com", faire:"faire.com", fanduel:"fanduel.com",
+  figma:"figma.com", flexport:"flexport.com", "flow-traders":"flowtraders.com",
+  garage:"garage.com", gemini:"gemini.com", gusto:"gusto.com",
+  hang:"hang.xyz", harvey:"harvey.ai", hellofresh:"careers.hellofresh.com",
+  hopper:"hopper.com", "jane-street":"janestreet.com", justworks:"justworks.com",
+  kalshi:"kalshi.com", linkedin:"linkedin.com", lithic:"lithic.com",
+  lovable:"lovable.dev", lyft:"lyft.com", meow:"meow.com",
+  metropolis:"metropolis.io", middesk:"middesk.com", modal:"modal.com",
+  mongodb:"mongodb.com", navan:"navan.com", "nyc-gov":"nyc.gov",
+  openai:"openai.com", oscar:"hioscar.com", palantir:"palantir.com",
+  partiful:"partiful.com", perplexity:"perplexity.ai", pinterest:"pinterest.com",
+  plaid:"plaid.com", point72:"point72.com", polymarket:"polymarket.com",
+  ramp:"ramp.com", reddit:"reddit.com", rho:"rho.co",
+  ridgeline:"ridgelineapps.com", rilla:"rillavoice.com", scaleai:"scale.com",
+  seatgeek:"seatgeek.com", sisense:"sisense.com", sofi:"sofi.com",
+  sonder:"sonder.com", sonymusic:"sonymusic.com", spotify:"spotify.com",
+  stripe:"stripe.com", taboola:"taboola.com", "the-trade-desk":"thetradedesk.com",
+  turing:"turing.com", vercel:"vercel.com", vestwell:"vestwell.com",
+  warp:"warp.dev", zocdoc:"zocdoc.com",
 };
 
 window.DATA = { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT };

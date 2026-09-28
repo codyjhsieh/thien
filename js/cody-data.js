@@ -16,7 +16,7 @@
  *           totalRoles, notes, jobs[{ title, url, level, posted, added }] }
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  */
-const COMPANIES_VERIFIED_AT = '2026-09-27';
+const COMPANIES_VERIFIED_AT = '2026-09-28';
 const COMPANIES = [
   { id:"camber", name:"Camber", vertical:"ai",
     sub:"AI medical billing + RCM",
@@ -122,7 +122,10 @@ const COMPANIES = [
 
 /* ---------- COMPANY DOMAINS (favicon CDN lookup) ---------- */
 const COMPANY_DOMAINS = {
-  camber:"camber.com", deepgram:"deepgram.com", wealthfront:"wealthfront.com",
+  alcumusgroup:"alcumusgroup.com", bloomerang:"bloomerang.com", camber:"camber.com",
+  deepgram:"deepgram.com", greatminds:"greatminds.io", lightspeedsystems:"lightspeedsystems.com",
+  osano:"osano.com", sanabenefits:"sanabenefits.com", smiledigitalhealth:"smiledigitalhealth.com",
+  wealthfront:"wealthfront.com",
 };
 
 window.CODY_DATA = { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT };
