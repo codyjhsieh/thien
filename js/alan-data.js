@@ -16,7 +16,7 @@
  *           totalRoles, notes, jobs[{ title, url, level, posted, added }] }
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  */
-const COMPANIES_VERIFIED_AT = '2026-09-28';
+const COMPANIES_VERIFIED_AT = '2026-09-29';
 const COMPANIES = [
   { id:"altusgroup", name:"Altus Group", vertical:"brokerage",
     sub:"Altus Group",
@@ -77,10 +77,11 @@ const COMPANIES = [
     sub:"EliseAI",
     stage:"\u2014", raised:"\u2014", lead:"\u2014",
     badges:[],
-    totalRoles:1,
+    totalRoles:2,
     notes:"Rental, payments or e-commerce-funnel platform \u2014 application, deposit and order records.",
     jobs:[
-      { title:"Senior Product Manager | Housing", url:"https://jobs.ashbyhq.com/eliseai/6d805fdd-a66d-49c8-a061-c41e066d76e6", level:"senior", added:"2026-09-28", posted:"2026-05-25", years:4, summary:"Housing is one of the most operationally complex industries in the world. Every day, property teams manage high volumes of resident communication, leasing operations, maintenance, payments…" }
+      { title:"Senior Product Manager | Housing", url:"https://jobs.ashbyhq.com/eliseai/6d805fdd-a66d-49c8-a061-c41e066d76e6", level:"senior", added:"2026-09-28", posted:"2026-05-25", years:4, summary:"Housing is one of the most operationally complex industries in the world. Every day, property teams manage high volumes of resident communication, leasing operations, maintenance, payments…" },
+      { title:"Associate Product Manager | Housing", url:"https://jobs.ashbyhq.com/eliseai/f0c8d0af-8021-4a04-b0f9-de1baff48ee4", level:"associate", added:"2026-09-29", posted:"2026-09-28", summary:"EliseAI is rapidly expanding into new product lines serving large, sophisticated customers. As an Associate Product Manager, you will partner closely with Product and Engineering to…" }
     ] },
   { id:"mercury", name:"Mercury", vertical:"fintech",
     sub:"Banking for startups",

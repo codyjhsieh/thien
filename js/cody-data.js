@@ -16,7 +16,7 @@
  *           totalRoles, notes, jobs[{ title, url, level, posted, added }] }
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  */
-const COMPANIES_VERIFIED_AT = '2026-09-28';
+const COMPANIES_VERIFIED_AT = '2026-09-29';
 const COMPANIES = [
   { id:"camber", name:"Camber", vertical:"ai",
     sub:"AI medical billing + RCM",
@@ -117,6 +117,24 @@ const COMPANIES = [
     notes:"Payer, CRO or health-data company \u2014 claims, trial and patient-record administration.",
     jobs:[
       { title:"Delivery Operations Specialist ( Remote US)", url:"https://jobs.lever.co/smiledigitalhealth/42224f40-5f23-4168-bbab-4cedce3ec2a3", level:"entry", added:"2026-09-25", posted:"2026-09-24", pay:{"min":19,"max":28,"interval":"hour"}, paySource:"estimate", summary:"Working for a company like Smile Digital Health means supporting our mandate for #BetterGlobalHealth." }
+    ] },
+  { id:"medrio", name:"Medrio", vertical:"health",
+    sub:"Medrio",
+    stage:"\u2014", raised:"\u2014", lead:"\u2014",
+    badges:[],
+    totalRoles:1,
+    notes:"Payer, CRO or health-data company \u2014 claims, trial and patient-record administration.",
+    jobs:[
+      { title:"Technical Customer Support Representative", url:"https://job-boards.greenhouse.io/medrio/jobs/8854042002", level:"entry", added:"2026-09-29", posted:"2026-09-28", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", years:0, summary:"At Medrio, our purpose is to save 1,000,000 lives by providing clinical researchers with the software tools necessary to chase the next breakthrough in public health." }
+    ] },
+  { id:"openloophealth", name:"OpenLoop Health", vertical:"health",
+    sub:"OpenLoop Health",
+    stage:"\u2014", raised:"\u2014", lead:"\u2014",
+    badges:[],
+    totalRoles:1,
+    notes:"Behavioral and telehealth provider \u2014 intake, scheduling and claims work.",
+    jobs:[
+      { title:"Provider Support Specialist", url:"https://jobs.ashbyhq.com/openloophealth/dc044261-6879-4db0-b8ce-85697382bef0", level:"entry", added:"2026-09-29", posted:"2026-09-28", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", years:0, summary:"OpenLoop is seeking a Provider Support Specialist to join our Medical Operations team. In this role, you will answer incoming questions from our contracted provider network and make sure…" }
     ] }
 ];
 
@@ -124,8 +142,8 @@ const COMPANIES = [
 const COMPANY_DOMAINS = {
   alcumusgroup:"alcumusgroup.com", bloomerang:"bloomerang.com", camber:"camber.com",
   deepgram:"deepgram.com", greatminds:"greatminds.io", lightspeedsystems:"lightspeedsystems.com",
-  osano:"osano.com", sanabenefits:"sanabenefits.com", smiledigitalhealth:"smiledigitalhealth.com",
-  wealthfront:"wealthfront.com",
+  medrio:"medrio.com", openloophealth:"openloophealth.com", osano:"osano.com",
+  sanabenefits:"sanabenefits.com", smiledigitalhealth:"smiledigitalhealth.com", wealthfront:"wealthfront.com",
 };
 
 window.CODY_DATA = { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT };

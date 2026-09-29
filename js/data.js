@@ -20,7 +20,7 @@
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  *  - jobs are sorted: founding > senior > mid.
  */
-const COMPANIES_VERIFIED_AT = '2026-09-28';
+const COMPANIES_VERIFIED_AT = '2026-09-29';
 const COMPANIES = [
   { id:"anthropic", name:"Anthropic", vertical:"ai",
     sub:"Claude \u2014 AI safety lab",
@@ -383,7 +383,7 @@ const COMPANIES = [
     sub:"Public sector (dept of tech)",
     stage:"Public sector", raised:"$110B budget", lead:"\u2014",
     badges:["Public sector"],
-    totalRoles:67,
+    totalRoles:68,
     notes:"NYC gov. Sr SWE GeoSupport, .NET, City Environmental Quality Review roles.",
     jobs:[
       { title:"Capital Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013315337", level:"mid", added:"2026-08-26", posted:"2026-05-27" },
@@ -452,7 +452,8 @@ const COMPANIES = [
       { title:"Timekeeper Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015671696", level:"mid", added:"2026-09-26", posted:"2026-09-25" },
       { title:"Analyst - Department of Social Services (DSS) / Department of Homeless Services (DHS)", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015705846", level:"mid", added:"2026-09-27", posted:"2026-09-26" },
       { title:"Analyst - Program Reporting and Evaluation", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015705801", level:"mid", added:"2026-09-27", posted:"2026-09-26" },
-      { title:"Business Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015705721", level:"mid", added:"2026-09-27", posted:"2026-09-26" }
+      { title:"Business Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015705721", level:"mid", added:"2026-09-27", posted:"2026-09-26" },
+      { title:"Procurement Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015759228", level:"mid", added:"2026-09-29", posted:"2026-09-29" }
     ] },
   { id:"palantir", name:"Palantir", vertical:"saas",
     sub:"Elite FDE consultancy (NYSE: PLTR)",

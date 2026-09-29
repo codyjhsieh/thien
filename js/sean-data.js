@@ -16,7 +16,7 @@
  *           totalRoles, notes, jobs[{ title, url, level, posted, added }] }
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  */
-const COMPANIES_VERIFIED_AT = '2026-09-28';
+const COMPANIES_VERIFIED_AT = '2026-09-29';
 const COMPANIES = [
   { id:"believer", name:"Believer Entertainment", vertical:"gaming",
     sub:"The Prodigal \u2014 new IP",
@@ -57,12 +57,13 @@ const COMPANIES = [
     sub:"Sony Interactive Entertainment",
     stage:"Public (Sony)", raised:"NYSE: SONY", lead:"\u2014",
     badges:["Sony"],
-    totalRoles:3,
+    totalRoles:4,
     notes:"Global first-party art org. Big board, so worth scanning even though NYC reqs are occasional.",
     jobs:[
       { title:"Senior Cinematic Animator (CONTRACT)", url:"https://job-boards.greenhouse.io/sonyinteractiveentertainmentglobal/jobs/6164400004", level:"senior", added:"2026-09-19", posted:"2026-09-11", remote:true, loc:"United States, Remote" },
       { title:"Senior Cinematic Facial Animator (CONTRACT)", url:"https://job-boards.greenhouse.io/sonyinteractiveentertainmentglobal/jobs/6164734004", level:"senior", added:"2026-09-19", posted:"2026-09-10", remote:true, loc:"United States, Remote" },
-      { title:"Senior Gameplay Animator", url:"https://job-boards.greenhouse.io/sonyinteractiveentertainmentglobal/jobs/6138861004", level:"senior", added:"2026-09-19", posted:"2026-09-10", remote:true, loc:"United States, Remote" }
+      { title:"Senior Gameplay Animator", url:"https://job-boards.greenhouse.io/sonyinteractiveentertainmentglobal/jobs/6138861004", level:"senior", added:"2026-09-19", posted:"2026-09-10", remote:true, loc:"United States, Remote" },
+      { title:"Game Artist (Generalist)", url:"https://job-boards.greenhouse.io/sonyinteractiveentertainmentglobal/jobs/6196526004", level:"mid", added:"2026-09-29", posted:"2026-09-28", remote:true, loc:"United States, Remote", pay:{"min":109600,"max":164400,"interval":"year"}, paySource:"posted" }
     ] },
   { id:"thatgamecompany", name:"thatgamecompany", vertical:"gaming",
     sub:"Journey / Sky: Children of the Light",
