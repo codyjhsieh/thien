@@ -16,7 +16,7 @@
  *           totalRoles, notes, jobs[{ title, url, level, posted, added }] }
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  */
-const COMPANIES_VERIFIED_AT = '2026-09-29';
+const COMPANIES_VERIFIED_AT = '2026-09-30';
 const COMPANIES = [
   { id:"camber", name:"Camber", vertical:"ai",
     sub:"AI medical billing + RCM",
@@ -76,10 +76,9 @@ const COMPANIES = [
     sub:"Great Minds",
     stage:"\u2014", raised:"\u2014", lead:"\u2014",
     badges:[],
-    totalRoles:2,
+    totalRoles:1,
     notes:"Language, tutoring or classroom-software company \u2014 roster, lesson and content administration.",
     jobs:[
-      { title:"IT Product Support Specialist (Salesforce)", url:"https://greatminds.recruitee.com/o/it-product-support-specialist-salesforce", level:"entry", added:"2026-09-19", posted:"2026-09-01", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", summary:"Application Support and Incident Management: Provide first- and second-level support for business systems such as Salesforce, NetSuite, Dayforce, and others." },
       { title:"Pre-Sales Product Specialist - West", url:"https://greatminds.recruitee.com/o/pre-sales-product-specialist-west-4", level:"entry", added:"2026-09-22", posted:"2026-09-21", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", summary:"Deliver compelling, market-driven sales presentations that effectively communicate the value of Great Minds' curricula." }
     ] },
   { id:"osano", name:"Osano", vertical:"security",
@@ -135,15 +134,34 @@ const COMPANIES = [
     notes:"Behavioral and telehealth provider \u2014 intake, scheduling and claims work.",
     jobs:[
       { title:"Provider Support Specialist", url:"https://jobs.ashbyhq.com/openloophealth/dc044261-6879-4db0-b8ce-85697382bef0", level:"entry", added:"2026-09-29", posted:"2026-09-28", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", years:0, summary:"OpenLoop is seeking a Provider Support Specialist to join our Medical Operations team. In this role, you will answer incoming questions from our contracted provider network and make sure…" }
+    ] },
+  { id:"enginegroup", name:"Engine Group", vertical:"adtech",
+    sub:"Engine Group",
+    stage:"\u2014", raised:"\u2014", lead:"\u2014",
+    badges:[],
+    totalRoles:1,
+    notes:"Agency or digital-services firm \u2014 trafficking, reporting and account coordination.",
+    jobs:[
+      { title:"Executive Assistant", url:"https://job-boards.greenhouse.io/engine/jobs/8007106003", level:"entry", added:"2026-09-30", posted:"2026-09-29", pay:{"min":88400,"max":122300,"interval":"year"}, paySource:"posted", summary:"We are expanding our Senior Leadership Team and looking for a proactive, highly adaptable Executive Assistant to join our team." }
+    ] },
+  { id:"sitecore", name:"Sitecore", vertical:"saas",
+    sub:"Sitecore",
+    stage:"\u2014", raised:"\u2014", lead:"\u2014",
+    badges:[],
+    totalRoles:1,
+    notes:"Commerce, CMS or hosting platform \u2014 account, catalogue and support operations.",
+    jobs:[
+      { title:"Executive Assistant", url:"https://jobs.ashbyhq.com/sitecore/030a64b5-1f89-4ecf-9853-e7cd1693e91a", level:"entry", added:"2026-09-30", posted:"2026-09-29", pay:{"min":22,"max":34,"interval":"hour"}, paySource:"estimate", summary:"This is not a calendar-and-travel-only role. You’ll be the operational backbone for the founders - anticipating needs, creating systems, removing friction, and making sure nothing slips…" }
     ] }
 ];
 
 /* ---------- COMPANY DOMAINS (favicon CDN lookup) ---------- */
 const COMPANY_DOMAINS = {
   alcumusgroup:"alcumusgroup.com", bloomerang:"bloomerang.com", camber:"camber.com",
-  deepgram:"deepgram.com", greatminds:"greatminds.io", lightspeedsystems:"lightspeedsystems.com",
-  medrio:"medrio.com", openloophealth:"openloophealth.com", osano:"osano.com",
-  sanabenefits:"sanabenefits.com", smiledigitalhealth:"smiledigitalhealth.com", wealthfront:"wealthfront.com",
+  deepgram:"deepgram.com", enginegroup:"engine.com", greatminds:"greatminds.io",
+  lightspeedsystems:"lightspeedsystems.com", medrio:"medrio.com", openloophealth:"openloophealth.com",
+  osano:"osano.com", sanabenefits:"sanabenefits.com", sitecore:"sitecore.com",
+  smiledigitalhealth:"smiledigitalhealth.com", wealthfront:"wealthfront.com",
 };
 
 window.CODY_DATA = { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT };
