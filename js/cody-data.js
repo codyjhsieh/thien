@@ -16,7 +16,7 @@
  *           totalRoles, notes, jobs[{ title, url, level, posted, added }] }
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  */
-const COMPANIES_VERIFIED_AT = '2026-09-30';
+const COMPANIES_VERIFIED_AT = '2026-10-01';
 const COMPANIES = [
   { id:"camber", name:"Camber", vertical:"ai",
     sub:"AI medical billing + RCM",
@@ -152,16 +152,25 @@ const COMPANIES = [
     notes:"Commerce, CMS or hosting platform \u2014 account, catalogue and support operations.",
     jobs:[
       { title:"Executive Assistant", url:"https://jobs.ashbyhq.com/sitecore/030a64b5-1f89-4ecf-9853-e7cd1693e91a", level:"entry", added:"2026-09-30", posted:"2026-09-29", pay:{"min":22,"max":34,"interval":"hour"}, paySource:"estimate", summary:"This is not a calendar-and-travel-only role. You’ll be the operational backbone for the founders - anticipating needs, creating systems, removing friction, and making sure nothing slips…" }
+    ] },
+  { id:"connectwise", name:"ConnectWise", vertical:"accounting",
+    sub:"ConnectWise",
+    stage:"\u2014", raised:"\u2014", lead:"\u2014",
+    badges:[],
+    totalRoles:1,
+    notes:"Tax, accounting or document-management software \u2014 ledger, filing and AP work.",
+    jobs:[
+      { title:"Software Support Specialist II", url:"https://job-boards.greenhouse.io/connectwise/jobs/4739286005", level:"mid", added:"2026-10-01", posted:"2026-09-30", pay:{"min":19.55,"max":28.75,"interval":"hour"}, paySource:"estimate", summary:"Provides support to partners with a high attention to detail Researches, analyzes, and documents findings May influence others within the Services & Support team through the explanation of…" }
     ] }
 ];
 
 /* ---------- COMPANY DOMAINS (favicon CDN lookup) ---------- */
 const COMPANY_DOMAINS = {
   alcumusgroup:"alcumusgroup.com", bloomerang:"bloomerang.com", camber:"camber.com",
-  deepgram:"deepgram.com", enginegroup:"engine.com", greatminds:"greatminds.io",
-  lightspeedsystems:"lightspeedsystems.com", medrio:"medrio.com", openloophealth:"openloophealth.com",
-  osano:"osano.com", sanabenefits:"sanabenefits.com", sitecore:"sitecore.com",
-  smiledigitalhealth:"smiledigitalhealth.com", wealthfront:"wealthfront.com",
+  connectwise:"connectwise.com", deepgram:"deepgram.com", enginegroup:"engine.com",
+  greatminds:"greatminds.io", lightspeedsystems:"lightspeedsystems.com", medrio:"medrio.com",
+  openloophealth:"openloophealth.com", osano:"osano.com", sanabenefits:"sanabenefits.com",
+  sitecore:"sitecore.com", smiledigitalhealth:"smiledigitalhealth.com", wealthfront:"wealthfront.com",
 };
 
 window.CODY_DATA = { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT };
