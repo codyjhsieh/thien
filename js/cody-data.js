@@ -16,7 +16,7 @@
  *           totalRoles, notes, jobs[{ title, url, level, posted, added }] }
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  */
-const COMPANIES_VERIFIED_AT = '2026-10-01';
+const COMPANIES_VERIFIED_AT = '2026-10-02';
 const COMPANIES = [
   { id:"camber", name:"Camber", vertical:"ai",
     sub:"AI medical billing + RCM",
@@ -71,15 +71,6 @@ const COMPANIES = [
     notes:"Carbon accounting, EHS or commodity-data company \u2014 emissions, audit and supplier records.",
     jobs:[
       { title:"Customer Support Representative", url:"https://alcumus.pinpointhq.com/en/postings/c9054b4f-8b53-4b6f-9743-5929980a3e62", level:"entry", added:"2026-09-09", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", summary:"At Veriforce, we help companies in high-risk industries keep their people, worksites, and supply chains safe and compliant." }
-    ] },
-  { id:"greatminds", name:"Great Minds", vertical:"education",
-    sub:"Great Minds",
-    stage:"\u2014", raised:"\u2014", lead:"\u2014",
-    badges:[],
-    totalRoles:1,
-    notes:"Language, tutoring or classroom-software company \u2014 roster, lesson and content administration.",
-    jobs:[
-      { title:"Pre-Sales Product Specialist - West", url:"https://greatminds.recruitee.com/o/pre-sales-product-specialist-west-4", level:"entry", added:"2026-09-22", posted:"2026-09-21", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", summary:"Deliver compelling, market-driven sales presentations that effectively communicate the value of Great Minds' curricula." }
     ] },
   { id:"osano", name:"Osano", vertical:"security",
     sub:"Osano",
@@ -161,6 +152,24 @@ const COMPANIES = [
     notes:"Tax, accounting or document-management software \u2014 ledger, filing and AP work.",
     jobs:[
       { title:"Software Support Specialist II", url:"https://job-boards.greenhouse.io/connectwise/jobs/4739286005", level:"mid", added:"2026-10-01", posted:"2026-09-30", pay:{"min":19.55,"max":28.75,"interval":"hour"}, paySource:"estimate", summary:"Provides support to partners with a high attention to detail Researches, analyzes, and documents findings May influence others within the Services & Support team through the explanation of…" }
+    ] },
+  { id:"handshake", name:"Handshake", vertical:"saas",
+    sub:"Early-career hiring marketplace",
+    stage:"Series F", raised:"$434M", lead:"Kleiner Perkins",
+    badges:["Kleiner","Coatue","Valor"],
+    totalRoles:1,
+    notes:"NYC office. Marketplace at scale.",
+    jobs:[
+      { title:"Support Specialist, Contract", url:"https://jobs.ashbyhq.com/handshake/f79143ce-152a-49ac-a7f2-c99ad903cea2", level:"entry", added:"2026-10-02", posted:"2026-10-01", pay:{"min":25,"max":25,"interval":"hour"}, paySource:"posted", summary:"Handshake is looking to bring on a Support Specialist, Contractor to provide support to our employer, student, and career services users." }
+    ] },
+  { id:"hummingbirdregtech", name:"Hummingbird RegTech", vertical:"fintech",
+    sub:"Hummingbird RegTech",
+    stage:"Private", raised:"\u2014", lead:"\u2014",
+    badges:[],
+    totalRoles:1,
+    notes:"Fintech and verification operations \u2014 document review and KYC queues.",
+    jobs:[
+      { title:"Support Specialist", url:"https://job-boards.greenhouse.io/hummingbirdregtech/jobs/6214398004", level:"entry", added:"2026-10-02", posted:"2026-10-01", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", summary:"Hummingbird is a remote-first, fully distributed team united by the shared mission of helping fight financial crime." }
     ] }
 ];
 
@@ -168,9 +177,10 @@ const COMPANIES = [
 const COMPANY_DOMAINS = {
   alcumusgroup:"alcumusgroup.com", bloomerang:"bloomerang.com", camber:"camber.com",
   connectwise:"connectwise.com", deepgram:"deepgram.com", enginegroup:"engine.com",
-  greatminds:"greatminds.io", lightspeedsystems:"lightspeedsystems.com", medrio:"medrio.com",
-  openloophealth:"openloophealth.com", osano:"osano.com", sanabenefits:"sanabenefits.com",
-  sitecore:"sitecore.com", smiledigitalhealth:"smiledigitalhealth.com", wealthfront:"wealthfront.com",
+  greatminds:"greatminds.io", handshake:"joinhandshake.com", lightspeedsystems:"lightspeedsystems.com",
+  medrio:"medrio.com", openloophealth:"openloophealth.com", osano:"osano.com",
+  sanabenefits:"sanabenefits.com", sitecore:"sitecore.com", smiledigitalhealth:"smiledigitalhealth.com",
+  wealthfront:"wealthfront.com",
 };
 
 window.CODY_DATA = { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT };

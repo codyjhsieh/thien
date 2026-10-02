@@ -20,7 +20,7 @@
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  *  - jobs are sorted: founding > senior > mid.
  */
-const COMPANIES_VERIFIED_AT = '2026-10-01';
+const COMPANIES_VERIFIED_AT = '2026-10-02';
 const COMPANIES = [
   { id:"anthropic", name:"Anthropic", vertical:"ai",
     sub:"Claude \u2014 AI safety lab",
@@ -286,7 +286,7 @@ const COMPANIES = [
     totalRoles:1,
     notes:"GPU cloud powering AI labs; IPO\\'d Mar 2025. Bare-metal infra + scheduling.",
     jobs:[
-      { title:"Data Center Operations Cost Analyst", url:"https://coreweave.com/careers/job?4702795006&board=coreweave&gh_jid=4702795006", level:"mid", added:"2026-08-26", posted:"2026-08-21" }
+      { title:"Strategic Finance Analyst", url:"https://coreweave.com/careers/job?4718134006&board=coreweave&gh_jid=4718134006", level:"mid", added:"2026-10-02", posted:"2026-10-01", years:2 }
     ] },
   { id:"blackrock", name:"BlackRock", vertical:"fintech",
     sub:"World's largest asset manager (NYSE: BLK)",
@@ -387,7 +387,7 @@ const COMPANIES = [
     sub:"Public sector (dept of tech)",
     stage:"Public sector", raised:"$110B budget", lead:"\u2014",
     badges:["Public sector"],
-    totalRoles:64,
+    totalRoles:62,
     notes:"NYC gov. Sr SWE GeoSupport, .NET, City Environmental Quality Review roles.",
     jobs:[
       { title:"Capital Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013315337", level:"mid", added:"2026-08-26", posted:"2026-05-27" },
@@ -395,7 +395,6 @@ const COMPANIES = [
       { title:"Data Content Analyst I", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014421941", level:"entry", added:"2026-08-26", posted:"2026-08-04" },
       { title:"Analyst - DOHMH", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014532571", level:"mid", added:"2026-08-26", posted:"2026-08-11" },
       { title:"Analyst - Sandy Grant Management & Insurance", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014736471", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
-      { title:"Analyst - Sustainability Policy", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014532596", level:"mid", added:"2026-08-26", posted:"2026-08-11" },
       { title:"Budget Research Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014614266", level:"mid", added:"2026-08-26", posted:"2026-08-15" },
       { title:"Data Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014506446", level:"mid", added:"2026-08-26", posted:"2026-08-08" },
       { title:"Data Content Analyst II", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014422006", level:"mid", added:"2026-08-26", posted:"2026-08-04" },
@@ -418,7 +417,6 @@ const COMPANIES = [
       { title:"Capital Analyst Division of Capital Planning", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015371431", level:"mid", added:"2026-09-19", posted:"2026-09-18" },
       { title:"Collections Data Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015335656", level:"mid", added:"2026-09-19", posted:"2026-09-17" },
       { title:"Community Coordinator- Central Admin. Analyst - Office of OFA for the Division of Fiscal Affairs/Central Administration", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015296126", level:"mid", added:"2026-09-19", posted:"2026-09-16" },
-      { title:"Data Analyst for the Division of Housing Opportunity", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015335846", level:"mid", added:"2026-09-19", posted:"2026-09-17" },
       { title:"Data Engagement Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015371126", level:"mid", added:"2026-09-19", posted:"2026-09-18" },
       { title:"Data Quality Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015224376", level:"mid", added:"2026-09-19", posted:"2026-09-12" },
       { title:"HOME-ARP Adjustment Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015296036", level:"mid", added:"2026-09-19", posted:"2026-09-16" },
@@ -426,13 +424,11 @@ const COMPANIES = [
       { title:"LOGISTICS - COLLEGE AIDE", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015132841", level:"mid", added:"2026-09-19", posted:"2026-09-09" },
       { title:"Procurement Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015168477", level:"mid", added:"2026-09-19", posted:"2026-09-10" },
       { title:"Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015552196", level:"mid", added:"2026-09-22", posted:"2026-09-22" },
-      { title:"Procurement Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015552406", level:"mid", added:"2026-09-22", posted:"2026-09-22" },
       { title:"Junior Capital Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015552167", level:"entry", added:"2026-09-23", posted:"2026-09-22" },
       { title:"Ideation Business Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015594965", level:"mid", added:"2026-09-23", posted:"2026-09-23" },
       { title:"Administrative Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015633956", level:"mid", added:"2026-09-24", posted:"2026-09-24" },
       { title:"Analyst, Procurement Operations", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015633506", level:"mid", added:"2026-09-24", posted:"2026-09-24" },
       { title:"Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015633866", level:"mid", added:"2026-09-24", posted:"2026-09-24" },
-      { title:"Business Analyst for the  Division of Budget and Program Operations", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015633676", level:"mid", added:"2026-09-24", posted:"2026-09-24" },
       { title:"Strategic Performance Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015633846", level:"mid", added:"2026-09-24", posted:"2026-09-24" },
       { title:"Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015670736", level:"mid", added:"2026-09-25", posted:"2026-09-25" },
       { title:"Capital Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015634301", level:"mid", added:"2026-09-25", posted:"2026-09-24" },
@@ -440,7 +436,6 @@ const COMPANIES = [
       { title:"Analyst, Procurement Operations", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015705361", level:"mid", added:"2026-09-26", posted:"2026-09-26" },
       { title:"Analyst, Procurement Operations", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015671591", level:"mid", added:"2026-09-26", posted:"2026-09-25" },
       { title:"Cell Site Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015705216", level:"mid", added:"2026-09-26", posted:"2026-09-26" },
-      { title:"Digital Forensic Lab Analyst (DFL Analyst)", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015689226", level:"mid", added:"2026-09-26", posted:"2026-09-25" },
       { title:"Research Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015705496", level:"mid", added:"2026-09-26", posted:"2026-09-26" },
       { title:"SW - PROJECT ANALYST", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015705246", level:"mid", added:"2026-09-26", posted:"2026-09-26" },
       { title:"Timekeeper Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015671696", level:"mid", added:"2026-09-26", posted:"2026-09-25" },
@@ -453,7 +448,10 @@ const COMPANIES = [
       { title:"BUDGET ANALYST", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015820796", level:"mid", added:"2026-10-01", posted:"2026-10-01" },
       { title:"Business Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015821076", level:"mid", added:"2026-10-01", posted:"2026-10-01" },
       { title:"Community Coordinator- Temporary Housing Payment Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015821006", level:"mid", added:"2026-10-01", posted:"2026-10-01" },
-      { title:"Research and Media Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015792946", level:"mid", added:"2026-10-01", posted:"2026-09-30", years:2 }
+      { title:"Research and Media Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015792946", level:"mid", added:"2026-10-01", posted:"2026-09-30", years:2 },
+      { title:"Analyst - Miscellaneous Budget", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015821336", level:"mid", added:"2026-10-02", posted:"2026-10-01" },
+      { title:"Capital Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015852899", level:"mid", added:"2026-10-02", posted:"2026-10-02" },
+      { title:"Data Analyst for the Division of Housing Opportunity", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015853046", level:"mid", added:"2026-10-02", posted:"2026-10-02" }
     ] },
   { id:"palantir", name:"Palantir", vertical:"saas",
     sub:"Elite FDE consultancy (NYSE: PLTR)",
@@ -616,10 +614,11 @@ const COMPANIES = [
     sub:"Marketplace for industrial assets",
     stage:"Seed", raised:"YC + Founders Fund", lead:"Founders Fund",
     badges:["Founders Fund","YC"],
-    totalRoles:1,
+    totalRoles:2,
     notes:"YC W24. NYC. Trucks, machinery, equipment.",
     jobs:[
-      { title:"People Strategy & Operations", url:"https://jobs.ashbyhq.com/garage/57ff110d-1c9c-412f-b176-fd1fb0bb8449", level:"mid", added:"2026-09-01", posted:"2026-07-21" }
+      { title:"People Strategy & Operations", url:"https://jobs.ashbyhq.com/garage/57ff110d-1c9c-412f-b176-fd1fb0bb8449", level:"mid", added:"2026-09-01", posted:"2026-07-21" },
+      { title:"Business Operations", url:"https://jobs.ashbyhq.com/garage/5dc4ff9d-c7fc-453f-b189-0fa7bd9588a3", level:"mid", added:"2026-10-02", posted:"2026-10-01", pay:{"min":90000,"max":130000,"interval":"year"}, paySource:"posted", years:2 }
     ] },
   { id:"alchemy", name:"Alchemy", vertical:"fintech",
     sub:"Web3 dev platform",
@@ -644,21 +643,23 @@ const COMPANIES = [
     sub:"Payroll / HR for SMBs",
     stage:"Series E", raised:"$716M", lead:"Generation",
     badges:["Generation","Kleiner","YC"],
-    totalRoles:3,
+    totalRoles:4,
     notes:"Payroll engine + benefits. Compliance, money movement, multi-state tax.",
     jobs:[
       { title:"Health Insurance Sales Operations Analyst", url:"https://job-boards.greenhouse.io/gusto/jobs/8075901", level:"mid", added:"2026-09-19", posted:"2026-09-17" },
       { title:"Payment Operations Analyst", url:"https://job-boards.greenhouse.io/gusto/jobs/8180461", level:"mid", added:"2026-09-19", posted:"2026-09-18", years:3 },
-      { title:"WFM Resource Management & Analytics", url:"https://job-boards.greenhouse.io/gusto/jobs/8104224", level:"mid", added:"2026-09-23", posted:"2026-09-22", years:7 }
+      { title:"WFM Resource Management & Analytics", url:"https://job-boards.greenhouse.io/gusto/jobs/8104224", level:"mid", added:"2026-09-23", posted:"2026-09-22", years:7 },
+      { title:"Sr. Sales Operations Analyst", url:"https://job-boards.greenhouse.io/gusto/jobs/8212233", level:"mid", added:"2026-10-02", posted:"2026-10-01" }
     ] },
   { id:"seatgeek", name:"SeatGeek", vertical:"marketplace",
     sub:"Live-events ticketing",
     stage:"Series E", raised:"$338M", lead:"Wellington",
     badges:["Wellington","Accel","Causeway"],
-    totalRoles:1,
+    totalRoles:2,
     notes:"Tickets marketplace + primary-issuer platform. Marketplace ranking, payments, integrations.",
     jobs:[
-      { title:"Paid Social & Programmatic Analyst", url:"https://seatgeek.com/jobs/8180508?gh_jid=8180508", level:"mid", added:"2026-09-05", posted:"2026-09-04" }
+      { title:"Paid Social & Programmatic Analyst", url:"https://seatgeek.com/jobs/8180508?gh_jid=8180508", level:"mid", added:"2026-09-05", posted:"2026-09-04" },
+      { title:"Data Analyst - New Grad", url:"https://seatgeek.com/jobs/8247550?gh_jid=8247550", level:"mid", added:"2026-10-02", posted:"2026-10-01", pay:{"min":85000,"max":100000,"interval":"year"}, paySource:"posted" }
     ] },
   { id:"meow", name:"Meow", vertical:"fintech",
     sub:"SMB treasury + business banking",
@@ -788,6 +789,42 @@ const COMPANIES = [
     notes:"Hosting, builder, payments at scale.",
     jobs:[
       { title:"GRC Analyst", url:"https://www.squarespace.com/about/careers?gh_jid=8223803", level:"mid", added:"2026-10-01", posted:"2026-09-30", years:3 }
+    ] },
+  { id:"dashlane", name:"Dashlane", vertical:"security",
+    sub:"Password manager / identity",
+    stage:"Series D", raised:"$200M+", lead:"Sequoia",
+    badges:["Sequoia","Bessemer"],
+    totalRoles:1,
+    notes:"NYC HQ. Snyk-adjacent security, mature eng org.",
+    jobs:[
+      { title:"Revenue Operations Associate, Marketing", url:"https://job-boards.greenhouse.io/dashlane/jobs/8244059", level:"entry", added:"2026-10-02", posted:"2026-10-01", years:2 }
+    ] },
+  { id:"reddit", name:"Reddit", vertical:"media",
+    sub:"Social discussion platform (NYSE)",
+    stage:"Public", raised:"$1.3B pre-IPO", lead:"Advance",
+    badges:["NYSE","Advance","Tencent"],
+    totalRoles:1,
+    notes:"Public co. Massive social platform with rich data + recs.",
+    jobs:[
+      { title:"Revenue Strategy & Operations Partner", url:"https://job-boards.greenhouse.io/reddit/jobs/8239905", level:"mid", added:"2026-10-02", posted:"2026-10-01", pay:{"min":180200,"max":252300,"interval":"year"}, paySource:"posted", years:5 }
+    ] },
+  { id:"ripple", name:"Ripple", vertical:"fintech",
+    sub:"Crypto payments + cross-border",
+    stage:"Late stage", raised:"$15B val", lead:"Andreessen Horowitz",
+    badges:["a16z","Founders Fund"],
+    totalRoles:1,
+    notes:"NYC office. RippleNet + XRP infra.",
+    jobs:[
+      { title:"Product Operations, Analyst", url:"https://ripple.com/careers/all-jobs/job/8230821?gh_jid=8230821", level:"mid", added:"2026-10-02", posted:"2026-10-01", pay:{"min":92000,"max":110000,"interval":"year"}, paySource:"posted" }
+    ] },
+  { id:"talkspace", name:"Talkspace", vertical:"health",
+    sub:"Online therapy (NASDAQ)",
+    stage:"Public", raised:"$110M pre-IPO", lead:"Norwest",
+    badges:["NASDAQ","Norwest"],
+    totalRoles:1,
+    notes:"Telehealth platform \u2014 therapy networks, intake, claims.",
+    jobs:[
+      { title:"Data Analyst", url:"https://www.talkspace.com/careers/job?gh_jid=6214066004", level:"mid", added:"2026-10-02", posted:"2026-10-01", years:3 }
     ] }
 ];
 
@@ -814,12 +851,13 @@ const COMPANY_DOMAINS = {
   partiful:"partiful.com", perplexity:"perplexity.ai", pinterest:"pinterest.com",
   plaid:"plaid.com", point72:"point72.com", polymarket:"polymarket.com",
   ramp:"ramp.com", reddit:"reddit.com", rho:"rho.co",
-  ridgeline:"ridgelineapps.com", rilla:"rillavoice.com", scaleai:"scale.com",
-  seatgeek:"seatgeek.com", sisense:"sisense.com", sofi:"sofi.com",
-  sonder:"sonder.com", sonymusic:"sonymusic.com", spotify:"spotify.com",
-  squarespace:"squarespace.com", stripe:"stripe.com", taboola:"taboola.com",
-  "the-trade-desk":"thetradedesk.com", turing:"turing.com", vercel:"vercel.com",
-  vestwell:"vestwell.com", warp:"warp.dev", zocdoc:"zocdoc.com",
+  ridgeline:"ridgelineapps.com", rilla:"rillavoice.com", ripple:"ripple.com",
+  scaleai:"scale.com", seatgeek:"seatgeek.com", sisense:"sisense.com",
+  sofi:"sofi.com", sonder:"sonder.com", sonymusic:"sonymusic.com",
+  spotify:"spotify.com", squarespace:"squarespace.com", stripe:"stripe.com",
+  taboola:"taboola.com", talkspace:"talkspace.com", "the-trade-desk":"thetradedesk.com",
+  turing:"turing.com", vercel:"vercel.com", vestwell:"vestwell.com",
+  warp:"warp.dev", zocdoc:"zocdoc.com",
 };
 
 window.DATA = { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT };
