@@ -16,7 +16,7 @@
  *           totalRoles, notes, jobs[{ title, url, level, posted, added }] }
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  */
-const COMPANIES_VERIFIED_AT = '2026-10-02';
+const COMPANIES_VERIFIED_AT = '2026-10-03';
 const COMPANIES = [
   { id:"believer", name:"Believer Entertainment", vertical:"gaming",
     sub:"The Prodigal \u2014 new IP",
@@ -32,13 +32,12 @@ const COMPANIES = [
     sub:"Marvel's Spider-Man / Ratchet & Clank",
     stage:"Public (Sony)", raised:"NYSE: SONY", lead:"\u2014",
     badges:["Sony"],
-    totalRoles:6,
+    totalRoles:5,
     notes:"Sony first-party with a large in-house art org and a fast shipping cadence.",
     jobs:[
       { title:"Senior Cinematic Animator (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6164402004", level:"senior", added:"2026-09-19", posted:"2026-09-11", remote:true, loc:"United States, Remote" },
       { title:"Senior Cinematic Facial Animator (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6164736004", level:"senior", added:"2026-09-19", posted:"2026-09-10", remote:true, loc:"United States, Remote" },
       { title:"Senior Facial Character TD (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6143980004", level:"senior", added:"2026-09-19", posted:"2026-09-10", remote:true, loc:"United States, Remote" },
-      { title:"Senior Gameplay Animator (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6138863004", level:"senior", added:"2026-09-19", posted:"2026-09-10", remote:true, loc:"United States, Remote" },
       { title:"Senior Gameplay Programmer (CONTRACT)", url:"https://job-boards.greenhouse.io/insomniac/jobs/6173051004", level:"senior", added:"2026-09-19", posted:"2026-09-10", remote:true, loc:"United States, Remote" },
       { title:"VFX Artist", url:"https://job-boards.greenhouse.io/insomniac/jobs/6192046004", level:"mid", added:"2026-09-23", posted:"2026-09-22", remote:true, loc:"United States, Remote", pay:{"min":75,"max":85,"interval":"hour"}, paySource:"posted" }
     ] },
@@ -57,11 +56,10 @@ const COMPANIES = [
     sub:"Sony Interactive Entertainment",
     stage:"Public (Sony)", raised:"NYSE: SONY", lead:"\u2014",
     badges:["Sony"],
-    totalRoles:3,
+    totalRoles:2,
     notes:"Global first-party art org. Big board, so worth scanning even though NYC reqs are occasional.",
     jobs:[
       { title:"Senior Cinematic Animator (CONTRACT)", url:"https://job-boards.greenhouse.io/sonyinteractiveentertainmentglobal/jobs/6164400004", level:"senior", added:"2026-09-19", posted:"2026-09-11", remote:true, loc:"United States, Remote" },
-      { title:"Senior Gameplay Animator", url:"https://job-boards.greenhouse.io/sonyinteractiveentertainmentglobal/jobs/6138861004", level:"senior", added:"2026-09-19", posted:"2026-09-10", remote:true, loc:"United States, Remote" },
       { title:"Game Artist (Generalist)", url:"https://job-boards.greenhouse.io/sonyinteractiveentertainmentglobal/jobs/6196526004", level:"mid", added:"2026-09-29", posted:"2026-09-28", remote:true, loc:"United States, Remote", pay:{"min":109600,"max":164400,"interval":"year"}, paySource:"posted" }
     ] },
   { id:"thatgamecompany", name:"thatgamecompany", vertical:"gaming",

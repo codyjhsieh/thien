@@ -16,7 +16,7 @@
  *           totalRoles, notes, jobs[{ title, url, level, posted, added }] }
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  */
-const COMPANIES_VERIFIED_AT = '2026-10-02';
+const COMPANIES_VERIFIED_AT = '2026-10-03';
 const COMPANIES = [
   { id:"altusgroup", name:"Altus Group", vertical:"brokerage",
     sub:"Altus Group",
@@ -71,7 +71,7 @@ const COMPANIES = [
     notes:"Real-estate technology, brokerage or data provider \u2014 underwriting, transactions and market data.",
     jobs:[
       { title:"Implementation Manager", url:"https://www.dealpath.com/job-post/?gh_jid=7844544", level:"associate", added:"2026-09-28", posted:"2026-07-24", summary:"Dealpath is looking for a self-motivated Implementation Manager to join our growing team! As an Implementation Manager you will play a critical role in collecting and analyzing new customer…" },
-      { title:"Senior Product Manager, Strategic Accounts", url:"https://www.dealpath.com/job-post/?gh_jid=8160857", level:"senior", added:"2026-09-28", posted:"2026-09-08", years:6, summary:"Senior Product Manager, Strategic Accounts San Francisco, CA or New York, NY Product management at Dealpath looks different than it did even a year ago." }
+      { title:"Senior Product Manager, Strategic Accounts", url:"https://www.dealpath.com/job-post/?gh_jid=8250181", level:"senior", added:"2026-10-03", posted:"2026-10-02", years:6, summary:"Senior Product Manager, Strategic Accounts San Francisco, CA or New York, NY Product management at Dealpath looks different than it did even a year ago." }
     ] },
   { id:"eliseai", name:"EliseAI", vertical:"proptech",
     sub:"EliseAI",
