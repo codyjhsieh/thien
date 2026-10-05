@@ -20,13 +20,13 @@
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  *  - jobs are sorted: founding > senior > mid.
  */
-const COMPANIES_VERIFIED_AT = '2026-10-04';
+const COMPANIES_VERIFIED_AT = '2026-10-05';
 const COMPANIES = [
   { id:"anthropic", name:"Anthropic", vertical:"ai",
     sub:"Claude \u2014 AI safety lab",
     stage:"Series F", raised:"$18B+", lead:"Amazon",
     badges:["Amazon","Google","Spark"],
-    totalRoles:19,
+    totalRoles:18,
     notes:"Heavy values screen; expect ethical-dilemma and downside-risk questions. Applied-AI eng roles are FDE-flavored.",
     jobs:[
       { title:"Safeguards Enforcement Analyst, Access Controls & Identity", url:"https://job-boards.greenhouse.io/anthropic/jobs/5319626008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
@@ -38,7 +38,6 @@ const COMPANIES = [
       { title:"Safeguards Enforcement Analyst, Cyber Harm", url:"https://job-boards.greenhouse.io/anthropic/jobs/5311159008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Safeguards Enforcement Analyst, Integrity & Authenticity", url:"https://job-boards.greenhouse.io/anthropic/jobs/5311149008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Safeguards Enforcement Analyst, Safety Evaluations", url:"https://job-boards.greenhouse.io/anthropic/jobs/5137183008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
-      { title:"Safeguards Enforcement Analyst, User Well-being", url:"https://job-boards.greenhouse.io/anthropic/jobs/5374778008", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Safeguards Enforcement Analyst, Conventional Weapons", url:"https://job-boards.greenhouse.io/anthropic/jobs/5410006008", level:"mid", added:"2026-09-02", posted:"2026-09-01" },
       { title:"Procurement Operations Business Partner, R&D Operations", url:"https://job-boards.greenhouse.io/anthropic/jobs/5357933008", level:"mid", added:"2026-09-05", posted:"2026-09-04" },
       { title:"Business Systems Analyst, New Product Introduction", url:"https://job-boards.greenhouse.io/anthropic/jobs/5416829008", level:"mid", added:"2026-09-19", posted:"2026-09-08", pay:{"min":270000,"max":315000,"interval":"year"}, paySource:"posted" },
@@ -837,6 +836,15 @@ const COMPANIES = [
     notes:"NYC HQ. Includes The Orchard, Alamo, Columbia. 3 NYC eng today (Data Privacy, Emerging Tech, Sr PM D2C).",
     jobs:[
       { title:"Analyst, A&R Admin - Santa Anna", url:"https://job-boards.greenhouse.io/sonymusicentertainment/jobs/8853439002", level:"mid", added:"2026-10-03", posted:"2026-10-02", pay:{"min":66300,"max":75000,"interval":"year"}, paySource:"posted", years:2 }
+    ] },
+  { id:"pointone", name:"PointOne", vertical:"ai",
+    sub:"AI legal timekeeping",
+    stage:"Seed", raised:"$10M+", lead:"Khosla",
+    badges:["Khosla","YC"],
+    totalRoles:1,
+    notes:"YC W24. NYC. Automated time entry for BigLaw.",
+    jobs:[
+      { title:"Strategy & Operations", url:"https://jobs.ashbyhq.com/pointone/f47e0530-6054-49be-a2e9-6a2b461faaba", level:"mid", added:"2026-10-05", posted:"2026-10-04" }
     ] }
 ];
 
@@ -861,15 +869,15 @@ const COMPANY_DOMAINS = {
   mongodb:"mongodb.com", navan:"navan.com", "nyc-gov":"nyc.gov",
   openai:"openai.com", oscar:"hioscar.com", palantir:"palantir.com",
   partiful:"partiful.com", perplexity:"perplexity.ai", pinterest:"pinterest.com",
-  plaid:"plaid.com", point72:"point72.com", polymarket:"polymarket.com",
-  ramp:"ramp.com", reddit:"reddit.com", rho:"rho.co",
-  ridgeline:"ridgelineapps.com", rilla:"rillavoice.com", ripple:"ripple.com",
-  scaleai:"scale.com", seatgeek:"seatgeek.com", sisense:"sisense.com",
-  sofi:"sofi.com", sonder:"sonder.com", sonymusic:"sonymusic.com",
-  spotify:"spotify.com", squarespace:"squarespace.com", stripe:"stripe.com",
-  taboola:"taboola.com", talkspace:"talkspace.com", "the-trade-desk":"thetradedesk.com",
-  turing:"turing.com", vercel:"vercel.com", vestwell:"vestwell.com",
-  warp:"warp.dev", zocdoc:"zocdoc.com",
+  plaid:"plaid.com", point72:"point72.com", pointone:"pointone.ai",
+  polymarket:"polymarket.com", ramp:"ramp.com", reddit:"reddit.com",
+  rho:"rho.co", ridgeline:"ridgelineapps.com", rilla:"rillavoice.com",
+  ripple:"ripple.com", scaleai:"scale.com", seatgeek:"seatgeek.com",
+  sisense:"sisense.com", sofi:"sofi.com", sonder:"sonder.com",
+  sonymusic:"sonymusic.com", spotify:"spotify.com", squarespace:"squarespace.com",
+  stripe:"stripe.com", taboola:"taboola.com", talkspace:"talkspace.com",
+  "the-trade-desk":"thetradedesk.com", turing:"turing.com", vercel:"vercel.com",
+  vestwell:"vestwell.com", warp:"warp.dev", zocdoc:"zocdoc.com",
 };
 
 window.DATA = { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT };
