@@ -16,7 +16,7 @@
  *           totalRoles, notes, jobs[{ title, url, level, posted, added }] }
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  */
-const COMPANIES_VERIFIED_AT = '2026-10-05';
+const COMPANIES_VERIFIED_AT = '2026-10-06';
 const COMPANIES = [
   { id:"camber", name:"Camber", vertical:"ai",
     sub:"AI medical billing + RCM",
@@ -170,17 +170,35 @@ const COMPANIES = [
     notes:"Fintech and verification operations \u2014 document review and KYC queues.",
     jobs:[
       { title:"Support Specialist", url:"https://job-boards.greenhouse.io/hummingbirdregtech/jobs/6214398004", level:"entry", added:"2026-10-02", posted:"2026-10-01", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", summary:"Hummingbird is a remote-first, fully distributed team united by the shared mission of helping fight financial crime." }
+    ] },
+  { id:"accessgroup", name:"Access Group", vertical:"staffing",
+    sub:"Access Group",
+    stage:"\u2014", raised:"\u2014", lead:"\u2014",
+    badges:[],
+    totalRoles:1,
+    notes:"HR, payroll or employer-of-record platform \u2014 onboarding and payroll data entry.",
+    jobs:[
+      { title:"Procurement and Contracting Administrative Specialist", url:"https://jobs.ashbyhq.com/access/2aae8214-f75c-47f0-81dd-d56ab2215698", level:"entry", added:"2026-10-06", posted:"2026-10-05", pay:{"min":18,"max":26,"interval":"hour"}, paySource:"estimate", years:0, summary:"DATA MANAGEMENT - Maintain accurate and up-to-date information across supplier accounts in Salesforce. - Update client contracting information to ensure data integrity and completeness." }
+    ] },
+  { id:"ro", name:"Ro", vertical:"health",
+    sub:"D2C telehealth + pharmacy",
+    stage:"Series E", raised:"$1B+", lead:"General Catalyst",
+    badges:["General Catalyst","Founders Fund","TPG"],
+    totalRoles:1,
+    notes:"NYC telehealth. Care plans + fulfillment + identity.",
+    jobs:[
+      { title:"Seasonal, Virtual Patient Support Specialist", url:"https://jobs.lever.co/ro/ed451f08-1070-4ed2-b059-d529190cf53a", level:"entry", added:"2026-10-06", posted:"2026-09-29", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", summary:"Ro is a direct-to-patient healthcare company with a mission of helping patients achieve their health goals by delivering the easiest, most effective care possible." }
     ] }
 ];
 
 /* ---------- COMPANY DOMAINS (favicon CDN lookup) ---------- */
 const COMPANY_DOMAINS = {
-  alcumusgroup:"alcumusgroup.com", bloomerang:"bloomerang.com", camber:"camber.com",
-  connectwise:"connectwise.com", deepgram:"deepgram.com", enginegroup:"engine.com",
-  greatminds:"greatminds.io", handshake:"joinhandshake.com", lightspeedsystems:"lightspeedsystems.com",
-  medrio:"medrio.com", openloophealth:"openloophealth.com", osano:"osano.com",
-  sanabenefits:"sanabenefits.com", sitecore:"sitecore.com", smiledigitalhealth:"smiledigitalhealth.com",
-  wealthfront:"wealthfront.com",
+  accessgroup:"accessgroup.com", alcumusgroup:"alcumusgroup.com", bloomerang:"bloomerang.com",
+  camber:"camber.com", connectwise:"connectwise.com", deepgram:"deepgram.com",
+  enginegroup:"engine.com", greatminds:"greatminds.io", handshake:"joinhandshake.com",
+  lightspeedsystems:"lightspeedsystems.com", medrio:"medrio.com", openloophealth:"openloophealth.com",
+  osano:"osano.com", sanabenefits:"sanabenefits.com", sitecore:"sitecore.com",
+  smiledigitalhealth:"smiledigitalhealth.com", wealthfront:"wealthfront.com",
 };
 
 window.CODY_DATA = { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT };

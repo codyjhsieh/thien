@@ -20,7 +20,7 @@
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  *  - jobs are sorted: founding > senior > mid.
  */
-const COMPANIES_VERIFIED_AT = '2026-10-05';
+const COMPANIES_VERIFIED_AT = '2026-10-06';
 const COMPANIES = [
   { id:"anthropic", name:"Anthropic", vertical:"ai",
     sub:"Claude \u2014 AI safety lab",
@@ -201,7 +201,7 @@ const COMPANIES = [
     totalRoles:1,
     notes:"Public co. Mobility platform \u2014 matching, payments, mapping.",
     jobs:[
-      { title:"Data Analyst, Go-To-Market Sales Insights", url:"https://app.careerpuck.com/job-board/lyft/job/8697679002?gh_jid=8697679002", level:"mid", added:"2026-08-26", posted:"2026-08-11" }
+      { title:"Analytics Lead, Decisions & Insights", url:"https://app.careerpuck.com/job-board/lyft/job/8868958002?gh_jid=8868958002", level:"mid", added:"2026-10-06", posted:"2026-10-05", years:5 }
     ] },
   { id:"jane-street", name:"Jane Street", vertical:"fintech",
     sub:"Quant trading firm",
@@ -382,13 +382,13 @@ const COMPANIES = [
     totalRoles:1,
     notes:"HQ Hudson Yards NYC. Sr Data Engineer + site-testing eng roles.",
     jobs:[
-      { title:"Strategic Finance Analyst (Hybrid – OnSite / Remote)", url:"https://jobs.smartrecruiters.com/Equinox/744000143120749", level:"mid", added:"2026-08-26", posted:"2026-08-12" }
+      { title:"Real Estate Analyst", url:"https://jobs.smartrecruiters.com/Equinox/744000153522729", level:"mid", added:"2026-10-06", posted:"2026-10-05", years:2 }
     ] },
   { id:"nyc-gov", name:"City of New York", vertical:"saas",
     sub:"Public sector (dept of tech)",
     stage:"Public sector", raised:"$110B budget", lead:"\u2014",
     badges:["Public sector"],
-    totalRoles:63,
+    totalRoles:65,
     notes:"NYC gov. Sr SWE GeoSupport, .NET, City Environmental Quality Review roles.",
     jobs:[
       { title:"Capital Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013315337", level:"mid", added:"2026-08-26", posted:"2026-05-27" },
@@ -425,11 +425,9 @@ const COMPANIES = [
       { title:"Administrative Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015633956", level:"mid", added:"2026-09-24", posted:"2026-09-24" },
       { title:"Analyst, Procurement Operations", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015633506", level:"mid", added:"2026-09-24", posted:"2026-09-24" },
       { title:"Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015633866", level:"mid", added:"2026-09-24", posted:"2026-09-24" },
-      { title:"Strategic Performance Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015633846", level:"mid", added:"2026-09-24", posted:"2026-09-24" },
       { title:"Capital Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015634301", level:"mid", added:"2026-09-25", posted:"2026-09-24" },
       { title:"Economic Crimes Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015634326", level:"mid", added:"2026-09-25", posted:"2026-09-24" },
       { title:"Analyst, Procurement Operations", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015705361", level:"mid", added:"2026-09-26", posted:"2026-09-26" },
-      { title:"Analyst, Procurement Operations", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015671591", level:"mid", added:"2026-09-26", posted:"2026-09-25" },
       { title:"Cell Site Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015705216", level:"mid", added:"2026-09-26", posted:"2026-09-26" },
       { title:"Research Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015705496", level:"mid", added:"2026-09-26", posted:"2026-09-26" },
       { title:"SW - PROJECT ANALYST", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015705246", level:"mid", added:"2026-09-26", posted:"2026-09-26" },
@@ -453,7 +451,11 @@ const COMPANIES = [
       { title:"Data Visualization Analyst Level I", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015879786", level:"mid", added:"2026-10-03", posted:"2026-10-03" },
       { title:"Fiscal & Purchasing Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015853311", level:"mid", added:"2026-10-03", posted:"2026-10-02" },
       { title:"LOGISTICS - COLLEGE AIDE", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015879426", level:"mid", added:"2026-10-03", posted:"2026-10-03" },
-      { title:"Mainframe Programmer Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015879721", level:"mid", added:"2026-10-03", posted:"2026-10-03" }
+      { title:"Mainframe Programmer Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015879721", level:"mid", added:"2026-10-03", posted:"2026-10-03" },
+      { title:"BOB- Procurement Analyst I", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015911366", level:"entry", added:"2026-10-06", posted:"2026-10-06" },
+      { title:"Analyst, Procurement Operations", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015911436", level:"mid", added:"2026-10-06", posted:"2026-10-06" },
+      { title:"BOB- Procurement Analyst II", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015911356", level:"mid", added:"2026-10-06", posted:"2026-10-06" },
+      { title:"Strategic Performance Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015911056", level:"mid", added:"2026-10-06", posted:"2026-10-06" }
     ] },
   { id:"palantir", name:"Palantir", vertical:"saas",
     sub:"Elite FDE consultancy (NYSE: PLTR)",
@@ -743,16 +745,15 @@ const COMPANIES = [
     totalRoles:1,
     notes:"NYC major office. Recommendation engine, big data pipelines.",
     jobs:[
-      { title:"Salesforce Business Analyst", url:"https://www.taboola.com/careers/job/8091936?gh_jid=8091936", level:"mid", added:"2026-09-26", posted:"2026-09-25", pay:{"min":100000,"max":123000,"interval":"year"}, paySource:"posted", years:2 }
+      { title:"Salesforce and GenAI System Analyst", url:"https://www.taboola.com/careers/job/8173563?gh_jid=8173563", level:"mid", added:"2026-10-06", posted:"2026-10-06", pay:{"min":100000,"max":123000,"interval":"year"}, paySource:"posted", years:2 }
     ] },
   { id:"blackstone", name:"Blackstone", vertical:"fintech",
     sub:"Alt asset manager (NYSE: BX)",
     stage:"Public", raised:"(NYSE: BX)", lead:"NYSE",
     badges:["NYSE"],
-    totalRoles:3,
+    totalRoles:2,
     notes:"NYC HQ.",
     jobs:[
-      { title:"Blackstone Executive Offices - Leadership Program, Analyst", url:"https://blackstone.wd1.myworkdayjobs.com/en-US/Blackstone_Careers/job/New-York/Blackstone-Executive-Offices---Leadership-Program--Analyst_45155-2", level:"mid", added:"2026-09-27" },
       { title:"BXMA - Business & Financial Evaluation - Analyst", url:"https://blackstone.wd1.myworkdayjobs.com/en-US/Blackstone_Careers/job/New-York/BXMA---Business---Financial-Evaluation---Analyst_45566", level:"mid", added:"2026-09-27" },
       { title:"Data Analyst, Associate - Private Equity Technology", url:"https://blackstone.wd1.myworkdayjobs.com/en-US/Blackstone_Careers/job/New-York/Data-Analyst--Associate---Private-Equity-Technology_43933-2", level:"entry", added:"2026-10-01" }
     ] },
@@ -845,6 +846,15 @@ const COMPANIES = [
     notes:"YC W24. NYC. Automated time entry for BigLaw.",
     jobs:[
       { title:"Strategy & Operations", url:"https://jobs.ashbyhq.com/pointone/f47e0530-6054-49be-a2e9-6a2b461faaba", level:"mid", added:"2026-10-05", posted:"2026-10-04" }
+    ] },
+  { id:"databricks", name:"Databricks", vertical:"devtools",
+    sub:"Data + AI platform (private)",
+    stage:"Late stage", raised:"$10B+", lead:"T. Rowe Price",
+    badges:["T. Rowe Price","Fidelity"],
+    totalRoles:1,
+    notes:"SF HQ, NYC hires. $62B valuation. Field ops + revenue analyst + BI hires.",
+    jobs:[
+      { title:"Sr. AI Operations Specialist \u2014 Sales Operations", url:"https://databricks.com/company/careers/open-positions/job?gh_jid=8821953002", level:"mid", added:"2026-10-06", posted:"2026-10-06", pay:{"min":125000,"max":171950,"interval":"year"}, paySource:"posted" }
     ] }
 ];
 
@@ -856,28 +866,29 @@ const COMPANY_DOMAINS = {
   capco:"capco.com", clear:"clearme.com", "cockroach-labs":"cockroachlabs.com",
   "codes-health":"codeshealth.co", cohere:"cohere.com", coreweave:"coreweave.com",
   crusoe:"crusoe.ai", cursor:"cursor.com", dashlane:"dashlane.com",
-  datadog:"datadoghq.com", decagon:"decagon.ai", drw:"drw.com",
-  elevenlabs:"elevenlabs.io", equinox:"equinox.com", etsy:"etsy.com",
-  faire:"faire.com", fanduel:"fanduel.com", figma:"figma.com",
-  flexport:"flexport.com", "flow-traders":"flowtraders.com", garage:"garage.com",
-  gemini:"gemini.com", gusto:"gusto.com", hang:"hang.xyz",
-  harvey:"harvey.ai", hellofresh:"careers.hellofresh.com", hopper:"hopper.com",
-  "jane-street":"janestreet.com", justworks:"justworks.com", kalshi:"kalshi.com",
-  linkedin:"linkedin.com", lithic:"lithic.com", lovable:"lovable.dev",
-  lyft:"lyft.com", meow:"meow.com", metropolis:"metropolis.io",
-  middesk:"middesk.com", modal:"modal.com", "modern-treasury":"moderntreasury.com",
-  mongodb:"mongodb.com", navan:"navan.com", "nyc-gov":"nyc.gov",
-  openai:"openai.com", oscar:"hioscar.com", palantir:"palantir.com",
-  partiful:"partiful.com", perplexity:"perplexity.ai", pinterest:"pinterest.com",
-  plaid:"plaid.com", point72:"point72.com", pointone:"pointone.ai",
-  polymarket:"polymarket.com", ramp:"ramp.com", reddit:"reddit.com",
-  rho:"rho.co", ridgeline:"ridgelineapps.com", rilla:"rillavoice.com",
-  ripple:"ripple.com", scaleai:"scale.com", seatgeek:"seatgeek.com",
-  sisense:"sisense.com", sofi:"sofi.com", sonder:"sonder.com",
-  sonymusic:"sonymusic.com", spotify:"spotify.com", squarespace:"squarespace.com",
-  stripe:"stripe.com", taboola:"taboola.com", talkspace:"talkspace.com",
-  "the-trade-desk":"thetradedesk.com", turing:"turing.com", vercel:"vercel.com",
-  vestwell:"vestwell.com", warp:"warp.dev", zocdoc:"zocdoc.com",
+  databricks:"databricks.com", datadog:"datadoghq.com", decagon:"decagon.ai",
+  drw:"drw.com", elevenlabs:"elevenlabs.io", equinox:"equinox.com",
+  etsy:"etsy.com", faire:"faire.com", fanduel:"fanduel.com",
+  figma:"figma.com", flexport:"flexport.com", "flow-traders":"flowtraders.com",
+  garage:"garage.com", gemini:"gemini.com", gusto:"gusto.com",
+  hang:"hang.xyz", harvey:"harvey.ai", hellofresh:"careers.hellofresh.com",
+  hopper:"hopper.com", "jane-street":"janestreet.com", justworks:"justworks.com",
+  kalshi:"kalshi.com", linkedin:"linkedin.com", lithic:"lithic.com",
+  lovable:"lovable.dev", lyft:"lyft.com", meow:"meow.com",
+  metropolis:"metropolis.io", middesk:"middesk.com", modal:"modal.com",
+  "modern-treasury":"moderntreasury.com", mongodb:"mongodb.com", navan:"navan.com",
+  "nyc-gov":"nyc.gov", openai:"openai.com", oscar:"hioscar.com",
+  palantir:"palantir.com", partiful:"partiful.com", perplexity:"perplexity.ai",
+  pinterest:"pinterest.com", plaid:"plaid.com", point72:"point72.com",
+  pointone:"pointone.ai", polymarket:"polymarket.com", ramp:"ramp.com",
+  reddit:"reddit.com", rho:"rho.co", ridgeline:"ridgelineapps.com",
+  rilla:"rillavoice.com", ripple:"ripple.com", scaleai:"scale.com",
+  seatgeek:"seatgeek.com", sisense:"sisense.com", sofi:"sofi.com",
+  sonder:"sonder.com", sonymusic:"sonymusic.com", spotify:"spotify.com",
+  squarespace:"squarespace.com", stripe:"stripe.com", taboola:"taboola.com",
+  talkspace:"talkspace.com", "the-trade-desk":"thetradedesk.com", turing:"turing.com",
+  vercel:"vercel.com", vestwell:"vestwell.com", warp:"warp.dev",
+  zocdoc:"zocdoc.com",
 };
 
 window.DATA = { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT };
