@@ -16,7 +16,7 @@
  *           totalRoles, notes, jobs[{ title, url, level, posted, added }] }
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  */
-const COMPANIES_VERIFIED_AT = '2026-10-06';
+const COMPANIES_VERIFIED_AT = '2026-10-07';
 const COMPANIES = [
   { id:"believer", name:"Believer Entertainment", vertical:"gaming",
     sub:"The Prodigal \u2014 new IP",
@@ -56,11 +56,10 @@ const COMPANIES = [
     sub:"Sony Interactive Entertainment",
     stage:"Public (Sony)", raised:"NYSE: SONY", lead:"\u2014",
     badges:["Sony"],
-    totalRoles:2,
+    totalRoles:1,
     notes:"Global first-party art org. Big board, so worth scanning even though NYC reqs are occasional.",
     jobs:[
-      { title:"Senior Cinematic Animator (CONTRACT)", url:"https://job-boards.greenhouse.io/sonyinteractiveentertainmentglobal/jobs/6164400004", level:"senior", added:"2026-09-19", posted:"2026-09-11", remote:true, loc:"United States, Remote" },
-      { title:"Game Artist (Generalist)", url:"https://job-boards.greenhouse.io/sonyinteractiveentertainmentglobal/jobs/6196526004", level:"mid", added:"2026-09-29", posted:"2026-09-28", remote:true, loc:"United States, Remote", pay:{"min":109600,"max":164400,"interval":"year"}, paySource:"posted" }
+      { title:"Senior Cinematic Animator (CONTRACT)", url:"https://job-boards.greenhouse.io/sonyinteractiveentertainmentglobal/jobs/6164400004", level:"senior", added:"2026-09-19", posted:"2026-09-11", remote:true, loc:"United States, Remote" }
     ] },
   { id:"thatgamecompany", name:"thatgamecompany", vertical:"gaming",
     sub:"Journey / Sky: Children of the Light",
@@ -98,14 +97,23 @@ const COMPANIES = [
     notes:"Avatar + world art for a user-generated 3D platform.",
     jobs:[
       { title:"Unity Technical Artist, Event Pipeline", url:"https://jobs.lever.co/vrchat/e9aecc1d-9e3f-4232-95ea-01fff6dfe222", level:"mid", added:"2026-09-19", posted:"2026-09-10", remote:true, loc:"Anywhere Anywhere" }
+    ] },
+  { id:"gismart", name:"Gismart", vertical:"gaming",
+    sub:"Mobile games + music apps",
+    stage:"Private", raised:"\u2014", lead:"\u2014",
+    badges:["London"],
+    totalRoles:1,
+    notes:"Mobile games and apps; creative production roles support the portfolio.",
+    jobs:[
+      { title:"Motion Designer (DanceBit)", url:"https://jobs.ashbyhq.com/gismart/059d1905-ddd2-46af-8364-c6e8cc2399c1", level:"mid", added:"2026-10-07", posted:"2026-10-07", remote:true, loc:"Remote", years:1 }
     ] }
 ];
 
 /* ---------- COMPANY DOMAINS (favicon CDN lookup) ---------- */
 const COMPANY_DOMAINS = {
-  believer:"believer.com", insomniac:"insomniacgames.com", neteasegames:"neteasegames.com",
-  playstation:"playstation.com", seconddinner:"seconddinner.com", thatgamecompany:"thatgamecompany.com",
-  thatsnomoonentertainment:"thatsnomoon.com", vrchat:"vrchat.com",
+  believer:"believer.com", gismart:"gismart.com", insomniac:"insomniacgames.com",
+  neteasegames:"neteasegames.com", playstation:"playstation.com", seconddinner:"seconddinner.com",
+  thatgamecompany:"thatgamecompany.com", thatsnomoonentertainment:"thatsnomoon.com", vrchat:"vrchat.com",
 };
 
 window.SEAN_DATA = { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT };
