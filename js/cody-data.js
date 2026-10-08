@@ -16,7 +16,7 @@
  *           totalRoles, notes, jobs[{ title, url, level, posted, added }] }
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  */
-const COMPANIES_VERIFIED_AT = '2026-10-07';
+const COMPANIES_VERIFIED_AT = '2026-10-08';
 const COMPANIES = [
   { id:"camber", name:"Camber", vertical:"ai",
     sub:"AI medical billing + RCM",
@@ -179,17 +179,36 @@ const COMPANIES = [
     notes:"NYC telehealth. Care plans + fulfillment + identity.",
     jobs:[
       { title:"Seasonal, Virtual Patient Support Specialist", url:"https://jobs.lever.co/ro/ed451f08-1070-4ed2-b059-d529190cf53a", level:"entry", added:"2026-10-06", posted:"2026-09-29", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", summary:"Ro is a direct-to-patient healthcare company with a mission of helping patients achieve their health goals by delivering the easiest, most effective care possible." }
+    ] },
+  { id:"bazaarvoice", name:"Bazaarvoice", vertical:"hospitality",
+    sub:"Bazaarvoice",
+    stage:"\u2014", raised:"\u2014", lead:"\u2014",
+    badges:[],
+    totalRoles:1,
+    notes:"Food service or restaurant technology \u2014 order, menu and vendor data.",
+    jobs:[
+      { title:"Content Moderator, Bilingual English/Spanish", url:"https://jobs.lever.co/bazaarvoice/6f6bad0a-07c4-48e2-940a-60c4f2e5e7df", level:"entry", added:"2026-10-08", posted:"2025-05-27", pay:{"min":16,"max":18,"interval":"hour"}, paySource:"posted", summary:"About Bazaarvoice At Bazaarvoice, we create smart shopping experiences. Through our expansive global network, product-passionate community & enterprise technology, we connect thousands of…" }
+    ] },
+  { id:"vanta", name:"Vanta", vertical:"security",
+    sub:"Vanta",
+    stage:"\u2014", raised:"\u2014", lead:"\u2014",
+    badges:[],
+    totalRoles:1,
+    notes:"Compliance, security-training or executive-search firm \u2014 evidence, case and candidate records.",
+    jobs:[
+      { title:"AI Agent Operations Specialist, Support", url:"https://jobs.ashbyhq.com/vanta/f987d41a-d0e1-4260-9129-f64aee6122ae", level:"entry", added:"2026-10-08", posted:"2026-10-07", pay:{"min":129000,"max":152000,"interval":"year"}, paySource:"posted", summary:"At Vanta, our mission is to help businesses earn and prove trust. We believe that security should be monitored and verified continuously, and we empower companies to practice better…" }
     ] }
 ];
 
 /* ---------- COMPANY DOMAINS (favicon CDN lookup) ---------- */
 const COMPANY_DOMAINS = {
-  accessgroup:"accessgroup.com", alcumusgroup:"alcumusgroup.com", bloomerang:"bloomerang.com",
-  camber:"camber.com", connectwise:"connectwise.com", deepgram:"deepgram.com",
-  enginegroup:"engine.com", greatminds:"greatminds.io", handshake:"joinhandshake.com",
-  lightspeedsystems:"lightspeedsystems.com", medrio:"medrio.com", openloophealth:"openloophealth.com",
-  osano:"osano.com", sanabenefits:"sanabenefits.com", sitecore:"sitecore.com",
-  smiledigitalhealth:"smiledigitalhealth.com", wealthfront:"wealthfront.com",
+  accessgroup:"accessgroup.com", alcumusgroup:"alcumusgroup.com", bazaarvoice:"bazaarvoice.com",
+  bloomerang:"bloomerang.com", camber:"camber.com", connectwise:"connectwise.com",
+  deepgram:"deepgram.com", enginegroup:"engine.com", greatminds:"greatminds.io",
+  handshake:"joinhandshake.com", lightspeedsystems:"lightspeedsystems.com", medrio:"medrio.com",
+  openloophealth:"openloophealth.com", osano:"osano.com", sanabenefits:"sanabenefits.com",
+  sitecore:"sitecore.com", smiledigitalhealth:"smiledigitalhealth.com", vanta:"vanta.com",
+  wealthfront:"wealthfront.com",
 };
 
 window.CODY_DATA = { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT };
