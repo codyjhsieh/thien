@@ -16,7 +16,7 @@
  *           totalRoles, notes, jobs[{ title, url, level, posted, added }] }
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  */
-const COMPANIES_VERIFIED_AT = '2026-10-08';
+const COMPANIES_VERIFIED_AT = '2026-10-09';
 const COMPANIES = [
   { id:"camber", name:"Camber", vertical:"ai",
     sub:"AI medical billing + RCM",
@@ -197,18 +197,36 @@ const COMPANIES = [
     notes:"Compliance, security-training or executive-search firm \u2014 evidence, case and candidate records.",
     jobs:[
       { title:"AI Agent Operations Specialist, Support", url:"https://jobs.ashbyhq.com/vanta/f987d41a-d0e1-4260-9129-f64aee6122ae", level:"entry", added:"2026-10-08", posted:"2026-10-07", pay:{"min":129000,"max":152000,"interval":"year"}, paySource:"posted", summary:"At Vanta, our mission is to help businesses earn and prove trust. We believe that security should be monitored and verified continuously, and we empower companies to practice better…" }
+    ] },
+  { id:"cleargov", name:"ClearGov", vertical:"nonprofit",
+    sub:"ClearGov",
+    stage:"\u2014", raised:"\u2014", lead:"\u2014",
+    badges:[],
+    totalRoles:1,
+    notes:"Government, civic or public-sector software vendor \u2014 permit, case and constituent records.",
+    jobs:[
+      { title:"Client Support Specialist", url:"https://job-boards.greenhouse.io/cleargov/jobs/4439086009", level:"entry", added:"2026-10-09", posted:"2026-10-08", pay:{"min":17,"max":25,"interval":"hour"}, paySource:"estimate", summary:"Master ClearGov's Software: Learn, in detail, how client financial data flows through our products; stay current as new features and products launch." }
+    ] },
+  { id:"talkspace", name:"Talkspace", vertical:"health",
+    sub:"Online therapy (NASDAQ)",
+    stage:"Public", raised:"$110M pre-IPO", lead:"Norwest",
+    badges:["NASDAQ","Norwest"],
+    totalRoles:1,
+    notes:"Telehealth platform \u2014 therapy networks, intake, claims.",
+    jobs:[
+      { title:"Network Strategic Operations Specialist", url:"https://www.talkspace.com/careers/job?gh_jid=6162085004", level:"entry", added:"2026-10-09", posted:"2026-10-08", pay:{"min":19,"max":28,"interval":"hour"}, paySource:"estimate", summary:"At Talkspace, we are committed to fostering a diverse, equitable, inclusive, and belonging-centered workplace where everyone can thrive while making a difference in mental health." }
     ] }
 ];
 
 /* ---------- COMPANY DOMAINS (favicon CDN lookup) ---------- */
 const COMPANY_DOMAINS = {
   accessgroup:"accessgroup.com", alcumusgroup:"alcumusgroup.com", bazaarvoice:"bazaarvoice.com",
-  bloomerang:"bloomerang.com", camber:"camber.com", connectwise:"connectwise.com",
-  deepgram:"deepgram.com", enginegroup:"engine.com", greatminds:"greatminds.io",
-  handshake:"joinhandshake.com", lightspeedsystems:"lightspeedsystems.com", medrio:"medrio.com",
-  openloophealth:"openloophealth.com", osano:"osano.com", sanabenefits:"sanabenefits.com",
-  sitecore:"sitecore.com", smiledigitalhealth:"smiledigitalhealth.com", vanta:"vanta.com",
-  wealthfront:"wealthfront.com",
+  bloomerang:"bloomerang.com", camber:"camber.com", cleargov:"cleargov.com",
+  connectwise:"connectwise.com", deepgram:"deepgram.com", enginegroup:"engine.com",
+  greatminds:"greatminds.io", handshake:"joinhandshake.com", lightspeedsystems:"lightspeedsystems.com",
+  medrio:"medrio.com", openloophealth:"openloophealth.com", osano:"osano.com",
+  sanabenefits:"sanabenefits.com", sitecore:"sitecore.com", smiledigitalhealth:"smiledigitalhealth.com",
+  talkspace:"talkspace.com", vanta:"vanta.com", wealthfront:"wealthfront.com",
 };
 
 window.CODY_DATA = { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT };
