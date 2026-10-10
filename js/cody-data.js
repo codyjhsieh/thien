@@ -16,7 +16,7 @@
  *           totalRoles, notes, jobs[{ title, url, level, posted, added }] }
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  */
-const COMPANIES_VERIFIED_AT = '2026-10-09';
+const COMPANIES_VERIFIED_AT = '2026-10-10';
 const COMPANIES = [
   { id:"camber", name:"Camber", vertical:"ai",
     sub:"AI medical billing + RCM",
@@ -215,6 +215,15 @@ const COMPANIES = [
     notes:"Telehealth platform \u2014 therapy networks, intake, claims.",
     jobs:[
       { title:"Network Strategic Operations Specialist", url:"https://www.talkspace.com/careers/job?gh_jid=6162085004", level:"entry", added:"2026-10-09", posted:"2026-10-08", pay:{"min":19,"max":28,"interval":"hour"}, paySource:"estimate", summary:"At Talkspace, we are committed to fostering a diverse, equitable, inclusive, and belonging-centered workplace where everyone can thrive while making a difference in mental health." }
+    ] },
+  { id:"foodsmart", name:"Foodsmart", vertical:"health",
+    sub:"Food-as-medicine platform",
+    stage:"Series C", raised:"$63M+", lead:"Cigna Ventures",
+    badges:["Cigna Ventures","Bessemer"],
+    totalRoles:1,
+    notes:"Food-as-medicine platform for health plans/employers. NYC office; nutrition + telehealth ops.",
+    jobs:[
+      { title:"Member Support Specialist, Escalations & Grievances", url:"https://jobs.lever.co/foodsmart/6ae68b02-7971-4d24-af43-ae04b2e36aa5", level:"entry", added:"2026-10-10", posted:"2026-05-01", pay:{"min":40000,"max":46000,"interval":"year"}, paySource:"posted", summary:"This role serves as the final point of contact for complex member issues, including health plan grievances, RD grievances, and advanced member account support and food benefits escalations." }
     ] }
 ];
 
@@ -223,10 +232,11 @@ const COMPANY_DOMAINS = {
   accessgroup:"accessgroup.com", alcumusgroup:"alcumusgroup.com", bazaarvoice:"bazaarvoice.com",
   bloomerang:"bloomerang.com", camber:"camber.com", cleargov:"cleargov.com",
   connectwise:"connectwise.com", deepgram:"deepgram.com", enginegroup:"engine.com",
-  greatminds:"greatminds.io", handshake:"joinhandshake.com", lightspeedsystems:"lightspeedsystems.com",
-  medrio:"medrio.com", openloophealth:"openloophealth.com", osano:"osano.com",
-  sanabenefits:"sanabenefits.com", sitecore:"sitecore.com", smiledigitalhealth:"smiledigitalhealth.com",
-  talkspace:"talkspace.com", vanta:"vanta.com", wealthfront:"wealthfront.com",
+  foodsmart:"foodsmart.com", greatminds:"greatminds.io", handshake:"joinhandshake.com",
+  lightspeedsystems:"lightspeedsystems.com", medrio:"medrio.com", openloophealth:"openloophealth.com",
+  osano:"osano.com", sanabenefits:"sanabenefits.com", sitecore:"sitecore.com",
+  smiledigitalhealth:"smiledigitalhealth.com", talkspace:"talkspace.com", vanta:"vanta.com",
+  wealthfront:"wealthfront.com",
 };
 
 window.CODY_DATA = { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT };

@@ -20,7 +20,7 @@
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  *  - jobs are sorted: founding > senior > mid.
  */
-const COMPANIES_VERIFIED_AT = '2026-10-09';
+const COMPANIES_VERIFIED_AT = '2026-10-10';
 const COMPANIES = [
   { id:"anthropic", name:"Anthropic", vertical:"ai",
     sub:"Claude \u2014 AI safety lab",
@@ -78,14 +78,13 @@ const COMPANIES = [
     sub:"Payments + financial infra",
     stage:"Late stage", raised:"$8.7B", lead:"Sequoia",
     badges:["Sequoia","a16z","General Catalyst"],
-    totalRoles:11,
+    totalRoles:10,
     notes:"Payments at planet scale. Distributed systems, idempotency, money.",
     jobs:[
       { title:"Strategy and Operations Lead, Deal Pricing", url:"https://stripe.com/jobs/search?gh_jid=8044391", level:"mid", added:"2026-08-26", posted:"2026-08-18" },
       { title:"Business Partner Analyst", url:"https://stripe.com/jobs/search?gh_jid=8079783", level:"mid", added:"2026-08-26", posted:"2026-08-18" },
       { title:"GTM Strategy & Operations Analyst", url:"https://stripe.com/jobs/search?gh_jid=8145119", level:"mid", added:"2026-08-26", posted:"2026-08-20" },
       { title:"Sales Strategy & Operations Business Partner", url:"https://stripe.com/jobs/search?gh_jid=8089882", level:"mid", added:"2026-08-26", posted:"2026-08-18" },
-      { title:"Product Strategy & Operations - Global Product", url:"https://stripe.com/jobs/search?gh_jid=8177640", level:"mid", added:"2026-09-04", posted:"2026-09-03" },
       { title:"Data Analyst, NYC", url:"https://stripe.com/jobs/search?gh_jid=8189909", level:"mid", added:"2026-09-19", posted:"2026-09-10", years:6 },
       { title:"GTM Strategy & Operations Analyst", url:"https://stripe.com/jobs/search?gh_jid=8201680", level:"mid", added:"2026-09-19", posted:"2026-09-18", years:7 },
       { title:"Finance & Strategy Analyst", url:"https://stripe.com/jobs/search?gh_jid=8231575", level:"mid", added:"2026-09-26", posted:"2026-09-25", years:4 },
@@ -369,10 +368,11 @@ const COMPANIES = [
     sub:"Professional social / SaaS",
     stage:"Public", raised:"(Microsoft: MSFT)", lead:"Microsoft",
     badges:["Microsoft","NASDAQ"],
-    totalRoles:1,
+    totalRoles:2,
     notes:"Empire State Building NYC office. Sr enterprise systems eng roles.",
     jobs:[
-      { title:"Sales Strategy and Operations Associate", url:"https://jobs.smartrecruiters.com/LinkedIn3/744000153272899", level:"entry", added:"2026-10-03", posted:"2026-10-02", years:2 }
+      { title:"Sales Strategy and Operations Associate", url:"https://jobs.smartrecruiters.com/LinkedIn3/744000154786870", level:"entry", added:"2026-10-10", posted:"2026-10-09", years:2 },
+      { title:"Monetization Strategy & Operations Managers", url:"https://jobs.smartrecruiters.com/LinkedIn3/744000154753080", level:"mid", added:"2026-10-10", posted:"2026-10-09" }
     ] },
   { id:"equinox", name:"Equinox Group", vertical:"consumer",
     sub:"Luxury fitness / hospitality",
@@ -387,11 +387,9 @@ const COMPANIES = [
     sub:"Public sector (dept of tech)",
     stage:"Public sector", raised:"$110B budget", lead:"\u2014",
     badges:["Public sector"],
-    totalRoles:67,
+    totalRoles:68,
     notes:"NYC gov. Sr SWE GeoSupport, .NET, City Environmental Quality Review roles.",
     jobs:[
-      { title:"Capital Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013315337", level:"mid", added:"2026-08-26", posted:"2026-05-27" },
-      { title:"Capital Budget Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990013314887", level:"mid", added:"2026-08-26", posted:"2026-05-27" },
       { title:"Analyst - DOHMH", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014532571", level:"mid", added:"2026-08-26", posted:"2026-08-11" },
       { title:"Analyst - Sandy Grant Management & Insurance", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014736471", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Budget Research Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014614266", level:"mid", added:"2026-08-26", posted:"2026-08-15" },
@@ -438,12 +436,9 @@ const COMPANIES = [
       { title:"Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015879576", level:"mid", added:"2026-10-03", posted:"2026-10-03" },
       { title:"BOB- Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015879566", level:"mid", added:"2026-10-03", posted:"2026-10-03" },
       { title:"Data Visualization Analyst Level I", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015879786", level:"mid", added:"2026-10-03", posted:"2026-10-03" },
-      { title:"LOGISTICS - COLLEGE AIDE", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015879426", level:"mid", added:"2026-10-03", posted:"2026-10-03" },
       { title:"Mainframe Programmer Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015879721", level:"mid", added:"2026-10-03", posted:"2026-10-03" },
       { title:"Analyst, Procurement Operations", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015911436", level:"mid", added:"2026-10-06", posted:"2026-10-06" },
       { title:"BOB- Procurement Analyst II", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015911356", level:"mid", added:"2026-10-06", posted:"2026-10-06" },
-      { title:"Strategic Performance Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015911056", level:"mid", added:"2026-10-06", posted:"2026-10-06" },
-      { title:"BOB- Procurement Analyst I", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015947176", level:"entry", added:"2026-10-07", posted:"2026-10-07" },
       { title:"Data Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015946806", level:"mid", added:"2026-10-07", posted:"2026-10-07" },
       { title:"Operations Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015946881", level:"mid", added:"2026-10-07", posted:"2026-10-07" },
       { title:"PROCUREMENT ANALYST II", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015911031", level:"mid", added:"2026-10-07", posted:"2026-10-06" },
@@ -456,7 +451,13 @@ const COMPANIES = [
       { title:"PEOPLE DATA & STRATEGY ANALYST", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015981606", level:"mid", added:"2026-10-08", posted:"2026-10-08" },
       { title:"Analyst, Talent and Organizational Development", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015982481", level:"mid", added:"2026-10-09", posted:"2026-10-08" },
       { title:"Procurement Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990016013156", level:"mid", added:"2026-10-09", posted:"2026-10-09" },
-      { title:"Research Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990016013456", level:"mid", added:"2026-10-09", posted:"2026-10-09" }
+      { title:"Research Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990016013456", level:"mid", added:"2026-10-09", posted:"2026-10-09" },
+      { title:"BOB- Procurement Analyst I", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990016040516", level:"entry", added:"2026-10-10", posted:"2026-10-10" },
+      { title:"EEO Program Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990016040406", level:"mid", added:"2026-10-10", posted:"2026-10-10" },
+      { title:"Fiscal & Purchasing Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990016013581", level:"mid", added:"2026-10-10", posted:"2026-10-09" },
+      { title:"Investigative Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990016040436", level:"mid", added:"2026-10-10", posted:"2026-10-10" },
+      { title:"Investigative Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990016013856", level:"mid", added:"2026-10-10", posted:"2026-10-09" },
+      { title:"Strategic Performance Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990016040366", level:"mid", added:"2026-10-10", posted:"2026-10-10" }
     ] },
   { id:"palantir", name:"Palantir", vertical:"saas",
     sub:"Elite FDE consultancy (NYSE: PLTR)",
@@ -493,7 +494,7 @@ const COMPANIES = [
     totalRoles:1,
     notes:"SF HQ, NYC office. Analyst + product analytics roles across ads + monetization.",
     jobs:[
-      { title:"Sales Strategy & Operations Lead, JBP Development", url:"https://www.pinterestcareers.com/jobs/?gh_jid=7983334", level:"mid", added:"2026-08-26", posted:"2026-08-20" }
+      { title:"Sales Finance Analyst II", url:"https://www.pinterestcareers.com/jobs/?gh_jid=7507652", level:"mid", added:"2026-10-10", posted:"2026-10-09", pay:{"min":81921,"max":168660,"interval":"year"}, paySource:"posted", years:3 }
     ] },
   { id:"box", name:"Box", vertical:"saas",
     sub:"Cloud content (NYSE: BOX)",
@@ -715,17 +716,16 @@ const COMPANIES = [
     totalRoles:1,
     notes:"Purchase NY HQ.",
     jobs:[
-      { title:"Analyst, Account Management", url:"https://mastercard.wd1.myworkdayjobs.com/en-US/CorporateCareers/job/New-York-City-New-York/Analyst--Account-Management_R-291149", level:"mid", added:"2026-09-24" }
+      { title:"Specialist, B2B Marketing Operations", url:"https://mastercard.wd1.myworkdayjobs.com/en-US/CorporateCareers/job/Purchase-New-York/Specialist--B2B-Marketing_R-291801-1", level:"mid", added:"2026-10-10" }
     ] },
   { id:"ridgeline", name:"Ridgeline", vertical:"saas",
     sub:"Cloud OS for investment mgmt",
     stage:"Series C", raised:"$278M", lead:"Wellington",
     badges:["Wellington","Sequoia"],
-    totalRoles:2,
+    totalRoles:1,
     notes:"Modern investment-management platform. Vertical SaaS at scale.",
     jobs:[
-      { title:"Financial Systems Analyst", url:"https://boards.greenhouse.io/ridgeline/jobs/7994584003?gh_jid=7994584003", level:"mid", added:"2026-09-24", posted:"2026-09-23", years:3 },
-      { title:"Investment Operations Analyst - Reconciliation Specialist (US Start of Day)", url:"https://boards.greenhouse.io/ridgeline/jobs/8003676003?gh_jid=8003676003", level:"mid", added:"2026-09-24", posted:"2026-09-23", years:3 }
+      { title:"Financial Systems Analyst", url:"https://boards.greenhouse.io/ridgeline/jobs/7994584003?gh_jid=7994584003", level:"mid", added:"2026-09-24", posted:"2026-09-23", years:3 }
     ] },
   { id:"hellofresh", name:"HelloFresh", vertical:"consumer",
     sub:"Meal kits",
@@ -890,6 +890,24 @@ const COMPANIES = [
     notes:"SF HQ, NYC hires.",
     jobs:[
       { title:"Sr. Analyst, Renewals Strategy & Operations", url:"https://www.okta.com/company/careers/opportunity/8246071?gh_jid=8246071", level:"mid", added:"2026-10-09", posted:"2026-10-06", pay:{"min":104000,"max":160600,"interval":"year"}, paySource:"posted" }
+    ] },
+  { id:"mercury", name:"Mercury", vertical:"fintech",
+    sub:"Banking for startups",
+    stage:"Series C", raised:"$152M", lead:"CRV",
+    badges:["CRV","a16z","Coatue"],
+    totalRoles:1,
+    notes:"Banking UX + ops. Compliance, money movement.",
+    jobs:[
+      { title:"Treasury Operations Analyst", url:"https://job-boards.greenhouse.io/mercury/jobs/6221673004", level:"mid", added:"2026-10-10", posted:"2026-10-09", pay:{"min":121700,"max":152100,"interval":"year"}, paySource:"posted", years:2 }
+    ] },
+  { id:"voxmedia", name:"Vox Media", vertical:"media",
+    sub:"Digital media network",
+    stage:"Late stage", raised:"$590M+", lead:"NBCUniversal",
+    badges:["NBCU","Comcast","General Atlantic"],
+    totalRoles:1,
+    notes:"NYC media (Vox, The Verge, NY Mag, Eater). CMS + ad tech.",
+    jobs:[
+      { title:"Commerce Analyst", url:"https://boards.greenhouse.io/voxmedia/jobs/8265879?gh_jid=8265879", level:"mid", added:"2026-10-10", posted:"2026-10-09", pay:{"min":78000,"max":92000,"interval":"year"}, paySource:"posted", years:4 }
     ] }
 ];
 
@@ -910,21 +928,21 @@ const COMPANY_DOMAINS = {
   hopper:"hopper.com", "jane-street":"janestreet.com", justworks:"justworks.com",
   kalshi:"kalshi.com", linkedin:"linkedin.com", lithic:"lithic.com",
   lovable:"lovable.dev", lyft:"lyft.com", meow:"meow.com",
-  metropolis:"metropolis.io", middesk:"middesk.com", modal:"modal.com",
-  "modern-treasury":"moderntreasury.com", mongodb:"mongodb.com", navan:"navan.com",
-  "nyc-gov":"nyc.gov", octus:"octus.com", okta:"okta.com",
-  openai:"openai.com", oscar:"hioscar.com", pagaya:"pagaya.com",
-  palantir:"palantir.com", partiful:"partiful.com", perplexity:"perplexity.ai",
-  pinterest:"pinterest.com", plaid:"plaid.com", point72:"point72.com",
-  pointone:"pointone.ai", polymarket:"polymarket.com", ramp:"ramp.com",
-  reddit:"reddit.com", rho:"rho.co", ridgeline:"ridgelineapps.com",
-  rilla:"rillavoice.com", ripple:"ripple.com", scaleai:"scale.com",
-  seatgeek:"seatgeek.com", sisense:"sisense.com", sofi:"sofi.com",
-  sonder:"sonder.com", sonymusic:"sonymusic.com", spotify:"spotify.com",
-  squarespace:"squarespace.com", stripe:"stripe.com", taboola:"taboola.com",
-  talkspace:"talkspace.com", "the-trade-desk":"thetradedesk.com", turing:"turing.com",
-  vercel:"vercel.com", vestwell:"vestwell.com", warp:"warp.dev",
-  zocdoc:"zocdoc.com",
+  mercury:"mercury.com", metropolis:"metropolis.io", middesk:"middesk.com",
+  modal:"modal.com", "modern-treasury":"moderntreasury.com", mongodb:"mongodb.com",
+  navan:"navan.com", "nyc-gov":"nyc.gov", octus:"octus.com",
+  okta:"okta.com", openai:"openai.com", oscar:"hioscar.com",
+  pagaya:"pagaya.com", palantir:"palantir.com", partiful:"partiful.com",
+  perplexity:"perplexity.ai", pinterest:"pinterest.com", plaid:"plaid.com",
+  point72:"point72.com", pointone:"pointone.ai", polymarket:"polymarket.com",
+  ramp:"ramp.com", reddit:"reddit.com", rho:"rho.co",
+  ridgeline:"ridgelineapps.com", rilla:"rillavoice.com", ripple:"ripple.com",
+  scaleai:"scale.com", seatgeek:"seatgeek.com", sisense:"sisense.com",
+  sofi:"sofi.com", sonder:"sonder.com", sonymusic:"sonymusic.com",
+  spotify:"spotify.com", squarespace:"squarespace.com", stripe:"stripe.com",
+  taboola:"taboola.com", talkspace:"talkspace.com", "the-trade-desk":"thetradedesk.com",
+  turing:"turing.com", vercel:"vercel.com", vestwell:"vestwell.com",
+  voxmedia:"voxmedia.com", warp:"warp.dev", zocdoc:"zocdoc.com",
 };
 
 window.DATA = { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT };
