@@ -16,7 +16,7 @@
  *           totalRoles, notes, jobs[{ title, url, level, posted, added }] }
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  */
-const COMPANIES_VERIFIED_AT = '2026-10-10';
+const COMPANIES_VERIFIED_AT = '2026-10-11';
 const COMPANIES = [
   { id:"altusgroup", name:"Altus Group", vertical:"brokerage",
     sub:"Altus Group",
@@ -169,17 +169,26 @@ const COMPANIES = [
     notes:"Alternative asset manager or private-credit fund \u2014 investment, portfolio and credit roles, real estate among them.",
     jobs:[
       { title:"Portfolio Manager, Commercial Real Estate Debt", url:"https://wellington.wd5.myworkdayjobs.com/en-US/External/job/New-York-NY-United-States/Portfolio-Manager--Commercial-Real-Estate-Debt_R94919-1", level:"associate", added:"2026-09-28", years:12, summary:"As part of the continued expansion of our Private Investing capabilities, we are seeking to recruit an experienced investor for our new Commercial Real Estate (CRE) Debt Team." }
+    ] },
+  { id:"blackstone", name:"Blackstone", vertical:"assetmgr",
+    sub:"BREP / BREIT / BREDS",
+    stage:"Public", raised:"\u2014", lead:"\u2014",
+    badges:["NYSE"],
+    totalRoles:1,
+    notes:"The largest owner of commercial real estate in the world; the real-estate groups hire associates in New York.",
+    jobs:[
+      { title:"Real Estate - Portfolio Management (Valuations), Associate", url:"https://blackstone.wd1.myworkdayjobs.com/en-US/Blackstone_Careers/job/New-York/Real-Estate---Portfolio-Management--Valuations---Associate_45826", level:"associate", added:"2026-10-11", summary:"Blackstone is the world’s largest alternative asset manager. Blackstone seeks to deliver compelling returns for institutional and individual investors by strengthening the companies in…" }
     ] }
 ];
 
 /* ---------- COMPANY DOMAINS (favicon CDN lookup) ---------- */
 const COMPANY_DOMAINS = {
   altusgroup:"altusgroup.com", arborrealtytrust:"arbor.com", blackrock:"blackrock.com",
-  carlylegroup:"carlyle.com", compstak:"compstak.com", dealpath:"dealpath.com",
-  eliseai:"eliseai.com", mercury:"mercury.com", oaknorth:"oaknorth.com",
-  plaid:"plaid.com", rxr:"rxr.com", situsamc:"situsamc.com",
-  stepstonegroup:"stepstonegroup.com", trepp:"trepp.com", trimont:"trimont.com",
-  vts:"vts.com",
+  blackstone:"blackstone.com", carlylegroup:"carlyle.com", compstak:"compstak.com",
+  dealpath:"dealpath.com", eliseai:"eliseai.com", mercury:"mercury.com",
+  oaknorth:"oaknorth.com", plaid:"plaid.com", rxr:"rxr.com",
+  situsamc:"situsamc.com", stepstonegroup:"stepstonegroup.com", trepp:"trepp.com",
+  trimont:"trimont.com", vts:"vts.com",
 };
 
 window.ALAN_DATA = { COMPANIES, COMPANY_DOMAINS, COMPANIES_VERIFIED_AT };

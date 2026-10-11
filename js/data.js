@@ -20,7 +20,7 @@
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  *  - jobs are sorted: founding > senior > mid.
  */
-const COMPANIES_VERIFIED_AT = '2026-10-10';
+const COMPANIES_VERIFIED_AT = '2026-10-11';
 const COMPANIES = [
   { id:"anthropic", name:"Anthropic", vertical:"ai",
     sub:"Claude \u2014 AI safety lab",
@@ -387,10 +387,9 @@ const COMPANIES = [
     sub:"Public sector (dept of tech)",
     stage:"Public sector", raised:"$110B budget", lead:"\u2014",
     badges:["Public sector"],
-    totalRoles:68,
+    totalRoles:66,
     notes:"NYC gov. Sr SWE GeoSupport, .NET, City Environmental Quality Review roles.",
     jobs:[
-      { title:"Analyst - DOHMH", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014532571", level:"mid", added:"2026-08-26", posted:"2026-08-11" },
       { title:"Analyst - Sandy Grant Management & Insurance", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014736471", level:"mid", added:"2026-08-26", posted:"2026-08-21" },
       { title:"Budget Research Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014614266", level:"mid", added:"2026-08-26", posted:"2026-08-15" },
       { title:"Forensic Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990014555616", level:"mid", added:"2026-08-26", posted:"2026-08-12" },
@@ -420,11 +419,9 @@ const COMPANIES = [
       { title:"Economic Crimes Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015634326", level:"mid", added:"2026-09-25", posted:"2026-09-24" },
       { title:"Analyst, Procurement Operations", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015705361", level:"mid", added:"2026-09-26", posted:"2026-09-26" },
       { title:"Cell Site Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015705216", level:"mid", added:"2026-09-26", posted:"2026-09-26" },
-      { title:"SW - PROJECT ANALYST", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015705246", level:"mid", added:"2026-09-26", posted:"2026-09-26" },
       { title:"Timekeeper Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015671696", level:"mid", added:"2026-09-26", posted:"2026-09-25" },
       { title:"Analyst - Department of Social Services (DSS) / Department of Homeless Services (DHS)", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015705846", level:"mid", added:"2026-09-27", posted:"2026-09-26" },
       { title:"Analyst - Program Reporting and Evaluation", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015705801", level:"mid", added:"2026-09-27", posted:"2026-09-26" },
-      { title:"Business Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015705721", level:"mid", added:"2026-09-27", posted:"2026-09-26" },
       { title:"Procurement Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015759228", level:"mid", added:"2026-09-29", posted:"2026-09-29" },
       { title:"Body-Worn Camera Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015759956", level:"mid", added:"2026-09-30", posted:"2026-09-29" },
       { title:"JR. ASSET MANAGEMENT ANALYST", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990015820766", level:"entry", added:"2026-10-01", posted:"2026-10-01" },
@@ -456,8 +453,9 @@ const COMPANIES = [
       { title:"EEO Program Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990016040406", level:"mid", added:"2026-10-10", posted:"2026-10-10" },
       { title:"Fiscal & Purchasing Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990016013581", level:"mid", added:"2026-10-10", posted:"2026-10-09" },
       { title:"Investigative Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990016040436", level:"mid", added:"2026-10-10", posted:"2026-10-10" },
-      { title:"Investigative Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990016013856", level:"mid", added:"2026-10-10", posted:"2026-10-09" },
-      { title:"Strategic Performance Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990016040366", level:"mid", added:"2026-10-10", posted:"2026-10-10" }
+      { title:"Strategic Performance Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990016040366", level:"mid", added:"2026-10-10", posted:"2026-10-10" },
+      { title:"Investigative Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990016040696", level:"mid", added:"2026-10-11", posted:"2026-10-10" },
+      { title:"Procurement Analyst", url:"https://jobs.smartrecruiters.com/CityOfNewYork/3743990016040701", level:"mid", added:"2026-10-11", posted:"2026-10-10" }
     ] },
   { id:"palantir", name:"Palantir", vertical:"saas",
     sub:"Elite FDE consultancy (NYSE: PLTR)",
