@@ -20,7 +20,7 @@
  *  - totalRoles == jobs.length (full set; the card slices to 3 for preview).
  *  - jobs are sorted: founding > senior > mid.
  */
-const COMPANIES_VERIFIED_AT = '2026-10-11';
+const COMPANIES_VERIFIED_AT = '2026-10-12';
 const COMPANIES = [
   { id:"anthropic", name:"Anthropic", vertical:"ai",
     sub:"Claude \u2014 AI safety lab",
@@ -829,11 +829,10 @@ const COMPANIES = [
     sub:"Global record label (Sony subsidiary)",
     stage:"Public", raised:"(Sony subsidiary)", lead:"Sony",
     badges:["Sony"],
-    totalRoles:2,
+    totalRoles:1,
     notes:"NYC HQ. Includes The Orchard, Alamo, Columbia. 3 NYC eng today (Data Privacy, Emerging Tech, Sr PM D2C).",
     jobs:[
-      { title:"Analyst, A&R Admin - Santa Anna", url:"https://job-boards.greenhouse.io/sonymusicentertainment/jobs/8853439002", level:"mid", added:"2026-10-03", posted:"2026-10-02", pay:{"min":66300,"max":75000,"interval":"year"}, paySource:"posted", years:2 },
-      { title:"Analyst, Marketing Financial Planning", url:"https://job-boards.greenhouse.io/sonymusicentertainment/jobs/8871782002", level:"mid", added:"2026-10-08", posted:"2026-10-07", pay:{"min":61000,"max":66000,"interval":"year"}, paySource:"posted" }
+      { title:"Analyst, A&R Admin - Santa Anna", url:"https://job-boards.greenhouse.io/sonymusicentertainment/jobs/8853439002", level:"mid", added:"2026-10-03", posted:"2026-10-02", pay:{"min":66300,"max":75000,"interval":"year"}, paySource:"posted", years:2 }
     ] },
   { id:"pointone", name:"PointOne", vertical:"ai",
     sub:"AI legal timekeeping",
